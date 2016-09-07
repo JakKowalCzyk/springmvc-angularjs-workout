@@ -1,6 +1,5 @@
 package pl.workout.kowalczyk.com.app.model.daoimpl;
 
-import org.hibernate.usertype.ParameterizedType;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import pl.workout.kowalczyk.com.app.model.dao.DaoBase;
 
@@ -13,30 +12,28 @@ public class DaoBaseImpl<T> extends HibernateDaoSupport implements DaoBase<T> {
 
     private Class<T> entityClass;
 
-    public DaoBaseImpl() {
-        entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-        entityClass = (Class<T>) ((ParameterizedType) getClass()
-                .getGenericSuperclass()).getActualTypeArguments()[0];
-
+    public DaoBaseImpl(Class<T> entityClass) {
+        this.entityClass = entityClass;
     }
 
     public List<T> getAll() {
-        return getHibernateTemplate().loadAll()
+        return getHibernateTemplate().loadAll(entityClass);
     }
 
     public void save(T domain) {
-
+        getHibernateTemplate().save(domain);
     }
 
     public void update(T domain) {
-
+        getHibernateTemplate().update(domain);
     }
 
     public void delete(T domain) {
-
+        getHibernateTemplate().delete(domain);
     }
 
     public T get(Long id) {
-        return null;
+        T o = (T) getHibernateTemplate().get(entityClass, id);
+        return o;
     }
 }
