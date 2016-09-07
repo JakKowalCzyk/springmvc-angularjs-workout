@@ -1,19 +1,27 @@
 package pl.workout.kowalczyk.com.app.model.daoimpl;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
-import pl.workout.kowalczyk.com.app.model.dao.DaoBase;
+import pl.workout.kowalczyk.com.app.model.dao.BaseDao;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 /**
  * Created by JK on 2016-09-03.
  */
-public class DaoBaseImpl<T> extends HibernateDaoSupport implements DaoBase<T> {
+public abstract class BaseImplDao<T> extends HibernateDaoSupport implements BaseDao<T> {
 
     private Class<T> entityClass;
 
-    public DaoBaseImpl(Class<T> entityClass) {
-        this.entityClass = entityClass;
+    @Autowired
+    public void setSession(SessionFactory sessionFactory) {
+        this.setSessionFactory(sessionFactory);
+    }
+
+    public BaseImplDao() {
+        entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
     public List<T> getAll() {

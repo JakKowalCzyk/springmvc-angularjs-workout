@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by JK on 2016-09-03.
  */
-public interface DaoBase<T> {
+public interface BaseDao<T> {
 
     List<T> getAll();
 
