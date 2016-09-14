@@ -1,7 +1,7 @@
 delete table if not EXISTS saw.user;
 
 create table saw.user(
-  id INTEGER ,
+  id INTEGER NOT NULL PRIMARY KEY,
   login VARCHAR(255),
   firstName VARCHAR(255),
   lastName VARCHAR(255),

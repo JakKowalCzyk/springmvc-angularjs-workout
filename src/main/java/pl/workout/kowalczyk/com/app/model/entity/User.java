@@ -1,14 +1,12 @@
 package pl.workout.kowalczyk.com.app.model.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by JK on 2016-09-07.
  */
 @Entity
+@Table(name = "saw.user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
