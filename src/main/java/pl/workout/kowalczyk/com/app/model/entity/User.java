@@ -1,16 +1,17 @@
 package pl.workout.kowalczyk.com.app.model.entity;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 /**
  * Created by JK on 2016-09-07.
  */
 @Entity
-@Table(name = "saw.user")
+@Table(name = "saw_user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
 
     private String login;
 
@@ -18,7 +19,7 @@ public class User {
 
     private String lastName;
 
-    private int age;
+    private Date birthDay;
 
     private String email;
 
