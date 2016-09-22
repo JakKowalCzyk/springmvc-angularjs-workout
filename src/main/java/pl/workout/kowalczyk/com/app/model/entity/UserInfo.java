@@ -21,6 +21,9 @@ public class UserInfo {
     @PrimaryKeyJoinColumn
     private UserWeight actual_weight;
 
+    @OneToOne(cascade =  CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private FavouriteExercise favouriteExercise;
 
 
 }
