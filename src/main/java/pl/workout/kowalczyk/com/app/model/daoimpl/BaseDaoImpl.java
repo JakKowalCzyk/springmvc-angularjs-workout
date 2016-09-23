@@ -14,50 +14,37 @@ import java.util.List;
 /**
  * Created by JK on 2016-09-03.
  */
-public abstract class BaseImplDao<T> implements BaseDao<T> {
+public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
     private Class<T> entityClass;
 
     @PersistenceContext
     private EntityManager entityManager;
 
-//    @Autowired
-//    public void setSession() {
-//        Session session = entityManager.unwrap(Session.class);
-//        this.setSessionFactory((SessionFactory) session);
-//    }
-
-    public BaseImplDao() {
+    public BaseDaoImpl() {
         entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
     public List<T> getAll() {
-       // return getHibernateTemplate().loadAll(entityClass);
         return entityManager
                 .createQuery("Select a from T a", entityClass)
                 .getResultList();
     }
 
     public void save(T domain) {
-//        getHibernateTemplate().save(domain);
         entityManager.persist(domain);
     }
 
 
     public void update(T domain) {
-//        getHibernateTemplate().update(domain);
         entityManager.merge(domain);
     }
 
     public void delete(T domain) {
         entityManager.remove(domain);
-//        getHibernateTemplate().delete(domain);
-
     }
 
     public T get(Long id) {
-//        T o = (T) getHibernateTemplate().get(entityClass, id);
-//        return o;
         return entityManager.find(entityClass, id);
     }
 }

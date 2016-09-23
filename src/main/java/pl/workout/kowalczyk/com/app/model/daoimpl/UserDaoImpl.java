@@ -13,12 +13,12 @@ import javax.persistence.TypedQuery;
  * Created by JK on 2016-09-07.
  */
 @Repository
-public class UserImplDao extends BaseImplDao<User> implements UserDao {
+public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    private static final String selectUserByLogin = "SELECT o FROM saw.user AS o where o.login = :login";
+    private static final String selectUserByLogin = "SELECT o FROM User AS o where o.login = :login";
 
     public User getByLogin(String login) {
         if(login == null || login.length()==0) throw new IllegalArgumentException("The name argument is required");

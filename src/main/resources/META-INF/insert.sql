@@ -10,7 +10,7 @@ create table saw_user(user_id int NOT NULL PRIMARY KEY, login VARCHAR(255), firs
 
 CREATE TABLE saw_userWeight(uweight_id int not null PRIMARY KEY, user_id int REFERENCES saw_user(user_id), weight_kg int, date DATE);
 
-CREATE TABLE saw_exercise(exercise_id int not null PRIMARY KEY , user_id int REFERENCES saw_user(user_id), name VARCHAR(255), description text);
+CREATE TABLE saw_exercise(exercise_id int not null PRIMARY KEY, name VARCHAR(255), description text, exerciseType VARCHAR(255));
 
 CREATE TABLE saw_userExercise(usexercise_id int NOT NULL PRIMARY key, exercise_id int REFERENCES saw_exercise(exercise_id), user_id int REFERENCES saw_user(user_id), repeat int, series int, date DATE );
 

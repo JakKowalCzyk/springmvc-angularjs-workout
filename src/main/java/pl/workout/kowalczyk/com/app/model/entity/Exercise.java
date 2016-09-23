@@ -1,5 +1,7 @@
 package pl.workout.kowalczyk.com.app.model.entity;
 
+import pl.workout.kowalczyk.com.app.model.Enums.ExerciseType;
+
 import javax.persistence.*;
 
 /**
@@ -12,13 +14,12 @@ public class Exercise {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int exercise_id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private User user_id;
-
     private String name;
 
     private String description;
+
+    @Enumerated
+    private ExerciseType exerciseType;
 
     public int getExercise_id() {
         return exercise_id;
@@ -26,14 +27,6 @@ public class Exercise {
 
     public void setExercise_id(int uweight_id) {
         this.exercise_id = uweight_id;
-    }
-
-    public User getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(User user_id) {
-        this.user_id = user_id;
     }
 
     public String getName() {
@@ -50,5 +43,13 @@ public class Exercise {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public ExerciseType getExerciseType() {
+        return exerciseType;
+    }
+
+    public void setExerciseType(ExerciseType exerciseType) {
+        this.exerciseType = exerciseType;
     }
 }
