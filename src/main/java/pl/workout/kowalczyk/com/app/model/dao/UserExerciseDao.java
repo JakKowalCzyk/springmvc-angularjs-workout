@@ -3,14 +3,14 @@ package pl.workout.kowalczyk.com.app.model.dao;
 import pl.workout.kowalczyk.com.app.model.entity.UserExercise;
 
 import java.sql.Date;
+import java.util.List;
 
 /**
  * Created by JK on 2016-09-22.
  */
 public interface UserExerciseDao extends BaseDao<UserExercise> {
-    UserExercise getUserExerciseByUserId(int userId);
+    List<UserExercise> getUserExercisesByUserId(int userId);
 
-    UserExercise getByDate(Date date);
-
+    List<UserExercise> getByDate(int userId, Date date);
 
 }
