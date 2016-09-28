@@ -1,5 +1,6 @@
 package pl.workout.kowalczyk.com.app.model.daoimpl;
 
+import org.springframework.stereotype.Repository;
 import pl.workout.kowalczyk.com.app.model.dao.BaseDao;
 import pl.workout.kowalczyk.com.app.model.dao.UserExerciseDao;
 import pl.workout.kowalczyk.com.app.model.entity.Exercise;
@@ -14,6 +15,7 @@ import java.util.List;
 /**
  * Created by JK on 2016-09-26.
  */
+@Repository
 public class UserExerciseDaoImpl extends BaseDaoImpl<UserExercise> implements UserExerciseDao{
 
     private static final String getByIdSql = "SELECT o FROM UserExercise o WHERE o.user_id = :userId";

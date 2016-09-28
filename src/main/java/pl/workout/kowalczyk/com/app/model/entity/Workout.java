@@ -20,8 +20,7 @@ public class Workout {
 
     private Date date;
 
-    @OneToMany
-    @OrderColumn(name = "date")
+    @OneToMany(mappedBy = "workout_id")
     private List<UserExercise> userExercises;
 
     public int getWorkout_id() {
