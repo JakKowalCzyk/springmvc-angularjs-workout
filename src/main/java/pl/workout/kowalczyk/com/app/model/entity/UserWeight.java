@@ -22,6 +22,10 @@ public class UserWeight {
 
     private Date data;
 
+    @OneToOne
+    @JoinColumn(name = "userInfo_id")
+    private UserInfo userInfo_id;
+
     public int getUweight_id() {
         return uweight_id;
     }
@@ -52,5 +56,13 @@ public class UserWeight {
 
     public void setData(Date date) {
         this.data = date;
+    }
+
+    public UserInfo getUserInfo_id() {
+        return userInfo_id;
+    }
+
+    public void setUserInfo_id(UserInfo userInfo_id) {
+        this.userInfo_id = userInfo_id;
     }
 }

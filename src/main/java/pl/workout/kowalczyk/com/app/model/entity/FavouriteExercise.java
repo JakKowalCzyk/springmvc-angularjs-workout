@@ -20,6 +20,10 @@ public class FavouriteExercise {
     @PrimaryKeyJoinColumn
     private Exercise exercise;
 
+    @OneToOne
+    @JoinColumn(name = "userInfo_id")
+    private UserInfo userInfo_id;
+
     public int getEfavourite_id() {
         return efavourite_id;
     }
@@ -42,5 +46,13 @@ public class FavouriteExercise {
 
     public void setExercise(Exercise exercise) {
         this.exercise = exercise;
+    }
+
+    public UserInfo getUserInfo_id() {
+        return userInfo_id;
+    }
+
+    public void setUserInfo_id(UserInfo userInfo_id) {
+        this.userInfo_id = userInfo_id;
     }
 }

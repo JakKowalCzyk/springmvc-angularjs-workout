@@ -16,10 +16,6 @@ public class UserExercise {
     @PrimaryKeyJoinColumn
     private Exercise exercise;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @PrimaryKeyJoinColumn
-//    private User user_id;
-
     @ManyToOne
     @JoinColumn(name = "workout_id")
     private Workout workout_id;
@@ -27,8 +23,6 @@ public class UserExercise {
     private int repeat;
 
     private int series;
-
-//    private Date date;
 
     public Exercise getExercise() {
         return exercise;
@@ -54,14 +48,6 @@ public class UserExercise {
         this.usexercise_id = usexercise_id;
     }
 
-//    public User getUser_id() {
-//        return user_id;
-//    }
-//
-//    public void setUser_id(User user_id) {
-//        this.user_id = user_id;
-//    }
-//
     public int getRepeat() {
         return repeat;
     }
@@ -78,11 +64,4 @@ public class UserExercise {
         this.series = series;
     }
 
-//    public Date getDate() {
-//        return date;
-//    }
-//
-//    public void setDate(Date date) {
-//        this.date = date;
-//    }
 }
