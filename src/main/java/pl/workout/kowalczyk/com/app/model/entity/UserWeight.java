@@ -14,8 +14,7 @@ public class UserWeight {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int uweight_id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @ManyToOne
     private User user_id;
 
     private int weight_kg;
@@ -23,8 +22,12 @@ public class UserWeight {
     private Date data;
 
     @OneToOne
-    @JoinColumn(name = "userInfo_id")
+    @PrimaryKeyJoinColumn
     private UserInfo userInfo_id;
+
+    public void setUser_id(User user_id) {
+        this.user_id = user_id;
+    }
 
     public int getUweight_id() {
         return uweight_id;
@@ -32,14 +35,6 @@ public class UserWeight {
 
     public void setUweight_id(int uweight_id) {
         this.uweight_id = uweight_id;
-    }
-
-    public User getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(User user_id) {
-        this.user_id = user_id;
     }
 
     public int getWeight_kg() {

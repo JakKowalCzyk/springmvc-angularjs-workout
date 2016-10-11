@@ -12,5 +12,5 @@ public interface UserInfoDao extends BaseDao<UserInfo> {
 
     UserWeight getActualWeight(int userId);
 
-    FavouriteExercise getFavouriteExercise(int UserId);
+    FavouriteExercise getFavouriteExercise(int userId);
 }

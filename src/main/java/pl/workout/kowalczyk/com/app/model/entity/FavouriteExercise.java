@@ -12,16 +12,12 @@ public class FavouriteExercise {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int efavourite_id ;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private User user_id;
-
     @OneToOne
     @PrimaryKeyJoinColumn
     private Exercise exercise;
 
     @OneToOne
-    @JoinColumn(name = "userInfo_id")
+    @PrimaryKeyJoinColumn
     private UserInfo userInfo_id;
 
     public int getEfavourite_id() {
@@ -30,14 +26,6 @@ public class FavouriteExercise {
 
     public void setEfavourite_id(int efavourite_id) {
         this.efavourite_id = efavourite_id;
-    }
-
-    public User getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(User user_id) {
-        this.user_id = user_id;
     }
 
     public Exercise getExercise() {
