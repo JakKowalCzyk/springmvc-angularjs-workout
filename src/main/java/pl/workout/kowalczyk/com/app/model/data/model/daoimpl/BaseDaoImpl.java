@@ -1,10 +1,6 @@
-package pl.workout.kowalczyk.com.app.model.daoimpl;
+package pl.workout.kowalczyk.com.app.model.data.model.daoimpl;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
-import pl.workout.kowalczyk.com.app.model.dao.BaseDao;
+import pl.workout.kowalczyk.com.app.model.data.model.dao.BaseDao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

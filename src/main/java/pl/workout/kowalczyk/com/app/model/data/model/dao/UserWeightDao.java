@@ -1,6 +1,6 @@
-package pl.workout.kowalczyk.com.app.model.dao;
+package pl.workout.kowalczyk.com.app.model.data.model.dao;
 
-import pl.workout.kowalczyk.com.app.model.entity.UserWeight;
+import pl.workout.kowalczyk.com.app.model.data.model.entity.UserWeight;
 
 import java.sql.Date;
 import java.util.List;

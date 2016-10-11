@@ -1,6 +1,5 @@
-package pl.workout.kowalczyk.com.app.model.dao;
+package pl.workout.kowalczyk.com.app.model.data.model.dao;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**

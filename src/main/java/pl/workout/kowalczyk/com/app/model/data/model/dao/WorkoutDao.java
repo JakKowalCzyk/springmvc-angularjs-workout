@@ -1,7 +1,7 @@
-package pl.workout.kowalczyk.com.app.model.dao;
+package pl.workout.kowalczyk.com.app.model.data.model.dao;
 
-import pl.workout.kowalczyk.com.app.model.entity.UserExercise;
-import pl.workout.kowalczyk.com.app.model.entity.Workout;
+import pl.workout.kowalczyk.com.app.model.data.model.entity.UserExercise;
+import pl.workout.kowalczyk.com.app.model.data.model.entity.Workout;
 
 import java.sql.Date;
 import java.util.List;

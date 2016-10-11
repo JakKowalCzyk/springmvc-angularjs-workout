@@ -1,4 +1,4 @@
-package pl.workout.kowalczyk.com.app.model.entity;
+package pl.workout.kowalczyk.com.app.model.data.model.entity;
 
 import pl.workout.kowalczyk.com.app.model.Enums.ExerciseType;
 

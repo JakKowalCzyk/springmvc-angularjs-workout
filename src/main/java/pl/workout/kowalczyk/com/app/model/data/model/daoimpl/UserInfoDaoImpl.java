@@ -1,9 +1,9 @@
-package pl.workout.kowalczyk.com.app.model.daoimpl;
+package pl.workout.kowalczyk.com.app.model.data.model.daoimpl;
 
-import pl.workout.kowalczyk.com.app.model.dao.UserInfoDao;
-import pl.workout.kowalczyk.com.app.model.entity.FavouriteExercise;
-import pl.workout.kowalczyk.com.app.model.entity.UserInfo;
-import pl.workout.kowalczyk.com.app.model.entity.UserWeight;
+import pl.workout.kowalczyk.com.app.model.data.model.dao.UserInfoDao;
+import pl.workout.kowalczyk.com.app.model.data.model.entity.FavouriteExercise;
+import pl.workout.kowalczyk.com.app.model.data.model.entity.UserInfo;
+import pl.workout.kowalczyk.com.app.model.data.model.entity.UserWeight;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

@@ -1,7 +1,7 @@
-package pl.workout.kowalczyk.com.app.model.dao;
+package pl.workout.kowalczyk.com.app.model.data.model.dao;
 
 import pl.workout.kowalczyk.com.app.model.Enums.ExerciseType;
-import pl.workout.kowalczyk.com.app.model.entity.Exercise;
+import pl.workout.kowalczyk.com.app.model.data.model.entity.Exercise;
 
 import java.util.List;
 

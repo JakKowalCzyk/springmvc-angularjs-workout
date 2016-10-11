@@ -1,9 +1,9 @@
-package pl.workout.kowalczyk.com.app.model.daoimpl;
+package pl.workout.kowalczyk.com.app.model.data.model.daoimpl;
 
 import org.springframework.stereotype.Repository;
 import pl.workout.kowalczyk.com.app.model.Enums.ExerciseType;
-import pl.workout.kowalczyk.com.app.model.dao.ExerciseDao;
-import pl.workout.kowalczyk.com.app.model.entity.Exercise;
+import pl.workout.kowalczyk.com.app.model.data.model.dao.ExerciseDao;
+import pl.workout.kowalczyk.com.app.model.data.model.entity.Exercise;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
