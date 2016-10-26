@@ -11,5 +11,5 @@ import java.util.List;
 public interface UserNotesDao extends BaseDao<UserNotes> {
     List<UserNotes> getUserNotesByUserId(int userId);
 
-    UserNotes getSingeNoteByDate(int userId, Date date);
+    UserNotes getSingleNoteByDate(int userId, Date date);
 }

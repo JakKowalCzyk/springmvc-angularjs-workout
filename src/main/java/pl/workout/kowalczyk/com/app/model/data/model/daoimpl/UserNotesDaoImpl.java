@@ -29,7 +29,7 @@ public class UserNotesDaoImpl extends BaseDaoImpl<UserNotes> implements UserNote
         return userNotesList;
     }
 
-    public UserNotes getSingeNoteByDate(int userId, Date date) {
+    public UserNotes getSingleNoteByDate(int userId, Date date) {
         TypedQuery<UserNotes> typedQuery = entityManager.createQuery(getSingleNoteSql, UserNotes.class);
         typedQuery.setParameter("userId", userId);
         typedQuery.setParameter("date", date);
