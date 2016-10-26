@@ -1,6 +1,6 @@
 package pl.workout.kowalczyk.com.app.services.service;
 
-import pl.workout.kowalczyk.com.app.model.data.model.entity.UserInfo;
+import pl.workout.kowalczyk.com.app.model.data.entity.UserInfo;
 
 /**
  * Created by JK on 2016-10-26.
