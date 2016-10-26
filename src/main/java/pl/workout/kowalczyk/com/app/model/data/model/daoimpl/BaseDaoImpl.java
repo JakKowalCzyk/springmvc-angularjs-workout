@@ -1,5 +1,6 @@
 package pl.workout.kowalczyk.com.app.model.data.model.daoimpl;
 
+import org.springframework.stereotype.Repository;
 import pl.workout.kowalczyk.com.app.model.data.model.dao.BaseDao;
 
 import javax.persistence.EntityManager;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Created by JK on 2016-09-03.
  */
+@Repository
 public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
     private Class<T> entityClass;
