@@ -26,7 +26,7 @@ public class FavouriteExerciseServiceImpl implements FavouriteExerciseService{
     }
 
     public void updateFavouriteExercise(FavouriteExercise favouriteExercise) {
-        favouriteExerciseBaseDao.save(favouriteExercise);
+        favouriteExerciseBaseDao.update(favouriteExercise);
     }
 
     public void getUserFavouriteExercise(int userId) {
