@@ -1,4 +1,4 @@
-package pl.workout.kowalczyk.com.app.model.Enums;
+package pl.workout.kowalczyk.com.app.enums;
 
 /**
  * Created by JK on 2016-09-23.

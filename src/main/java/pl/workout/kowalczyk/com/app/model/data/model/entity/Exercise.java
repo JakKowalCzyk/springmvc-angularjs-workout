@@ -1,6 +1,6 @@
 package pl.workout.kowalczyk.com.app.model.data.model.entity;
 
-import pl.workout.kowalczyk.com.app.model.Enums.ExerciseType;
+import pl.workout.kowalczyk.com.app.enums.ExerciseType;
 
 import javax.persistence.*;
 

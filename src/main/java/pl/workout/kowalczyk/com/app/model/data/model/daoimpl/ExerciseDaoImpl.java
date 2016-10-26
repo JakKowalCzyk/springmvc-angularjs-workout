@@ -1,7 +1,7 @@
 package pl.workout.kowalczyk.com.app.model.data.model.daoimpl;
 
 import org.springframework.stereotype.Repository;
-import pl.workout.kowalczyk.com.app.model.Enums.ExerciseType;
+import pl.workout.kowalczyk.com.app.enums.ExerciseType;
 import pl.workout.kowalczyk.com.app.model.data.model.dao.ExerciseDao;
 import pl.workout.kowalczyk.com.app.model.data.model.entity.Exercise;
 
