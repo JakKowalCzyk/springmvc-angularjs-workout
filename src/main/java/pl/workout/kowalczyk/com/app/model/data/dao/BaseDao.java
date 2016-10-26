@@ -1,4 +1,4 @@
-package pl.workout.kowalczyk.com.app.model.data.model.dao;
+package pl.workout.kowalczyk.com.app.model.data.dao;
 
 import java.util.List;
 

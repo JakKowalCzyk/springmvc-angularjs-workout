@@ -1,6 +1,6 @@
-package pl.workout.kowalczyk.com.app.model.data.model.dao;
+package pl.workout.kowalczyk.com.app.model.data.dao;
 
-import pl.workout.kowalczyk.com.app.model.data.model.entity.User;
+import pl.workout.kowalczyk.com.app.model.data.entity.User;
 
 /**
  * Created by JK on 2016-09-07.
