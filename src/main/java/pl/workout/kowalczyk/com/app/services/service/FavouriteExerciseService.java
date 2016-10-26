@@ -10,7 +10,7 @@ public interface FavouriteExerciseService {
 
     void updateFavouriteExercise(FavouriteExercise favouriteExercise);
 
-    void getUserFavouriteExercise(int userId);
+    FavouriteExercise getUserFavouriteExercise(int userId);
 
     void deleteFavouriteExercise(FavouriteExercise favouriteExercise);
 }
