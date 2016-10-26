@@ -17,27 +17,16 @@ import java.util.List;
 public class UserExerciseDaoImpl extends BaseDaoImpl<UserExercise> implements UserExerciseDao{
 
     private static final String getByIdSql = "SELECT o FROM UserExercise o WHERE o.user_id = :userId";
-    private static final String getByDate = "SELECT o FROM UserExercise o WHERE o.user_id = :userId AND o.date = :date";
 
     @PersistenceContext
     private EntityManager entityManager;
 
     public List<UserExercise> getUserExercisesByUserId(int userId) {
-        TypedQuery<UserExercise> typedQuery = getUserExerciseTypedQuery(getByIdSql);
+        TypedQuery<UserExercise> typedQuery = entityManager.createQuery(getByIdSql, UserExercise.class);
         typedQuery.setParameter("userId", userId);
         List<UserExercise> userExercises = typedQuery.getResultList();
         return userExercises;
     }
 
-    public List<UserExercise> getByDate(int userId, Date date) {
-        TypedQuery<UserExercise> typedQuery = getUserExerciseTypedQuery(getByDate);
-        typedQuery.setParameter("userId", userId);
-        typedQuery.setParameter("date", date);
-        List<UserExercise> userExercises = typedQuery.getResultList();
-        return userExercises;
-    }
 
-    private TypedQuery<UserExercise> getUserExerciseTypedQuery(String getByIdSql) {
-        return entityManager.createQuery(getByIdSql, UserExercise.class);
-    }
 }

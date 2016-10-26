@@ -11,6 +11,4 @@ import java.util.List;
 public interface UserExerciseDao extends BaseDao<UserExercise> {
     List<UserExercise> getUserExercisesByUserId(int userId);
 
-    List<UserExercise> getByDate(int userId, Date date);
-
 }
