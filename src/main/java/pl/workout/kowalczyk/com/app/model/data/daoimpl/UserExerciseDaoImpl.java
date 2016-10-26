@@ -1,13 +1,12 @@
-package pl.workout.kowalczyk.com.app.model.data.model.daoimpl;
+package pl.workout.kowalczyk.com.app.model.data.daoimpl;
 
 import org.springframework.stereotype.Repository;
-import pl.workout.kowalczyk.com.app.model.data.model.dao.UserExerciseDao;
-import pl.workout.kowalczyk.com.app.model.data.model.entity.UserExercise;
+import pl.workout.kowalczyk.com.app.model.data.dao.UserExerciseDao;
+import pl.workout.kowalczyk.com.app.model.data.entity.UserExercise;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.sql.Date;
 import java.util.List;
 
 /**

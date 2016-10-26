@@ -1,9 +1,9 @@
-package pl.workout.kowalczyk.com.app.model.data.model.daoimpl;
+package pl.workout.kowalczyk.com.app.model.data.daoimpl;
 
 import org.springframework.stereotype.Repository;
-import pl.workout.kowalczyk.com.app.model.data.model.dao.WorkoutDao;
-import pl.workout.kowalczyk.com.app.model.data.model.entity.UserExercise;
-import pl.workout.kowalczyk.com.app.model.data.model.entity.Workout;
+import pl.workout.kowalczyk.com.app.model.data.dao.WorkoutDao;
+import pl.workout.kowalczyk.com.app.model.data.entity.Workout;
+import pl.workout.kowalczyk.com.app.model.data.entity.UserExercise;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import java.util.List;
  * Created by JK on 2016-09-26.
  */
 @Repository
-public class WorkoutDaoImpl extends BaseDaoImpl<Workout> implements WorkoutDao{
+public class WorkoutDaoImpl extends BaseDaoImpl<Workout> implements WorkoutDao {
 
     private static final String getByUserIdSql = "SELECT o FROM Workout o where o.user_id = :userId";
     private static final String getByDateSql = "SELECT o FROM Workout  o where o.user_id = :userId and o.date = :date";
