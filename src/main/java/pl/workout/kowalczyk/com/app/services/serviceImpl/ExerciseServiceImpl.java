@@ -23,8 +23,8 @@ public class ExerciseServiceImpl implements ExerciseService {
         exerciseDao.save(exercise);
     }
 
-    public void getAllExercises() {
-        exerciseDao.getAll();
+    public List<Exercise> getAllExercises() {
+        return exerciseDao.getAll();
     }
 
     public Exercise getExerciseByName(String name) {

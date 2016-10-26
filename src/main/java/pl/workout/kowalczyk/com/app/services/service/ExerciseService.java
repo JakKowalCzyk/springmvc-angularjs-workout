@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface ExerciseService {
     void saveExercise(Exercise exercise);
-    void getAllExercises();
+    List<Exercise> getAllExercises();
     Exercise getExerciseByName(String name);
     List<Exercise> getExercisesForBodyPart(ExerciseType exerciseType);
 }
