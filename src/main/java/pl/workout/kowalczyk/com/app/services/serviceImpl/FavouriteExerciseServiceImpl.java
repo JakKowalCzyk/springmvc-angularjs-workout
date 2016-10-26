@@ -3,7 +3,7 @@ package pl.workout.kowalczyk.com.app.services.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.workout.kowalczyk.com.app.model.data.model.dao.FavouriteExerciseDao;
+import pl.workout.kowalczyk.com.app.model.data.model.dao.BaseDao;
 import pl.workout.kowalczyk.com.app.model.data.model.dao.UserInfoDao;
 import pl.workout.kowalczyk.com.app.model.data.model.entity.FavouriteExercise;
 import pl.workout.kowalczyk.com.app.services.service.FavouriteExerciseService;
@@ -16,17 +16,17 @@ import pl.workout.kowalczyk.com.app.services.service.FavouriteExerciseService;
 public class FavouriteExerciseServiceImpl implements FavouriteExerciseService{
 
     @Autowired
-    private FavouriteExerciseDao favouriteExerciseDao;
+    private BaseDao<FavouriteExercise> favouriteExerciseBaseDao;
 
     @Autowired
     private UserInfoDao userInfoDao;
 
     public void saveFavouriteExercise(FavouriteExercise favouriteExercise) {
-        favouriteExerciseDao.save(favouriteExercise);
+        favouriteExerciseBaseDao.save(favouriteExercise);
     }
 
     public void updateFavouriteExercise(FavouriteExercise favouriteExercise) {
-        favouriteExerciseDao.save(favouriteExercise);
+        favouriteExerciseBaseDao.save(favouriteExercise);
     }
 
     public void getUserFavouriteExercise(int userId) {
@@ -34,6 +34,6 @@ public class FavouriteExerciseServiceImpl implements FavouriteExerciseService{
     }
 
     public void deleteFavouriteExercise(FavouriteExercise favouriteExercise) {
-        favouriteExerciseDao.delete(favouriteExercise);
+        favouriteExerciseBaseDao.delete(favouriteExercise);
     }
 }
