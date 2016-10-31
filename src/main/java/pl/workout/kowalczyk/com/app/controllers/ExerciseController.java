@@ -15,27 +15,28 @@ import java.util.List;
  * Created by JK on 2016-10-26.
  */
 @RestController
+@RequestMapping(path = "/exercise")
 public class ExerciseController {
     @Autowired
     private ExerciseService exerciseService;
 
-    @RequestMapping(path = "/exercise", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity saveExercise(@RequestBody Exercise exercise) {
         exerciseService.saveExercise(exercise);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/exercise", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public List<Exercise> getAllExercises(){
         return exerciseService.getAllExercises();
     }
 
-    @RequestMapping(path = "/exercise/{name}", method = RequestMethod.GET)
+    @RequestMapping(path = "/{name}", method = RequestMethod.GET)
     public Exercise getExerciseByName(@PathVariable String name){
         return exerciseService.getExerciseByName(name);
     }
 
-    @RequestMapping(path = "exercise/{exerciseType}", method = RequestMethod.GET)
+    @RequestMapping(path = "/{exerciseType}", method = RequestMethod.GET)
     public List<Exercise> getExercisesByType(@PathVariable ExerciseType exerciseType){
         return exerciseService.getExercisesForBodyPart(exerciseType);
     }
