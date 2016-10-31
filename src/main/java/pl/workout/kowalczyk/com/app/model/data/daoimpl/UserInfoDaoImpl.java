@@ -1,5 +1,6 @@
 package pl.workout.kowalczyk.com.app.model.data.daoimpl;
 
+import org.springframework.stereotype.Repository;
 import pl.workout.kowalczyk.com.app.model.data.dao.UserInfoDao;
 import pl.workout.kowalczyk.com.app.model.data.entity.FavouriteExercise;
 import pl.workout.kowalczyk.com.app.model.data.entity.UserInfo;
@@ -12,6 +13,7 @@ import javax.persistence.TypedQuery;
 /**
  * Created by JK on 2016-10-10.
  */
+@Repository
 public class UserInfoDaoImpl extends BaseDaoImpl<UserInfo> implements UserInfoDao {
 
     private static final String getByUserIdSql = "SELECT o FROM UserInfo o where o.user_id = :userId";
