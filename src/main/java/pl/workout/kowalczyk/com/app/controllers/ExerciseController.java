@@ -8,7 +8,6 @@ import pl.workout.kowalczyk.com.app.enums.ExerciseType;
 import pl.workout.kowalczyk.com.app.model.data.entity.Exercise;
 import pl.workout.kowalczyk.com.app.services.service.ExerciseService;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -27,17 +26,17 @@ public class ExerciseController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Exercise> getAllExercises(){
+    public List<Exercise> getAllExercises() {
         return exerciseService.getAllExercises();
     }
 
     @RequestMapping(path = "/{name}", method = RequestMethod.GET)
-    public Exercise getExerciseByName(@PathVariable String name){
+    public Exercise getExerciseByName(@PathVariable String name) {
         return exerciseService.getExerciseByName(name);
     }
 
     @RequestMapping(path = "/{exerciseType}", method = RequestMethod.GET)
-    public List<Exercise> getExercisesByType(@PathVariable ExerciseType exerciseType){
+    public List<Exercise> getExercisesByType(@PathVariable ExerciseType exerciseType) {
         return exerciseService.getExercisesForBodyPart(exerciseType);
     }
 

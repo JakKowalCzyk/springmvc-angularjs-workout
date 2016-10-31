@@ -11,7 +11,7 @@ import pl.workout.kowalczyk.com.app.services.service.FavouriteExerciseService;
  * Created by JK on 2016-10-26.
  */
 @RestController
-@RequestMapping(path = "/favouriteExercise")
+@RequestMapping(path = "/exercise/favourite")
 public class FavouriteExerciseController {
     @Autowired
     private FavouriteExerciseService favouriteExerciseService;
