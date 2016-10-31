@@ -18,7 +18,7 @@ public class Exercise {
 
     private String description;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private ExerciseType exerciseType;
 
     public int getExercise_id() {
