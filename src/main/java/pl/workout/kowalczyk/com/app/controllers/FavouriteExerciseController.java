@@ -11,28 +11,29 @@ import pl.workout.kowalczyk.com.app.services.service.FavouriteExerciseService;
  * Created by JK on 2016-10-26.
  */
 @RestController
+@RequestMapping(path = "/favouriteExercise")
 public class FavouriteExerciseController {
     @Autowired
     private FavouriteExerciseService favouriteExerciseService;
 
-    @RequestMapping(path = "/favouriteExercise", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity saveFavouriteExercise(@RequestBody FavouriteExercise favouriteExercise) {
         favouriteExerciseService.saveFavouriteExercise(favouriteExercise);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/favouriteExercise", method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity updateFavouriteExercise(@RequestBody FavouriteExercise favouriteExercise) {
         favouriteExerciseService.updateFavouriteExercise(favouriteExercise);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/favouriteExercise/{userId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public FavouriteExercise getUserFavouriteExercise(@PathVariable int userId){
         return favouriteExerciseService.getUserFavouriteExercise(userId);
     }
 
-    @RequestMapping(value = "/favouriteExercise", method = RequestMethod.DELETE)
+    @RequestMapping(method = RequestMethod.DELETE)
     public ResponseEntity deleteFavouriteExercise(@RequestBody FavouriteExercise favouriteExercise) {
         favouriteExerciseService.deleteFavouriteExercise(favouriteExercise);
         return new ResponseEntity(HttpStatus.OK);
