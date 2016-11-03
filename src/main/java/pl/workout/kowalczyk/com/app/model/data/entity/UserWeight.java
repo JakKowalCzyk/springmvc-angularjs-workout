@@ -1,5 +1,7 @@
 package pl.workout.kowalczyk.com.app.model.data.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -11,7 +13,8 @@ import java.sql.Date;
 public class UserWeight {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GenericGenerator(name="auto" , strategy="increment")
+    @GeneratedValue(generator="auto")
     private int uweight_id;
 
     @ManyToOne

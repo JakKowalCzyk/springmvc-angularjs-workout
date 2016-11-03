@@ -1,5 +1,6 @@
 package pl.workout.kowalczyk.com.app.model.data.entity;
 
+import org.hibernate.annotations.GenericGenerator;
 import pl.workout.kowalczyk.com.app.enums.ExerciseType;
 
 import javax.persistence.*;
@@ -11,7 +12,8 @@ import javax.persistence.*;
 @Table(name ="saw_exercise")
 public class Exercise {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GenericGenerator(name="auto" , strategy="increment")
+    @GeneratedValue(generator="auto")
     private int exercise_id;
 
     private String name;
