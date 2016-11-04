@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.workout.kowalczyk.com.app.model.data.entity.FavouriteExercise;
 import pl.workout.kowalczyk.com.app.services.service.FavouriteExerciseService;
+import pl.workout.kowalczyk.com.app.services.service.UserInfoService;
 
 /**
  * Created by JK on 2016-10-26.
@@ -15,10 +16,14 @@ import pl.workout.kowalczyk.com.app.services.service.FavouriteExerciseService;
 public class FavouriteExerciseController {
     @Autowired
     private FavouriteExerciseService favouriteExerciseService;
+    @Autowired
+    private UserInfoService userInfoService;
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity saveFavouriteExercise(@RequestBody FavouriteExercise favouriteExercise) {
+        int userId = 1;
         favouriteExerciseService.saveFavouriteExercise(favouriteExercise);
+        userInfoService.updateUserInfoFavourite(userId, favouriteExercise);
         return new ResponseEntity(HttpStatus.OK);
     }
 
