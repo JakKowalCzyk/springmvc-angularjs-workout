@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.workout.kowalczyk.com.app.model.data.dao.UserInfoDao;
 import pl.workout.kowalczyk.com.app.model.data.entity.FavouriteExercise;
 import pl.workout.kowalczyk.com.app.model.data.entity.UserInfo;
+import pl.workout.kowalczyk.com.app.model.data.entity.UserWeight;
 import pl.workout.kowalczyk.com.app.services.service.UserInfoService;
 
 /**
@@ -33,6 +34,13 @@ public class UserInfoServiceImpl implements UserInfoService {
     public void updateUserInfoFavourite(int userId, FavouriteExercise favouriteExercise) {
         UserInfo userInfo = getUserInfoByUserId(userId);
         userInfo.setEfavourite_id(favouriteExercise);
+        updateUserInfo(userInfo);
+    }
+
+    @Override
+    public void updateUserInfoWithUserWeight(int userId, UserWeight userWeight) {
+        UserInfo userInfo = getUserInfoByUserId(userId);
+        userInfo.setActual_weight(userWeight);
         updateUserInfo(userInfo);
     }
 }

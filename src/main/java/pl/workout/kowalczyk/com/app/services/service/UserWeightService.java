@@ -9,7 +9,7 @@ import java.util.List;
  * Created by JK on 2016-10-26.
  */
 public interface UserWeightService {
-    void saveUserWeight(UserWeight userWeight);
+    void saveUserWeight(int userId, UserWeight userWeight);
 
     void updateUserWeight(UserWeight userWeight);
 

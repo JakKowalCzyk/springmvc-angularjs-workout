@@ -13,5 +13,5 @@ public interface UserWeightDao extends BaseDao<UserWeight> {
 
     UserWeight getByUserIdAndDate(int userId, Date date);
 
-
+    UserWeight getLastUserWeight(int userId);
 }
