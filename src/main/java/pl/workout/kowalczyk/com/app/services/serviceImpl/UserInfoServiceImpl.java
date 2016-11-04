@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.workout.kowalczyk.com.app.model.data.dao.UserInfoDao;
-import pl.workout.kowalczyk.com.app.model.data.entity.FavouriteExercise;
+import pl.workout.kowalczyk.com.app.model.data.entity.Exercise;
 import pl.workout.kowalczyk.com.app.model.data.entity.UserInfo;
 import pl.workout.kowalczyk.com.app.model.data.entity.UserWeight;
 import pl.workout.kowalczyk.com.app.services.service.UserInfoService;
@@ -30,12 +30,6 @@ public class UserInfoServiceImpl implements UserInfoService {
         return userInfoDao.getUserInfoByUserId(userId);
     }
 
-    @Override
-    public void updateUserInfoFavourite(int userId, FavouriteExercise favouriteExercise) {
-        UserInfo userInfo = getUserInfoByUserId(userId);
-        userInfo.setEfavourite_id(favouriteExercise);
-        updateUserInfo(userInfo);
-    }
 
     @Override
     public void updateUserInfoWithUserWeight(int userId, UserWeight userWeight) {

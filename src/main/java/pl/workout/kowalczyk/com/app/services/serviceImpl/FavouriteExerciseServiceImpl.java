@@ -3,11 +3,12 @@ package pl.workout.kowalczyk.com.app.services.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.workout.kowalczyk.com.app.model.data.dao.BaseDao;
 import pl.workout.kowalczyk.com.app.model.data.dao.UserInfoDao;
-import pl.workout.kowalczyk.com.app.model.data.daoimpl.BaseDaoImpl;
-import pl.workout.kowalczyk.com.app.model.data.entity.FavouriteExercise;
+import pl.workout.kowalczyk.com.app.model.data.entity.Exercise;
+import pl.workout.kowalczyk.com.app.model.data.entity.UserInfo;
+import pl.workout.kowalczyk.com.app.services.service.ExerciseService;
 import pl.workout.kowalczyk.com.app.services.service.FavouriteExerciseService;
+import pl.workout.kowalczyk.com.app.services.service.UserInfoService;
 
 /**
  * Created by JK on 2016-10-26.
@@ -17,24 +18,28 @@ import pl.workout.kowalczyk.com.app.services.service.FavouriteExerciseService;
 public class FavouriteExerciseServiceImpl implements FavouriteExerciseService{
 
     @Autowired
-    private BaseDaoImpl<FavouriteExercise> favouriteExerciseBaseDao;
-
-    @Autowired
     private UserInfoDao userInfoDao;
+    @Autowired
+    private UserInfoService userInfoService;
+    @Autowired
+    private ExerciseService exerciseService;
 
-    public void saveFavouriteExercise(FavouriteExercise favouriteExercise) {
-        favouriteExerciseBaseDao.save(favouriteExercise);
+    public void updateFavouriteExercise(int userId, int exerciseId) {
+        UserInfo userInfo = getUserInfo(userId);
+        userInfo.setEfavourite_id(exerciseService.getExerciseById(exerciseId));
+        userInfoService.updateUserInfo(userInfo);
     }
 
-    public void updateFavouriteExercise(FavouriteExercise favouriteExercise) {
-        favouriteExerciseBaseDao.update(favouriteExercise);
-    }
-
-    public FavouriteExercise getUserFavouriteExercise(int userId) {
+    public Exercise getUserFavouriteExercise(int userId) {
         return userInfoDao.getFavouriteExercise(userId);
     }
 
-    public void deleteFavouriteExercise(FavouriteExercise favouriteExercise) {
-        favouriteExerciseBaseDao.delete(favouriteExercise);
+    public void deleteFavouriteExercise(int userId) {
+        updateFavouriteExercise(userId, -1);
     }
+
+    public UserInfo getUserInfo(int userId) {
+       return userInfoService.getUserInfoByUserId(userId);
+    }
+
 }

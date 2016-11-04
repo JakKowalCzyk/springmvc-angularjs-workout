@@ -26,7 +26,7 @@ public class UserInfo {
 
     @OneToOne(cascade =  CascadeType.ALL, mappedBy = "userInfo_id")
     @PrimaryKeyJoinColumn
-    private FavouriteExercise efavourite_id;
+    private Exercise efavourite_id;
 
 
     public int getUinfo_id() {
@@ -53,11 +53,11 @@ public class UserInfo {
         this.actual_weight = actual_weight;
     }
 
-    public FavouriteExercise getEfavourite_id() {
+    public Exercise getEfavourite_id() {
         return efavourite_id;
     }
 
-    public void setEfavourite_id(FavouriteExercise efavourite_id) {
+    public void setEfavourite_id(Exercise efavourite_id) {
         this.efavourite_id = efavourite_id;
     }
 }

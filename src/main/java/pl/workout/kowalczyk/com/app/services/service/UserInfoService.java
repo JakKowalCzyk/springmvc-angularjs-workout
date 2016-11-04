@@ -1,6 +1,6 @@
 package pl.workout.kowalczyk.com.app.services.service;
 
-import pl.workout.kowalczyk.com.app.model.data.entity.FavouriteExercise;
+import pl.workout.kowalczyk.com.app.model.data.entity.Exercise;
 import pl.workout.kowalczyk.com.app.model.data.entity.UserInfo;
 import pl.workout.kowalczyk.com.app.model.data.entity.UserWeight;
 
@@ -13,8 +13,6 @@ public interface UserInfoService {
     void updateUserInfo(UserInfo userInfo);
 
     UserInfo getUserInfoByUserId(int userId);
-
-    void updateUserInfoFavourite(int userId, FavouriteExercise favouriteExercise);
 
     void updateUserInfoWithUserWeight(int userId, UserWeight userWeight);
 }

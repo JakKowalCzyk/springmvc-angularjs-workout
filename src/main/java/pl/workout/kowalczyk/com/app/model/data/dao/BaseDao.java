@@ -15,5 +15,5 @@ public interface BaseDao<T> {
 
     void delete(T domain);
 
-    T get(Long id);
+    T get(int id);
 }

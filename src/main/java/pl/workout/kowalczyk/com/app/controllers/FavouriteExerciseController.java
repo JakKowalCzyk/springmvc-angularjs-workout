@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.workout.kowalczyk.com.app.model.data.entity.FavouriteExercise;
+import pl.workout.kowalczyk.com.app.model.data.entity.Exercise;
 import pl.workout.kowalczyk.com.app.services.service.FavouriteExerciseService;
 import pl.workout.kowalczyk.com.app.services.service.UserInfoService;
 
@@ -16,31 +16,29 @@ import pl.workout.kowalczyk.com.app.services.service.UserInfoService;
 public class FavouriteExerciseController {
     @Autowired
     private FavouriteExerciseService favouriteExerciseService;
-    @Autowired
-    private UserInfoService userInfoService;
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity saveFavouriteExercise(@RequestBody FavouriteExercise favouriteExercise) {
+    @RequestMapping(path = "/exerciseId", method = RequestMethod.POST)
+    public ResponseEntity saveFavouriteExercise(@PathVariable int exerciseId) {
         int userId = 1;
-        favouriteExerciseService.saveFavouriteExercise(favouriteExercise);
-        userInfoService.updateUserInfoFavourite(userId, favouriteExercise);
+        favouriteExerciseService.updateFavouriteExercise(userId, exerciseId);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity updateFavouriteExercise(@RequestBody FavouriteExercise favouriteExercise) {
-        favouriteExerciseService.updateFavouriteExercise(favouriteExercise);
+    @RequestMapping(path = "/exerciseId", method = RequestMethod.PUT)
+    public ResponseEntity updateFavouriteExercise(@PathVariable int exerciseId) {
+        int userId = 1;
+        favouriteExerciseService.updateFavouriteExercise(userId, exerciseId);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-    public FavouriteExercise getUserFavouriteExercise(@PathVariable int userId){
+    public Exercise getUserFavouriteExercise(@PathVariable int userId){
         return favouriteExerciseService.getUserFavouriteExercise(userId);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
-    public ResponseEntity deleteFavouriteExercise(@RequestBody FavouriteExercise favouriteExercise) {
-        favouriteExerciseService.deleteFavouriteExercise(favouriteExercise);
+    @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
+    public ResponseEntity deleteFavouriteExercise(@PathVariable int userId) {
+        favouriteExerciseService.deleteFavouriteExercise(userId);
         return new ResponseEntity(HttpStatus.OK);
     }
 }

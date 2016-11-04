@@ -12,5 +12,7 @@ public interface ExerciseService {
     void saveExercise(Exercise exercise);
     List<Exercise> getAllExercises();
     Exercise getExerciseByName(String name);
+
+    Exercise getExerciseById(int exerciseId);
     List<Exercise> getExercisesForBodyPart(ExerciseType exerciseType);
 }

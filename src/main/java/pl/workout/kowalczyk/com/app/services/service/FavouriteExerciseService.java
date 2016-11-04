@@ -1,16 +1,15 @@
 package pl.workout.kowalczyk.com.app.services.service;
 
-import pl.workout.kowalczyk.com.app.model.data.entity.FavouriteExercise;
+import pl.workout.kowalczyk.com.app.model.data.entity.Exercise;
 
 /**
  * Created by JK on 2016-10-26.
  */
 public interface FavouriteExerciseService {
-    void saveFavouriteExercise(FavouriteExercise favouriteExercise);
 
-    void updateFavouriteExercise(FavouriteExercise favouriteExercise);
+    void updateFavouriteExercise(int userId, int exerciseId);
 
-    FavouriteExercise getUserFavouriteExercise(int userId);
+    Exercise getUserFavouriteExercise(int userId);
 
-    void deleteFavouriteExercise(FavouriteExercise favouriteExercise);
+    void deleteFavouriteExercise(int userId);
 }

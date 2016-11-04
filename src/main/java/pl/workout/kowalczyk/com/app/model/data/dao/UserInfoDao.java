@@ -1,7 +1,7 @@
 package pl.workout.kowalczyk.com.app.model.data.dao;
 
 import org.springframework.stereotype.Repository;
-import pl.workout.kowalczyk.com.app.model.data.entity.FavouriteExercise;
+import pl.workout.kowalczyk.com.app.model.data.entity.Exercise;
 import pl.workout.kowalczyk.com.app.model.data.entity.UserInfo;
 import pl.workout.kowalczyk.com.app.model.data.entity.UserWeight;
 
@@ -14,5 +14,5 @@ public interface UserInfoDao extends BaseDao<UserInfo> {
 
     UserWeight getActualWeight(int userId);
 
-    FavouriteExercise getFavouriteExercise(int userId);
+    Exercise getFavouriteExercise(int userId);
 }

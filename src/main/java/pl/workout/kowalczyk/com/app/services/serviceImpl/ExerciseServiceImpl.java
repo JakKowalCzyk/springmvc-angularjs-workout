@@ -31,6 +31,11 @@ public class ExerciseServiceImpl implements ExerciseService {
         return exerciseDao.getExerciseByName(name);
     }
 
+    @Override
+    public Exercise getExerciseById(int exerciseId) {
+        exerciseDao.get(exerciseId);
+    }
+
     public List<Exercise> getExercisesForBodyPart(ExerciseType exerciseType) {
         return exerciseDao.getExercisesForBodyPart(exerciseType);
     }

@@ -43,7 +43,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
         entityManager.remove(domain);
     }
 
-    public T get(Long id) {
+    public T get(int id) {
         return entityManager.find(entityClass, id);
     }
 }
