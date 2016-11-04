@@ -1,5 +1,7 @@
 package pl.workout.kowalczyk.com.app.model.data.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -10,7 +12,8 @@ import java.sql.Date;
 @Table(name = "saw_userNotes")
 public class UserNotes {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GenericGenerator(name="auto" , strategy="increment")
+    @GeneratedValue(generator="auto")
     private int unotes_id;
 
     @OneToOne(cascade = CascadeType.ALL)

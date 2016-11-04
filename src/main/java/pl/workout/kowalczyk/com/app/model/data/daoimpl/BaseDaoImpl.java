@@ -20,12 +20,13 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
     private EntityManager entityManager;
 
     public BaseDaoImpl() {
-        entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
+        this.entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[0];
     }
 
     public List<T> getAll() {
         return entityManager
-                .createQuery("Select a from T a", entityClass)
+                .createQuery("from " + entityClass.getName(), entityClass)
                 .getResultList();
     }
 

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.workout.kowalczyk.com.app.model.data.dao.BaseDao;
 import pl.workout.kowalczyk.com.app.model.data.dao.UserInfoDao;
+import pl.workout.kowalczyk.com.app.model.data.daoimpl.BaseDaoImpl;
 import pl.workout.kowalczyk.com.app.model.data.entity.FavouriteExercise;
 import pl.workout.kowalczyk.com.app.services.service.FavouriteExerciseService;
 
@@ -16,7 +17,7 @@ import pl.workout.kowalczyk.com.app.services.service.FavouriteExerciseService;
 public class FavouriteExerciseServiceImpl implements FavouriteExerciseService{
 
     @Autowired
-    private BaseDao<FavouriteExercise> favouriteExerciseBaseDao;
+    private BaseDaoImpl<FavouriteExercise> favouriteExerciseBaseDao;
 
     @Autowired
     private UserInfoDao userInfoDao;
