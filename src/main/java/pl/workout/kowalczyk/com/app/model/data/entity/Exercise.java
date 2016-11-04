@@ -23,6 +23,11 @@ public class Exercise {
     @Enumerated(EnumType.STRING)
     private ExerciseType exerciseType;
 
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private UserInfo userInfo_id;
+
+
     public int getExercise_id() {
         return exercise_id;
     }

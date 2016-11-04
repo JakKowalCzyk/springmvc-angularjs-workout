@@ -25,8 +25,7 @@ public class ExerciseDaoImpl extends BaseDaoImpl<Exercise> implements ExerciseDa
     public Exercise getExerciseByName(String name) {
         TypedQuery<Exercise> typedQuery = entityManager.createQuery(getByNameSql, Exercise.class);
         typedQuery.setParameter("name", name);
-        Exercise exercise = typedQuery.getSingleResult();
-        return exercise;
+        return (Exercise) typedQuery.getResultList().stream().findFirst().orElse(null);
     }
 
     public List<Exercise> getExercisesForBodyPart(ExerciseType exerciseType) {
