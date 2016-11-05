@@ -12,8 +12,8 @@ import java.sql.Date;
 @Table(name = "saw_user")
 public class User {
     @Id
-    @GenericGenerator(name="auto" , strategy="increment")
-    @GeneratedValue(generator="auto")
+//    @GenericGenerator(name="auto" , strategy="increment")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int user_id;
 
     private String login;

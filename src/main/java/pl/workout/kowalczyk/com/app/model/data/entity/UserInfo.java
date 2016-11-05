@@ -3,29 +3,29 @@ package pl.workout.kowalczyk.com.app.model.data.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by JK on 2016-09-17.
  */
 @Entity
 @Table(name = "saw_userInfo")
-public class UserInfo {
+public class UserInfo implements Serializable {
 
     @Id
-    @GenericGenerator(name="auto" , strategy="increment")
-    @GeneratedValue(generator="auto")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int uinfo_id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @OneToOne()
+    @JoinColumn(name = "user_id")
     private User user_id;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "userInfo_id")
-    @PrimaryKeyJoinColumn
+    @OneToOne
+    @JoinColumn(name = "uweight_id")
     private UserWeight actual_weight;
 
-    @OneToOne(cascade =  CascadeType.ALL, mappedBy = "userInfo_id")
-    @PrimaryKeyJoinColumn
+    @OneToOne
+    @JoinColumn(name = "exercise_id")
     private Exercise efavourite_id;
 
 

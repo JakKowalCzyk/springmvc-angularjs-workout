@@ -13,8 +13,7 @@ import java.util.List;
 @Table(name = "saw_workout")
 public class Workout {
     @Id
-    @GenericGenerator(name="auto" , strategy="increment")
-    @GeneratedValue(generator="auto")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int workout_id ;
 
     @OneToOne(cascade = CascadeType.ALL)

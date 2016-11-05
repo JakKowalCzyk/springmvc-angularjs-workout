@@ -11,8 +11,7 @@ import javax.persistence.*;
 @Table(name = "saw_userExercise")
 public class UserExercise {
     @Id
-    @GenericGenerator(name="auto" , strategy="increment")
-    @GeneratedValue(generator="auto")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int usexercise_id;
 
     @OneToOne

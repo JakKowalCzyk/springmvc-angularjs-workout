@@ -1,7 +1,5 @@
 package pl.workout.kowalczyk.com.app.model.data.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -13,8 +11,7 @@ import java.sql.Date;
 public class UserWeight {
 
     @Id
-    @GenericGenerator(name="auto" , strategy="increment")
-    @GeneratedValue(generator="auto")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int uweight_id;
 
     @ManyToOne
@@ -22,7 +19,7 @@ public class UserWeight {
 
     private int weight_kg;
 
-    private Date data;
+    private Date date;
 
     @OneToOne
     @PrimaryKeyJoinColumn
@@ -48,12 +45,12 @@ public class UserWeight {
         this.weight_kg = weight_kg;
     }
 
-    public Date getData() {
-        return data;
+    public Date getDate() {
+        return date;
     }
 
-    public void setData(Date date) {
-        this.data = date;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public UserInfo getUserInfo_id() {

@@ -12,8 +12,7 @@ import javax.persistence.*;
 @Table(name ="saw_exercise")
 public class Exercise {
     @Id
-    @GenericGenerator(name="auto" , strategy="increment")
-    @GeneratedValue(generator="auto")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int exercise_id;
 
     private String name;

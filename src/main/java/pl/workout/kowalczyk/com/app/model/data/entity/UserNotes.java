@@ -12,8 +12,7 @@ import java.sql.Date;
 @Table(name = "saw_userNotes")
 public class UserNotes {
     @Id
-    @GenericGenerator(name="auto" , strategy="increment")
-    @GeneratedValue(generator="auto")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int unotes_id;
 
     @OneToOne(cascade = CascadeType.ALL)
