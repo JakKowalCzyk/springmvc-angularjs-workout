@@ -17,14 +17,14 @@ public class FavouriteExerciseController {
     @Autowired
     private FavouriteExerciseService favouriteExerciseService;
 
-    @RequestMapping(path = "/exerciseId", method = RequestMethod.POST)
+    @RequestMapping(path = "/{exerciseId}", method = RequestMethod.POST)
     public ResponseEntity saveFavouriteExercise(@PathVariable int exerciseId) {
         int userId = 1;
         favouriteExerciseService.updateFavouriteExercise(userId, exerciseId);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/exerciseId", method = RequestMethod.PUT)
+    @RequestMapping(path = "/{exerciseId}", method = RequestMethod.PUT)
     public ResponseEntity updateFavouriteExercise(@PathVariable int exerciseId) {
         int userId = 1;
         favouriteExerciseService.updateFavouriteExercise(userId, exerciseId);
