@@ -16,11 +16,11 @@ import javax.persistence.TypedQuery;
 @Repository
 public class UserInfoDaoImpl extends BaseDaoImpl<UserInfo> implements UserInfoDao {
 
-    private static final String getByUserIdSql = "SELECT o FROM UserInfo o where o.user_id = :userId";
-    private static final String getActualWeightSql = "select o FROM UserWeight as o inner join UserInfo as uw on" +
-            " o.uweight_id = uw.actual_weight where uw.user_id = :userId";
-    private static final String getFavouriteExerciseSql = "select o FROM Exercise as o inner join UserInfo as ui " +
-            "on o.efavourite_id = ui.exercise_id where ui.user_id = :userId";
+    private static final String getByUserIdSql = "SELECT o FROM UserInfo o where o.uinfo_id = :userId";
+    private static final String getActualWeightSql = "select o FROM UserWeight o join o.userInfo_id as user " +
+            " where user.user_id.id = :userId";
+    private static final String getFavouriteExerciseSql = "select o FROM Exercise o join o.userInfo_id as user " +
+            " where user.user_id.id = :userId";
 
     @PersistenceContext
     private EntityManager entityManager;

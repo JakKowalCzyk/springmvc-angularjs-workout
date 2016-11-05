@@ -42,7 +42,7 @@ public class UserWeightServiceImpl implements UserWeightService {
     }
 
     public boolean checkIfLastWeight(int userId, UserWeight userWeight) {
-        if (getLastDate(userId).after(userWeight.getData())) {
+        if (getLastDate(userId).after(userWeight.getDate())) {
             return false;
         }else{
             return true;
@@ -50,6 +50,6 @@ public class UserWeightServiceImpl implements UserWeightService {
     }
 
     private Date getLastDate(int userId) {
-        return userWeightDao.getLastUserWeight(userId).getData();
+        return userWeightDao.getLastUserWeight(userId).getDate();
     }
 }
