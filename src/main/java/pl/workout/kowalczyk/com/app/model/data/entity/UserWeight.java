@@ -12,6 +12,7 @@ import java.sql.Date;
 @Table(name = "saw_userWeight")
 public class UserWeight extends BaseModel{
 
+    @Column(name = "weight_id")
     private int weight_id;
 
     @JsonIgnore

@@ -12,22 +12,19 @@ import javax.persistence.*;
 @Entity
 @Table(name ="saw_exercise")
 public class Exercise extends BaseModel{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+ 
     private int exercise_id;
 
     private String name;
 
     private String description;
 
-    @Enumerated(EnumType.STRING)
     private ExerciseType exerciseType;
-
-    @OneToOne
-    @PrimaryKeyJoinColumn
+    
     @JsonIgnore
     private UserInfo userInfo_id;
-
+    
+    @OneToOne(mappedBy = "exerciseFavourite_id")
     public UserInfo getUserInfo_id() {
         return userInfo_id;
     }
@@ -36,12 +33,14 @@ public class Exercise extends BaseModel{
         this.userInfo_id = userInfo_id;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getExercise_id() {
         return exercise_id;
     }
 
-    public void setExercise_id(int uweight_id) {
-        this.exercise_id = uweight_id;
+    public void setExercise_id(int exercise_id) {
+        this.exercise_id = exercise_id;
     }
 
     public String getName() {
@@ -60,6 +59,7 @@ public class Exercise extends BaseModel{
         this.description = description;
     }
 
+    @Enumerated(EnumType.STRING)
     public ExerciseType getExerciseType() {
         return exerciseType;
     }
