@@ -3,6 +3,7 @@ package pl.workout.kowalczyk.com.app.services.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.workout.kowalczyk.com.app.model.data.dao.UserInfoDao;
 import pl.workout.kowalczyk.com.app.model.data.dao.UserWeightDao;
 import pl.workout.kowalczyk.com.app.model.data.entity.UserWeight;
 import pl.workout.kowalczyk.com.app.services.service.UserInfoService;
@@ -21,12 +22,14 @@ public class UserWeightServiceImpl implements UserWeightService {
     private UserWeightDao userWeightDao;
     @Autowired
     private UserInfoService userInfoService;
+    @Autowired
+    private UserInfoDao userInfoDao;
 
     public void saveUserWeight(int userId, UserWeight userWeight) {
-        if(checkIfLastWeight(userId, userWeight)){
+        if (checkIfLastWeight(userId, userWeight)) {
             userInfoService.updateUserInfoWithUserWeight(userId, userWeight);
         }
-        userWeightDao.save(userWeight);
+            userWeightDao.save(userWeight);
     }
 
     public void updateUserWeight(UserWeight userWeight) {
@@ -39,6 +42,11 @@ public class UserWeightServiceImpl implements UserWeightService {
 
     public UserWeight getByUserIdAndDate(int userId, Date date) {
         return userWeightDao.getByUserIdAndDate(userId, date);
+    }
+
+    @Override
+    public UserWeight getActualWeight(int userId) {
+        return userInfoDao.getActualWeight(userId);
     }
 
     public boolean checkIfLastWeight(int userId, UserWeight userWeight) {

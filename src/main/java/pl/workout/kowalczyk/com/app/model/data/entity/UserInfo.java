@@ -1,7 +1,5 @@
 package pl.workout.kowalczyk.com.app.model.data.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -12,31 +10,26 @@ import java.io.Serializable;
 @Table(name = "saw_userInfo")
 public class UserInfo extends BaseModel implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int uinfo_id;
+    private int userInfo_id;
 
-    @OneToOne()
-    @JoinColumn(name = "user_id")
     private User user_id;
 
-    @OneToOne
-    @JoinColumn(name = "uweight_id")
     private UserWeight actual_weight;
 
+    private Exercise exerciseFavourite_id;
+
+    public void setUserInfo_id(int uinfo_id) {
+        this.userInfo_id = uinfo_id;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public int getUserInfo_id() {
+        return userInfo_id;
+    }
+
     @OneToOne
-    @JoinColumn(name = "exercise_id")
-    private Exercise efavourite_id;
-
-
-    public int getUinfo_id() {
-        return uinfo_id;
-    }
-
-    public void setUinfo_id(int uinfo_id) {
-        this.uinfo_id = uinfo_id;
-    }
-
+    @JoinColumn(name = "user_id")
     public User getUser_id() {
         return user_id;
     }
@@ -45,6 +38,8 @@ public class UserInfo extends BaseModel implements Serializable {
         this.user_id = user_id;
     }
 
+    @OneToOne
+    @JoinColumn(name = "weight_id")
     public UserWeight getActual_weight() {
         return actual_weight;
     }
@@ -53,11 +48,13 @@ public class UserInfo extends BaseModel implements Serializable {
         this.actual_weight = actual_weight;
     }
 
-    public Exercise getEfavourite_id() {
-        return efavourite_id;
+    @OneToOne
+    @JoinColumn(name = "exercise_id")
+    public Exercise getExerciseFavourite_id() {
+        return exerciseFavourite_id;
     }
 
-    public void setEfavourite_id(Exercise efavourite_id) {
-        this.efavourite_id = efavourite_id;
+    public void setExerciseFavourite_id(Exercise exerciseFavourite_id) {
+        this.exerciseFavourite_id = exerciseFavourite_id;
     }
 }

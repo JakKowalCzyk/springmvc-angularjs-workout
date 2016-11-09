@@ -16,4 +16,6 @@ public interface UserWeightService {
     List<UserWeight> getWeightByUserId(int userId);
 
     UserWeight getByUserIdAndDate(int userId, Date date);
+
+    UserWeight getActualWeight(int userId);
 }

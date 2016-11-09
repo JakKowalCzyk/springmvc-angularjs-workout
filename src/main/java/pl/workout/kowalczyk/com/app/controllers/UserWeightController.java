@@ -42,4 +42,9 @@ public class UserWeightController {
     public UserWeight getWeightByDate(@PathVariable int userId, @PathVariable Date date) {
         return userWeightService.getByUserIdAndDate(userId, date);
     }
+
+    @RequestMapping(value = "/actual/{userId}", method = RequestMethod.GET)
+    public UserWeight getActualWeight(@PathVariable int userId) {
+        return userWeightService.getActualWeight(userId);
+    }
 }

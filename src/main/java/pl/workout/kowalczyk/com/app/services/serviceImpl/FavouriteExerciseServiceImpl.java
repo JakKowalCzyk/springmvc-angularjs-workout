@@ -26,7 +26,7 @@ public class FavouriteExerciseServiceImpl implements FavouriteExerciseService{
 
     public void updateFavouriteExercise(int userId, int exerciseId) {
         UserInfo userInfo = getUserInfo(userId);
-        userInfo.setEfavourite_id(exerciseService.getExerciseById(exerciseId));
+        userInfo.setExerciseFavourite_id(exerciseService.getExerciseById(exerciseId));
         userInfoService.updateUserInfo(userInfo);
     }
 

@@ -12,32 +12,29 @@ import java.sql.Date;
 @Table(name = "saw_userWeight")
 public class UserWeight extends BaseModel{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int uweight_id;
+    private int weight_id;
 
-    @OneToOne
+    @JsonIgnore
     private User user_id;
 
     private int weight_kg;
 
     private Date date;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
     @JsonIgnore
     private UserInfo userInfo_id;
 
     public void setUser_id(User user_id) {
         this.user_id = user_id;
     }
-
-    public int getUweight_id() {
-        return uweight_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public int getWeight_id() {
+        return weight_id;
     }
 
-    public void setUweight_id(int uweight_id) {
-        this.uweight_id = uweight_id;
+    public void setWeight_id(int weight_id) {
+        this.weight_id = weight_id;
     }
 
     public int getWeight_kg() {
@@ -55,7 +52,7 @@ public class UserWeight extends BaseModel{
     public void setDate(Date date) {
         this.date = date;
     }
-
+    @OneToOne(mappedBy = "actual_weight")
     public UserInfo getUserInfo_id() {
         return userInfo_id;
     }
@@ -63,4 +60,11 @@ public class UserWeight extends BaseModel{
     public void setUserInfo_id(UserInfo userInfo_id) {
         this.userInfo_id = userInfo_id;
     }
+
+    @ManyToOne
+    public User getUser_id() {
+        return user_id;
+    }
+
+
 }
