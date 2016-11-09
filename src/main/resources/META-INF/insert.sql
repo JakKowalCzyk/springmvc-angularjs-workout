@@ -28,6 +28,6 @@ INSERT INTO saw_userExercise (exercise_id, workout_id, repeat, series) VALUES (1
 INSERT INTO saw_userExercise (exercise_id, workout_id, repeat, series) VALUES (2, 1, 10, 3);
 INSERT INTO saw_userExercise (exercise_id, workout_id, repeat, series) VALUES (3, 1, 10, 3);
 INSERT INTO saw_userinfo (user_id) VALUES (1);
-
+INSERT INTO saw_userweight (user_id_user_id, date, weight_kg) VALUES (1,'2016-10-11', 64);
 
 

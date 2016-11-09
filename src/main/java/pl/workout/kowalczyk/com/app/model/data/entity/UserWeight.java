@@ -1,5 +1,7 @@
 package pl.workout.kowalczyk.com.app.model.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -23,6 +25,7 @@ public class UserWeight extends BaseModel{
 
     @OneToOne
     @PrimaryKeyJoinColumn
+    @JsonIgnore
     private UserInfo userInfo_id;
 
     public void setUser_id(User user_id) {

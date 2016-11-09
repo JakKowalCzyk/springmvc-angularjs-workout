@@ -17,9 +17,9 @@ import java.util.List;
 @Repository
 public class UserWeightDaoImpl extends BaseDaoImpl<UserWeight> implements UserWeightDao {
 
-    private static final String getByUserIdSql = "SELECT o FROM UserWeight o WHERE o.user_id = :userId";
+    private static final String getByUserIdSql = "SELECT o FROM UserWeight o inner join o.user_id WHERE o.user_id.id = :userId";
     private static final String getByUserIdAndDateSql = "SELECT o FROM UserWeight o WHERE o.user_id = :userId and o.data = :date";
-    private static final String getLastWeight = "SELECT o FROM UserWeight o where o.userId = :userId order by o.date  ";
+    private static final String getLastWeight = "SELECT o FROM UserWeight o where o.user_id = :userId order by o.date  ";
     @PersistenceContext
     private EntityManager entityManager;
 

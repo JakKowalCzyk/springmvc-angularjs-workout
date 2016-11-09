@@ -1,5 +1,6 @@
 package pl.workout.kowalczyk.com.app.model.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import pl.workout.kowalczyk.com.app.enums.ExerciseType;
 
@@ -24,8 +25,16 @@ public class Exercise extends BaseModel{
 
     @OneToOne
     @PrimaryKeyJoinColumn
+    @JsonIgnore
     private UserInfo userInfo_id;
 
+    public UserInfo getUserInfo_id() {
+        return userInfo_id;
+    }
+
+    public void setUserInfo_id(UserInfo userInfo_id) {
+        this.userInfo_id = userInfo_id;
+    }
 
     public int getExercise_id() {
         return exercise_id;
