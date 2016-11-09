@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name ="saw_exercise")
-public class Exercise {
+public class Exercise extends BaseModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int exercise_id;

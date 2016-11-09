@@ -10,9 +10,8 @@ import java.sql.Date;
  */
 @Entity
 @Table(name = "saw_user")
-public class User {
+public class User extends BaseModel{
     @Id
-//    @GenericGenerator(name="auto" , strategy="increment")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int user_id;
 

@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "saw_workout")
-public class Workout {
+public class Workout extends BaseModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int workout_id ;

@@ -10,7 +10,7 @@ import java.sql.Date;
  */
 @Entity
 @Table(name = "saw_userNotes")
-public class UserNotes {
+public class UserNotes extends BaseModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int unotes_id;

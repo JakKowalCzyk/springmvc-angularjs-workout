@@ -8,13 +8,13 @@ import java.sql.Date;
  */
 @Entity
 @Table(name = "saw_userWeight")
-public class UserWeight {
+public class UserWeight extends BaseModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int uweight_id;
 
-    @ManyToOne
+    @OneToOne
     private User user_id;
 
     private int weight_kg;
