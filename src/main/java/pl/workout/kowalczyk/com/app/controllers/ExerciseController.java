@@ -30,12 +30,12 @@ public class ExerciseController {
         return exerciseService.getAllExercises();
     }
 
-    @RequestMapping(path = "/{name}", method = RequestMethod.GET)
+    @RequestMapping(path = "/name/{name}", method = RequestMethod.GET)
     public Exercise getExerciseByName(@PathVariable String name) {
         return exerciseService.getExerciseByName(name);
     }
 
-    @RequestMapping(path = "/{exerciseType}", method = RequestMethod.GET)
+    @RequestMapping(path = "/type/{exerciseType}", method = RequestMethod.GET)
     public List<Exercise> getExercisesByType(@PathVariable ExerciseType exerciseType) {
         return exerciseService.getExercisesForBodyPart(exerciseType);
     }
