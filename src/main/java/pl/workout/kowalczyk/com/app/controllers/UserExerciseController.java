@@ -44,7 +44,7 @@ public class UserExerciseController {
     }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-    public List<UserExercise> getUserExerciseByWorkout(@PathVariable int userId){
+    public List<UserExercise> getUserExerciseByUserId(@PathVariable int userId){
         return userExerciseService.getUserExercisesByUserId(userId);
     }
 

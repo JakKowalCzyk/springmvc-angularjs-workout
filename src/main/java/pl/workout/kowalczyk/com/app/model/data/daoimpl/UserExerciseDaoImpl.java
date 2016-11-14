@@ -15,7 +15,8 @@ import java.util.List;
 @Repository
 public class UserExerciseDaoImpl extends BaseDaoImpl<UserExercise> implements UserExerciseDao{
 
-    private static final String getByIdSql = "SELECT o FROM UserExercise o WHERE o.user_id = :userId";
+    private static final String getByIdSql = "SELECT o FROM UserExercise o inner join o.workout_id as workout" +
+            " inner join workout.user_id as user where user.user_id = :userId";
 
     @PersistenceContext
     private EntityManager entityManager;

@@ -1,6 +1,6 @@
 package pl.workout.kowalczyk.com.app.model.data.entity;
 
-import org.hibernate.annotations.GenericGenerator;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 
@@ -10,22 +10,20 @@ import javax.persistence.*;
 @Entity
 @Table(name = "saw_userExercise")
 public class UserExercise extends BaseModel{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int usexercise_id;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
+    private int userExercise_id;
+
     private Exercise exercise;
 
-    @ManyToOne
-    @JoinColumn(name = "workout_id")
+    @JsonBackReference
     private Workout workout_id;
 
     private int repeat;
 
     private int series;
 
+    @OneToOne
+    @JoinColumn(name = "exercise_id")
     public Exercise getExercise() {
         return exercise;
     }
@@ -34,6 +32,8 @@ public class UserExercise extends BaseModel{
         this.exercise = exercise;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "workout_id")
     public Workout getWorkout_id() {
         return workout_id;
     }
@@ -42,12 +42,14 @@ public class UserExercise extends BaseModel{
         this.workout_id = workout;
     }
 
-    public int getUsexercise_id() {
-        return usexercise_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public int getUserExercise_id() {
+        return userExercise_id;
     }
 
-    public void setUsexercise_id(int usexercise_id) {
-        this.usexercise_id = usexercise_id;
+    public void setUserExercise_id(int userExercise_id) {
+        this.userExercise_id = userExercise_id;
     }
 
     public int getRepeat() {
