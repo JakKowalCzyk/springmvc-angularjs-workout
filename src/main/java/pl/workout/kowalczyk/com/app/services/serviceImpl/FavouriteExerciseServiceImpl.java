@@ -35,11 +35,14 @@ public class FavouriteExerciseServiceImpl implements FavouriteExerciseService{
     }
 
     public void deleteFavouriteExercise(int userId) {
-        updateFavouriteExercise(userId, -1);
+        UserInfo userInfo = getUserInfo(userId);
+        userInfo.setExerciseFavourite_id(null);
+        userInfoService.updateUserInfo(userInfo);
     }
 
     public UserInfo getUserInfo(int userId) {
        return userInfoService.getUserInfoByUserId(userId);
     }
+
 
 }
