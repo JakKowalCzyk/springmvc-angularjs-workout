@@ -22,7 +22,14 @@ public class Exercise extends BaseModel{
     
     @JsonIgnore
     private UserInfo userInfo_id;
-    
+
+    public Exercise(Integer exercise_id, String name, String description, ExerciseType exerciseType) {
+        this.exercise_id = exercise_id;
+        this.name = name;
+        this.description = description;
+        this.exerciseType = exerciseType;
+    }
+
     @OneToOne(mappedBy = "exerciseFavourite_id")
     public UserInfo getUserInfo_id() {
         return userInfo_id;
