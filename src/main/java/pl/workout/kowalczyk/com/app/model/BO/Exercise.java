@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Table(name ="saw_exercise")
 public class Exercise extends BaseModel{
  
-    private int exercise_id;
+    private Integer exercise_id;
 
     private String name;
 
