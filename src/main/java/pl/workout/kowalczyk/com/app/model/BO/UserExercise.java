@@ -19,6 +19,13 @@ public class UserExercise extends BaseModel {
 
     private int series;
 
+    public UserExercise(int userExercise_id, Exercise exercise, int repeat, int series) {
+        this.userExercise_id = userExercise_id;
+        this.exercise = exercise;
+        this.repeat = repeat;
+        this.series = series;
+    }
+
     @OneToOne
     @JoinColumn(name = "exercise_id")
     public Exercise getExercise() {

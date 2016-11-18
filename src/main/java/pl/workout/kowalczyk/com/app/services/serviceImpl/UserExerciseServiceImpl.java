@@ -6,10 +6,13 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.workout.kowalczyk.com.app.dao.UserExerciseDao;
 import pl.workout.kowalczyk.com.app.dao.WorkoutDao;
 import pl.workout.kowalczyk.com.app.model.BO.UserExercise;
+import pl.workout.kowalczyk.com.app.model.DTO.UserExerciseDTO;
+import pl.workout.kowalczyk.com.app.services.service.ExerciseService;
 import pl.workout.kowalczyk.com.app.services.service.UserExerciseService;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by JK on 2016-10-26.
@@ -21,24 +24,38 @@ public class UserExerciseServiceImpl implements UserExerciseService {
     private UserExerciseDao userExerciseDao;
     @Autowired
     private WorkoutDao workoutDao;
+    @Autowired
+    private ExerciseService exerciseService;
 
-    public void saveUserExercise(UserExercise userExercise) {
-        userExerciseDao.save(userExercise);
+    @Override
+    public UserExercise mapUserExerciseDtoToBo(UserExerciseDTO userExerciseDTO) {
+        UserExercise userExercise = new UserExercise(userExerciseDTO.getUserExercise_id(), exerciseService.mapExerciseDtoToBo(userExerciseDTO.getExercise()), userExerciseDTO.getRepeat(), userExerciseDTO.getSeries());
+        userExercise.setWorkout_id(workoutDao.get(userExerciseDTO.getWorkout_id()));
+        return userExercise;
     }
 
-    public void updateUserExercise(UserExercise userExercise) {
-        userExerciseDao.update(userExercise);
+    @Override
+    public UserExerciseDTO mapUserExerciseBoToDto(UserExercise userExercise) {
+        return new UserExerciseDTO(userExercise.getUserExercise_id(), exerciseService.mapExerciseBoToDTO(userExercise.getExercise()), userExercise.getWorkout_id().getWorkout_id(), userExercise.getRepeat(), userExercise.getSeries());
     }
 
-    public void deleteUserExercise(UserExercise userExercise) {
-        userExerciseDao.delete(userExercise);
+    public void saveUserExercise(UserExerciseDTO userExerciseDTO) {
+        userExerciseDao.save(mapUserExerciseDtoToBo(userExerciseDTO));
     }
 
-    public List<UserExercise> getUserExercisesByWorkout(int userId, Date date) {
-        return workoutDao.getUserExercisesByIdAndDate(userId, date);
+    public void updateUserExercise(UserExerciseDTO userExerciseDTO) {
+        userExerciseDao.update(mapUserExerciseDtoToBo(userExerciseDTO));
     }
 
-    public List<UserExercise> getUserExercisesByUserId(int userId) {
-        return userExerciseDao.getUserExercisesByUserId(userId);
+    public void deleteUserExercise(UserExerciseDTO userExerciseDTO) {
+        userExerciseDao.delete(mapUserExerciseDtoToBo(userExerciseDTO));
+    }
+
+    public List<UserExerciseDTO> getUserExercisesByWorkout(int userId, Date date) {
+        return workoutDao.getUserExercisesByIdAndDate(userId, date).stream().map(this::mapUserExerciseBoToDto).collect(Collectors.toList());
+    }
+
+    public List<UserExerciseDTO> getUserExercisesByUserId(int userId) {
+        return userExerciseDao.getUserExercisesByUserId(userId).stream().map(this::mapUserExerciseBoToDto).collect(Collectors.toList());
     }
 }
