@@ -27,7 +27,7 @@ public class FavouriteExerciseServiceImpl implements FavouriteExerciseService{
     public void updateFavouriteExercise(int userId, int exerciseId) {
         UserInfo userInfo = getUserInfo(userId);
         userInfo.setExerciseFavourite_id(exerciseService.getExerciseById(exerciseId));
-        userInfoService.updateUserInfo(userInfo);
+        userInfoService.updateUserInfoDTO(userInfo);
     }
 
     public ExerciseDTO getUserFavouriteExercise(int userId) {
@@ -37,11 +37,11 @@ public class FavouriteExerciseServiceImpl implements FavouriteExerciseService{
     public void deleteFavouriteExercise(int userId) {
         UserInfo userInfo = getUserInfo(userId);
         userInfo.setExerciseFavourite_id(null);
-        userInfoService.updateUserInfo(userInfo);
+        userInfoService.updateUserInfoDTO(userInfo);
     }
 
     public UserInfo getUserInfo(int userId) {
-       return userInfoService.getUserInfoByUserId(userId);
+       return userInfoService.getUserInfoDTOByUserId(userId);
     }
 
 

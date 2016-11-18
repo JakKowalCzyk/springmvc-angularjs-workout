@@ -18,6 +18,13 @@ public class UserInfo extends BaseModel implements Serializable {
 
     private Exercise exerciseFavourite_id;
 
+    public UserInfo(int userInfo_id) {
+        this.userInfo_id = userInfo_id;
+    }
+
+    public UserInfo() {
+    }
+
     public void setUserInfo_id(int uinfo_id) {
         this.userInfo_id = uinfo_id;
     }
