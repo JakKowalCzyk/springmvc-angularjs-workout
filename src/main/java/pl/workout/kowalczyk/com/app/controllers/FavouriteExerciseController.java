@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.workout.kowalczyk.com.app.model.BO.Exercise;
+import pl.workout.kowalczyk.com.app.model.DTO.ExerciseDTO;
 import pl.workout.kowalczyk.com.app.services.service.FavouriteExerciseService;
 
 /**
@@ -31,7 +32,7 @@ public class FavouriteExerciseController {
     }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-    public Exercise getUserFavouriteExercise(@PathVariable int userId){
+    public ExerciseDTO getUserFavouriteExercise(@PathVariable int userId){
         return favouriteExerciseService.getUserFavouriteExercise(userId);
     }
 

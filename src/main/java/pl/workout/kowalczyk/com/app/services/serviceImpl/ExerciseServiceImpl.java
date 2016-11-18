@@ -20,11 +20,12 @@ import java.util.stream.Collectors;
 public class ExerciseServiceImpl implements ExerciseService {
     @Autowired
     private ExerciseDao exerciseDao;
-
+    @Override
     public ExerciseDTO mapExerciseBoToDTO(Exercise exercise) {
         return new ExerciseDTO(exercise.getExercise_id(), exercise.getName(), exercise.getDescription(), exercise.getExerciseType());
     }
 
+    @Override
     public Exercise mapExerciseDtoToBo(ExerciseDTO exerciseDTO) {
         return new Exercise(exerciseDTO.getExercise_id(), exerciseDTO.getName(), exerciseDTO.getDescription(), exerciseDTO.getExerciseType());
     }
@@ -33,20 +34,25 @@ public class ExerciseServiceImpl implements ExerciseService {
         exerciseDao.save(mapExerciseDtoToBo(exerciseDTO));
     }
 
-    public List<ExerciseDTO> getAllExercises() {
+    public List<ExerciseDTO> getAllExercisesDTO() {
         return exerciseDao.getAll().stream().map(this::mapExerciseBoToDTO).collect(Collectors.toList());
     }
 
-    public ExerciseDTO getExerciseByName(String name) {
+    public ExerciseDTO getExerciseDTOByName(String name) {
         return mapExerciseBoToDTO(exerciseDao.getExerciseByName(name));
     }
 
     @Override
-    public ExerciseDTO getExerciseById(int exerciseId) {
+    public ExerciseDTO getExerciseDTOById(int exerciseId) {
        return mapExerciseBoToDTO(exerciseDao.get(exerciseId));
     }
 
-    public List<ExerciseDTO> getExercisesForBodyPart(ExerciseType exerciseType) {
+    @Override
+    public Exercise getExerciseById(int exerciseId) {
+        return exerciseDao.get(exerciseId);
+    }
+
+    public List<ExerciseDTO> getExercisesDTOForBodyPart(ExerciseType exerciseType) {
         return exerciseDao.getExercisesForBodyPart(exerciseType).stream().map(this::mapExerciseBoToDTO).collect(Collectors.toList());
     }
 }

@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.workout.kowalczyk.com.app.dao.UserInfoDao;
-import pl.workout.kowalczyk.com.app.model.BO.Exercise;
 import pl.workout.kowalczyk.com.app.model.BO.UserInfo;
+import pl.workout.kowalczyk.com.app.model.DTO.ExerciseDTO;
 import pl.workout.kowalczyk.com.app.services.service.ExerciseService;
 import pl.workout.kowalczyk.com.app.services.service.FavouriteExerciseService;
 import pl.workout.kowalczyk.com.app.services.service.UserInfoService;
@@ -30,8 +30,8 @@ public class FavouriteExerciseServiceImpl implements FavouriteExerciseService{
         userInfoService.updateUserInfo(userInfo);
     }
 
-    public Exercise getUserFavouriteExercise(int userId) {
-        return userInfoDao.getFavouriteExercise(userId);
+    public ExerciseDTO getUserFavouriteExercise(int userId) {
+        return exerciseService.mapExerciseBoToDTO(userInfoDao.getFavouriteExercise(userId));
     }
 
     public void deleteFavouriteExercise(int userId) {
