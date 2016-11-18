@@ -1,10 +1,10 @@
-package pl.workout.kowalczyk.com.app.model.data.daoimpl;
+package pl.workout.kowalczyk.com.app.dao.daoimpl;
 
 import org.springframework.stereotype.Repository;
-import pl.workout.kowalczyk.com.app.model.data.dao.UserInfoDao;
-import pl.workout.kowalczyk.com.app.model.data.entity.Exercise;
-import pl.workout.kowalczyk.com.app.model.data.entity.UserInfo;
-import pl.workout.kowalczyk.com.app.model.data.entity.UserWeight;
+import pl.workout.kowalczyk.com.app.dao.UserInfoDao;
+import pl.workout.kowalczyk.com.app.model.BO.Exercise;
+import pl.workout.kowalczyk.com.app.model.BO.UserInfo;
+import pl.workout.kowalczyk.com.app.model.BO.UserWeight;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

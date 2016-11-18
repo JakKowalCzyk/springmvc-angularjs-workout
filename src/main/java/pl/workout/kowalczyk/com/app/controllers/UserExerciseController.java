@@ -2,10 +2,9 @@ package pl.workout.kowalczyk.com.app.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.workout.kowalczyk.com.app.model.data.entity.UserExercise;
+import pl.workout.kowalczyk.com.app.model.BO.UserExercise;
 import pl.workout.kowalczyk.com.app.services.service.UserExerciseService;
 
 import java.sql.Date;
@@ -38,12 +37,12 @@ public class UserExerciseController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{userId}/{date}", method = RequestMethod.GET)
+    @RequestMapping(value = "userId/{userId}/date/{date}", method = RequestMethod.GET)
     public List<UserExercise> getUserExercisesByWorkout(@PathVariable int userId, @PathVariable Date date) {
         return userExerciseService.getUserExercisesByWorkout(userId, date);
     }
 
-    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+    @RequestMapping(value = "userId/{userId}", method = RequestMethod.GET)
     public List<UserExercise> getUserExerciseByUserId(@PathVariable int userId){
         return userExerciseService.getUserExercisesByUserId(userId);
     }

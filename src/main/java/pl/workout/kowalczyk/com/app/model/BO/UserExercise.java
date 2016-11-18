@@ -1,6 +1,4 @@
-package pl.workout.kowalczyk.com.app.model.data.entity;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
+package pl.workout.kowalczyk.com.app.model.BO;
 
 import javax.persistence.*;
 
@@ -9,13 +7,12 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "saw_userExercise")
-public class UserExercise extends BaseModel{
+public class UserExercise extends BaseModel {
 
     private int userExercise_id;
 
     private Exercise exercise;
 
-    @JsonBackReference
     private Workout workout_id;
 
     private int repeat;

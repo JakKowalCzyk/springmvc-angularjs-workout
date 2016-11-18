@@ -1,9 +1,6 @@
-package pl.workout.kowalczyk.com.app.model.data.entity;
+package pl.workout.kowalczyk.com.app.model.BO;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.context.annotation.Lazy;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -15,15 +12,15 @@ import java.util.List;
  */
 @Entity()
 @Table(name = "saw_workout")
-public class Workout extends BaseModel{
+public class Workout  extends BaseModel {
 
     private int workout_id ;
 
+    @JsonIgnore
     private User user_id;
 
     private Date date;
 
-    @JsonManagedReference
     private List<UserExercise> userExercises = new ArrayList<>();
 
     @Id

@@ -1,9 +1,9 @@
-package pl.workout.kowalczyk.com.app.model.data.dao;
+package pl.workout.kowalczyk.com.app.dao;
 
 import org.springframework.stereotype.Repository;
-import pl.workout.kowalczyk.com.app.model.data.entity.Exercise;
-import pl.workout.kowalczyk.com.app.model.data.entity.UserInfo;
-import pl.workout.kowalczyk.com.app.model.data.entity.UserWeight;
+import pl.workout.kowalczyk.com.app.model.BO.Exercise;
+import pl.workout.kowalczyk.com.app.model.BO.UserInfo;
+import pl.workout.kowalczyk.com.app.model.BO.UserWeight;
 
 /**
  * Created by JK on 2016-09-22.

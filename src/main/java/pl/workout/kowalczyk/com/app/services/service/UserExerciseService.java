@@ -1,6 +1,6 @@
 package pl.workout.kowalczyk.com.app.services.service;
 
-import pl.workout.kowalczyk.com.app.model.data.entity.UserExercise;
+import pl.workout.kowalczyk.com.app.model.BO.UserExercise;
 
 import java.sql.Date;
 import java.util.List;

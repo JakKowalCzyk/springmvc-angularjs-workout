@@ -1,7 +1,7 @@
 package pl.workout.kowalczyk.com.app.services.service;
 
 import pl.workout.kowalczyk.com.app.enums.ExerciseType;
-import pl.workout.kowalczyk.com.app.model.data.entity.Exercise;
+import pl.workout.kowalczyk.com.app.model.BO.Exercise;
 
 import java.util.List;
 

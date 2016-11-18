@@ -1,8 +1,7 @@
 package pl.workout.kowalczyk.com.app.services.service;
 
-import pl.workout.kowalczyk.com.app.model.data.entity.Exercise;
-import pl.workout.kowalczyk.com.app.model.data.entity.UserInfo;
-import pl.workout.kowalczyk.com.app.model.data.entity.UserWeight;
+import pl.workout.kowalczyk.com.app.model.BO.UserInfo;
+import pl.workout.kowalczyk.com.app.model.BO.UserWeight;
 
 /**
  * Created by JK on 2016-10-26.

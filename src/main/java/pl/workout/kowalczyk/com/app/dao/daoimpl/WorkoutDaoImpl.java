@@ -1,9 +1,9 @@
-package pl.workout.kowalczyk.com.app.model.data.daoimpl;
+package pl.workout.kowalczyk.com.app.dao.daoimpl;
 
 import org.springframework.stereotype.Repository;
-import pl.workout.kowalczyk.com.app.model.data.dao.WorkoutDao;
-import pl.workout.kowalczyk.com.app.model.data.entity.Workout;
-import pl.workout.kowalczyk.com.app.model.data.entity.UserExercise;
+import pl.workout.kowalczyk.com.app.dao.WorkoutDao;
+import pl.workout.kowalczyk.com.app.model.BO.Workout;
+import pl.workout.kowalczyk.com.app.model.BO.UserExercise;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,10 +17,12 @@ import java.util.List;
 @Repository
 public class WorkoutDaoImpl extends BaseDaoImpl<Workout> implements WorkoutDao {
 
-    private static final String getByUserIdSql = "SELECT o FROM Workout o where o.user_id = :userId";
-    private static final String getByDateSql = "SELECT o FROM Workout  o where o.user_id = :userId and o.date = :date";
-    private static final String getUserExercises = "SELECT o FROM UserExercise as o inner join Workout as w on  o.workout_id =  w " +
-            "where w.user_id = :userId and w.date = :date";
+    private static final String getByUserIdSql = "SELECT o FROM Workout o inner join o.user_id as user" +
+            " where user.user_id = :userId";
+    private static final String getByDateSql = "SELECT o FROM Workout  o inner join o.user_id as user where user.user_id = :userId and o.date = :date";
+    private static final String getUserExercises = "SELECT o FROM UserExercise o inner join o.workout_id as workout " +
+            "inner join workout.user_id as user " +
+            "where user.user_id = :userId and workout.date = :date";
 
     @PersistenceContext
     private EntityManager entityManager;

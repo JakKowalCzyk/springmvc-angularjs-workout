@@ -1,6 +1,4 @@
-package pl.workout.kowalczyk.com.app.model.data.entity;
-
-import org.hibernate.annotations.GenericGenerator;
+package pl.workout.kowalczyk.com.app.model.BO;
 
 import javax.persistence.*;
 import java.sql.Date;

@@ -1,4 +1,4 @@
-package pl.workout.kowalczyk.com.app.model.data.entity;
+package pl.workout.kowalczyk.com.app.model.BO;
 
 import javax.persistence.*;
 import java.io.Serializable;

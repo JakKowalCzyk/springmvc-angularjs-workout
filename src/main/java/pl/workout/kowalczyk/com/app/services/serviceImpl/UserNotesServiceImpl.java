@@ -3,8 +3,8 @@ package pl.workout.kowalczyk.com.app.services.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.workout.kowalczyk.com.app.model.data.dao.UserNotesDao;
-import pl.workout.kowalczyk.com.app.model.data.entity.UserNotes;
+import pl.workout.kowalczyk.com.app.dao.UserNotesDao;
+import pl.workout.kowalczyk.com.app.model.BO.UserNotes;
 import pl.workout.kowalczyk.com.app.services.service.UserNotesService;
 
 import java.sql.Date;

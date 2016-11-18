@@ -4,8 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.workout.kowalczyk.com.app.model.data.dao.UserInfoDao;
-import pl.workout.kowalczyk.com.app.model.data.entity.UserInfo;
+import pl.workout.kowalczyk.com.app.model.BO.UserInfo;
 import pl.workout.kowalczyk.com.app.services.service.UserInfoService;
 
 /**

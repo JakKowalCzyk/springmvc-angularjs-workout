@@ -1,8 +1,8 @@
-package pl.workout.kowalczyk.com.app.model.data.daoimpl;
+package pl.workout.kowalczyk.com.app.dao.daoimpl;
 
 import org.springframework.stereotype.Repository;
-import pl.workout.kowalczyk.com.app.model.data.dao.UserNotesDao;
-import pl.workout.kowalczyk.com.app.model.data.entity.UserNotes;
+import pl.workout.kowalczyk.com.app.dao.UserNotesDao;
+import pl.workout.kowalczyk.com.app.model.BO.UserNotes;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

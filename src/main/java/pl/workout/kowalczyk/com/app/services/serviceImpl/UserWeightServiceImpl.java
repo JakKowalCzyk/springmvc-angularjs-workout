@@ -3,9 +3,9 @@ package pl.workout.kowalczyk.com.app.services.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.workout.kowalczyk.com.app.model.data.dao.UserInfoDao;
-import pl.workout.kowalczyk.com.app.model.data.dao.UserWeightDao;
-import pl.workout.kowalczyk.com.app.model.data.entity.UserWeight;
+import pl.workout.kowalczyk.com.app.dao.UserInfoDao;
+import pl.workout.kowalczyk.com.app.dao.UserWeightDao;
+import pl.workout.kowalczyk.com.app.model.BO.UserWeight;
 import pl.workout.kowalczyk.com.app.services.service.UserInfoService;
 import pl.workout.kowalczyk.com.app.services.service.UserWeightService;
 

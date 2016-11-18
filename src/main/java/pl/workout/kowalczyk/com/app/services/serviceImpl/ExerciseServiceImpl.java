@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.workout.kowalczyk.com.app.enums.ExerciseType;
-import pl.workout.kowalczyk.com.app.model.data.dao.ExerciseDao;
-import pl.workout.kowalczyk.com.app.model.data.entity.Exercise;
+import pl.workout.kowalczyk.com.app.dao.ExerciseDao;
+import pl.workout.kowalczyk.com.app.model.BO.Exercise;
 import pl.workout.kowalczyk.com.app.services.service.ExerciseService;
 
 import java.util.List;
