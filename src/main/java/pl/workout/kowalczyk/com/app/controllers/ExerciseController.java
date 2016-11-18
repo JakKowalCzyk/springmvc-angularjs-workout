@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.workout.kowalczyk.com.app.enums.ExerciseType;
-import pl.workout.kowalczyk.com.app.model.BO.Exercise;
 import pl.workout.kowalczyk.com.app.model.DTO.ExerciseDTO;
 import pl.workout.kowalczyk.com.app.services.service.ExerciseService;
 
@@ -28,17 +27,17 @@ public class ExerciseController {
 
     @RequestMapping(method = RequestMethod.GET)
     public List<ExerciseDTO> getAllExercises() {
-        return exerciseService.getAllExercises();
+        return exerciseService.getAllExercisesDTO();
     }
 
     @RequestMapping(path = "/name/{name}", method = RequestMethod.GET)
     public ExerciseDTO getExerciseByName(@PathVariable String name) {
-        return exerciseService.getExerciseByName(name);
+        return exerciseService.getExerciseDTOByName(name);
     }
 
     @RequestMapping(path = "/type/{exerciseType}", method = RequestMethod.GET)
     public List<ExerciseDTO> getExercisesByType(@PathVariable ExerciseType exerciseType) {
-        return exerciseService.getExercisesForBodyPart(exerciseType);
+        return exerciseService.getExercisesDTOForBodyPart(exerciseType);
     }
 
 }
