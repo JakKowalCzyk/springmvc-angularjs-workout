@@ -11,7 +11,7 @@ import java.sql.Date;
 public class User extends BaseModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int user_id;
+    private Integer user_id;
 
     private String login;
 
@@ -24,6 +24,16 @@ public class User extends BaseModel{
     private String email;
 
     private String password;
+
+    public User(Integer userId, String login, String firstName, String lastName, Date birthDay, String email, String password) {
+        this.user_id = userId;
+        this.login = login;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDay = birthDay;
+        this.email = email;
+        this.password = password;
+    }
 
     public int getUser_id() {
         return user_id;

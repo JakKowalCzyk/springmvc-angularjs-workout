@@ -1,14 +1,20 @@
 package pl.workout.kowalczyk.com.app.services.service;
 
 import pl.workout.kowalczyk.com.app.model.BO.User;
+import pl.workout.kowalczyk.com.app.model.DTO.UserDTO;
 
 /**
  * Created by JK on 2016-10-26.
  */
 public interface UserService {
-    User getUserByLogin(String login);
 
-    void saveUser(User user);
+    User mapUserDtoToBo(UserDTO userDTO);
 
-    void updateUser(User user);
+    UserDTO mapUserBoToDto(User user);
+
+    UserDTO getUserByLogin(String login);
+
+    void saveUser(UserDTO userDTO);
+
+    void updateUser(UserDTO userDTO);
 }
