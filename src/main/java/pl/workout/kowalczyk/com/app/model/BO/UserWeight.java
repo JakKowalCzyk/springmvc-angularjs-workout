@@ -32,6 +32,9 @@ public class UserWeight extends BaseModel{
     @JsonIgnore
     private UserInfo userInfo_id;
 
+    public UserWeight() {
+    }
+
     public void setUser_id(User user_id) {
         this.user_id = user_id;
     }

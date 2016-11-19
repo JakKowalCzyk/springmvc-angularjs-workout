@@ -1,6 +1,7 @@
 package pl.workout.kowalczyk.com.app.services.service;
 
 import pl.workout.kowalczyk.com.app.model.BO.UserNotes;
+import pl.workout.kowalczyk.com.app.model.DTO.UserNotesDTO;
 
 import java.sql.Date;
 import java.util.List;
@@ -9,13 +10,18 @@ import java.util.List;
  * Created by JK on 2016-10-26.
  */
 public interface UserNotesService {
-    void saveUserNotes(UserNotes userNotes);
 
-    void updateUserNotes(UserNotes userNotes);
+    UserNotes mapUserNotesDtoToBo(UserNotesDTO userNotesDTO);
 
-    void deleteUserNotes(UserNotes userNotes);
+    UserNotesDTO mapUserNotesBoToDto(UserNotes userNotes);
 
-    List<UserNotes> getUserNotesByUserId(int userId);
+    void saveUserNotes(UserNotesDTO userNotesDTO);
 
-    UserNotes getSingleNoteByDate(int userId, Date date);
+    void updateUserNotes(UserNotesDTO userNotesDTO);
+
+    void deleteUserNotes(UserNotesDTO userNotesDTO);
+
+    List<UserNotesDTO> getUserNotesByUserId(int userId);
+
+    UserNotesDTO getSingleNoteByDate(int userId, Date date);
 }

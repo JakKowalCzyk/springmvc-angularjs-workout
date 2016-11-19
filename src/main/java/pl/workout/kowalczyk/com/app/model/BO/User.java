@@ -35,6 +35,9 @@ public class User extends BaseModel{
         this.password = password;
     }
 
+    public User() {
+    }
+
     public int getUser_id() {
         return user_id;
     }

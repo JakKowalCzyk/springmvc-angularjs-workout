@@ -26,6 +26,9 @@ public class UserExercise extends BaseModel {
         this.series = series;
     }
 
+    public UserExercise() {
+    }
+
     @OneToOne
     @JoinColumn(name = "exercise_id")
     public Exercise getExercise() {

@@ -31,6 +31,8 @@ public class Workout  extends BaseModel {
         this.userExercises = userExercises;
     }
 
+    public Workout() {
+    }
 
 
     @Id

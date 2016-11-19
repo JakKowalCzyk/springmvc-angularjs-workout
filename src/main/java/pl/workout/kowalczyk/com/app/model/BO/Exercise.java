@@ -30,6 +30,9 @@ public class Exercise extends BaseModel{
         this.exerciseType = exerciseType;
     }
 
+    public Exercise() {
+    }
+
     @OneToOne(mappedBy = "exerciseFavourite_id")
     public UserInfo getUserInfo_id() {
         return userInfo_id;

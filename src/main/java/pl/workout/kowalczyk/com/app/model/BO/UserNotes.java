@@ -11,7 +11,7 @@ import java.sql.Date;
 public class UserNotes extends BaseModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int unotes_id;
+    private int userNotes_id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
@@ -21,12 +21,22 @@ public class UserNotes extends BaseModel{
 
     private Date date;
 
-    public int getUnotes_id() {
-        return unotes_id;
+    public UserNotes(Integer userNotesId, User user_id, String note, Date date) {
+        this.userNotes_id = userNotesId;
+        this.user_id = user_id;
+        this.note = note;
+        this.date = date;
     }
 
-    public void setUnotes_id(int uweight_id) {
-        this.unotes_id = uweight_id;
+    public UserNotes() {
+    }
+
+    public int getUserNotes_id() {
+        return userNotes_id;
+    }
+
+    public void setUserNotes_id(int uweight_id) {
+        this.userNotes_id = uweight_id;
     }
 
     public User getUser_id() {
