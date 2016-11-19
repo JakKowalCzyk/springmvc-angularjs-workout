@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.workout.kowalczyk.com.app.model.BO.Workout;
+import pl.workout.kowalczyk.com.app.model.DTO.WorkoutDTO;
 import pl.workout.kowalczyk.com.app.services.service.WorkoutService;
 
 import java.sql.Date;
@@ -20,30 +21,30 @@ public class WorkoutController {
     private WorkoutService workoutService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity saveWorkout(@RequestBody Workout workout) {
+    public ResponseEntity saveWorkout(@RequestBody WorkoutDTO workout) {
         workoutService.saveWorkout(workout);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity updateWorkout(@RequestBody Workout workout) {
+    public ResponseEntity updateWorkout(@RequestBody WorkoutDTO workout) {
         workoutService.updateWorkout(workout);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    public ResponseEntity deleteWorkout(@RequestBody Workout workout) {
+    public ResponseEntity deleteWorkout(@RequestBody WorkoutDTO workout) {
         workoutService.deleteWorkout(workout);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-    public List<Workout> getWorkoutsById(@PathVariable int userId) {
+    public List<WorkoutDTO> getWorkoutsById(@PathVariable int userId) {
         return workoutService.getWorkoutsByUserId(userId);
     }
 
     @RequestMapping(value = "/{userId}/{date}", method = RequestMethod.GET)
-    public Workout getWorkoutByDate(@PathVariable int userId, @PathVariable Date date) {
+    public WorkoutDTO getWorkoutByDate(@PathVariable int userId, @PathVariable Date date) {
         return workoutService.getByUserIdAndDate(userId, date);
     }
 }

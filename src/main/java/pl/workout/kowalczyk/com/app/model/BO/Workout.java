@@ -1,6 +1,7 @@
 package pl.workout.kowalczyk.com.app.model.BO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import pl.workout.kowalczyk.com.app.model.DTO.UserExerciseDTO;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -21,7 +22,16 @@ public class Workout  extends BaseModel {
 
     private Date date;
 
-    private List<UserExercise> userExercises = new ArrayList<>();
+    private List<UserExercise> userExercises;
+
+    public Workout(int workout_id, User user_id, Date date, List<UserExercise> userExercises) {
+        this.workout_id = workout_id;
+        this.user_id = user_id;
+        this.date = date;
+        this.userExercises = userExercises;
+    }
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

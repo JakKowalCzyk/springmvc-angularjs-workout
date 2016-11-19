@@ -1,11 +1,6 @@
 package pl.workout.kowalczyk.com.app.model.DTO;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import pl.workout.kowalczyk.com.app.model.BO.User;
-import pl.workout.kowalczyk.com.app.model.BO.UserExercise;
-
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,9 +13,9 @@ public class WorkoutDTO {
 
     private Date date;
 
-    private List<UserExercise> userExercises;
+    private List<UserExerciseDTO> userExercises;
 
-    public WorkoutDTO(Integer workout_id, Integer user_id, Date date, List<UserExercise> userExercises) {
+    public WorkoutDTO(Integer workout_id, Integer user_id, Date date, List<UserExerciseDTO> userExercises) {
         this.workout_id = workout_id;
         this.user_id = user_id;
         this.date = date;
@@ -51,11 +46,11 @@ public class WorkoutDTO {
         this.date = date;
     }
 
-    public List<UserExercise> getUserExercises() {
+    public List<UserExerciseDTO> getUserExercises() {
         return userExercises;
     }
 
-    public void setUserExercises(List<UserExercise> userExercises) {
+    public void setUserExercises(List<UserExerciseDTO> userExercises) {
         this.userExercises = userExercises;
     }
 }
