@@ -44,11 +44,11 @@ public class Exercise extends BaseModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getExercise_id() {
+    public Integer getExercise_id() {
         return exercise_id;
     }
 
-    public void setExercise_id(int exercise_id) {
+    public void setExercise_id(Integer exercise_id) {
         this.exercise_id = exercise_id;
     }
 

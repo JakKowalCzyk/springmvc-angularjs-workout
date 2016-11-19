@@ -14,6 +14,9 @@ public class UserWeightDTO {
 
     private Date date;
 
+    public UserWeightDTO() {
+    }
+
     public UserWeightDTO(Integer weight_id, Integer user_id, Integer weight_kg, Date date) {
         this.weightId = weight_id;
         this.userId = user_id;

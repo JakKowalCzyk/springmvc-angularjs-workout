@@ -32,7 +32,7 @@ public class UserWeightServiceImpl implements UserWeightService {
 
     @Override
     public UserWeight mapUserWeightDtoToBo(UserWeightDTO actual_weight) {
-        return new UserWeight(actual_weight.getWeightId(), userDao.get(actual_weight.getUserId()), actual_weight.getWeightKg(), actual_weight.getDate());
+        return new UserWeight(userDao.get(actual_weight.getUserId()), actual_weight.getWeightKg(), actual_weight.getDate());
     }
 
     @Override

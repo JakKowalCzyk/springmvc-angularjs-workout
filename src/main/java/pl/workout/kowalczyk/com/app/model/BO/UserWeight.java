@@ -22,8 +22,7 @@ public class UserWeight extends BaseModel{
 
     private Date date;
 
-    public UserWeight(int weight_id, User user_id, int weight_kg, Date date) {
-        this.weight_id = weight_id;
+    public UserWeight(User user_id, int weight_kg, Date date) {
         this.user_id = user_id;
         this.weight_kg = weight_kg;
         this.date = date;
