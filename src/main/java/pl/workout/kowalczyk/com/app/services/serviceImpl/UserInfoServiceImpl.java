@@ -32,7 +32,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public UserInfoDTO mapUserInfoBoToDto(UserInfo userInfo) {
-        return new UserInfoDTO(userInfo.getUserInfo_id(), userInfo.getUser_id().getUser_id(), userWeightService.mapUserWeightBoToDto(userInfo.getActual_weight()), exerciseService.mapExerciseBoToDTO(userInfo.getExerciseFavourite_id()))
+        return new UserInfoDTO(userInfo.getUserInfo_id(), userInfo.getUser_id().getUser_id(), userWeightService.mapUserWeightBoToDto(userInfo.getActual_weight()), exerciseService.mapExerciseBoToDTO(userInfo.getExerciseFavourite_id()));
     }
 
     @Override
