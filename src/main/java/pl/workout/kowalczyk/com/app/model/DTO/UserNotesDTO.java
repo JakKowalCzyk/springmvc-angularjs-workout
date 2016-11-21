@@ -5,7 +5,7 @@ import java.sql.Date;
 /**
  * Created by JK on 2016-11-18.
  */
-public class UserNotesDTO {
+public class UserNotesDTO extends BaseModel{
     private Integer userNotesId;
     private Integer user_id;
     private String note;

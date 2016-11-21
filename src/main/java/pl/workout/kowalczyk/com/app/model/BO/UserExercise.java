@@ -1,5 +1,7 @@
 package pl.workout.kowalczyk.com.app.model.BO;
 
+import pl.workout.kowalczyk.com.app.model.DTO.BaseModel;
+
 import javax.persistence.*;
 
 /**
@@ -7,7 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "saw_userExercise")
-public class UserExercise extends BaseModel {
+public class UserExercise  {
 
     private int userExercise_id;
 
@@ -19,7 +21,7 @@ public class UserExercise extends BaseModel {
 
     private int series;
 
-    public UserExercise(int userExercise_id, Exercise exercise, int repeat, int series) {
+    public UserExercise(Exercise exercise, int repeat, int series) {
         this.userExercise_id = userExercise_id;
         this.exercise = exercise;
         this.repeat = repeat;
@@ -29,7 +31,7 @@ public class UserExercise extends BaseModel {
     public UserExercise() {
     }
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "exercise_id")
     public Exercise getExercise() {
         return exercise;
@@ -39,7 +41,7 @@ public class UserExercise extends BaseModel {
         this.exercise = exercise;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "workout_id")
     public Workout getWorkout_id() {
         return workout_id;

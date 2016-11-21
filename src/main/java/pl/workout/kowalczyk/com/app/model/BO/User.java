@@ -1,5 +1,7 @@
 package pl.workout.kowalczyk.com.app.model.BO;
 
+import pl.workout.kowalczyk.com.app.model.DTO.BaseModel;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -8,7 +10,7 @@ import java.sql.Date;
  */
 @Entity
 @Table(name = "saw_user")
-public class User extends BaseModel{
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer user_id;

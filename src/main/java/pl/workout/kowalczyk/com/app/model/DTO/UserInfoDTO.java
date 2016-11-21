@@ -3,7 +3,7 @@ package pl.workout.kowalczyk.com.app.model.DTO;
 /**
  * Created by JK on 2016-11-18.
  */
-public class UserInfoDTO {
+public class UserInfoDTO extends BaseModel{
     private Integer userInfoId;
     private Integer userId;
     private UserWeightDTO actual_weight;

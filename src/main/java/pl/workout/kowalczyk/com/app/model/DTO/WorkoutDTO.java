@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by JK on 2016-11-18.
  */
-public class WorkoutDTO {
+public class WorkoutDTO extends BaseModel{
     private Integer workout_id ;
 
     private Integer user_id;

@@ -1,4 +1,4 @@
-package pl.workout.kowalczyk.com.app.model.BO;
+package pl.workout.kowalczyk.com.app.model.DTO;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

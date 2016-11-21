@@ -2,6 +2,7 @@ package pl.workout.kowalczyk.com.app.model.BO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import pl.workout.kowalczyk.com.app.enums.ExerciseType;
+import pl.workout.kowalczyk.com.app.model.DTO.BaseModel;
 
 import javax.persistence.*;
 
@@ -10,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name ="saw_exercise")
-public class Exercise extends BaseModel{
+public class Exercise{
  
     private Integer exercise_id;
 

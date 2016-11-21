@@ -5,7 +5,7 @@ import java.sql.Date;
 /**
  * Created by JK on 2016-11-18.
  */
-public class UserWeightDTO {
+public class UserWeightDTO extends BaseModel{
     private Integer weightId;
 
     private Integer userId;

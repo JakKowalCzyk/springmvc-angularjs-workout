@@ -1,11 +1,10 @@
 package pl.workout.kowalczyk.com.app.model.BO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import pl.workout.kowalczyk.com.app.model.DTO.UserExerciseDTO;
+import pl.workout.kowalczyk.com.app.model.DTO.BaseModel;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +12,7 @@ import java.util.List;
  */
 @Entity()
 @Table(name = "saw_workout")
-public class Workout  extends BaseModel {
+public class Workout   {
 
     private int workout_id ;
 

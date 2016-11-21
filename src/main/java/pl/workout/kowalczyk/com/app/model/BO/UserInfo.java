@@ -1,5 +1,7 @@
 package pl.workout.kowalczyk.com.app.model.BO;
 
+import pl.workout.kowalczyk.com.app.model.DTO.BaseModel;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -8,7 +10,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "saw_userInfo")
-public class UserInfo extends BaseModel implements Serializable {
+public class UserInfo implements Serializable {
 
     private int userInfo_id;
 

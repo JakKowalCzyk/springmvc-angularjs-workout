@@ -5,7 +5,7 @@ import pl.workout.kowalczyk.com.app.enums.ExerciseType;
 /**
  * Created by JK on 2016-11-18.
  */
-public class ExerciseDTO {
+public class ExerciseDTO extends BaseModel {
 
     private Integer exerciseId;
 

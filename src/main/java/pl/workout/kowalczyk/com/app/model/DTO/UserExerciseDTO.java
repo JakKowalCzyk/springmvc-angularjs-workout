@@ -3,12 +3,15 @@ package pl.workout.kowalczyk.com.app.model.DTO;
 /**
  * Created by JK on 2016-11-18.
  */
-public class UserExerciseDTO {
+public class UserExerciseDTO extends BaseModel{
     private Integer userExercise_id;
     private ExerciseDTO exercise;
     private Integer workout_id;
     private Integer repeat;
     private Integer series;
+
+    public UserExerciseDTO() {
+    }
 
     public UserExerciseDTO(Integer userExercise_id, ExerciseDTO exercise, Integer workout_id, Integer repeat, Integer series) {
         this.userExercise_id = userExercise_id;

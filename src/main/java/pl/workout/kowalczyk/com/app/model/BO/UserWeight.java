@@ -1,6 +1,7 @@
 package pl.workout.kowalczyk.com.app.model.BO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import pl.workout.kowalczyk.com.app.model.DTO.BaseModel;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -10,7 +11,7 @@ import java.sql.Date;
  */
 @Entity
 @Table(name = "saw_userWeight")
-public class UserWeight extends BaseModel{
+public class UserWeight  {
 
     @Column(name = "weight_id")
     private int weight_id;
