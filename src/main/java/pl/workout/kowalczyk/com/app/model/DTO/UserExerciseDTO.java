@@ -9,6 +9,7 @@ public class UserExerciseDTO extends BaseModel{
     private Integer workout_id;
     private Integer repeat;
     private Integer series;
+    private Integer exerciseId;
 
     public UserExerciseDTO() {
     }
@@ -21,12 +22,27 @@ public class UserExerciseDTO extends BaseModel{
         this.series = series;
     }
 
-    public int getUserExercise_id() {
-        return userExercise_id;
+    public UserExerciseDTO(Integer workout_id, Integer repeat, Integer series, Integer exerciseId) {
+        this.workout_id = workout_id;
+        this.repeat = repeat;
+        this.series = series;
+        this.exerciseId = exerciseId;
     }
 
-    public void setUserExercise_id(int userExercise_id) {
+    public void setUserExercise_id(Integer userExercise_id) {
         this.userExercise_id = userExercise_id;
+    }
+
+    public Integer getExerciseId() {
+        return exerciseId;
+    }
+
+    public void setExerciseId(Integer exerciseId) {
+        this.exerciseId = exerciseId;
+    }
+
+    public int getUserExercise_id() {
+        return userExercise_id;
     }
 
     public ExerciseDTO getExercise() {

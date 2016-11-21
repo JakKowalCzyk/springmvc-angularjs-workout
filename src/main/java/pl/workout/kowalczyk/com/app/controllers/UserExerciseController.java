@@ -32,9 +32,9 @@ public class UserExerciseController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
-    public ResponseEntity deleteUserExercise(@RequestBody UserExerciseDTO userExercise) {
-        userExerciseService.deleteUserExercise(userExercise);
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{exerciseId}")
+    public ResponseEntity deleteUserExercise(@PathVariable Integer exerciseId) {
+        userExerciseService.deleteUserExercise(exerciseId);
         return new ResponseEntity(HttpStatus.OK);
     }
 

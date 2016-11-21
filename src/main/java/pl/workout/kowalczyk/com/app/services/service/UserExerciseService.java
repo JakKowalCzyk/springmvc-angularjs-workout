@@ -19,7 +19,7 @@ public interface UserExerciseService {
 
     void updateUserExercise(UserExerciseDTO userExercise);
 
-    void deleteUserExercise(UserExerciseDTO userExercise);
+    void deleteUserExercise(Integer userExercise);
 
     List<UserExerciseDTO> getUserExercisesByWorkout(int userId, Date date);
 

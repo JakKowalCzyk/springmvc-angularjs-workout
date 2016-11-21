@@ -21,14 +21,12 @@ public class UserExercise  {
 
     private int series;
 
-    public UserExercise(Exercise exercise, int repeat, int series) {
-        this.userExercise_id = userExercise_id;
-        this.exercise = exercise;
-        this.repeat = repeat;
-        this.series = series;
+    public UserExercise() {
     }
 
-    public UserExercise() {
+    public UserExercise(int repeat, int series) {
+        this.repeat = repeat;
+        this.series = series;
     }
 
     @OneToOne(cascade = CascadeType.ALL)

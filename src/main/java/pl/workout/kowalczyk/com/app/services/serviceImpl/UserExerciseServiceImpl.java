@@ -29,9 +29,18 @@ public class UserExerciseServiceImpl implements UserExerciseService {
 
     @Override
     public UserExercise mapUserExerciseDtoToBo(UserExerciseDTO userExerciseDTO) {
-        UserExercise userExercise = new UserExercise(userExerciseDTO.getUserExercise_id(), exerciseService.mapExerciseDtoToBo(userExerciseDTO.getExercise()), userExerciseDTO.getRepeat(), userExerciseDTO.getSeries());
+        UserExercise userExercise = new UserExercise(userExerciseDTO.getRepeat(), userExerciseDTO.getSeries());
+        setExerciseDtoToBo(userExerciseDTO, userExercise);
         userExercise.setWorkout_id(workoutDao.get(userExerciseDTO.getWorkout_id()));
         return userExercise;
+    }
+
+    private void setExerciseDtoToBo(UserExerciseDTO userExerciseDTO, UserExercise userExercise) {
+        if (userExerciseDTO.getExerciseId() == null) {
+            userExercise.setExercise(exerciseService.mapExerciseDtoToBo(userExerciseDTO.getExercise()));
+        }else{
+            userExercise.setExercise(exerciseService.getExerciseById(userExerciseDTO.getExerciseId()));
+        }
     }
 
     @Override
@@ -47,8 +56,9 @@ public class UserExerciseServiceImpl implements UserExerciseService {
         userExerciseDao.update(mapUserExerciseDtoToBo(userExerciseDTO));
     }
 
-    public void deleteUserExercise(UserExerciseDTO userExerciseDTO) {
-        userExerciseDao.delete(mapUserExerciseDtoToBo(userExerciseDTO));
+    public void deleteUserExercise(Integer userExerciseId) {
+        UserExercise userExercise = userExerciseDao.get(userExerciseId);
+        userExerciseDao.delete(userExercise);
     }
 
     public List<UserExerciseDTO> getUserExercisesByWorkout(int userId, Date date) {
