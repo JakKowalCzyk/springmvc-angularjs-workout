@@ -23,8 +23,7 @@ public class Exercise extends BaseModel{
     @JsonIgnore
     private UserInfo userInfo_id;
 
-    public Exercise(Integer exercise_id, String name, String description, ExerciseType exerciseType) {
-        this.exercise_id = exercise_id;
+    public Exercise(String name, String description, ExerciseType exerciseType) {
         this.name = name;
         this.description = description;
         this.exerciseType = exerciseType;

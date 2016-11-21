@@ -27,7 +27,7 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     public Exercise mapExerciseDtoToBo(ExerciseDTO exerciseDTO) {
-        return new Exercise(exerciseDTO.getExercise_id(), exerciseDTO.getName(), exerciseDTO.getDescription(), exerciseDTO.getExerciseType());
+        return new Exercise(exerciseDTO.getName(), exerciseDTO.getDescription(), exerciseDTO.getExerciseType());
     }
 
     public void saveExercise(ExerciseDTO exerciseDTO) {

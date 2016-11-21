@@ -16,6 +16,9 @@ public class ExerciseDTO {
     private ExerciseType exerciseType;
 
 
+    public ExerciseDTO() {
+    }
+
     public ExerciseDTO(Integer exercise_id, String name, String description, ExerciseType exerciseType) {
         this.exerciseId = exercise_id;
         this.name = name;
