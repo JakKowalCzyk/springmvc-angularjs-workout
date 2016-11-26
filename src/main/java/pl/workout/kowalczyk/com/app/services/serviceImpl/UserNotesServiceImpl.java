@@ -39,7 +39,9 @@ public class UserNotesServiceImpl  implements UserNotesService{
     }
 
     public void updateUserNotes(UserNotesDTO userNotesDTO) {
-        userNotesDao.update(mapUserNotesDtoToBo(userNotesDTO));
+        UserNotes userNotes = mapUserNotesDtoToBo(userNotesDTO);
+        userNotes.setUserNotes_id(userNotesDTO.getUserNotesId());
+        userNotesDao.update(userNotes);
     }
 
     public void deleteUserNotes(Integer noteId) {
