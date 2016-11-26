@@ -32,9 +32,9 @@ public class UserNotesController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
-    public ResponseEntity deleteUserNote(@RequestBody UserNotesDTO userNotes) {
-        userNotesService.deleteUserNotes(userNotes);
+    @RequestMapping(value = "/note/{noteId}", method = RequestMethod.DELETE)
+    public ResponseEntity deleteUserNote(@PathVariable Integer noteId) {
+        userNotesService.deleteUserNotes(noteId);
         return new ResponseEntity(HttpStatus.OK);
     }
 
@@ -43,7 +43,7 @@ public class UserNotesController {
         return userNotesService.getUserNotesByUserId(userId);
     }
 
-    @RequestMapping(value = "/{userId}/{date", method = RequestMethod.GET)
+    @RequestMapping(value = "/{userId}/{date}", method = RequestMethod.GET)
     public UserNotesDTO getUserNotesByDate(@PathVariable int userId, @PathVariable Date date) {
         return userNotesService.getSingleNoteByDate(userId, date);
     }

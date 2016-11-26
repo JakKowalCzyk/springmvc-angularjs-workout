@@ -11,6 +11,9 @@ public class UserNotesDTO extends BaseModel{
     private String note;
     private Date date;
 
+    public UserNotesDTO() {
+    }
+
     public UserNotesDTO(Integer userNotesId, Integer user_id, String note, Date date) {
         this.userNotesId = userNotesId;
         this.user_id = user_id;

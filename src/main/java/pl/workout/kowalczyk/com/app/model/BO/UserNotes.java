@@ -11,20 +11,16 @@ import java.sql.Date;
 @Entity
 @Table(name = "saw_userNotes")
 public class UserNotes  {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int userNotes_id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
     private User user_id;
 
     private String note;
 
     private Date date;
 
-    public UserNotes(Integer userNotesId, User user_id, String note, Date date) {
-        this.userNotes_id = userNotesId;
+    public UserNotes(User user_id, String note, Date date) {
         this.user_id = user_id;
         this.note = note;
         this.date = date;
@@ -33,14 +29,18 @@ public class UserNotes  {
     public UserNotes() {
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getUserNotes_id() {
         return userNotes_id;
     }
 
-    public void setUserNotes_id(int uweight_id) {
-        this.userNotes_id = uweight_id;
+    public void setUserNotes_id(int userNotes_id) {
+        this.userNotes_id = userNotes_id;
     }
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
     public User getUser_id() {
         return user_id;
     }

@@ -19,7 +19,7 @@ public interface UserNotesService {
 
     void updateUserNotes(UserNotesDTO userNotesDTO);
 
-    void deleteUserNotes(UserNotesDTO userNotesDTO);
+    void deleteUserNotes(Integer noteId);
 
     List<UserNotesDTO> getUserNotesByUserId(int userId);
 

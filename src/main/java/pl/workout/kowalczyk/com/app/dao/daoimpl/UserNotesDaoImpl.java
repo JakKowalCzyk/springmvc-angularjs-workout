@@ -16,8 +16,8 @@ import java.util.List;
 @Repository
 public class UserNotesDaoImpl extends BaseDaoImpl<UserNotes> implements UserNotesDao {
 
-    private static final String getByUserIdSql = "SELECT o FROM UserNotes o where o.user_id = :userId";
-    private static final String getSingleNoteSql = "SELECT o FROM UserNotes o where o.user_id = :userId and o.date = :date";
+    private static final String getByUserIdSql = "SELECT o FROM UserNotes o  join o.user_id as userid where userid.user_id = :userId";
+    private static final String getSingleNoteSql = "SELECT o FROM UserNotes o join o.user_id as userid where userid.user_id = :userId and o.date = :date";
 
     @PersistenceContext
     private EntityManager entityManager;
