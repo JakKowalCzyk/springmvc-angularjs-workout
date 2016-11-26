@@ -44,7 +44,9 @@ public class WorkoutServiceImpl implements WorkoutService {
     }
 
     public void updateWorkout(WorkoutDTO workoutDTO) {
-        workoutDao.update(mapWorkoutDtoToBo(workoutDTO));
+        Workout workout = mapWorkoutDtoToBo(workoutDTO);
+        workout.setWorkout_id(workoutDTO.getWorkout_id());
+        workoutDao.update(workout);
     }
 
     public void deleteWorkout(Integer workoutId) {
