@@ -21,7 +21,7 @@
 
 INSERT INTO saw_user (login, firstName, lastName) VALUES ('kuba', 'kowalczyk', 'kowal');
 INSERT INTO saw_workout(user_id, date) VALUES (1, '2015-02-02');
-INSERT INTO saw_workout(user_id, date) VALUES (2, '2015-03-03');
+INSERT INTO saw_workout(user_id, date) VALUES (1, '2015-03-03');
 INSERT INTO saw_exercise (name, exerciseType) VALUES ('Przysiady', 'LEGS');
 INSERT INTO saw_exercise (name, exerciseType) VALUES ('Przysiady przednie', 'LEGS');
 INSERT INTO saw_exercise (name, exerciseType) VALUES ('Wykroki', 'LEGS');
@@ -32,5 +32,7 @@ INSERT INTO saw_userExercise (exercise_id, workout_id, repeat, series) VALUES (2
 INSERT INTO saw_userExercise (exercise_id, workout_id, repeat, series) VALUES (1, 2, 12, 4);
 INSERT INTO saw_userweight (user_id_user_id, date, weight_kg) VALUES (1,'2016-10-11', 64);
 INSERT INTO saw_userinfo (user_id, weight_id) VALUES (1, 1);
+INSERT INTO saw_usernotes (user_id, date, note)VALUES (1, '2016-10-23', 'notatka pierwsza jakas tam blalblablalbablabl');
+INSERT INTO saw_usernotes (user_id, date, note)VALUES (1, '2016-09-26', 'njklsadhaslkdjlaksdjlaskdjlaksjdlakdjlskajd');
 
 
