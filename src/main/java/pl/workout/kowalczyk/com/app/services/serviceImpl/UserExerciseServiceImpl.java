@@ -53,7 +53,9 @@ public class UserExerciseServiceImpl implements UserExerciseService {
     }
 
     public void updateUserExercise(UserExerciseDTO userExerciseDTO) {
-        userExerciseDao.update(mapUserExerciseDtoToBo(userExerciseDTO));
+        UserExercise userExercise = mapUserExerciseDtoToBo(userExerciseDTO);
+        userExercise.setUserExercise_id(userExerciseDTO.getUserExercise_id());
+        userExerciseDao.update(userExercise);
     }
 
     public void deleteUserExercise(Integer userExerciseId) {
