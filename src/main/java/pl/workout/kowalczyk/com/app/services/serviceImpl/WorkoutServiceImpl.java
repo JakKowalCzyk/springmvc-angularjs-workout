@@ -28,20 +28,15 @@ public class WorkoutServiceImpl implements WorkoutService {
     @Autowired
     private UserDao userDao;
 
-    @Autowired
-    private UserExerciseService userExerciseService;
 
     @Override
     public Workout mapWorkoutDtoToBo(WorkoutDTO workoutDTO) {
-        List<UserExercise> userExercisesList = workoutDTO.getUserExercises()
-                .stream().map(userExerciseDTO -> userExerciseService.mapUserExerciseDtoToBo(userExerciseDTO)).collect(Collectors.toList());
-        return new Workout(workoutDTO.getWorkout_id(), userDao.get(workoutDTO.getUser_id()), workoutDTO.getDate(),  userExercisesList);
+        return new Workout(userDao.get(workoutDTO.getUser_id()), workoutDTO.getDate());
     }
 
     @Override
     public WorkoutDTO mapWorkoutBoToDto(Workout workout) {
-        List<UserExerciseDTO> userExerciseDTOs = workout.getUserExercises().stream().map(userExercise -> userExerciseService.mapUserExerciseBoToDto(userExercise)).collect(Collectors.toList());
-        return new WorkoutDTO(workout.getWorkout_id(), workout.getUser_id().getUser_id(), workout.getDate(), userExerciseDTOs);
+        return new WorkoutDTO(workout.getWorkout_id(), workout.getUser_id().getUser_id(), workout.getDate());
     }
 
     public void saveWorkout(WorkoutDTO workoutDTO) {

@@ -13,13 +13,14 @@ public class WorkoutDTO extends BaseModel{
 
     private Date date;
 
-    private List<UserExerciseDTO> userExercises;
+    public WorkoutDTO() {
+    }
 
-    public WorkoutDTO(Integer workout_id, Integer user_id, Date date, List<UserExerciseDTO> userExercises) {
+    public WorkoutDTO(Integer workout_id, Integer user_id, Date date) {
         this.workout_id = workout_id;
         this.user_id = user_id;
         this.date = date;
-        this.userExercises = userExercises;
+
     }
 
     public Integer getWorkout_id() {
@@ -46,11 +47,4 @@ public class WorkoutDTO extends BaseModel{
         this.date = date;
     }
 
-    public List<UserExerciseDTO> getUserExercises() {
-        return userExercises;
-    }
-
-    public void setUserExercises(List<UserExerciseDTO> userExercises) {
-        this.userExercises = userExercises;
-    }
 }

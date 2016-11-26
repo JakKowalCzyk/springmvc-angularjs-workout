@@ -23,11 +23,9 @@ public class Workout   {
 
     private List<UserExercise> userExercises;
 
-    public Workout(int workout_id, User user_id, Date date, List<UserExercise> userExercises) {
-        this.workout_id = workout_id;
+    public Workout(User user_id, Date date) {
         this.user_id = user_id;
         this.date = date;
-        this.userExercises = userExercises;
     }
 
     public Workout() {
