@@ -3,6 +3,7 @@ package pl.workout.kowalczyk.com.app.services.service;
 import pl.workout.kowalczyk.com.app.model.BO.Workout;
 import pl.workout.kowalczyk.com.app.model.DTO.WorkoutDTO;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.Date;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface WorkoutService {
 
     void updateWorkout(WorkoutDTO workoutDTO);
 
-    void deleteWorkout(WorkoutDTO workoutDTO);
+    void deleteWorkout(Integer workoutId);
 
     List<WorkoutDTO> getWorkoutsByUserId(int userId);
 

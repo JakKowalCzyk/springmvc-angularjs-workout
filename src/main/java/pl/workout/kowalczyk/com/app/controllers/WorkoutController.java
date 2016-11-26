@@ -32,9 +32,9 @@ public class WorkoutController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
-    public ResponseEntity deleteWorkout(@RequestBody WorkoutDTO workout) {
-        workoutService.deleteWorkout(workout);
+    @RequestMapping(value = "/workoutId/{workoutId}", method = RequestMethod.DELETE)
+    public ResponseEntity deleteWorkout(@PathVariable Integer workoutId) {
+        workoutService.deleteWorkout(workoutId);
         return new ResponseEntity(HttpStatus.OK);
     }
 
