@@ -49,7 +49,9 @@ public class UserWeightServiceImpl implements UserWeightService {
     }
 
     public void updateUserWeight(UserWeightDTO userWeightDTO) {
-        userWeightDao.update(mapUserWeightDtoToBo(userWeightDTO));
+        UserWeight userWeight = mapUserWeightDtoToBo(userWeightDTO);
+        userWeight.setWeight_id(userWeightDTO.getWeightId());
+        userWeightDao.update(userWeight);
     }
 
     public List<UserWeightDTO> getWeightByUserId(int userId) {
