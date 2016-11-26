@@ -23,5 +23,5 @@ public interface UserNotesService {
 
     List<UserNotesDTO> getUserNotesByUserId(int userId);
 
-    UserNotesDTO getSingleNoteByDate(int userId, Date date);
+    List<UserNotesDTO> getNotesByDate(int userId, Date date);
 }

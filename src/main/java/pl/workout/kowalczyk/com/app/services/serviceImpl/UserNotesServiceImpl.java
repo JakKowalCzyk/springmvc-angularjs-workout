@@ -53,7 +53,7 @@ public class UserNotesServiceImpl  implements UserNotesService{
         return userNotesDao.getUserNotesByUserId(userId).stream().map(this::mapUserNotesBoToDto).collect(Collectors.toList());
     }
 
-    public UserNotesDTO getSingleNoteByDate(int userId, Date date) {
-        return mapUserNotesBoToDto(userNotesDao.getSingleNoteByDate(userId, date));
+    public List<UserNotesDTO> getNotesByDate(int userId, Date date) {
+        return userNotesDao.getSingleNoteByDate(userId, date).stream().map(this::mapUserNotesBoToDto).collect(Collectors.toList());
     }
 }

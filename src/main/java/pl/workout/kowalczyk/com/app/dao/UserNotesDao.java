@@ -1,6 +1,7 @@
 package pl.workout.kowalczyk.com.app.dao;
 
 import pl.workout.kowalczyk.com.app.model.BO.UserNotes;
+import pl.workout.kowalczyk.com.app.model.DTO.UserNotesDTO;
 
 import java.sql.Date;
 import java.util.List;
@@ -11,5 +12,5 @@ import java.util.List;
 public interface UserNotesDao extends BaseDao<UserNotes> {
     List<UserNotes> getUserNotesByUserId(int userId);
 
-    UserNotes getSingleNoteByDate(int userId, Date date);
+    List<UserNotes> getSingleNoteByDate(int userId, Date date);
 }

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.workout.kowalczyk.com.app.model.BO.UserNotes;
 import pl.workout.kowalczyk.com.app.model.DTO.UserNotesDTO;
 import pl.workout.kowalczyk.com.app.services.service.UserNotesService;
 
@@ -44,7 +43,7 @@ public class UserNotesController {
     }
 
     @RequestMapping(value = "/{userId}/{date}", method = RequestMethod.GET)
-    public UserNotesDTO getUserNotesByDate(@PathVariable int userId, @PathVariable Date date) {
-        return userNotesService.getSingleNoteByDate(userId, date);
+    public List<UserNotesDTO> getUserNotesByDate(@PathVariable int userId, @PathVariable Date date) {
+        return userNotesService.getNotesByDate(userId, date);
     }
 }

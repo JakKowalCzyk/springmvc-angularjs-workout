@@ -3,6 +3,7 @@ package pl.workout.kowalczyk.com.app.dao.daoimpl;
 import org.springframework.stereotype.Repository;
 import pl.workout.kowalczyk.com.app.dao.UserNotesDao;
 import pl.workout.kowalczyk.com.app.model.BO.UserNotes;
+import pl.workout.kowalczyk.com.app.model.DTO.UserNotesDTO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,11 +30,11 @@ public class UserNotesDaoImpl extends BaseDaoImpl<UserNotes> implements UserNote
         return userNotesList;
     }
 
-    public UserNotes getSingleNoteByDate(int userId, Date date) {
+    public List<UserNotes> getSingleNoteByDate(int userId, Date date) {
         TypedQuery<UserNotes> typedQuery = entityManager.createQuery(getSingleNoteSql, UserNotes.class);
         typedQuery.setParameter("userId", userId);
         typedQuery.setParameter("date", date);
-        UserNotes userNotes = typedQuery.getSingleResult();
+        List<UserNotes> userNotes = typedQuery.getResultList();
         return userNotes;
     }
 }
