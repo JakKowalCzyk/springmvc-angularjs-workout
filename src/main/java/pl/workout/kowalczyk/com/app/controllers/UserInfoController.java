@@ -23,11 +23,7 @@ public class UserInfoController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity updateUserInfo(@RequestBody UserInfoDTO userInfoDTO) {
-        userInfoService.updateUserInfoDTO(userInfoDTO);
-        return new ResponseEntity(HttpStatus.OK);
-    }
+
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public UserInfoDTO getById(@PathVariable int userId) {
