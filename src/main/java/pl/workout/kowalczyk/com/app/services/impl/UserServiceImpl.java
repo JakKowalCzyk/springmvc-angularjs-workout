@@ -1,4 +1,4 @@
-package pl.workout.kowalczyk.com.app.services.serviceImpl;
+package pl.workout.kowalczyk.com.app.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.workout.kowalczyk.com.app.dao.UserDao;
 import pl.workout.kowalczyk.com.app.model.BO.User;
 import pl.workout.kowalczyk.com.app.model.DTO.UserDTO;
-import pl.workout.kowalczyk.com.app.services.service.UserService;
+import pl.workout.kowalczyk.com.app.services.UserService;
 
 /**
  * Created by JK on 2016-10-26.

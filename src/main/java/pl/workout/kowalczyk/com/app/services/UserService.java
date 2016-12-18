@@ -1,4 +1,4 @@
-package pl.workout.kowalczyk.com.app.services.service;
+package pl.workout.kowalczyk.com.app.services;
 
 import pl.workout.kowalczyk.com.app.model.BO.User;
 import pl.workout.kowalczyk.com.app.model.DTO.UserDTO;
@@ -6,7 +6,7 @@ import pl.workout.kowalczyk.com.app.model.DTO.UserDTO;
 /**
  * Created by JK on 2016-10-26.
  */
-public interface UserService {
+public interface UserService{
 
     User mapUserDtoToBo(UserDTO userDTO);
 
