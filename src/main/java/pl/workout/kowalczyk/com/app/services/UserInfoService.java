@@ -1,4 +1,4 @@
-package pl.workout.kowalczyk.com.app.services.service;
+package pl.workout.kowalczyk.com.app.services;
 
 import pl.workout.kowalczyk.com.app.model.BO.UserInfo;
 import pl.workout.kowalczyk.com.app.model.BO.UserWeight;

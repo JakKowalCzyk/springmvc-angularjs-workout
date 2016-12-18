@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.workout.kowalczyk.com.app.model.DTO.UserNotesDTO;
-import pl.workout.kowalczyk.com.app.services.service.UserNotesService;
+import pl.workout.kowalczyk.com.app.services.UserNotesService;
 
 import java.sql.Date;
 import java.util.List;

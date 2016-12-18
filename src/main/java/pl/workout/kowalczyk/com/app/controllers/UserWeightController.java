@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.workout.kowalczyk.com.app.model.BO.UserWeight;
 import pl.workout.kowalczyk.com.app.model.DTO.UserWeightDTO;
-import pl.workout.kowalczyk.com.app.services.service.UserWeightService;
+import pl.workout.kowalczyk.com.app.services.UserWeightService;
 
 import java.sql.Date;
 import java.util.List;

@@ -1,16 +1,13 @@
-package pl.workout.kowalczyk.com.app.services.serviceImpl;
+package pl.workout.kowalczyk.com.app.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.workout.kowalczyk.com.app.dao.UserDao;
 import pl.workout.kowalczyk.com.app.dao.WorkoutDao;
-import pl.workout.kowalczyk.com.app.model.BO.UserExercise;
 import pl.workout.kowalczyk.com.app.model.BO.Workout;
-import pl.workout.kowalczyk.com.app.model.DTO.UserExerciseDTO;
 import pl.workout.kowalczyk.com.app.model.DTO.WorkoutDTO;
-import pl.workout.kowalczyk.com.app.services.service.UserExerciseService;
-import pl.workout.kowalczyk.com.app.services.service.WorkoutService;
+import pl.workout.kowalczyk.com.app.services.WorkoutService;
 
 import java.sql.Date;
 import java.util.List;

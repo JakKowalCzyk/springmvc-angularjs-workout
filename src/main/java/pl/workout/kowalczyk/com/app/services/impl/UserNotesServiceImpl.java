@@ -1,4 +1,4 @@
-package pl.workout.kowalczyk.com.app.services.serviceImpl;
+package pl.workout.kowalczyk.com.app.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,7 +7,7 @@ import pl.workout.kowalczyk.com.app.dao.UserDao;
 import pl.workout.kowalczyk.com.app.dao.UserNotesDao;
 import pl.workout.kowalczyk.com.app.model.BO.UserNotes;
 import pl.workout.kowalczyk.com.app.model.DTO.UserNotesDTO;
-import pl.workout.kowalczyk.com.app.services.service.UserNotesService;
+import pl.workout.kowalczyk.com.app.services.UserNotesService;
 
 import java.sql.Date;
 import java.util.List;

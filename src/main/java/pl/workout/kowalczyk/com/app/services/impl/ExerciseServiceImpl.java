@@ -1,4 +1,4 @@
-package pl.workout.kowalczyk.com.app.services.serviceImpl;
+package pl.workout.kowalczyk.com.app.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,7 +7,7 @@ import pl.workout.kowalczyk.com.app.enums.ExerciseType;
 import pl.workout.kowalczyk.com.app.dao.ExerciseDao;
 import pl.workout.kowalczyk.com.app.model.BO.Exercise;
 import pl.workout.kowalczyk.com.app.model.DTO.ExerciseDTO;
-import pl.workout.kowalczyk.com.app.services.service.ExerciseService;
+import pl.workout.kowalczyk.com.app.services.ExerciseService;
 
 import java.util.List;
 import java.util.stream.Collectors;
