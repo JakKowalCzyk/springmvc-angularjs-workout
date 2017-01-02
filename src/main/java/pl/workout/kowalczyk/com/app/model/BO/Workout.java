@@ -17,13 +17,13 @@ public class Workout   {
     private int workout_id ;
 
     @JsonIgnore
-    private User user_id;
+    private UserDetails user_id;
 
     private Date date;
 
     private List<UserExercise> userExercises;
 
-    public Workout(User user_id, Date date) {
+    public Workout(UserDetails user_id, Date date) {
         this.user_id = user_id;
         this.date = date;
     }
@@ -44,11 +44,11 @@ public class Workout   {
 
     @OneToOne
     @JoinColumn(name = "user_id")
-    public User getUser_id() {
+    public UserDetails getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(User user_id) {
+    public void setUser_id(UserDetails user_id) {
         this.user_id = user_id;
     }
 

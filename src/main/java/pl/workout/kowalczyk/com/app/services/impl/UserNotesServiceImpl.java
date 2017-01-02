@@ -3,8 +3,9 @@ package pl.workout.kowalczyk.com.app.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.workout.kowalczyk.com.app.dao.UserDao;
+import pl.workout.kowalczyk.com.app.dao.UserDetailsDao;
 import pl.workout.kowalczyk.com.app.dao.UserNotesDao;
+import pl.workout.kowalczyk.com.app.model.BO.UserDetails;
 import pl.workout.kowalczyk.com.app.model.BO.UserNotes;
 import pl.workout.kowalczyk.com.app.model.DTO.UserNotesDTO;
 import pl.workout.kowalczyk.com.app.services.UserNotesService;
@@ -22,16 +23,16 @@ public class UserNotesServiceImpl  implements UserNotesService{
     @Autowired
     private UserNotesDao userNotesDao;
     @Autowired
-    private UserDao userDao;
+    private UserDetailsDao userDetailsDao;
 
     @Override
     public UserNotes mapUserNotesDtoToBo(UserNotesDTO userNotesDTO) {
-        return new UserNotes(userDao.get(userNotesDTO.getUser_id()),  userNotesDTO.getNote(), userNotesDTO.getDate());
+        return new UserNotes(userDetailsDao.get(userNotesDTO.getUser_id()),  userNotesDTO.getNote(), userNotesDTO.getDate());
     }
 
     @Override
     public UserNotesDTO mapUserNotesBoToDto(UserNotes userNotes) {
-        return new UserNotesDTO(userNotes.getUserNotes_id(), userNotes.getUser_id().getUser_id(), userNotes.getNote(), userNotes.getDate());
+        return new UserNotesDTO(userNotes.getUserNotes_id(), userNotes.getUser_id().getUserId(), userNotes.getNote(), userNotes.getDate());
     }
 
     public void saveUserNotes(UserNotesDTO userNotesDto) {

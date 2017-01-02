@@ -12,11 +12,12 @@ import java.util.List;
 /**
  * Created by JK on 2016-09-26.
  */
+//TODO exception in delete, need to test services
 @Repository
 public class UserExerciseDaoImpl extends BaseDaoImpl<UserExercise> implements UserExerciseDao{
 
     private static final String getByIdSql = "SELECT o FROM UserExercise o inner join o.workout_id as workout" +
-            " inner join workout.user_id as user where user.user_id = :userId";
+            " inner join workout.user_id as user where user.userId = :userId";
 
     @PersistenceContext
     private EntityManager entityManager;

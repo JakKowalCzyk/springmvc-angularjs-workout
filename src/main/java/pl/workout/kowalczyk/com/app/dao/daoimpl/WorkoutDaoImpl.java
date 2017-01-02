@@ -18,11 +18,11 @@ import java.util.List;
 public class WorkoutDaoImpl extends BaseDaoImpl<Workout> implements WorkoutDao {
 
     private static final String getByUserIdSql = "SELECT o FROM Workout o inner join o.user_id as user" +
-            " where user.user_id = :userId";
-    private static final String getByDateSql = "SELECT o FROM Workout  o inner join o.user_id as user where user.user_id = :userId and o.date = :date";
+            " where user.userId = :userId";
+    private static final String getByDateSql = "SELECT o FROM Workout  o inner join o.user_id as user where user.userId = :userId and o.date = :date";
     private static final String getUserExercises = "SELECT o FROM UserExercise o inner join o.workout_id as workout " +
             "inner join workout.user_id as user " +
-            "where user.user_id = :userId and workout.date = :date";
+            "where user.userId = :userId and workout.date = :date";
 
     @PersistenceContext
     private EntityManager entityManager;

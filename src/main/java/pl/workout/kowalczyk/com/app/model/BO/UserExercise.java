@@ -29,7 +29,7 @@ public class UserExercise  {
         this.series = series;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "exercise_id")
     public Exercise getExercise() {
         return exercise;

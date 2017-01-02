@@ -18,13 +18,13 @@ public class UserInfoDaoImpl extends BaseDaoImpl<UserInfo> implements UserInfoDa
 
     private static final String getByUserIdSql = "SELECT o FROM UserInfo o " +
             "inner join o.user_id as user " +
-            "where user.user_id = :userId";
+            "where user.id = :userId";
     private static final String getActualWeightSql = "select o FROM UserWeight o inner join o.userInfo_id as ui " +
             "inner join ui.user_id as user " +
-            "where user.user_id = :userId";
+            "where user.userId = :userId";
     private static final String getFavouriteExerciseSql = "select o FROM Exercise o inner join o.userInfo_id as userInfo " +
             "inner join userInfo.user_id as user " +
-            "where user.user_id = :userId";
+            "where user.userId = :userId";
 
     @PersistenceContext
     private EntityManager entityManager;

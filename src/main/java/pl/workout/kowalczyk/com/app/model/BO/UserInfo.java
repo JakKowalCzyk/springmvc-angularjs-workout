@@ -14,7 +14,7 @@ public class UserInfo implements Serializable {
 
     private int userInfo_id;
 
-    private User user_id;
+    private UserDetails user_id;
 
     private UserWeight actual_weight;
 
@@ -38,12 +38,12 @@ public class UserInfo implements Serializable {
     }
 
     @OneToOne
-    @JoinColumn(name = "user_id")
-    public User getUser_id() {
+    @JoinColumn(name = "userId")
+    public UserDetails getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(User user_id) {
+    public void setUser_id(UserDetails user_id) {
         this.user_id = user_id;
     }
 

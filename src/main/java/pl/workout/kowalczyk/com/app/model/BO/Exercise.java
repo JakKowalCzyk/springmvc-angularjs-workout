@@ -2,7 +2,6 @@ package pl.workout.kowalczyk.com.app.model.BO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import pl.workout.kowalczyk.com.app.enums.ExerciseType;
-import pl.workout.kowalczyk.com.app.model.DTO.BaseModel;
 
 import javax.persistence.*;
 

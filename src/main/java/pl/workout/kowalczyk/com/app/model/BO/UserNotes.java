@@ -14,13 +14,13 @@ public class UserNotes  {
 
     private int userNotes_id;
 
-    private User user_id;
+    private UserDetails user_id;
 
     private String note;
 
     private Date date;
 
-    public UserNotes(User user_id, String note, Date date) {
+    public UserNotes(UserDetails user_id, String note, Date date) {
         this.user_id = user_id;
         this.note = note;
         this.date = date;
@@ -40,12 +40,12 @@ public class UserNotes  {
     }
 
     @OneToOne
-    @JoinColumn(name = "user_id")
-    public User getUser_id() {
+    @JoinColumn(name = "userId")
+    public UserDetails getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(User user_id) {
+    public void setUser_id(UserDetails user_id) {
         this.user_id = user_id;
     }
 

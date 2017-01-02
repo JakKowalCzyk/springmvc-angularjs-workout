@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.workout.kowalczyk.com.app.dao.UserDao;
+import pl.workout.kowalczyk.com.app.dao.UserDetailsDao;
 import pl.workout.kowalczyk.com.app.dao.UserInfoDao;
 import pl.workout.kowalczyk.com.app.model.BO.UserInfo;
 import pl.workout.kowalczyk.com.app.model.BO.UserWeight;
@@ -22,7 +23,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     private UserInfoDao userInfoDao;
 
     @Autowired
-    private UserDao userDao;
+    private UserDetailsDao userDetailsDao;
 
     @Autowired
     private UserWeightService userWeightService;
@@ -32,13 +33,13 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public UserInfoDTO mapUserInfoBoToDto(UserInfo userInfo) {
-        return new UserInfoDTO(userInfo.getUserInfo_id(), userInfo.getUser_id().getUser_id(), userWeightService.mapUserWeightBoToDto(userInfo.getActual_weight()), exerciseService.mapExerciseBoToDTO(userInfo.getExerciseFavourite_id()));
+        return new UserInfoDTO(userInfo.getUserInfo_id(), userInfo.getUser_id().getUserId(), userWeightService.mapUserWeightBoToDto(userInfo.getActual_weight()), exerciseService.mapExerciseBoToDTO(userInfo.getExerciseFavourite_id()));
     }
 
     @Override
     public UserInfo mapUserInfoDtoToBo(UserInfoDTO userInfoDTO) {
         UserInfo userInfo = new UserInfo(userInfoDTO.getUserInfoId());
-        userInfo.setUser_id(userDao.get(userInfoDTO.getUserId()));
+        userInfo.setUser_id(userDetailsDao.get(userInfoDTO.getUserId()));
         userInfo.setExerciseFavourite_id(exerciseService.mapExerciseDtoToBo(userInfoDTO.getExerciseFavourite_id()));
         userInfo.setActual_weight(userWeightService.mapUserWeightDtoToBo(userInfoDTO.getActual_weight()));
         return userInfo;

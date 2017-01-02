@@ -20,12 +20,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User mapUserDtoToBo(UserDTO userDTO) {
-        return new User(userDTO.getUserId(), userDTO.getLogin(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getBirthDay(), userDTO.getEmail(), userDTO.getPassword());
+        return new User(userDTO.getUserId(),userDTO.getUserDetails(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getBirthDay(), userDTO.getEmail());
     }
 
     @Override
     public UserDTO mapUserBoToDto(User user) {
-        return new UserDTO(user.getUser_id(), user.getLogin(), user.getFirstName(), user.getLastName(), user.getBirthDay(), user.getEmail(), user.getPassword());
+        return new UserDTO(user.getId(),user.getUserDetails(), user.getFirstName(), user.getLastName(), user.getBirthDay(), user.getEmail());
     }
 
     public UserDTO getUserByLogin(String login){

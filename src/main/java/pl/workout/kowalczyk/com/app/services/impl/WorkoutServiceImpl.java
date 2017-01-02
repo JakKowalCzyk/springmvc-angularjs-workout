@@ -3,7 +3,7 @@ package pl.workout.kowalczyk.com.app.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.workout.kowalczyk.com.app.dao.UserDao;
+import pl.workout.kowalczyk.com.app.dao.UserDetailsDao;
 import pl.workout.kowalczyk.com.app.dao.WorkoutDao;
 import pl.workout.kowalczyk.com.app.model.BO.Workout;
 import pl.workout.kowalczyk.com.app.model.DTO.WorkoutDTO;
@@ -23,17 +23,17 @@ public class WorkoutServiceImpl implements WorkoutService {
     private WorkoutDao workoutDao;
 
     @Autowired
-    private UserDao userDao;
+    private UserDetailsDao userDetailsDao;
 
 
     @Override
     public Workout mapWorkoutDtoToBo(WorkoutDTO workoutDTO) {
-        return new Workout(userDao.get(workoutDTO.getUser_id()), workoutDTO.getDate());
+        return new Workout(userDetailsDao.get(workoutDTO.getUser_id()), workoutDTO.getDate());
     }
 
     @Override
     public WorkoutDTO mapWorkoutBoToDto(Workout workout) {
-        return new WorkoutDTO(workout.getWorkout_id(), workout.getUser_id().getUser_id(), workout.getDate());
+        return new WorkoutDTO(workout.getWorkout_id(), workout.getUser_id().getUserId(), workout.getDate());
     }
 
     public void saveWorkout(WorkoutDTO workoutDTO) {

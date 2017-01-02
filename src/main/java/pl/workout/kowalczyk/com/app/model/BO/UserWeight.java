@@ -17,13 +17,13 @@ public class UserWeight  {
     private int weight_id;
 
     @JsonIgnore
-    private User user_id;
+    private UserDetails user_id;
 
     private int weight_kg;
 
     private Date date;
 
-    public UserWeight(User user_id, int weight_kg, Date date) {
+    public UserWeight(UserDetails user_id, int weight_kg, Date date) {
         this.user_id = user_id;
         this.weight_kg = weight_kg;
         this.date = date;
@@ -35,7 +35,7 @@ public class UserWeight  {
     public UserWeight() {
     }
 
-    public void setUser_id(User user_id) {
+    public void setUser_id(UserDetails user_id) {
         this.user_id = user_id;
     }
     @Id
@@ -73,7 +73,7 @@ public class UserWeight  {
     }
 
     @ManyToOne
-    public User getUser_id() {
+    public UserDetails getUser_id() {
         return user_id;
     }
 
