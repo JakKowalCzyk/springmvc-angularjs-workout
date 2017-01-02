@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.workout.kowalczyk.com.app.model.DTO.ExerciseDTO;
-import pl.workout.kowalczyk.com.app.services.FavouriteExerciseService;
+import pl.workout.kowalczyk.com.app.model.DTO.exercise.ExerciseDTO;
+import pl.workout.kowalczyk.com.app.services.exercise.FavouriteExerciseService;
 
 /**
  * Created by JK on 2016-10-26.

@@ -5,8 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.workout.kowalczyk.com.app.enums.ExerciseType;
-import pl.workout.kowalczyk.com.app.model.DTO.ExerciseDTO;
-import pl.workout.kowalczyk.com.app.services.ExerciseService;
+import pl.workout.kowalczyk.com.app.model.DTO.exercise.ExerciseDTO;
+import pl.workout.kowalczyk.com.app.services.exercise.ExerciseService;
 
 import java.util.List;
 
