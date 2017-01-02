@@ -1,7 +1,5 @@
 package pl.workout.kowalczyk.com.app.model.BO;
 
-import pl.workout.kowalczyk.com.app.model.DTO.BaseModel;
-
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -13,9 +11,10 @@ import java.sql.Date;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer user_id;
+    private Integer id;
 
-    private String login;
+    @OneToOne
+    private UserDetails userDetails;
 
     private String firstName;
 
@@ -25,35 +24,32 @@ public class User {
 
     private String email;
 
-    private String password;
-
-    public User(Integer userId, String login, String firstName, String lastName, Date birthDay, String email, String password) {
-        this.user_id = userId;
-        this.login = login;
+    public User(Integer userId, UserDetails userDetails, String firstName, String lastName, Date birthDay, String email) {
+        this.id = userId;
         this.firstName = firstName;
+        this.userDetails = userDetails;
         this.lastName = lastName;
         this.birthDay = birthDay;
         this.email = email;
-        this.password = password;
     }
 
     public User() {
     }
 
-    public int getUser_id() {
-        return user_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public UserDetails getUserDetails() {
+        return userDetails;
     }
 
-    public String getLogin() {
-        return login;
+    public void setUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public int getId() {
+        return id;
     }
 
     public String getFirstName() {
@@ -86,13 +82,5 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

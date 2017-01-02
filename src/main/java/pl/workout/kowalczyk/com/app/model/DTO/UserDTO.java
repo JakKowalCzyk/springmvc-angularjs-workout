@@ -1,5 +1,7 @@
 package pl.workout.kowalczyk.com.app.model.DTO;
 
+import pl.workout.kowalczyk.com.app.model.BO.UserDetails;
+
 import java.sql.Date;
 
 /**
@@ -7,21 +9,27 @@ import java.sql.Date;
  */
 public class UserDTO extends BaseModel{
     private Integer userId;
-    private String login;
     private String firstName;
     private String lastName;
     private Date birthDay;
     private String email;
-    private String password;
+    private UserDetails userDetails;
 
-    public UserDTO(Integer user_id, String login, String firstName, String lastName, Date birthDay, String email, String password) {
+    public UserDTO(Integer user_id, UserDetails userDetails, String firstName, String lastName, Date birthDay, String email) {
         this.userId = user_id;
-        this.login = login;
+        this.userDetails = userDetails;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDay = birthDay;
         this.email = email;
-        this.password = password;
+    }
+
+    public UserDetails getUserDetails() {
+        return userDetails;
+    }
+
+    public void setUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
     }
 
     public Integer getUserId() {
@@ -30,14 +38,6 @@ public class UserDTO extends BaseModel{
 
     public void setUserId(Integer userId) {
         this.userId = userId;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getFirstName() {
@@ -72,11 +72,4 @@ public class UserDTO extends BaseModel{
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }
