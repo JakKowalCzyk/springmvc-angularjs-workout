@@ -1,6 +1,6 @@
 package pl.workout.kowalczyk.com.app.model.BO.exercise;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import pl.workout.kowalczyk.com.app.model.BO.AbstractModel;
 import pl.workout.kowalczyk.com.app.model.BO.security.UserDetails;
 
 import javax.persistence.*;
@@ -12,9 +12,7 @@ import java.util.List;
  */
 @Entity()
 @Table(name = "saw_workout")
-public class Workout   {
-
-    private int workout_id ;
+public class Workout extends AbstractModel {
 
     private UserDetails user_id;
 
@@ -28,17 +26,6 @@ public class Workout   {
     }
 
     public Workout() {
-    }
-
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getWorkout_id() {
-        return workout_id;
-    }
-
-    public void setWorkout_id(int workout_id) {
-        this.workout_id = workout_id;
     }
 
     @OneToOne

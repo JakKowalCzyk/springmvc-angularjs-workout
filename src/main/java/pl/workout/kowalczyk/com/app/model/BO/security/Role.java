@@ -1,5 +1,7 @@
 package pl.workout.kowalczyk.com.app.model.BO.security;
 
+import pl.workout.kowalczyk.com.app.model.BO.AbstractModel;
+
 import javax.persistence.*;
 
 /**
@@ -7,21 +9,10 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "saw_role")
-public class Role {
-    private Integer roleId;
+public class Role extends AbstractModel {
     private String name;
 
     public Role() {
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
     }
 
     public String getName() {

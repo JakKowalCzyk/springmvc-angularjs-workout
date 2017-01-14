@@ -1,5 +1,6 @@
 package pl.workout.kowalczyk.com.app.model.BO.user;
 
+import pl.workout.kowalczyk.com.app.model.BO.AbstractModel;
 import pl.workout.kowalczyk.com.app.model.BO.security.UserDetails;
 
 import javax.persistence.*;
@@ -10,9 +11,7 @@ import java.sql.Date;
  */
 @Entity
 @Table(name = "saw_userNotes")
-public class UserNotes  {
-
-    private int userNotes_id;
+public class UserNotes extends AbstractModel {
 
     private UserDetails user_id;
 
@@ -27,16 +26,6 @@ public class UserNotes  {
     }
 
     public UserNotes() {
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getUserNotes_id() {
-        return userNotes_id;
-    }
-
-    public void setUserNotes_id(int userNotes_id) {
-        this.userNotes_id = userNotes_id;
     }
 
     @OneToOne

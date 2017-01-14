@@ -2,6 +2,7 @@ package pl.workout.kowalczyk.com.app.model.BO.exercise;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import pl.workout.kowalczyk.com.app.enums.ExerciseType;
+import pl.workout.kowalczyk.com.app.model.BO.AbstractModel;
 import pl.workout.kowalczyk.com.app.model.BO.user.UserInfo;
 
 import javax.persistence.*;
@@ -11,10 +12,8 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name ="saw_exercise")
-public class Exercise{
+public class Exercise extends AbstractModel{
  
-    private Integer exercise_id;
-
     private String name;
 
     private String description;
@@ -40,16 +39,6 @@ public class Exercise{
 
     public void setUserInfo_id(UserInfo userInfo_id) {
         this.userInfo_id = userInfo_id;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getExercise_id() {
-        return exercise_id;
-    }
-
-    public void setExercise_id(Integer exercise_id) {
-        this.exercise_id = exercise_id;
     }
 
     public String getName() {

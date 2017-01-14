@@ -1,5 +1,7 @@
 package pl.workout.kowalczyk.com.app.model.BO.security;
 
+import pl.workout.kowalczyk.com.app.model.BO.AbstractModel;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,9 +11,8 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "saw_user_details")
-public class UserDetails {
+public class UserDetails extends AbstractModel{
 
-    private Integer userId;
     private String login;
     private String password;
     private Boolean enabled;
@@ -26,16 +27,6 @@ public class UserDetails {
     }
 
     public UserDetails() {
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public String getLogin() {

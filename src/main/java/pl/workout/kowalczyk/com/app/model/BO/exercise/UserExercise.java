@@ -1,5 +1,7 @@
 package pl.workout.kowalczyk.com.app.model.BO.exercise;
 
+import pl.workout.kowalczyk.com.app.model.BO.AbstractModel;
+
 import javax.persistence.*;
 
 /**
@@ -7,9 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "saw_userExercise")
-public class UserExercise  {
-
-    private int userExercise_id;
+public class UserExercise  extends AbstractModel{
 
     private Exercise exercise;
 
@@ -45,16 +45,6 @@ public class UserExercise  {
 
     public void setWorkout_id(Workout workout) {
         this.workout_id = workout;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getUserExercise_id() {
-        return userExercise_id;
-    }
-
-    public void setUserExercise_id(int userExercise_id) {
-        this.userExercise_id = userExercise_id;
     }
 
     public int getRepeat() {

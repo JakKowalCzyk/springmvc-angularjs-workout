@@ -1,9 +1,11 @@
 package pl.workout.kowalczyk.com.app.model.BO.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import pl.workout.kowalczyk.com.app.model.BO.security.UserDetails;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.sql.Date;
 
 /**
@@ -13,14 +15,13 @@ import java.sql.Date;
 @Table(name = "saw_userWeight")
 public class UserWeight  {
 
-    @Column(name = "weight_id")
-    private int weight_id;
-
     private UserDetails user_id;
 
     private int weight_kg;
 
     private Date date;
+
+    private UserInfo userInfo_id;
 
     public UserWeight(UserDetails user_id, int weight_kg, Date date) {
         this.user_id = user_id;
@@ -28,22 +29,11 @@ public class UserWeight  {
         this.date = date;
     }
 
-    private UserInfo userInfo_id;
-
     public UserWeight() {
     }
 
     public void setUser_id(UserDetails user_id) {
         this.user_id = user_id;
-    }
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getWeight_id() {
-        return weight_id;
-    }
-
-    public void setWeight_id(int weight_id) {
-        this.weight_id = weight_id;
     }
 
     public int getWeight_kg() {

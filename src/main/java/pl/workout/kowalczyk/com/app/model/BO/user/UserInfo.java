@@ -1,5 +1,6 @@
 package pl.workout.kowalczyk.com.app.model.BO.user;
 
+import pl.workout.kowalczyk.com.app.model.BO.AbstractModel;
 import pl.workout.kowalczyk.com.app.model.BO.exercise.Exercise;
 import pl.workout.kowalczyk.com.app.model.BO.security.UserDetails;
 
@@ -11,9 +12,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "saw_userInfo")
-public class UserInfo implements Serializable {
-
-    private int userInfo_id;
+public class UserInfo extends AbstractModel  {
 
     private UserDetails user_id;
 
@@ -22,20 +21,10 @@ public class UserInfo implements Serializable {
     private Exercise exerciseFavourite_id;
 
     public UserInfo(int userInfo_id) {
-        this.userInfo_id = userInfo_id;
+        super(userInfo_id);
     }
 
     public UserInfo() {
-    }
-
-    public void setUserInfo_id(int uinfo_id) {
-        this.userInfo_id = uinfo_id;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getUserInfo_id() {
-        return userInfo_id;
     }
 
     @OneToOne

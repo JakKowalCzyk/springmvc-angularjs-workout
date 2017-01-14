@@ -1,5 +1,6 @@
 package pl.workout.kowalczyk.com.app.model.BO.user;
 
+import pl.workout.kowalczyk.com.app.model.BO.AbstractModel;
 import pl.workout.kowalczyk.com.app.model.BO.security.UserDetails;
 
 import javax.persistence.*;
@@ -10,10 +11,7 @@ import java.sql.Date;
  */
 @Entity
 @Table(name = "saw_user")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class User extends AbstractModel{
 
     @OneToOne
     private UserDetails userDetails;
@@ -27,7 +25,7 @@ public class User {
     private String email;
 
     public User(Integer userId, UserDetails userDetails, String firstName, String lastName, Date birthDay, String email) {
-        this.id = userId;
+        super(userId);
         this.firstName = firstName;
         this.userDetails = userDetails;
         this.lastName = lastName;
@@ -38,20 +36,12 @@ public class User {
     public User() {
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public UserDetails getUserDetails() {
         return userDetails;
     }
 
     public void setUserDetails(UserDetails userDetails) {
         this.userDetails = userDetails;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getFirstName() {
