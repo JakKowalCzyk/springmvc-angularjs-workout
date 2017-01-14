@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @Table(name ="saw_exercise")
 public class Exercise extends AbstractModel{
- 
+    private Integer id;
     private String name;
 
     private String description;
@@ -30,6 +30,16 @@ public class Exercise extends AbstractModel{
     }
 
     public Exercise() {
+    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "exercise_id")
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @OneToOne(mappedBy = "exerciseFavourite_id")

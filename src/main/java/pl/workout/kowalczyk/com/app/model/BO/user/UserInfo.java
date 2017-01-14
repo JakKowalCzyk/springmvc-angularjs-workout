@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "saw_userInfo")
 public class UserInfo extends AbstractModel  {
-
+    private Integer id;
     private UserDetails user_id;
 
     private UserWeight actual_weight;
@@ -26,9 +26,18 @@ public class UserInfo extends AbstractModel  {
 
     public UserInfo() {
     }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_info_id")
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
     @OneToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_details_id")
     public UserDetails getUser_id() {
         return user_id;
     }

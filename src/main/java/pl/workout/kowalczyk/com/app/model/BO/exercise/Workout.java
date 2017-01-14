@@ -14,6 +14,8 @@ import java.util.List;
 @Table(name = "saw_workout")
 public class Workout extends AbstractModel {
 
+    private Integer id;
+
     private UserDetails user_id;
 
     private Date date;
@@ -28,8 +30,19 @@ public class Workout extends AbstractModel {
     public Workout() {
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "workout_id")
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_details_id")
     public UserDetails getUser_id() {
         return user_id;
     }

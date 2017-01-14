@@ -10,11 +10,21 @@ import javax.persistence.*;
 @Entity
 @Table(name = "saw_role")
 public class Role extends AbstractModel {
+    private Integer id;
     private String name;
 
     public Role() {
     }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "role_id")
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
     public String getName() {
         return name;
     }

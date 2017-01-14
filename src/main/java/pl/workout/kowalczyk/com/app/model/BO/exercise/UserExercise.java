@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "saw_userExercise")
 public class UserExercise  extends AbstractModel{
+    private Integer id;
 
     private Exercise exercise;
 
@@ -25,6 +26,16 @@ public class UserExercise  extends AbstractModel{
     public UserExercise(int repeat, int series) {
         this.repeat = repeat;
         this.series = series;
+    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_exercise_id")
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @OneToOne(cascade = CascadeType.MERGE)

@@ -12,7 +12,7 @@ import java.sql.Date;
 @Entity
 @Table(name = "saw_userNotes")
 public class UserNotes extends AbstractModel {
-
+    private Integer id;
     private UserDetails user_id;
 
     private String note;
@@ -27,9 +27,19 @@ public class UserNotes extends AbstractModel {
 
     public UserNotes() {
     }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_notes_id")
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
     @OneToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_details_id")
     public UserDetails getUser_id() {
         return user_id;
     }

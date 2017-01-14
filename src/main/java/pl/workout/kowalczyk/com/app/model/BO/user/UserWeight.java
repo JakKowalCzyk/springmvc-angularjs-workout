@@ -3,10 +3,7 @@ package pl.workout.kowalczyk.com.app.model.BO.user;
 import pl.workout.kowalczyk.com.app.model.BO.AbstractModel;
 import pl.workout.kowalczyk.com.app.model.BO.security.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 
 /**
@@ -15,7 +12,7 @@ import java.sql.Date;
 @Entity
 @Table(name = "saw_userWeight")
 public class UserWeight extends AbstractModel {
-
+    private Integer id;
     private UserDetails user_id;
 
     private int weight_kg;
@@ -32,7 +29,16 @@ public class UserWeight extends AbstractModel {
 
     public UserWeight() {
     }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_weight_id")
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
     public void setUser_id(UserDetails user_id) {
         this.user_id = user_id;
     }

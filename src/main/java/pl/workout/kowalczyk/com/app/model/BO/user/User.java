@@ -13,7 +13,8 @@ import java.sql.Date;
 @Table(name = "saw_user")
 public class User extends AbstractModel{
 
-    @OneToOne
+    private Integer id;
+
     private UserDetails userDetails;
 
     private String firstName;
@@ -36,10 +37,24 @@ public class User extends AbstractModel{
     public User() {
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @OneToOne
     public UserDetails getUserDetails() {
         return userDetails;
     }
 
+    @OneToOne
+    @JoinColumn(referencedColumnName = "id")
     public void setUserDetails(UserDetails userDetails) {
         this.userDetails = userDetails;
     }

@@ -10,13 +10,21 @@ import javax.persistence.*;
 @Entity
 @Table(name = "saw_user_role")
 public class UserRole extends AbstractModel{
-
+    private Integer id;
     private UserDetails userDetails;
     private Role role;
 
     public UserRole() {
     }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
     @ManyToOne
     @JoinColumn(name = "userId")
     public UserDetails getUserDetails() {

@@ -8,7 +8,7 @@ import javax.persistence.MappedSuperclass;
 /**
  * Created by JK on 2017-01-14.
  */
-@MappedSuperclass
+
 public class AbstractModel {
 
     private Integer id;
