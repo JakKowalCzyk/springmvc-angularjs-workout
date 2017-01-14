@@ -26,7 +26,7 @@ public class User extends AbstractModel{
     private String email;
 
     public User(Integer userId, UserDetails userDetails, String firstName, String lastName, Date birthDay, String email) {
-        super(userId);
+        this.id = userId;
         this.firstName = firstName;
         this.userDetails = userDetails;
         this.lastName = lastName;

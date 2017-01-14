@@ -21,7 +21,7 @@ public class UserInfo extends AbstractModel  {
     private Exercise exerciseFavourite_id;
 
     public UserInfo(int userInfo_id) {
-        super(userInfo_id);
+        this.id = userInfo_id;
     }
 
     public UserInfo() {

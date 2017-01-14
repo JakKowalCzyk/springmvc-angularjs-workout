@@ -8,14 +8,10 @@ import javax.persistence.MappedSuperclass;
 /**
  * Created by JK on 2017-01-14.
  */
-
+@MappedSuperclass
 public class AbstractModel {
 
     private Integer id;
-
-    public AbstractModel(Integer id) {
-        this.id = id;
-    }
 
     public AbstractModel() {
     }
