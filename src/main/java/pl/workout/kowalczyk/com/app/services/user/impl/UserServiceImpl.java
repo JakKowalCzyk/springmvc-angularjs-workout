@@ -2,7 +2,6 @@ package pl.workout.kowalczyk.com.app.services.user.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import pl.workout.kowalczyk.com.app.dao.user.UserDao;
 import pl.workout.kowalczyk.com.app.model.BO.user.User;
 import pl.workout.kowalczyk.com.app.model.DTO.user.UserDTO;
@@ -12,7 +11,6 @@ import pl.workout.kowalczyk.com.app.services.user.UserService;
  * Created by JK on 2016-10-26.
  */
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -20,7 +18,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User mapUserDtoToBo(UserDTO userDTO) {
-        return new User(userDTO.getUserId(),userDTO.getUserDetails(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getBirthDay(), userDTO.getEmail());
+        return new User(userDTO.getId(),userDTO.getUserDetails(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getBirthDay(), userDTO.getEmail());
     }
 
     @Override

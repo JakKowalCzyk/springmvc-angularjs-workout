@@ -2,9 +2,8 @@ package pl.workout.kowalczyk.com.app.services.exercise.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import pl.workout.kowalczyk.com.app.dao.security.UserDetailsDao;
 import pl.workout.kowalczyk.com.app.dao.exercise.WorkoutDao;
+import pl.workout.kowalczyk.com.app.dao.security.UserDetailsDao;
 import pl.workout.kowalczyk.com.app.model.BO.exercise.Workout;
 import pl.workout.kowalczyk.com.app.model.DTO.exercise.WorkoutDTO;
 import pl.workout.kowalczyk.com.app.services.exercise.WorkoutService;
@@ -17,7 +16,6 @@ import java.util.stream.Collectors;
  * Created by JK on 2016-10-26.
  */
 @Service
-@Transactional
 public class WorkoutServiceImpl implements WorkoutService {
     @Autowired
     private WorkoutDao workoutDao;
@@ -33,7 +31,7 @@ public class WorkoutServiceImpl implements WorkoutService {
 
     @Override
     public WorkoutDTO mapWorkoutBoToDto(Workout workout) {
-        return new WorkoutDTO(workout.getWorkout_id(), workout.getUser_id().getUserId(), workout.getDate());
+        return new WorkoutDTO(workout.getId(), workout.getUser_id().getId(), workout.getDate());
     }
 
     public void saveWorkout(WorkoutDTO workoutDTO) {
@@ -42,7 +40,7 @@ public class WorkoutServiceImpl implements WorkoutService {
 
     public void updateWorkout(WorkoutDTO workoutDTO) {
         Workout workout = mapWorkoutDtoToBo(workoutDTO);
-        workout.setWorkout_id(workoutDTO.getWorkout_id());
+        workout.setId(workoutDTO.getId());
         workoutDao.update(workout);
     }
 

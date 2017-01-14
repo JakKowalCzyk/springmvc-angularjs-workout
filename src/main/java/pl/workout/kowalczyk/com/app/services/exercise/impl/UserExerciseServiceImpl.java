@@ -2,7 +2,6 @@ package pl.workout.kowalczyk.com.app.services.exercise.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import pl.workout.kowalczyk.com.app.dao.exercise.UserExerciseDao;
 import pl.workout.kowalczyk.com.app.dao.exercise.WorkoutDao;
 import pl.workout.kowalczyk.com.app.model.BO.exercise.UserExercise;
@@ -18,7 +17,6 @@ import java.util.stream.Collectors;
  * Created by JK on 2016-10-26.
  */
 @Service
-@Transactional
 public class UserExerciseServiceImpl implements UserExerciseService {
     @Autowired
     private UserExerciseDao userExerciseDao;
@@ -45,7 +43,7 @@ public class UserExerciseServiceImpl implements UserExerciseService {
 
     @Override
     public UserExerciseDTO mapUserExerciseBoToDto(UserExercise userExercise) {
-        return new UserExerciseDTO(userExercise.getUserExercise_id(), exerciseService.mapExerciseBoToDTO(userExercise.getExercise()), userExercise.getWorkout_id().getWorkout_id(), userExercise.getRepeat(), userExercise.getSeries());
+        return new UserExerciseDTO(userExercise.getId(), exerciseService.mapExerciseBoToDTO(userExercise.getExercise()), userExercise.getWorkout_id().getId(), userExercise.getRepeat(), userExercise.getSeries());
     }
 
     public void saveUserExercise(UserExerciseDTO userExerciseDTO) {
@@ -54,7 +52,7 @@ public class UserExerciseServiceImpl implements UserExerciseService {
 
     public void updateUserExercise(UserExerciseDTO userExerciseDTO) {
         UserExercise userExercise = mapUserExerciseDtoToBo(userExerciseDTO);
-        userExercise.setUserExercise_id(userExerciseDTO.getUserExercise_id());
+        userExercise.setId(userExerciseDTO.getId());
         userExerciseDao.update(userExercise);
     }
 

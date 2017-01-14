@@ -2,7 +2,6 @@ package pl.workout.kowalczyk.com.app.services.user.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import pl.workout.kowalczyk.com.app.dao.security.UserDetailsDao;
 import pl.workout.kowalczyk.com.app.dao.user.UserInfoDao;
 import pl.workout.kowalczyk.com.app.dao.user.UserWeightDao;
@@ -19,7 +18,6 @@ import java.util.stream.Collectors;
  * Created by JK on 2016-10-26.
  */
 @Service
-@Transactional
 public class UserWeightServiceImpl implements UserWeightService {
     @Autowired
     private UserWeightDao userWeightDao;
@@ -37,7 +35,7 @@ public class UserWeightServiceImpl implements UserWeightService {
 
     @Override
     public UserWeightDTO mapUserWeightBoToDto(UserWeight actual_weight) {
-        return new UserWeightDTO(actual_weight.getWeight_id(), actual_weight.getUser_id().getUserId(), actual_weight.getWeight_kg(), actual_weight.getDate());
+        return new UserWeightDTO(actual_weight.getId(), actual_weight.getUser_id().getId(), actual_weight.getWeight_kg(), actual_weight.getDate());
     }
 
     public void saveUserWeight(int userId, UserWeightDTO userWeightDto) {
@@ -50,7 +48,7 @@ public class UserWeightServiceImpl implements UserWeightService {
 
     public void updateUserWeight(UserWeightDTO userWeightDTO) {
         UserWeight userWeight = mapUserWeightDtoToBo(userWeightDTO);
-        userWeight.setWeight_id(userWeightDTO.getWeightId());
+        userWeight.setId(userWeightDTO.getId());
         userWeightDao.update(userWeight);
     }
 
@@ -68,11 +66,7 @@ public class UserWeightServiceImpl implements UserWeightService {
     }
 
     public boolean checkIfLastWeight(int userId, UserWeightDTO userWeight) {
-        if (getLastDate(userId).after(userWeight.getDate())) {
-            return false;
-        }else{
-            return true;
-        }
+        return !getLastDate(userId).after(userWeight.getDate());
     }
 
     public Date getLastDate(int userId) {

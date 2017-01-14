@@ -1,5 +1,6 @@
 package pl.workout.kowalczyk.com.app.model.BO.user;
 
+import pl.workout.kowalczyk.com.app.model.BO.AbstractModel;
 import pl.workout.kowalczyk.com.app.model.BO.security.UserDetails;
 
 import javax.persistence.Entity;
@@ -13,7 +14,7 @@ import java.sql.Date;
  */
 @Entity
 @Table(name = "saw_userWeight")
-public class UserWeight  {
+public class UserWeight extends AbstractModel {
 
     private UserDetails user_id;
 
