@@ -1,5 +1,7 @@
 package pl.workout.kowalczyk.com.app.dao.security;
 
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import pl.workout.kowalczyk.com.app.dao.BaseDao;
 import pl.workout.kowalczyk.com.app.model.BO.security.UserDetails;
 
@@ -8,6 +10,7 @@ import pl.workout.kowalczyk.com.app.model.BO.security.UserDetails;
  */
 public interface UserDetailsDao extends BaseDao<UserDetails> {
 
-    UserDetails getByLogin(String login);
+    @Query("select u from UserDetails as u where u.login = :login")
+    UserDetails getByLogin(@Param("login") String login);
 
 }

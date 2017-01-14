@@ -33,7 +33,7 @@ public class ExerciseServiceImpl implements ExerciseService {
     }
 
     public List<ExerciseDTO> getAllExercisesDTO() {
-        return exerciseDao.getAll().stream().map(this::mapExerciseBoToDTO).collect(Collectors.toList());
+        return exerciseDao.findAll().stream().map(this::mapExerciseBoToDTO).collect(Collectors.toList());
     }
 
     public ExerciseDTO getExerciseDTOByName(String name) {
@@ -42,12 +42,12 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     public ExerciseDTO getExerciseDTOById(int exerciseId) {
-       return mapExerciseBoToDTO(exerciseDao.get(exerciseId));
+       return mapExerciseBoToDTO(exerciseDao.findOne(exerciseId));
     }
 
     @Override
     public Exercise getExerciseById(int exerciseId) {
-        return exerciseDao.get(exerciseId);
+        return exerciseDao.findOne(exerciseId);
     }
 
     public List<ExerciseDTO> getExercisesDTOForBodyPart(ExerciseType exerciseType) {

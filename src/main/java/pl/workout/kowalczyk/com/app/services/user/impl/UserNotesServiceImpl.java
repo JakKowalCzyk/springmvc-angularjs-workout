@@ -24,7 +24,7 @@ public class UserNotesServiceImpl  implements UserNotesService{
 
     @Override
     public UserNotes mapUserNotesDtoToBo(UserNotesDTO userNotesDTO) {
-        return new UserNotes(userDetailsDao.get(userNotesDTO.getUser_id()),  userNotesDTO.getNote(), userNotesDTO.getDate());
+        return new UserNotes(userDetailsDao.findOne(userNotesDTO.getUser_id()),  userNotesDTO.getNote(), userNotesDTO.getDate());
     }
 
     @Override
@@ -39,11 +39,11 @@ public class UserNotesServiceImpl  implements UserNotesService{
     public void updateUserNotes(UserNotesDTO userNotesDTO) {
         UserNotes userNotes = mapUserNotesDtoToBo(userNotesDTO);
         userNotes.setId(userNotesDTO.getId());
-        userNotesDao.update(userNotes);
+//        userNotesDao.update(userNotes);
     }
 
     public void deleteUserNotes(Integer noteId) {
-        UserNotes userNotes = userNotesDao.get(noteId);
+        UserNotes userNotes = userNotesDao.findOne(noteId);
         userNotesDao.delete(userNotes);
     }
 

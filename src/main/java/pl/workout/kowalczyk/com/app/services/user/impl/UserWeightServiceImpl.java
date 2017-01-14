@@ -30,7 +30,7 @@ public class UserWeightServiceImpl implements UserWeightService {
 
     @Override
     public UserWeight mapUserWeightDtoToBo(UserWeightDTO actual_weight) {
-        return new UserWeight(userDetailsDao.get(actual_weight.getUserId()), actual_weight.getWeightKg(), actual_weight.getDate());
+        return new UserWeight(userDetailsDao.findOne(actual_weight.getUserId()), actual_weight.getWeightKg(), actual_weight.getDate());
     }
 
     @Override
@@ -49,7 +49,7 @@ public class UserWeightServiceImpl implements UserWeightService {
     public void updateUserWeight(UserWeightDTO userWeightDTO) {
         UserWeight userWeight = mapUserWeightDtoToBo(userWeightDTO);
         userWeight.setId(userWeightDTO.getId());
-        userWeightDao.update(userWeight);
+//        userWeightDao.update(userWeight);
     }
 
     public List<UserWeightDTO> getWeightByUserId(int userId) {

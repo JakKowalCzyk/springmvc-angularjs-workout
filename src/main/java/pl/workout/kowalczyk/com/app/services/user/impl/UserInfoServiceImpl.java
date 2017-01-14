@@ -36,7 +36,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public UserInfo mapUserInfoDtoToBo(UserInfoDTO userInfoDTO) {
         UserInfo userInfo = new UserInfo(userInfoDTO.getId());
-        userInfo.setUser_id(userDetailsDao.get(userInfoDTO.getUserId()));
+        userInfo.setUser_id(userDetailsDao.findOne(userInfoDTO.getUserId()));
         userInfo.setExerciseFavourite_id(exerciseService.mapExerciseDtoToBo(userInfoDTO.getExerciseFavourite_id()));
         userInfo.setActual_weight(userWeightService.mapUserWeightDtoToBo(userInfoDTO.getActual_weight()));
         return userInfo;
@@ -52,7 +52,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public void updateUserInfo(UserInfo userInfo) {
-        userInfoDao.update(userInfo);
+//        userInfoDao.update(userInfo);
     }
 
     public UserInfoDTO getUserInfoDTOByUserId(int userId) {

@@ -29,7 +29,7 @@ public class UserExerciseServiceImpl implements UserExerciseService {
     public UserExercise mapUserExerciseDtoToBo(UserExerciseDTO userExerciseDTO) {
         UserExercise userExercise = new UserExercise(userExerciseDTO.getRepeat(), userExerciseDTO.getSeries());
         setExerciseDtoToBo(userExerciseDTO, userExercise);
-        userExercise.setWorkout_id(workoutDao.get(userExerciseDTO.getWorkout_id()));
+        userExercise.setWorkout_id(workoutDao.findOne(userExerciseDTO.getWorkout_id()));
         return userExercise;
     }
 
@@ -53,11 +53,11 @@ public class UserExerciseServiceImpl implements UserExerciseService {
     public void updateUserExercise(UserExerciseDTO userExerciseDTO) {
         UserExercise userExercise = mapUserExerciseDtoToBo(userExerciseDTO);
         userExercise.setId(userExerciseDTO.getId());
-        userExerciseDao.update(userExercise);
+//        userExerciseDao.update(userExercise);
     }
 
     public void deleteUserExercise(Integer userExerciseId) {
-        UserExercise userExercise = userExerciseDao.get(userExerciseId);
+        UserExercise userExercise = userExerciseDao.findOne(userExerciseId);
         userExerciseDao.delete(userExercise);
     }
 

@@ -26,7 +26,7 @@ public class WorkoutServiceImpl implements WorkoutService {
 
     @Override
     public Workout mapWorkoutDtoToBo(WorkoutDTO workoutDTO) {
-        return new Workout(userDetailsDao.get(workoutDTO.getUser_id()), workoutDTO.getDate());
+        return new Workout(userDetailsDao.findOne(workoutDTO.getUser_id()), workoutDTO.getDate());
     }
 
     @Override
@@ -41,11 +41,11 @@ public class WorkoutServiceImpl implements WorkoutService {
     public void updateWorkout(WorkoutDTO workoutDTO) {
         Workout workout = mapWorkoutDtoToBo(workoutDTO);
         workout.setId(workoutDTO.getId());
-        workoutDao.update(workout);
+//        workoutDao.(workout);
     }
 
     public void deleteWorkout(Integer workoutId) {
-        Workout workout = workoutDao.get(workoutId);
+        Workout workout = workoutDao.findOne(workoutId);
         workoutDao.delete(workout);
     }
 

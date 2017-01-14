@@ -1,5 +1,7 @@
 package pl.workout.kowalczyk.com.app.dao.exercise;
 
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import pl.workout.kowalczyk.com.app.dao.BaseDao;
 import pl.workout.kowalczyk.com.app.model.BO.exercise.Workout;
 import pl.workout.kowalczyk.com.app.model.BO.exercise.UserExercise;
@@ -11,9 +13,16 @@ import java.util.List;
  * Created by JK on 2016-09-22.
  */
 public interface WorkoutDao extends BaseDao<Workout> {
-    List<Workout> getWorkoutsByUserId(int userId);
 
-    Workout getByUserIdAndDate(int userId, Date date);
+    @Query("SELECT o FROM Workout o inner join o.user_id as user" +
+            " where user.id = :userId")
+    List<Workout> getWorkoutsByUserId(@Param("userId") int userId);
 
-    List<UserExercise> getUserExercisesByIdAndDate(int userId, Date date);
+    @Query("SELECT o FROM Workout  o inner join o.user_id as user where user.id = :userId and o.date = :date")
+    Workout getByUserIdAndDate(@Param("userId") int userId, @Param("date") Date date);
+
+    @Query("SELECT o FROM UserExercise o inner join o.workout_id as workout " +
+            "inner join workout.user_id as user " +
+            "where user.id = :userId and workout.date = :date")
+    List<UserExercise> getUserExercisesByIdAndDate(@Param("userId") int userId, @Param("date") Date date);
 }
