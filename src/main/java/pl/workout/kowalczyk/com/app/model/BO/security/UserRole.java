@@ -26,7 +26,7 @@ public class UserRole extends AbstractModel{
         this.id = id;
     }
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_details_id")
     public UserDetails getUserDetails() {
         return userDetails;
     }
