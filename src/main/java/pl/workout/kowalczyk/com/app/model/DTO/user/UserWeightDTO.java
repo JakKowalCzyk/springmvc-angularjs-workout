@@ -8,7 +8,6 @@ import java.sql.Date;
  * Created by JK on 2016-11-18.
  */
 public class UserWeightDTO extends BaseModel {
-    private Integer weightId;
 
     private Integer userId;
 
@@ -20,18 +19,10 @@ public class UserWeightDTO extends BaseModel {
     }
 
     public UserWeightDTO(Integer weight_id, Integer user_id, Integer weight_kg, Date date) {
-        this.weightId = weight_id;
+        super(weight_id);
         this.userId = user_id;
         this.weightKg = weight_kg;
         this.date = date;
-    }
-
-    public Integer getWeightId() {
-        return weightId;
-    }
-
-    public void setWeightId(Integer weightId) {
-        this.weightId = weightId;
     }
 
     public Integer getUserId() {

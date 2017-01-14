@@ -8,8 +8,6 @@ import pl.workout.kowalczyk.com.app.model.DTO.BaseModel;
  */
 public class ExerciseDTO extends BaseModel {
 
-    private Integer exerciseId;
-
     private String name;
 
     private String description;
@@ -21,18 +19,10 @@ public class ExerciseDTO extends BaseModel {
     }
 
     public ExerciseDTO(Integer exercise_id, String name, String description, ExerciseType exerciseType) {
-        this.exerciseId = exercise_id;
+        super(exercise_id);
         this.name = name;
         this.description = description;
         this.exerciseType = exerciseType;
-    }
-
-    public Integer getExercise_id() {
-        return exerciseId;
-    }
-
-    public void setExercise_id(Integer exercise_id) {
-        this.exerciseId = exercise_id;
     }
 
     public String getName() {

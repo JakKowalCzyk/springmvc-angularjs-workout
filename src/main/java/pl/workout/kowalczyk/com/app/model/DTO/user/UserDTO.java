@@ -9,7 +9,6 @@ import java.sql.Date;
  * Created by JK on 2016-11-18.
  */
 public class UserDTO extends BaseModel {
-    private Integer userId;
     private String firstName;
     private String lastName;
     private Date birthDay;
@@ -17,7 +16,7 @@ public class UserDTO extends BaseModel {
     private UserDetails userDetails;
 
     public UserDTO(Integer user_id, UserDetails userDetails, String firstName, String lastName, Date birthDay, String email) {
-        this.userId = user_id;
+        super(user_id);
         this.userDetails = userDetails;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -31,14 +30,6 @@ public class UserDTO extends BaseModel {
 
     public void setUserDetails(UserDetails userDetails) {
         this.userDetails = userDetails;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public String getFirstName() {

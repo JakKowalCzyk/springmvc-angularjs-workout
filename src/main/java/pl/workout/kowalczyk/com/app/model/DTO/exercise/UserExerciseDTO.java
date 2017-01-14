@@ -6,7 +6,6 @@ import pl.workout.kowalczyk.com.app.model.DTO.BaseModel;
  * Created by JK on 2016-11-18.
  */
 public class UserExerciseDTO extends BaseModel {
-    private Integer userExercise_id;
     private ExerciseDTO exercise;
     private Integer workout_id;
     private Integer repeat;
@@ -17,7 +16,7 @@ public class UserExerciseDTO extends BaseModel {
     }
 
     public UserExerciseDTO(Integer userExercise_id, ExerciseDTO exercise, Integer workout_id, Integer repeat, Integer series) {
-        this.userExercise_id = userExercise_id;
+        super(userExercise_id);
         this.exercise = exercise;
         this.workout_id = workout_id;
         this.repeat = repeat;
@@ -31,9 +30,6 @@ public class UserExerciseDTO extends BaseModel {
         this.exerciseId = exerciseId;
     }
 
-    public void setUserExercise_id(Integer userExercise_id) {
-        this.userExercise_id = userExercise_id;
-    }
 
     public Integer getExerciseId() {
         return exerciseId;
@@ -41,10 +37,6 @@ public class UserExerciseDTO extends BaseModel {
 
     public void setExerciseId(Integer exerciseId) {
         this.exerciseId = exerciseId;
-    }
-
-    public int getUserExercise_id() {
-        return userExercise_id;
     }
 
     public ExerciseDTO getExercise() {
