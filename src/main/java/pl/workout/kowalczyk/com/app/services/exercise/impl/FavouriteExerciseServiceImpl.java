@@ -3,6 +3,7 @@ package pl.workout.kowalczyk.com.app.services.exercise.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.workout.kowalczyk.com.app.dao.user.UserInfoDao;
+import pl.workout.kowalczyk.com.app.model.BO.exercise.Exercise;
 import pl.workout.kowalczyk.com.app.model.BO.user.UserInfo;
 import pl.workout.kowalczyk.com.app.model.DTO.exercise.ExerciseDTO;
 import pl.workout.kowalczyk.com.app.services.exercise.ExerciseService;
@@ -23,9 +24,8 @@ public class FavouriteExerciseServiceImpl implements FavouriteExerciseService{
     private ExerciseService exerciseService;
 
     public void updateFavouriteExercise(int userId, int exerciseId) {
-        UserInfo userInfo = getUserInfo(userId);
-        userInfo.setExerciseFavourite_id(exerciseService.getExerciseById(exerciseId));
-        userInfoService.updateUserInfo(userInfo);
+        Exercise exercise = exerciseService.getExerciseById(exerciseId);
+        userInfoDao.updateFavouriteExercise(userId, exercise);
     }
 
     public ExerciseDTO getUserFavouriteExercise(int userId) {
@@ -33,14 +33,11 @@ public class FavouriteExerciseServiceImpl implements FavouriteExerciseService{
     }
 
     public void deleteFavouriteExercise(int userId) {
-        UserInfo userInfo = getUserInfo(userId);
-        userInfo.setExerciseFavourite_id(null);
-        userInfoService.updateUserInfo(userInfo);
+        userInfoDao.updateFavouriteExercise(userId, null);
     }
 
     public UserInfo getUserInfo(int userId) {
        return userInfoService.getUserInfoByUserId(userId);
     }
-
 
 }
