@@ -30,15 +30,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public UserInfoDTO mapUserInfoBoToDto(UserInfo userInfo) {
-        return new UserInfoDTO(userInfo.getId(), userInfo.getUser_id().getId(), userWeightService.mapUserWeightBoToDto(userInfo.getActual_weight()), exerciseService.mapExerciseBoToDTO(userInfo.getExerciseFavourite_id()));
+        return new UserInfoDTO(userInfo.getId(), userInfo.getUserId().getId(), userWeightService.mapUserWeightBoToDto(userInfo.getActualWeight()), exerciseService.mapExerciseBoToDTO(userInfo.getExerciseFavouriteId()));
     }
 
     @Override
     public UserInfo mapUserInfoDtoToBo(UserInfoDTO userInfoDTO) {
         UserInfo userInfo = new UserInfo(userInfoDTO.getId());
-        userInfo.setUser_id(userDetailsDao.findOne(userInfoDTO.getUserId()));
-        userInfo.setExerciseFavourite_id(exerciseService.mapExerciseDtoToBo(userInfoDTO.getExerciseFavourite_id()));
-        userInfo.setActual_weight(userWeightService.mapUserWeightDtoToBo(userInfoDTO.getActual_weight()));
+        userInfo.setUserId(userDetailsDao.findOne(userInfoDTO.getUserId()));
+        userInfo.setExerciseFavouriteId(exerciseService.mapExerciseDtoToBo(userInfoDTO.getExerciseFavourite_id()));
+        userInfo.setActualWeight(userWeightService.mapUserWeightDtoToBo(userInfoDTO.getActual_weight()));
         return userInfo;
     }
 
@@ -46,14 +46,6 @@ public class UserInfoServiceImpl implements UserInfoService {
         userInfoDao.save(mapUserInfoDtoToBo(userInfoDTO));
     }
 
-    public void updateUserInfoDTO(UserInfoDTO userInfoDTO) {
-        updateUserInfo(mapUserInfoDtoToBo(userInfoDTO));
-    }
-
-    @Override
-    public void updateUserInfo(UserInfo userInfo) {
-//        userInfoDao.update(userInfo);
-    }
 
     public UserInfoDTO getUserInfoDTOByUserId(int userId) {
         return mapUserInfoBoToDto(userInfoDao.getUserInfoByUserId(userId));
@@ -67,8 +59,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public void updateUserInfoWithUserWeight(int userId, UserWeight userWeight) {
-        UserInfo userInfo = getUserInfoByUserId(userId);
-        userInfo.setActual_weight(userWeight);
-        updateUserInfo(userInfo);
+        userInfoDao.updateUserWeight(userId, userWeight);
     }
 }
