@@ -15,10 +15,6 @@ public interface UserInfoService {
 
     void saveUserInfo(UserInfoDTO userInfo);
 
-    void updateUserInfoDTO(UserInfoDTO userInfoDTO);
-
-    void updateUserInfo(UserInfo userInfo);
-
     UserInfoDTO getUserInfoDTOByUserId(int userId);
 
     UserInfo getUserInfoByUserId(int userId);
