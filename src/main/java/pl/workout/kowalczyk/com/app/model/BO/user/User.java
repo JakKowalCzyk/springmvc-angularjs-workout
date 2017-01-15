@@ -11,7 +11,7 @@ import java.sql.Date;
  */
 @Entity
 @Table(name = "saw_user")
-public class User extends AbstractModel{
+public class User extends AbstractModel {
 
     private Integer id;
 
@@ -53,8 +53,6 @@ public class User extends AbstractModel{
         return userDetails;
     }
 
-    @OneToOne
-    @JoinColumn(referencedColumnName = "id")
     public void setUserDetails(UserDetails userDetails) {
         this.userDetails = userDetails;
     }

@@ -11,7 +11,6 @@ import javax.persistence.*;
  * Created by JK on 2016-09-17.
  */
 @Entity
-@Table(name ="saw_exercise")
 public class Exercise extends AbstractModel{
     private Integer id;
     private String name;
@@ -21,7 +20,7 @@ public class Exercise extends AbstractModel{
     private ExerciseType exerciseType;
     
     @JsonIgnore
-    private UserInfo userInfo_id;
+    private UserInfo userInfoId;
 
     public Exercise(String name, String description, ExerciseType exerciseType) {
         this.name = name;
@@ -42,13 +41,13 @@ public class Exercise extends AbstractModel{
         this.id = id;
     }
 
-    @OneToOne(mappedBy = "exerciseFavourite_id")
-    public UserInfo getUserInfo_id() {
-        return userInfo_id;
+    @OneToOne(mappedBy = "exerciseFavouriteId")
+    public UserInfo getUserInfoId() {
+        return userInfoId;
     }
 
-    public void setUserInfo_id(UserInfo userInfo_id) {
-        this.userInfo_id = userInfo_id;
+    public void setUserInfoId(UserInfo userInfoId) {
+        this.userInfoId = userInfoId;
     }
 
     public String getName() {

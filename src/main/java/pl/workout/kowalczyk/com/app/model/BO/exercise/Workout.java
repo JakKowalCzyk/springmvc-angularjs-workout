@@ -11,19 +11,18 @@ import java.util.List;
  * Created by JK on 2016-09-17.
  */
 @Entity()
-@Table(name = "saw_workout")
 public class Workout extends AbstractModel {
 
     private Integer id;
 
-    private UserDetails user_id;
+    private UserDetails userId;
 
     private Date date;
 
     private List<UserExercise> userExercises;
 
-    public Workout(UserDetails user_id, Date date) {
-        this.user_id = user_id;
+    public Workout(UserDetails userId, Date date) {
+        this.userId = userId;
         this.date = date;
     }
 
@@ -43,12 +42,12 @@ public class Workout extends AbstractModel {
 
     @OneToOne
     @JoinColumn(name = "user_details_id")
-    public UserDetails getUser_id() {
-        return user_id;
+    public UserDetails getUserId() {
+        return userId;
     }
 
-    public void setUser_id(UserDetails user_id) {
-        this.user_id = user_id;
+    public void setUserId(UserDetails userId) {
+        this.userId = userId;
     }
 
     public Date getDate() {
@@ -59,7 +58,7 @@ public class Workout extends AbstractModel {
         this.date = date;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workout_id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workoutId")
     public List<UserExercise> getUserExercises() {
         return userExercises;
     }

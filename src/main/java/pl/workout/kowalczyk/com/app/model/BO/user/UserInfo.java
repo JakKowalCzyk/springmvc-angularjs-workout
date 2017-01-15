@@ -5,20 +5,18 @@ import pl.workout.kowalczyk.com.app.model.BO.exercise.Exercise;
 import pl.workout.kowalczyk.com.app.model.BO.security.UserDetails;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * Created by JK on 2016-09-17.
  */
 @Entity
-@Table(name = "saw_userInfo")
 public class UserInfo extends AbstractModel  {
     private Integer id;
-    private UserDetails user_id;
+    private UserDetails userId;
 
-    private UserWeight actual_weight;
+    private UserWeight actualWeight;
 
-    private Exercise exerciseFavourite_id;
+    private Exercise exerciseFavouriteId;
 
     public UserInfo(int userInfo_id) {
         this.id = userInfo_id;
@@ -38,31 +36,31 @@ public class UserInfo extends AbstractModel  {
     }
     @OneToOne
     @JoinColumn(name = "user_details_id")
-    public UserDetails getUser_id() {
-        return user_id;
+    public UserDetails getUserId() {
+        return userId;
     }
 
-    public void setUser_id(UserDetails user_id) {
-        this.user_id = user_id;
+    public void setUserId(UserDetails userId) {
+        this.userId = userId;
     }
 
     @OneToOne
     @JoinColumn(name = "weight_id")
-    public UserWeight getActual_weight() {
-        return actual_weight;
+    public UserWeight getActualWeight() {
+        return actualWeight;
     }
 
-    public void setActual_weight(UserWeight actual_weight) {
-        this.actual_weight = actual_weight;
+    public void setActualWeight(UserWeight actualWeight) {
+        this.actualWeight = actualWeight;
     }
 
     @OneToOne
     @JoinColumn(name = "exercise_id")
-    public Exercise getExerciseFavourite_id() {
-        return exerciseFavourite_id;
+    public Exercise getExerciseFavouriteId() {
+        return exerciseFavouriteId;
     }
 
-    public void setExerciseFavourite_id(Exercise exerciseFavourite_id) {
-        this.exerciseFavourite_id = exerciseFavourite_id;
+    public void setExerciseFavouriteId(Exercise exerciseFavouriteId) {
+        this.exerciseFavouriteId = exerciseFavouriteId;
     }
 }

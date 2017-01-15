@@ -8,13 +8,12 @@ import javax.persistence.*;
  * Created by JK on 2016-09-17.
  */
 @Entity
-@Table(name = "saw_userExercise")
 public class UserExercise  extends AbstractModel{
     private Integer id;
 
     private Exercise exercise;
 
-    private Workout workout_id;
+    private Workout workoutId;
 
     private int repeat;
 
@@ -49,13 +48,13 @@ public class UserExercise  extends AbstractModel{
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "workout_id")
-    public Workout getWorkout_id() {
-        return workout_id;
+    @JoinColumn(name = "workoutId")
+    public Workout getWorkoutId() {
+        return workoutId;
     }
 
-    public void setWorkout_id(Workout workout) {
-        this.workout_id = workout;
+    public void setWorkoutId(Workout workout) {
+        this.workoutId = workout;
     }
 
     public int getRepeat() {

@@ -11,7 +11,6 @@ import java.util.Set;
  * Created by JK on 2016-12-12.
  */
 @Entity
-@Table(name = "saw_user_details")
 public class UserDetails extends AbstractModel{
     private Integer id;
     private String login;

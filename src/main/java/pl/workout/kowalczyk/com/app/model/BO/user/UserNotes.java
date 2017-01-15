@@ -10,7 +10,6 @@ import java.sql.Date;
  * Created by JK on 2016-09-17.
  */
 @Entity
-@Table(name = "saw_userNotes")
 public class UserNotes extends AbstractModel {
     private Integer id;
     private UserDetails user_id;

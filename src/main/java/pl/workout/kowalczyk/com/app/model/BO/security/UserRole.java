@@ -8,7 +8,6 @@ import javax.persistence.*;
  * Created by JK on 2016-12-12.
  */
 @Entity
-@Table(name = "saw_user_role")
 public class UserRole extends AbstractModel{
     private Integer id;
     private UserDetails userDetails;
