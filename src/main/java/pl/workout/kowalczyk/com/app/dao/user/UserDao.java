@@ -10,6 +10,6 @@ import pl.workout.kowalczyk.com.app.model.BO.user.User;
  */
 public interface UserDao extends BaseDao<User> {
 
-    @Query("SELECT o FROM User AS o inner join o.userDetails as userDetails where userDetails.login = :login")
+    @Query("SELECT o FROM pl.workout.kowalczyk.com.app.model.BO.user.User AS o inner join o.userDetails as userDetails where userDetails.login = :login")
     User getByLogin(@Param("login") String login);
 }
