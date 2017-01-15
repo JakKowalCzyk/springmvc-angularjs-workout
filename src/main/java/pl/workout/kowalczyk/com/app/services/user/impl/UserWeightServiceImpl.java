@@ -35,21 +35,19 @@ public class UserWeightServiceImpl implements UserWeightService {
 
     @Override
     public UserWeightDTO mapUserWeightBoToDto(UserWeight actual_weight) {
-        return new UserWeightDTO(actual_weight.getId(), actual_weight.getUser_id().getId(), actual_weight.getWeight_kg(), actual_weight.getDate());
+        return new UserWeightDTO(actual_weight.getId(), actual_weight.getUserId().getId(), actual_weight.getWeightKg(), actual_weight.getDate());
     }
 
     public void saveUserWeight(int userId, UserWeightDTO userWeightDto) {
         UserWeight userWeight = mapUserWeightDtoToBo(userWeightDto);
+        userWeightDao.save(userWeight);
         if (checkIfLastWeight(userId, userWeightDto)) {
             userInfoService.updateUserInfoWithUserWeight(userId, userWeight);
         }
-            userWeightDao.save(userWeight);
     }
 
     public void updateUserWeight(UserWeightDTO userWeightDTO) {
-        UserWeight userWeight = mapUserWeightDtoToBo(userWeightDTO);
-        userWeight.setId(userWeightDTO.getId());
-//        userWeightDao.update(userWeight);
+        userWeightDao.updateUserWeight(userWeightDTO.getId(), userWeightDTO.getWeightKg());
     }
 
     public List<UserWeightDTO> getWeightByUserId(int userId) {
@@ -70,6 +68,7 @@ public class UserWeightServiceImpl implements UserWeightService {
     }
 
     public Date getLastDate(int userId) {
-        return userWeightDao.getLastUserWeight(userId).getDate();
+        List<UserWeight> userWeights = userWeightDao.getUserWeightListOrderedByDate(userId);
+        return userWeights.stream().findFirst().get().getDate();
     }
 }
