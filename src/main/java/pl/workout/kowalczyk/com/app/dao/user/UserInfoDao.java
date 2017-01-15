@@ -35,4 +35,9 @@ public interface UserInfoDao extends BaseDao<UserInfo> {
     @Transactional
     @Query("Update UserInfo user set user.exerciseFavouriteId = :exerciseId  where user.userId.id = :userId ")
     void updateFavouriteExercise(@Param("userId") Integer userId, @Param("exerciseId") Exercise exerciseId);
+
+    @Modifying
+    @Transactional
+    @Query("Update UserInfo user set user.actualWeight = :actualWeight  where user.userId.id = :userId ")
+    void updateUserWeight(@Param("userId") Integer userId, @Param("actualWeight") UserWeight userWeight);
 }
