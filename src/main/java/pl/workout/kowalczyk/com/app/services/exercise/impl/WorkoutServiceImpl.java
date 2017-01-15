@@ -31,7 +31,7 @@ public class WorkoutServiceImpl implements WorkoutService {
 
     @Override
     public WorkoutDTO mapWorkoutBoToDto(Workout workout) {
-        return new WorkoutDTO(workout.getId(), workout.getUser_id().getId(), workout.getDate());
+        return new WorkoutDTO(workout.getId(), workout.getUserId().getId(), workout.getDate());
     }
 
     public void saveWorkout(WorkoutDTO workoutDTO) {
