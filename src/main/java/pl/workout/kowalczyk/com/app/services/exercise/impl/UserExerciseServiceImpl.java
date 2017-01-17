@@ -29,31 +29,25 @@ public class UserExerciseServiceImpl implements UserExerciseService {
     public UserExercise mapUserExerciseDtoToBo(UserExerciseDTO userExerciseDTO) {
         UserExercise userExercise = new UserExercise(userExerciseDTO.getRepeat(), userExerciseDTO.getSeries());
         setExerciseDtoToBo(userExerciseDTO, userExercise);
-        userExercise.setWorkout_id(workoutDao.findOne(userExerciseDTO.getWorkout_id()));
+        userExercise.setWorkoutId(workoutDao.findOne(userExerciseDTO.getWorkoutId()));
         return userExercise;
     }
 
     private void setExerciseDtoToBo(UserExerciseDTO userExerciseDTO, UserExercise userExercise) {
-        if (userExerciseDTO.getExerciseId() == null) {
-            userExercise.setExercise(exerciseService.mapExerciseDtoToBo(userExerciseDTO.getExercise()));
-        }else{
-            userExercise.setExercise(exerciseService.getExerciseById(userExerciseDTO.getExerciseId()));
-        }
+        userExercise.setExercise(exerciseService.getExerciseById(userExerciseDTO.getExerciseId()));
     }
 
     @Override
     public UserExerciseDTO mapUserExerciseBoToDto(UserExercise userExercise) {
-        return new UserExerciseDTO(userExercise.getId(), exerciseService.mapExerciseBoToDTO(userExercise.getExercise()), userExercise.getWorkout_id().getId(), userExercise.getRepeat(), userExercise.getSeries());
+        return new UserExerciseDTO(userExercise.getId(), userExercise.getWorkoutId().getId(), userExercise.getRepeat(), userExercise.getSeries(), userExercise.getExercise().getId());
     }
 
     public void saveUserExercise(UserExerciseDTO userExerciseDTO) {
         userExerciseDao.save(mapUserExerciseDtoToBo(userExerciseDTO));
     }
 
-    public void updateUserExercise(UserExerciseDTO userExerciseDTO) {
-        UserExercise userExercise = mapUserExerciseDtoToBo(userExerciseDTO);
-        userExercise.setId(userExerciseDTO.getId());
-//        userExerciseDao.update(userExercise);
+    public void updateUserExerciseWithRepeatAndSeries(UserExerciseDTO userExerciseDTO) {
+        userExerciseDao.updateUserExerciseWithRepeatAndSeries(userExerciseDTO.getId(), userExerciseDTO.getRepeat(), userExerciseDTO.getSeries());
     }
 
     public void deleteUserExercise(Integer userExerciseId) {

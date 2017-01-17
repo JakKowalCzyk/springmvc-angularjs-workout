@@ -17,7 +17,7 @@ public interface UserExerciseService {
 
     void saveUserExercise(UserExerciseDTO userExercise);
 
-    void updateUserExercise(UserExerciseDTO userExercise);
+    void updateUserExerciseWithRepeatAndSeries(UserExerciseDTO userExercise);
 
     void deleteUserExercise(Integer userExercise);
 

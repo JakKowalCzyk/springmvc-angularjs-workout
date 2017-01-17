@@ -27,7 +27,7 @@ public class UserExerciseController {
 
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity updateUserExercise(@RequestBody UserExerciseDTO userExercise) {
-        userExerciseService.updateUserExercise(userExercise);
+        userExerciseService.updateUserExerciseWithRepeatAndSeries(userExercise);
         return new ResponseEntity(HttpStatus.OK);
     }
 
