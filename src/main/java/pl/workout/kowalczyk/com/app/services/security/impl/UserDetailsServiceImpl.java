@@ -1,4 +1,4 @@
-package pl.workout.kowalczyk.com.app.services.security;
+package pl.workout.kowalczyk.com.app.services.security.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
