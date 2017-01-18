@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 /**
  * Created by JK on 2017-01-02.
  */
-@EnableWebSecurity
 @SpringBootApplication
 public class AppRunner {
     public static void main(String[] args) {
