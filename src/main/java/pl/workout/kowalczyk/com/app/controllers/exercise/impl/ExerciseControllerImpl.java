@@ -1,9 +1,10 @@
-package pl.workout.kowalczyk.com.app.controllers;
+package pl.workout.kowalczyk.com.app.controllers.exercise.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import pl.workout.kowalczyk.com.app.controllers.exercise.ExerciseController;
 import pl.workout.kowalczyk.com.app.enums.ExerciseType;
 import pl.workout.kowalczyk.com.app.model.DTO.exercise.ExerciseDTO;
 import pl.workout.kowalczyk.com.app.services.exercise.ExerciseService;
@@ -11,33 +12,31 @@ import pl.workout.kowalczyk.com.app.services.exercise.ExerciseService;
 import java.util.List;
 
 /**
- * Created by JK on 2016-10-26.
+ * Created by JK on 2017-01-22.
  */
 @RestController
-@RequestMapping(path = "/exercise")
-public class ExerciseController {
+public class ExerciseControllerImpl implements ExerciseController {
+
     @Autowired
     private ExerciseService exerciseService;
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity saveExercise(@RequestBody ExerciseDTO exercise) {
+    @Override
+    public void saveExercise(@RequestBody ExerciseDTO exercise) {
         exerciseService.saveExercise(exercise);
-        return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @Override
     public List<ExerciseDTO> getAllExercises() {
         return exerciseService.getAllExercisesDTO();
     }
 
-    @RequestMapping(path = "/name/{name}", method = RequestMethod.GET)
+    @Override
     public ExerciseDTO getExerciseByName(@PathVariable String name) {
         return exerciseService.getExerciseDTOByName(name);
     }
 
-    @RequestMapping(path = "/type/{exerciseType}", method = RequestMethod.GET)
+    @Override
     public List<ExerciseDTO> getExercisesByType(@PathVariable ExerciseType exerciseType) {
         return exerciseService.getExercisesDTOForBodyPart(exerciseType);
     }
-
 }
