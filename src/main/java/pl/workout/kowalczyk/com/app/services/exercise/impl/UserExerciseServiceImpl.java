@@ -51,8 +51,7 @@ public class UserExerciseServiceImpl implements UserExerciseService {
     }
 
     public void deleteUserExercise(Integer userExerciseId) {
-        UserExercise userExercise = userExerciseDao.findOne(userExerciseId);
-        userExerciseDao.delete(userExercise);
+        userExerciseDao.delete(userExerciseId);
     }
 
     public List<UserExerciseDTO> getUserExercisesByWorkout(int userId, Date date) {
