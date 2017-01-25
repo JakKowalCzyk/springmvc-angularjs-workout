@@ -22,8 +22,7 @@ public class UserWeightControllerImpl implements UserWeightController {
 
     @Override
     public void saveUserWeight(@RequestBody UserWeightDTO userWeightDTO) {
-        int userId = 1;
-        userWeightService.saveUserWeight(userId, userWeightDTO);
+        userWeightService.saveUserWeight(userWeightDTO);
     }
 
     @Override

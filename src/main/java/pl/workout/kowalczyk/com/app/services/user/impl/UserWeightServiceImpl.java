@@ -38,11 +38,11 @@ public class UserWeightServiceImpl implements UserWeightService {
         return new UserWeightDTO(actual_weight.getId(), actual_weight.getUserId().getId(), actual_weight.getWeightKg(), actual_weight.getDate());
     }
 
-    public void saveUserWeight(int userId, UserWeightDTO userWeightDto) {
+    public void saveUserWeight(UserWeightDTO userWeightDto) {
         UserWeight userWeight = mapUserWeightDtoToBo(userWeightDto);
         userWeightDao.save(userWeight);
-        if (checkIfLastWeight(userId, userWeightDto)) {
-            userInfoService.updateUserInfoWithUserWeight(userId, userWeight);
+        if (checkIfLastWeight(userWeightDto)) {
+            userInfoService.updateUserInfoWithUserWeight(userWeight);
         }
     }
 
@@ -63,8 +63,8 @@ public class UserWeightServiceImpl implements UserWeightService {
         return mapUserWeightBoToDto(userInfoDao.getActualWeight(userId));
     }
 
-    public boolean checkIfLastWeight(int userId, UserWeightDTO userWeight) {
-        return !getLastDate(userId).after(userWeight.getDate());
+    public boolean checkIfLastWeight(UserWeightDTO userWeight) {
+        return !getLastDate(userWeight.getUserId()).after(userWeight.getDate());
     }
 
     public Date getLastDate(int userId) {

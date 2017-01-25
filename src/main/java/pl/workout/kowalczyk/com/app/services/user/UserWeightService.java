@@ -14,7 +14,7 @@ public interface UserWeightService {
 
     UserWeightDTO mapUserWeightBoToDto(UserWeight actual_weight);
 
-    void saveUserWeight(int userId, UserWeightDTO userWeightDTO);
+    void saveUserWeight(UserWeightDTO userWeightDTO);
 
     void updateUserWeight(UserWeightDTO userWeightDTO);
 
@@ -26,5 +26,5 @@ public interface UserWeightService {
 
     Date getLastDate(int userId);
 
-    boolean checkIfLastWeight(int userId, UserWeightDTO userWeight);
+    boolean checkIfLastWeight(UserWeightDTO userWeight);
 }
