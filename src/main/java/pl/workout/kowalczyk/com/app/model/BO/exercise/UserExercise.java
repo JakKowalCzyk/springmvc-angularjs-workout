@@ -47,7 +47,7 @@ public class UserExercise  extends AbstractModel{
         this.exercise = exercise;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "workoutId")
     public Workout getWorkoutId() {
         return workoutId;
