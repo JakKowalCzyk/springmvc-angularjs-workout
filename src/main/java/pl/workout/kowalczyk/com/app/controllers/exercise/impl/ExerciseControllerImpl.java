@@ -39,4 +39,9 @@ public class ExerciseControllerImpl implements ExerciseController {
     public List<ExerciseDTO> getExercisesByType(@PathVariable ExerciseType exerciseType) {
         return exerciseService.getExercisesDTOForBodyPart(exerciseType);
     }
+
+    @Override
+    public ExerciseDTO getExerciseById(@PathVariable Integer exerciseId) {
+        return exerciseService.getExerciseDTOById(exerciseId);
+    }
 }

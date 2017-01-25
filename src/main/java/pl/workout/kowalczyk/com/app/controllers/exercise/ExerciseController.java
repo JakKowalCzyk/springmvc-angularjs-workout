@@ -32,4 +32,8 @@ public interface ExerciseController {
     @ApiOperation(value = "Get exercise by type")
     @RequestMapping(path = "/type/{exerciseType}", method = RequestMethod.GET)
     List<ExerciseDTO> getExercisesByType(@PathVariable ExerciseType exerciseType);
+
+    @ApiOperation(value = "Get exercise by id")
+    @RequestMapping(path = "/{exerciseId}", method = RequestMethod.GET)
+    ExerciseDTO getExerciseById(@PathVariable Integer exerciseId);
 }

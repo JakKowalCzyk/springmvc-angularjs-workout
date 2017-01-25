@@ -11,9 +11,13 @@ import java.util.List;
  */
 public interface ExerciseService {
     Exercise mapExerciseDtoToBo(ExerciseDTO exerciseDTO);
+
     ExerciseDTO mapExerciseBoToDTO(Exercise exercise);
+
     void saveExercise(ExerciseDTO exercise);
+
     List<ExerciseDTO> getAllExercisesDTO();
+
     ExerciseDTO getExerciseDTOByName(String name);
 
     ExerciseDTO getExerciseDTOById(int exerciseId);
