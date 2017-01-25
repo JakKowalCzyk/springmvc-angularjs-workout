@@ -58,7 +58,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 
     @Override
-    public void updateUserInfoWithUserWeight(int userId, UserWeight userWeight) {
-        userInfoDao.updateUserWeight(userId, userWeight);
+    public void updateUserInfoWithUserWeight(UserWeight userWeight) {
+        userInfoDao.updateUserWeight(userWeight.getUserId().getId(), userWeight);
     }
 }

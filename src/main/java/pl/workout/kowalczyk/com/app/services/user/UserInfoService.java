@@ -19,5 +19,5 @@ public interface UserInfoService {
 
     UserInfo getUserInfoByUserId(int userId);
 
-    void updateUserInfoWithUserWeight(int userId, UserWeight userWeight);
+    void updateUserInfoWithUserWeight(UserWeight userWeight);
 }
