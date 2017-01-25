@@ -28,13 +28,9 @@ public class UserExerciseServiceImpl implements UserExerciseService {
     @Override
     public UserExercise mapUserExerciseDtoToBo(UserExerciseDTO userExerciseDTO) {
         UserExercise userExercise = new UserExercise(userExerciseDTO.getRepeat(), userExerciseDTO.getSeries());
-        setExerciseDtoToBo(userExerciseDTO, userExercise);
+        userExercise.setExercise(exerciseService.getExerciseById(userExerciseDTO.getExerciseId()));
         userExercise.setWorkoutId(workoutDao.findOne(userExerciseDTO.getWorkoutId()));
         return userExercise;
-    }
-
-    private void setExerciseDtoToBo(UserExerciseDTO userExerciseDTO, UserExercise userExercise) {
-        userExercise.setExercise(exerciseService.getExerciseById(userExerciseDTO.getExerciseId()));
     }
 
     @Override
@@ -42,23 +38,33 @@ public class UserExerciseServiceImpl implements UserExerciseService {
         return new UserExerciseDTO(userExercise.getId(), userExercise.getWorkoutId().getId(), userExercise.getRepeat(), userExercise.getSeries(), userExercise.getExercise().getId());
     }
 
+    @Override
     public void saveUserExercise(UserExerciseDTO userExerciseDTO) {
         userExerciseDao.save(mapUserExerciseDtoToBo(userExerciseDTO));
     }
 
+    @Override
     public void updateUserExerciseWithRepeatAndSeries(UserExerciseDTO userExerciseDTO) {
         userExerciseDao.updateUserExerciseWithRepeatAndSeries(userExerciseDTO.getId(), userExerciseDTO.getRepeat(), userExerciseDTO.getSeries());
     }
 
+    @Override
     public void deleteUserExercise(Integer userExerciseId) {
         userExerciseDao.delete(userExerciseId);
     }
 
-    public List<UserExerciseDTO> getUserExercisesByWorkout(int userId, Date date) {
+    @Override
+    public List<UserExerciseDTO> getUserExercisesByWorkoutDate(int userId, Date date) {
         return workoutDao.getUserExercisesByIdAndDate(userId, date).stream().map(this::mapUserExerciseBoToDto).collect(Collectors.toList());
     }
 
+    @Override
     public List<UserExerciseDTO> getUserExercisesByUserId(int userId) {
         return userExerciseDao.getUserExercisesByUserId(userId).stream().map(this::mapUserExerciseBoToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserExerciseDTO> getUserExercisesBoWorkout(Integer workoutId) {
+        return workoutDao.findOne(workoutId).getUserExercises().stream().map(this::mapUserExerciseBoToDto).collect(Collectors.toList());
     }
 }

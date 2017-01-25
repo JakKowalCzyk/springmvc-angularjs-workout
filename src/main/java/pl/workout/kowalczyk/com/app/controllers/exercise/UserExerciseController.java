@@ -30,12 +30,16 @@ public interface UserExerciseController {
     @RequestMapping(method = RequestMethod.DELETE, value = "/{exerciseId}")
     void deleteUserExercise(@PathVariable Integer exerciseId);
 
-    @ApiOperation(value = "Get List with UserExercises by Workout")
+    @ApiOperation(value = "Get List with UserExercises by Workout Date")
     @RequestMapping(value = "userId/{userId}/date/{date}", method = RequestMethod.GET)
-    List<UserExerciseDTO> getUserExercisesByWorkout(@PathVariable int userId, @PathVariable Date date);
+    List<UserExerciseDTO> getUserExercisesByWorkoutDate(@PathVariable int userId, @PathVariable Date date);
 
     @ApiOperation(value = "Get all UserExercises for user")
     @RequestMapping(value = "userId/{userId}", method = RequestMethod.GET)
     List<UserExerciseDTO> getUserExerciseByUserId(@PathVariable int userId);
+
+    @ApiOperation(value = "Get user exercises by workout")
+    @RequestMapping(value = "workout/{workoutId}", method = RequestMethod.GET)
+    List<UserExerciseDTO> getUserExercisesByWorkout(@PathVariable int workoutId);
 
 }

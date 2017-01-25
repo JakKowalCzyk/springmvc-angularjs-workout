@@ -21,7 +21,9 @@ public interface UserExerciseService {
 
     void deleteUserExercise(Integer userExercise);
 
-    List<UserExerciseDTO> getUserExercisesByWorkout(int userId, Date date);
+    List<UserExerciseDTO> getUserExercisesByWorkoutDate(int userId, Date date);
 
     List<UserExerciseDTO> getUserExercisesByUserId(int userId);
+
+    List<UserExerciseDTO> getUserExercisesBoWorkout(Integer workoutId);
 }

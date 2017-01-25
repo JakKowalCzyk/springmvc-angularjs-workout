@@ -36,12 +36,17 @@ public class UserExerciseControllerImpl implements UserExerciseController {
     }
 
     @Override
-    public List<UserExerciseDTO> getUserExercisesByWorkout(@PathVariable int userId, @PathVariable Date date) {
-        return userExerciseService.getUserExercisesByWorkout(userId, date);
+    public List<UserExerciseDTO> getUserExercisesByWorkoutDate(@PathVariable int userId, @PathVariable Date date) {
+        return userExerciseService.getUserExercisesByWorkoutDate(userId, date);
     }
 
     @Override
     public List<UserExerciseDTO> getUserExerciseByUserId(@PathVariable int userId) {
         return userExerciseService.getUserExercisesByUserId(userId);
+    }
+
+    @Override
+    public List<UserExerciseDTO> getUserExercisesByWorkout(@PathVariable int workoutId) {
+        return userExerciseService.getUserExercisesBoWorkout(workoutId);
     }
 }
