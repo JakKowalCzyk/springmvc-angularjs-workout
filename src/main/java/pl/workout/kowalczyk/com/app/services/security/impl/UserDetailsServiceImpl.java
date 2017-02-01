@@ -36,4 +36,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         userRoles.forEach(userRole -> grantedAuthorities.add(new SimpleGrantedAuthority(userRole.getRole().getName())));
         return grantedAuthorities;
     }
+
+    @Override
+    public pl.workout.kowalczyk.com.app.model.BO.security.UserDetails getById(Integer id) {
+        return userDetailsDao.findOne(id);
+    }
 }
