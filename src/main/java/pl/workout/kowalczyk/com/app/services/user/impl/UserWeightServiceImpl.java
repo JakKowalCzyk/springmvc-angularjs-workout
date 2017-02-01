@@ -38,6 +38,11 @@ public class UserWeightServiceImpl implements UserWeightService {
         return new UserWeightDTO(actual_weight.getId(), actual_weight.getUserId().getId(), actual_weight.getWeightKg(), actual_weight.getDate());
     }
 
+    @Override
+    public UserWeight getUserWeightById(Integer weightId) {
+        return userWeightDao.findOne(weightId);
+    }
+
     public void saveUserWeight(UserWeightDTO userWeightDto) {
         UserWeight userWeight = mapUserWeightDtoToBo(userWeightDto);
         userWeightDao.save(userWeight);

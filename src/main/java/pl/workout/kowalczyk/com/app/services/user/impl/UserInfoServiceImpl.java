@@ -30,15 +30,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public UserInfoDTO mapUserInfoBoToDto(UserInfo userInfo) {
-        return new UserInfoDTO(userInfo.getId(), userInfo.getUserId().getId(), userWeightService.mapUserWeightBoToDto(userInfo.getActualWeight()), exerciseService.mapExerciseBoToDTO(userInfo.getExerciseFavouriteId()));
+        return new UserInfoDTO(userInfo.getId(), userInfo.getUserId().getId(), userInfo.getActualWeight().getId(), userInfo.getExerciseFavouriteId().getId());
     }
 
     @Override
     public UserInfo mapUserInfoDtoToBo(UserInfoDTO userInfoDTO) {
         UserInfo userInfo = new UserInfo(userInfoDTO.getId());
         userInfo.setUserId(userDetailsDao.findOne(userInfoDTO.getUserId()));
-        userInfo.setExerciseFavouriteId(exerciseService.mapExerciseDtoToBo(userInfoDTO.getExerciseFavourite_id()));
-        userInfo.setActualWeight(userWeightService.mapUserWeightDtoToBo(userInfoDTO.getActual_weight()));
+        userInfo.setExerciseFavouriteId(exerciseService.getExerciseById(userInfoDTO.getFavouriteExerciseId()));
+        userInfo.setActualWeight(userWeightService.getUserWeightById(userInfoDTO.getActualWeightId()));
         return userInfo;
     }
 

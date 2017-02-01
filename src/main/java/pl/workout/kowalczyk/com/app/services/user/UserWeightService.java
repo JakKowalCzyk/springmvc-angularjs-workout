@@ -10,9 +10,12 @@ import java.util.List;
  * Created by JK on 2016-10-26.
  */
 public interface UserWeightService {
+
     UserWeight mapUserWeightDtoToBo(UserWeightDTO actual_weight);
 
     UserWeightDTO mapUserWeightBoToDto(UserWeight actual_weight);
+
+    UserWeight getUserWeightById(Integer weightId);
 
     void saveUserWeight(UserWeightDTO userWeightDTO);
 
