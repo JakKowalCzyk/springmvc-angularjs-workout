@@ -1,12 +1,12 @@
 package pl.workout.kowalczyk.com.app.model.DTO.exercise;
 
 import pl.workout.kowalczyk.com.app.enums.ExerciseType;
-import pl.workout.kowalczyk.com.app.model.DTO.BaseModel;
+import pl.workout.kowalczyk.com.app.model.DTO.ObjectDTO;
 
 /**
  * Created by JK on 2016-11-18.
  */
-public class ExerciseDTO extends BaseModel {
+public class ExerciseDTO extends ObjectDTO {
 
     private String name;
 
@@ -18,8 +18,7 @@ public class ExerciseDTO extends BaseModel {
     public ExerciseDTO() {
     }
 
-    public ExerciseDTO(Integer exercise_id, String name, String description, ExerciseType exerciseType) {
-        super(exercise_id);
+    public ExerciseDTO(String name, String description, ExerciseType exerciseType) {
         this.name = name;
         this.description = description;
         this.exerciseType = exerciseType;

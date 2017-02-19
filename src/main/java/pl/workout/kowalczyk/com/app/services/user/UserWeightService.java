@@ -1,7 +1,7 @@
 package pl.workout.kowalczyk.com.app.services.user;
 
 import pl.workout.kowalczyk.com.app.model.BO.user.UserWeight;
-import pl.workout.kowalczyk.com.app.model.DTO.user.UserWeightDTO;
+import pl.workout.kowalczyk.com.app.services.ModelService;
 
 import java.sql.Date;
 import java.util.List;
@@ -9,25 +9,15 @@ import java.util.List;
 /**
  * Created by JK on 2016-10-26.
  */
-public interface UserWeightService {
+public interface UserWeightService extends ModelService<UserWeight> {
 
-    UserWeight mapUserWeightDtoToBo(UserWeightDTO actual_weight);
+    List<UserWeight> getWeightByUserId(Long userId);
 
-    UserWeightDTO mapUserWeightBoToDto(UserWeight actual_weight);
+    UserWeight getByUserIdAndDate(Long userId, Date date);
 
-    UserWeight getUserWeightById(Integer weightId);
+    UserWeight getActualWeight(Long userId);
 
-    void saveUserWeight(UserWeightDTO userWeightDTO);
+    Date getLastDate(Long userId);
 
-    void updateUserWeight(UserWeightDTO userWeightDTO);
-
-    List<UserWeightDTO> getWeightByUserId(int userId);
-
-    UserWeightDTO getByUserIdAndDate(int userId, Date date);
-
-    UserWeightDTO getActualWeight(int userId);
-
-    Date getLastDate(int userId);
-
-    boolean checkIfLastWeight(UserWeightDTO userWeight);
+    boolean checkIfLastWeight(UserWeight userWeight);
 }

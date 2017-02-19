@@ -1,7 +1,7 @@
 package pl.workout.kowalczyk.com.app.services.exercise;
 
 import pl.workout.kowalczyk.com.app.model.BO.exercise.Workout;
-import pl.workout.kowalczyk.com.app.model.DTO.exercise.WorkoutDTO;
+import pl.workout.kowalczyk.com.app.services.ModelService;
 
 import java.sql.Date;
 import java.util.List;
@@ -9,20 +9,10 @@ import java.util.List;
 /**
  * Created by JK on 2016-10-26.
  */
-public interface WorkoutService {
+public interface WorkoutService extends ModelService<Workout> {
 
-    Workout mapWorkoutDtoToBo(WorkoutDTO workoutDTO);
+    List<Workout> getWorkoutsByUserId(Long userId);
 
-    WorkoutDTO mapWorkoutBoToDto(Workout workout);
-
-    void saveWorkout(WorkoutDTO workoutDTO);
-
-    void updateWorkout(WorkoutDTO workoutDTO);
-
-    void deleteWorkout(Integer workoutId);
-
-    List<WorkoutDTO> getWorkoutsByUserId(int userId);
-
-    WorkoutDTO getByUserIdAndDate(int userId, Date date);
+    Workout getByUserIdAndDate(Long userId, Date date);
 
 }

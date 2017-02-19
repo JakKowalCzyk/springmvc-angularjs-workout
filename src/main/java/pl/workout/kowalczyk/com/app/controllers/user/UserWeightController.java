@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import pl.workout.kowalczyk.com.app.controllers.ModelController;
 import pl.workout.kowalczyk.com.app.model.DTO.user.UserWeightDTO;
 
 import java.sql.Date;
@@ -16,26 +17,38 @@ import java.util.List;
  */
 @Api(tags = {"User's weight API"}, description = "Services for user's weight")
 @RequestMapping("/user/weight")
-public interface UserWeightController {
+public interface UserWeightController extends ModelController<UserWeightDTO> {
 
-    @ApiOperation(value = "Save new user's weight")
-    @RequestMapping(method = RequestMethod.POST)
-    void saveUserWeight(@RequestBody UserWeightDTO userWeightDTO);
+    @Override
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    UserWeightDTO getObject(@PathVariable Long id);
 
-    @ApiOperation(value = "Update existing user's weight")
+    @Override
     @RequestMapping(method = RequestMethod.PUT)
-    void updateUserWeight(@RequestBody UserWeightDTO userWeightDTO);
+    UserWeightDTO updateObject(@RequestBody UserWeightDTO model);
+
+    @Override
+    @RequestMapping(method = RequestMethod.POST)
+    UserWeightDTO addObject(@RequestBody UserWeightDTO model);
+
+    @Override
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    List<UserWeightDTO> findAll();
+
+    @Override
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    void deleteObject(@PathVariable Long id);
 
     @ApiOperation(value = "Get weight for user")
-    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
-    List<UserWeightDTO> getWeightByUserId(@PathVariable int userId);
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    List<UserWeightDTO> getWeightByUserId(@PathVariable Long id);
 
     @ApiOperation(value = "Get weight for user by date")
-    @RequestMapping(value = "/user/{userId}/date/{date}", method = RequestMethod.GET)
-    UserWeightDTO getWeightByDate(@PathVariable int userId, @PathVariable Date date);
+    @RequestMapping(value = "/user/{id}/date/{date}", method = RequestMethod.GET)
+    UserWeightDTO getWeightByDate(@PathVariable Long id, @PathVariable Date date);
 
     @ApiOperation(value = "Get actual weight for user")
-    @RequestMapping(value = "/actual/user/{userId}", method = RequestMethod.GET)
-    UserWeightDTO getActualWeight(@PathVariable int userId);
+    @RequestMapping(value = "/actual/user/{id}", method = RequestMethod.GET)
+    UserWeightDTO getActualWeight(@PathVariable Long id);
 
 }

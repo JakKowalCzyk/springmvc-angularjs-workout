@@ -4,44 +4,65 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import pl.workout.kowalczyk.com.app.controllers.impl.ModelControllerImpl;
 import pl.workout.kowalczyk.com.app.controllers.user.UserWeightController;
+import pl.workout.kowalczyk.com.app.mapper.user.UserWeightMapper;
+import pl.workout.kowalczyk.com.app.model.BO.user.UserWeight;
 import pl.workout.kowalczyk.com.app.model.DTO.user.UserWeightDTO;
 import pl.workout.kowalczyk.com.app.services.user.UserWeightService;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by JK on 2017-01-22.
  */
 @RestController
-public class UserWeightControllerImpl implements UserWeightController {
+public class UserWeightControllerImpl extends ModelControllerImpl<UserWeight, UserWeightDTO> implements UserWeightController {
 
     @Autowired
-    private UserWeightService userWeightService;
-
-    @Override
-    public void saveUserWeight(@RequestBody UserWeightDTO userWeightDTO) {
-        userWeightService.saveUserWeight(userWeightDTO);
+    public UserWeightControllerImpl(UserWeightService modelService, UserWeightMapper modelMapper) {
+        super(modelService, modelMapper);
     }
 
     @Override
-    public void updateUserWeight(@RequestBody UserWeightDTO userWeightDTO) {
-        userWeightService.updateUserWeight(userWeightDTO);
+    public UserWeightDTO getObject(@PathVariable Long id) {
+        return super.getObject(id);
     }
 
     @Override
-    public List<UserWeightDTO> getWeightByUserId(@PathVariable int userId) {
-        return userWeightService.getWeightByUserId(userId);
+    public UserWeightDTO updateObject(@RequestBody UserWeightDTO model) {
+        return super.updateObject(model);
     }
 
     @Override
-    public UserWeightDTO getWeightByDate(@PathVariable int userId, @PathVariable Date date) {
-        return userWeightService.getByUserIdAndDate(userId, date);
+    public UserWeightDTO addObject(@RequestBody UserWeightDTO model) {
+        return super.addObject(model);
     }
 
     @Override
-    public UserWeightDTO getActualWeight(@PathVariable int userId) {
-        return userWeightService.getActualWeight(userId);
+    public List<UserWeightDTO> findAll() {
+        return super.findAll();
+    }
+
+    @Override
+    public void deleteObject(@PathVariable Long id) {
+        super.deleteObject(id);
+    }
+
+    @Override
+    public List<UserWeightDTO> getWeightByUserId(@PathVariable Long id) {
+        return ((UserWeightService) getModelService()).getWeightByUserId(id).stream().map(userWeight -> getModelMapper().mapToDTO(userWeight)).collect(Collectors.toList());
+    }
+
+    @Override
+    public UserWeightDTO getWeightByDate(@PathVariable Long id, @PathVariable Date date) {
+        return getModelMapper().mapToDTO(((UserWeightService) getModelService()).getByUserIdAndDate(id, date));
+    }
+
+    @Override
+    public UserWeightDTO getActualWeight(@PathVariable Long id) {
+        return getModelMapper().mapToDTO(((UserWeightService) getModelService()).getActualWeight(id));
     }
 }

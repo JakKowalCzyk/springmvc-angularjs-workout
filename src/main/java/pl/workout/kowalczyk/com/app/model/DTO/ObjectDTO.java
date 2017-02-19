@@ -6,21 +6,21 @@ import com.fasterxml.jackson.annotation.JsonInclude;
  * Created by JK on 2016-11-09.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class BaseModel {
-    private Integer id;
+public abstract class ObjectDTO {
+    private Long id;
 
-    public BaseModel() {
+    public ObjectDTO() {
     }
 
-    public BaseModel(Integer id) {
+    public ObjectDTO(Long id) {
         this.id = id;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

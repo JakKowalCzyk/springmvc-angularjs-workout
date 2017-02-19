@@ -6,40 +6,44 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import pl.workout.kowalczyk.com.app.controllers.ModelController;
 import pl.workout.kowalczyk.com.app.model.DTO.exercise.UserExerciseDTO;
 
-import java.sql.Date;
 import java.util.List;
 
 /**
  * Created by JK on 2017-01-22.
  */
 @Api(tags = {"User exercise API"}, description = "Services for users trained exercises")
-@RequestMapping("/exercise/user")
-public interface UserExerciseController {
+@RequestMapping("/user/exercise")
+public interface UserExerciseController extends ModelController<UserExerciseDTO> {
 
-    @ApiOperation(value = "Save new UserExercise")
-    @RequestMapping(method = RequestMethod.POST)
-    void saveUserExercise(@RequestBody UserExerciseDTO userExercise);
+    @Override
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    UserExerciseDTO getObject(@PathVariable Long id);
 
-    @ApiOperation(value = "Update UserExercise")
+    @Override
     @RequestMapping(method = RequestMethod.PUT)
-    void updateUserExercise(@RequestBody UserExerciseDTO userExercise);
+    UserExerciseDTO updateObject(@RequestBody UserExerciseDTO model);
 
-    @ApiOperation(value = "Delete UserExercise")
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{exerciseId}")
-    void deleteUserExercise(@PathVariable Integer exerciseId);
+    @Override
+    @RequestMapping(method = RequestMethod.POST)
+    UserExerciseDTO addObject(@RequestBody UserExerciseDTO model);
 
-    @ApiOperation(value = "Get List with UserExercises by Workout Date")
-    @RequestMapping(value = "userId/{userId}/date/{date}", method = RequestMethod.GET)
-    List<UserExerciseDTO> getUserExercisesByWorkoutDate(@PathVariable int userId, @PathVariable Date date);
+    @Override
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    List<UserExerciseDTO> findAll();
+
+    @Override
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    void deleteObject(@PathVariable Long id);
 
     @ApiOperation(value = "Get all UserExercises for user")
-    @RequestMapping(value = "userId/{userId}", method = RequestMethod.GET)
-    List<UserExerciseDTO> getUserExerciseByUserId(@PathVariable int userId);
+    @RequestMapping(value = "user/{id}", method = RequestMethod.GET)
+    List<UserExerciseDTO> getUserExerciseByUserId(@PathVariable Long id);
 
     @ApiOperation(value = "Get user exercises by workout")
-    @RequestMapping(value = "workout/{workoutId}", method = RequestMethod.GET)
-    List<UserExerciseDTO> getUserExercisesByWorkout(@PathVariable int workoutId);
+    @RequestMapping(value = "workout/{id}", method = RequestMethod.GET)
+    List<UserExerciseDTO> getUserExercisesByWorkout(@PathVariable Long id);
 
 }

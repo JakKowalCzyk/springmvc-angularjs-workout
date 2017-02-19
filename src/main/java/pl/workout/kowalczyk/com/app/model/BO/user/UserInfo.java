@@ -1,38 +1,29 @@
 package pl.workout.kowalczyk.com.app.model.BO.user;
 
-import pl.workout.kowalczyk.com.app.model.BO.AbstractModel;
+import pl.workout.kowalczyk.com.app.model.BO.ModelObject;
 import pl.workout.kowalczyk.com.app.model.BO.exercise.Exercise;
 import pl.workout.kowalczyk.com.app.model.BO.security.UserDetails;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 /**
  * Created by JK on 2016-09-17.
  */
 @Entity
-public class UserInfo extends AbstractModel  {
-    private Integer id;
+public class UserInfo extends ModelObject {
     private UserDetails userId;
 
     private UserWeight actualWeight;
 
     private Exercise exerciseFavouriteId;
 
-    public UserInfo(int userInfo_id) {
-        this.id = userInfo_id;
+    public UserInfo(Long userInfo_id) {
+        super(userInfo_id);
     }
 
     public UserInfo() {
-    }
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_info_id")
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
     @OneToOne
     @JoinColumn(name = "user_details_id")

@@ -9,20 +9,24 @@ import javax.persistence.MappedSuperclass;
  * Created by JK on 2017-01-14.
  */
 @MappedSuperclass
-public class AbstractModel {
+public abstract class ModelObject {
 
-    private Integer id;
+    private Long id;
 
-    public AbstractModel() {
+    public ModelObject() {
+    }
+
+    public ModelObject(Long id) {
+        this.id = id;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

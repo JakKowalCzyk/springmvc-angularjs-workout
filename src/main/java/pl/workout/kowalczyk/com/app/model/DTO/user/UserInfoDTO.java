@@ -1,43 +1,39 @@
 package pl.workout.kowalczyk.com.app.model.DTO.user;
 
-import pl.workout.kowalczyk.com.app.model.DTO.BaseModel;
+import pl.workout.kowalczyk.com.app.model.DTO.ObjectDTO;
 
 /**
  * Created by JK on 2016-11-18.
  */
-public class UserInfoDTO extends BaseModel {
-    private Integer userId;
-    private Integer actualWeightId;
-    private Integer favouriteExerciseId;
+public class UserInfoDTO extends ObjectDTO {
+    private Long userId;
+    private Long actualWeightId;
+    private Long favouriteExerciseId;
 
-    public UserInfoDTO(Integer id, Integer userId, Integer actualWeightId, Integer favouriteExerciseId) {
-        super(id);
-        this.userId = userId;
-        this.actualWeightId = actualWeightId;
-        this.favouriteExerciseId = favouriteExerciseId;
+    public UserInfoDTO() {
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public Integer getActualWeightId() {
+    public Long getActualWeightId() {
         return actualWeightId;
     }
 
-    public void setActualWeightId(Integer actualWeightId) {
+    public void setActualWeightId(Long actualWeightId) {
         this.actualWeightId = actualWeightId;
     }
 
-    public Integer getFavouriteExerciseId() {
+    public Long getFavouriteExerciseId() {
         return favouriteExerciseId;
     }
 
-    public void setFavouriteExerciseId(Integer favouriteExerciseId) {
+    public void setFavouriteExerciseId(Long favouriteExerciseId) {
         this.favouriteExerciseId = favouriteExerciseId;
     }
 }

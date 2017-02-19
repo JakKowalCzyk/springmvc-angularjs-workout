@@ -1,32 +1,24 @@
 package pl.workout.kowalczyk.com.app.model.DTO.exercise;
 
-import pl.workout.kowalczyk.com.app.model.DTO.BaseModel;
+import pl.workout.kowalczyk.com.app.model.DTO.ObjectDTO;
 
 /**
  * Created by JK on 2016-11-18.
  */
-public class UserExerciseDTO extends BaseModel {
-    private Integer workoutId;
+public class UserExerciseDTO extends ObjectDTO {
+    private Long workoutId;
     private Integer repeat;
     private Integer series;
-    private Integer exerciseId;
+    private Long exerciseId;
 
     public UserExerciseDTO() {
     }
 
-    public UserExerciseDTO(Integer id, Integer workoutId, Integer repeat, Integer series, Integer exerciseId) {
-        super(id);
-        this.workoutId = workoutId;
-        this.repeat = repeat;
-        this.series = series;
-        this.exerciseId = exerciseId;
-    }
-
-    public Integer getWorkoutId() {
+    public Long getWorkoutId() {
         return workoutId;
     }
 
-    public void setWorkoutId(Integer workoutId) {
+    public void setWorkoutId(Long workoutId) {
         this.workoutId = workoutId;
     }
 
@@ -46,11 +38,11 @@ public class UserExerciseDTO extends BaseModel {
         this.series = series;
     }
 
-    public Integer getExerciseId() {
+    public Long getExerciseId() {
         return exerciseId;
     }
 
-    public void setExerciseId(Integer exerciseId) {
+    public void setExerciseId(Long exerciseId) {
         this.exerciseId = exerciseId;
     }
 }

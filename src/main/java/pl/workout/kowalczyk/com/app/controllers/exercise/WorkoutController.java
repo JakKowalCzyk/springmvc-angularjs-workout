@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import pl.workout.kowalczyk.com.app.controllers.ModelController;
 import pl.workout.kowalczyk.com.app.model.DTO.exercise.WorkoutDTO;
 
 import java.sql.Date;
@@ -15,26 +16,35 @@ import java.util.List;
  * Created by JK on 2017-01-22.
  */
 @Api(tags = {"Workout API"}, description = "Services for workouts")
-@RequestMapping("/exercise/workout")
-public interface WorkoutController {
+@RequestMapping("/workout")
+public interface WorkoutController extends ModelController<WorkoutDTO> {
 
-    @ApiOperation(value = "Save new workout")
-    @RequestMapping(method = RequestMethod.POST)
-    void saveWorkout(@RequestBody WorkoutDTO workout);
+    @Override
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    WorkoutDTO getObject(@PathVariable Long id);
 
-    @ApiOperation(value = "Update existing workout")
+    @Override
     @RequestMapping(method = RequestMethod.PUT)
-    void updateWorkout(@RequestBody WorkoutDTO workout);
+    WorkoutDTO updateObject(@RequestBody WorkoutDTO model);
 
-    @ApiOperation(value = "Delete workout")
-    @RequestMapping(value = "/workoutId/{workoutId}", method = RequestMethod.DELETE)
-    void deleteWorkout(@PathVariable Integer workoutId);
+    @Override
+    @RequestMapping(method = RequestMethod.POST)
+    WorkoutDTO addObject(@RequestBody WorkoutDTO model);
+
+    @Override
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    List<WorkoutDTO> findAll();
+
+    @Override
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    void deleteObject(@PathVariable Long id);
+
 
     @ApiOperation(value = "Get workout for user")
-    @RequestMapping(value = "user/{userId}", method = RequestMethod.GET)
-    List<WorkoutDTO> getWorkoutsById(@PathVariable int userId);
+    @RequestMapping(value = "user/{id}", method = RequestMethod.GET)
+    List<WorkoutDTO> getWorkoutsByUser(@PathVariable Long id);
 
     @ApiOperation(value = "Get workout by date for user")
-    @RequestMapping(value = "user/{userId}/date/{date}", method = RequestMethod.GET)
-    WorkoutDTO getWorkoutByDate(@PathVariable int userId, @PathVariable Date date);
+    @RequestMapping(value = "user/{id}/date/{date}", method = RequestMethod.GET)
+    WorkoutDTO getWorkoutByDate(@PathVariable Long id, @PathVariable Date date);
 }

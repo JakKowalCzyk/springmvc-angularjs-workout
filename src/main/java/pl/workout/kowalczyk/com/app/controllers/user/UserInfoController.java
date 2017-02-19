@@ -10,18 +10,37 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import pl.workout.kowalczyk.com.app.controllers.ModelController;
 import pl.workout.kowalczyk.com.app.model.DTO.user.UserInfoDTO;
+
+import java.util.List;
 
 @Api(tags = {"User Info API"}, description = "Services for user info")
 @RequestMapping("/user/info")
-public interface UserInfoController {
+public interface UserInfoController extends ModelController<UserInfoDTO> {
 
-    @ApiOperation(value = "Save new User info")
+    @Override
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    UserInfoDTO getObject(@PathVariable Long id);
+
+    @Override
+    @RequestMapping(method = RequestMethod.PUT)
+    UserInfoDTO updateObject(@RequestBody UserInfoDTO model);
+
+    @Override
     @RequestMapping(method = RequestMethod.POST)
-    void saveUserInfo(@RequestBody UserInfoDTO userInfo);
+    UserInfoDTO addObject(@RequestBody UserInfoDTO model);
+
+    @Override
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    List<UserInfoDTO> findAll();
+
+    @Override
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    void deleteObject(@PathVariable Long id);
 
     @ApiOperation(value = "Get User info for user")
-    @RequestMapping(value = "user/{userId}", method = RequestMethod.GET)
-    UserInfoDTO getById(@PathVariable int userId);
+    @RequestMapping(value = "user/{id}", method = RequestMethod.GET)
+    UserInfoDTO getById(@PathVariable Long id);
 
 }

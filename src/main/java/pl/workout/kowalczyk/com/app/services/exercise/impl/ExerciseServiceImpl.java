@@ -5,52 +5,27 @@ import org.springframework.stereotype.Service;
 import pl.workout.kowalczyk.com.app.dao.exercise.ExerciseDao;
 import pl.workout.kowalczyk.com.app.enums.ExerciseType;
 import pl.workout.kowalczyk.com.app.model.BO.exercise.Exercise;
-import pl.workout.kowalczyk.com.app.model.DTO.exercise.ExerciseDTO;
 import pl.workout.kowalczyk.com.app.services.exercise.ExerciseService;
+import pl.workout.kowalczyk.com.app.services.impl.ModelServiceImpl;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by JK on 2016-10-26.
  */
 @Service
-public class ExerciseServiceImpl implements ExerciseService {
+public class ExerciseServiceImpl extends ModelServiceImpl<Exercise> implements ExerciseService {
+
     @Autowired
-    private ExerciseDao exerciseDao;
-    @Override
-    public ExerciseDTO mapExerciseBoToDTO(Exercise exercise) {
-        return new ExerciseDTO(exercise.getId(), exercise.getName(), exercise.getDescription(), exercise.getExerciseType());
+    public ExerciseServiceImpl(ExerciseDao baseDao) {
+        super(baseDao);
     }
 
-    @Override
-    public Exercise mapExerciseDtoToBo(ExerciseDTO exerciseDTO) {
-        return new Exercise(exerciseDTO.getName(), exerciseDTO.getDescription(), exerciseDTO.getExerciseType());
+    public Exercise getExerciseByName(String name) {
+        return ((ExerciseDao) getBaseDao()).getExerciseByName(name);
     }
 
-    public void saveExercise(ExerciseDTO exerciseDTO) {
-        exerciseDao.save(mapExerciseDtoToBo(exerciseDTO));
-    }
-
-    public List<ExerciseDTO> getAllExercisesDTO() {
-        return exerciseDao.findAll().stream().map(this::mapExerciseBoToDTO).collect(Collectors.toList());
-    }
-
-    public ExerciseDTO getExerciseDTOByName(String name) {
-        return mapExerciseBoToDTO(exerciseDao.getExerciseByName(name));
-    }
-
-    @Override
-    public ExerciseDTO getExerciseDTOById(int exerciseId) {
-       return mapExerciseBoToDTO(exerciseDao.findOne(exerciseId));
-    }
-
-    @Override
-    public Exercise getExerciseById(int exerciseId) {
-        return exerciseDao.findOne(exerciseId);
-    }
-
-    public List<ExerciseDTO> getExercisesDTOForBodyPart(ExerciseType exerciseType) {
-        return exerciseDao.getExercisesForBodyPart(exerciseType).stream().map(this::mapExerciseBoToDTO).collect(Collectors.toList());
+    public List<Exercise> getExercisesForBodyPart(ExerciseType exerciseType) {
+        return ((ExerciseDao) getBaseDao()).getExercisesForBodyPart(exerciseType);
     }
 }

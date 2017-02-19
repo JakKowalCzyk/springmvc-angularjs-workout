@@ -14,8 +14,8 @@ import java.util.List;
 public interface UserNotesDao extends BaseDao<UserNotes> {
 
     @Query("SELECT o FROM UserNotes o  join o.user_id as userid where userid.id = :userId")
-    List<UserNotes> getUserNotesByUserId(@Param("userId") int userId);
+    List<UserNotes> getUserNotesByUserId(@Param("userId") Long userId);
 
     @Query("SELECT o FROM UserNotes o join o.user_id as userid where userid.id = :userId and o.date = :date")
-    List<UserNotes> getSingleNoteByDate(@Param("userId") int userId, @Param("date") Date date);
+    List<UserNotes> getSingleNoteByDate(@Param("userId") Long userId, @Param("date") Date date);
 }

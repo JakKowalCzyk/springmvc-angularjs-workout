@@ -1,6 +1,6 @@
 package pl.workout.kowalczyk.com.app.model.BO.exercise;
 
-import pl.workout.kowalczyk.com.app.model.BO.AbstractModel;
+import pl.workout.kowalczyk.com.app.model.BO.ModelObject;
 
 import javax.persistence.*;
 
@@ -8,8 +8,7 @@ import javax.persistence.*;
  * Created by JK on 2016-09-17.
  */
 @Entity
-public class UserExercise  extends AbstractModel{
-    private Integer id;
+public class UserExercise extends ModelObject {
 
     private Exercise exercise;
 
@@ -25,16 +24,6 @@ public class UserExercise  extends AbstractModel{
     public UserExercise(int repeat, int series) {
         this.repeat = repeat;
         this.series = series;
-    }
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_exercise_id")
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     @OneToOne(cascade = CascadeType.MERGE)

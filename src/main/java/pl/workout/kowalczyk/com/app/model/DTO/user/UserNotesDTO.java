@@ -1,14 +1,14 @@
 package pl.workout.kowalczyk.com.app.model.DTO.user;
 
-import pl.workout.kowalczyk.com.app.model.DTO.BaseModel;
+import pl.workout.kowalczyk.com.app.model.DTO.ObjectDTO;
 
 import java.sql.Date;
 
 /**
  * Created by JK on 2016-11-18.
  */
-public class UserNotesDTO extends BaseModel {
-    private Integer user_id;
+public class UserNotesDTO extends ObjectDTO {
+    private Long user_id;
     private String note;
     private Date date;
 
@@ -16,18 +16,11 @@ public class UserNotesDTO extends BaseModel {
     }
 
 
-    public UserNotesDTO(Integer userNotesId, Integer user_id, String note, Date date) {
-        super(userNotesId);
-        this.user_id = user_id;
-        this.note = note;
-        this.date = date;
-    }
-
-    public Integer getUser_id() {
+    public Long getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(Integer user_id) {
+    public void setUser_id(Long user_id) {
         this.user_id = user_id;
     }
 

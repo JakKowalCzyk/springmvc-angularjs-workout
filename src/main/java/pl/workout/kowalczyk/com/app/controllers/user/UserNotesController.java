@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import pl.workout.kowalczyk.com.app.controllers.ModelController;
 import pl.workout.kowalczyk.com.app.model.DTO.user.UserNotesDTO;
 
 import java.sql.Date;
@@ -16,25 +17,34 @@ import java.util.List;
  */
 @Api(tags = {"User Notes API"}, description = "Services for user's notes")
 @RequestMapping("/user/notes")
-public interface UserNotesController {
+public interface UserNotesController extends ModelController<UserNotesDTO> {
 
-    @ApiOperation(value = "Save new User's note")
-    @RequestMapping(method = RequestMethod.POST)
-    void saveUserNote(@RequestBody UserNotesDTO userNotes);
 
-    @ApiOperation(value = "Update existing User's note")
+    @Override
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    UserNotesDTO getObject(@PathVariable Long id);
+
+    @Override
     @RequestMapping(method = RequestMethod.PUT)
-    void updateUserNote(@RequestBody UserNotesDTO userNotes);
+    UserNotesDTO updateObject(@RequestBody UserNotesDTO model);
 
-    @ApiOperation(value = "Delete User's note")
-    @RequestMapping(value = "/note/{noteId}", method = RequestMethod.DELETE)
-    void deleteUserNote(@PathVariable Integer noteId);
+    @Override
+    @RequestMapping(method = RequestMethod.POST)
+    UserNotesDTO addObject(@RequestBody UserNotesDTO model);
+
+    @Override
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    List<UserNotesDTO> findAll();
+
+    @Override
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    void deleteObject(@PathVariable Long id);
 
     @ApiOperation(value = "Get all notes for user")
-    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
-    List<UserNotesDTO> getUserNotesById(@PathVariable int userId);
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    List<UserNotesDTO> getUserNotesById(@PathVariable Long id);
 
     @ApiOperation(value = "Get all notes for user by date")
-    @RequestMapping(value = "/user/{userId}/date/{date}", method = RequestMethod.GET)
-    List<UserNotesDTO> getUserNotesByDate(@PathVariable int userId, @PathVariable Date date);
+    @RequestMapping(value = "/user/{id}/date/{date}", method = RequestMethod.GET)
+    List<UserNotesDTO> getUserNotesByDate(@PathVariable Long id, @PathVariable Date date);
 }

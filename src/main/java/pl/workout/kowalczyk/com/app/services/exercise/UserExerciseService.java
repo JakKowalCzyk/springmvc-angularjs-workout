@@ -1,29 +1,16 @@
 package pl.workout.kowalczyk.com.app.services.exercise;
 
 import pl.workout.kowalczyk.com.app.model.BO.exercise.UserExercise;
-import pl.workout.kowalczyk.com.app.model.DTO.exercise.UserExerciseDTO;
+import pl.workout.kowalczyk.com.app.services.ModelService;
 
-import java.sql.Date;
 import java.util.List;
 
 /**
  * Created by JK on 2016-10-26.
  */
-public interface UserExerciseService {
+public interface UserExerciseService extends ModelService<UserExercise> {
 
-    UserExercise mapUserExerciseDtoToBo(UserExerciseDTO userExerciseDTO);
+    List<UserExercise> getUserExercisesByUserId(Long userId);
 
-    UserExerciseDTO mapUserExerciseBoToDto(UserExercise userExercise);
-
-    void saveUserExercise(UserExerciseDTO userExercise);
-
-    void updateUserExerciseWithRepeatAndSeries(UserExerciseDTO userExercise);
-
-    void deleteUserExercise(Integer userExercise);
-
-    List<UserExerciseDTO> getUserExercisesByWorkoutDate(int userId, Date date);
-
-    List<UserExerciseDTO> getUserExercisesByUserId(int userId);
-
-    List<UserExerciseDTO> getUserExercisesBoWorkout(Integer workoutId);
+    List<UserExercise> findByWorkoutId(Long workoutId);
 }

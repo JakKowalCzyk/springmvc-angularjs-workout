@@ -3,57 +3,32 @@ package pl.workout.kowalczyk.com.app.services.exercise.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.workout.kowalczyk.com.app.dao.exercise.WorkoutDao;
-import pl.workout.kowalczyk.com.app.dao.security.UserDetailsDao;
 import pl.workout.kowalczyk.com.app.model.BO.exercise.Workout;
-import pl.workout.kowalczyk.com.app.model.DTO.exercise.WorkoutDTO;
 import pl.workout.kowalczyk.com.app.services.exercise.WorkoutService;
+import pl.workout.kowalczyk.com.app.services.impl.ModelServiceImpl;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by JK on 2016-10-26.
  */
 @Service
-public class WorkoutServiceImpl implements WorkoutService {
+public class WorkoutServiceImpl extends ModelServiceImpl<Workout> implements WorkoutService {
+
+
     @Autowired
-    private WorkoutDao workoutDao;
-
-    @Autowired
-    private UserDetailsDao userDetailsDao;
-
-
-    @Override
-    public Workout mapWorkoutDtoToBo(WorkoutDTO workoutDTO) {
-        return new Workout(userDetailsDao.findOne(workoutDTO.getUser_id()), workoutDTO.getDate());
+    public WorkoutServiceImpl(WorkoutDao baseDao) {
+        super(baseDao);
     }
 
     @Override
-    public WorkoutDTO mapWorkoutBoToDto(Workout workout) {
-        return new WorkoutDTO(workout.getId(), workout.getUserId().getId(), workout.getDate());
+    public List<Workout> getWorkoutsByUserId(Long userId) {
+        return ((WorkoutDao) getBaseDao()).getWorkoutsByUserId(userId);
     }
 
-    public void saveWorkout(WorkoutDTO workoutDTO) {
-        workoutDao.save(mapWorkoutDtoToBo(workoutDTO));
-    }
-
-    public void updateWorkout(WorkoutDTO workoutDTO) {
-        Workout workout = mapWorkoutDtoToBo(workoutDTO);
-        workout.setId(workoutDTO.getId());
-//        workoutDao.(workout);
-    }
-
-    public void deleteWorkout(Integer workoutId) {
-        Workout workout = workoutDao.findOne(workoutId);
-        workoutDao.delete(workout);
-    }
-
-    public List<WorkoutDTO> getWorkoutsByUserId(int userId) {
-        return workoutDao.getWorkoutsByUserId(userId).stream().map(this::mapWorkoutBoToDto).collect(Collectors.toList());
-    }
-
-    public WorkoutDTO getByUserIdAndDate(int userId, Date date) {
-        return mapWorkoutBoToDto(workoutDao.getByUserIdAndDate(userId, date));
+    @Override
+    public Workout getByUserIdAndDate(Long userId, Date date) {
+        return ((WorkoutDao) getBaseDao()).getByUserIdAndDate(userId, date);
     }
 }

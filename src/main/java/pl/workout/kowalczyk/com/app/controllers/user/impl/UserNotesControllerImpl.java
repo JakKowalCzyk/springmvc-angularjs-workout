@@ -8,41 +8,57 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import pl.workout.kowalczyk.com.app.controllers.impl.ModelControllerImpl;
 import pl.workout.kowalczyk.com.app.controllers.user.UserNotesController;
+import pl.workout.kowalczyk.com.app.mapper.user.UserNotesMapper;
+import pl.workout.kowalczyk.com.app.model.BO.user.UserNotes;
 import pl.workout.kowalczyk.com.app.model.DTO.user.UserNotesDTO;
 import pl.workout.kowalczyk.com.app.services.user.UserNotesService;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-public class UserNotesControllerImpl implements UserNotesController {
+public class UserNotesControllerImpl extends ModelControllerImpl<UserNotes, UserNotesDTO> implements UserNotesController {
 
     @Autowired
-    private UserNotesService userNotesService;
-
-    @Override
-    public void saveUserNote(@RequestBody UserNotesDTO userNotes) {
-        userNotesService.saveUserNotes(userNotes);
+    public UserNotesControllerImpl(UserNotesService modelService, UserNotesMapper modelMapper) {
+        super(modelService, modelMapper);
     }
 
     @Override
-    public void updateUserNote(@RequestBody UserNotesDTO userNotes) {
-        userNotesService.updateUserNotes(userNotes);
+    public UserNotesDTO getObject(@PathVariable Long id) {
+        return super.getObject(id);
     }
 
     @Override
-    public void deleteUserNote(@PathVariable Integer noteId) {
-        userNotesService.deleteUserNotes(noteId);
+    public UserNotesDTO updateObject(@RequestBody UserNotesDTO model) {
+        return super.updateObject(model);
     }
 
     @Override
-    public List<UserNotesDTO> getUserNotesById(@PathVariable int userId) {
-        return userNotesService.getUserNotesByUserId(userId);
+    public UserNotesDTO addObject(@RequestBody UserNotesDTO model) {
+        return super.addObject(model);
     }
 
     @Override
-    public List<UserNotesDTO> getUserNotesByDate(@PathVariable int userId, @PathVariable Date date) {
-        return userNotesService.getNotesByDate(userId, date);
+    public List<UserNotesDTO> findAll() {
+        return super.findAll();
+    }
+
+    @Override
+    public void deleteObject(@PathVariable Long id) {
+        super.deleteObject(id);
+    }
+
+    @Override
+    public List<UserNotesDTO> getUserNotesById(@PathVariable Long id) {
+        return ((UserNotesService) getModelService()).getUserNotesByUserId(id).stream().map(userNotes -> getModelMapper().mapToDTO(userNotes)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserNotesDTO> getUserNotesByDate(@PathVariable Long id, @PathVariable Date date) {
+        return ((UserNotesService) getModelService()).getNotesByDate(id, date).stream().map(userNotes -> getModelMapper().mapToDTO(userNotes)).collect(Collectors.toList());
     }
 }

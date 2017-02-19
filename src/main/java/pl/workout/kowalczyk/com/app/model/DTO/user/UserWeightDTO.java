@@ -1,15 +1,15 @@
 package pl.workout.kowalczyk.com.app.model.DTO.user;
 
-import pl.workout.kowalczyk.com.app.model.DTO.BaseModel;
+import pl.workout.kowalczyk.com.app.model.DTO.ObjectDTO;
 
 import java.sql.Date;
 
 /**
  * Created by JK on 2016-11-18.
  */
-public class UserWeightDTO extends BaseModel {
+public class UserWeightDTO extends ObjectDTO {
 
-    private Integer userId;
+    private Long userId;
 
     private Integer weightKg;
 
@@ -18,18 +18,11 @@ public class UserWeightDTO extends BaseModel {
     public UserWeightDTO() {
     }
 
-    public UserWeightDTO(Integer weight_id, Integer user_id, Integer weight_kg, Date date) {
-        super(weight_id);
-        this.userId = user_id;
-        this.weightKg = weight_kg;
-        this.date = date;
-    }
-
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

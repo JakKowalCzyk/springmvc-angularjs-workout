@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.workout.kowalczyk.com.app.dao.security.UserDetailsDao;
 import pl.workout.kowalczyk.com.app.model.BO.security.UserRole;
+import pl.workout.kowalczyk.com.app.services.impl.ModelServiceImpl;
 import pl.workout.kowalczyk.com.app.services.security.UserDetailsService;
 
 import java.util.ArrayList;
@@ -19,9 +20,14 @@ import java.util.Set;
  * Created by JK on 2016-12-18.
  */
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl extends ModelServiceImpl<pl.workout.kowalczyk.com.app.model.BO.security.UserDetails> implements UserDetailsService {
     @Autowired
     private UserDetailsDao userDetailsDao;
+
+    @Autowired
+    public UserDetailsServiceImpl(UserDetailsDao baseDao) {
+        super(baseDao);
+    }
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
@@ -37,8 +43,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return grantedAuthorities;
     }
 
-    @Override
-    public pl.workout.kowalczyk.com.app.model.BO.security.UserDetails getById(Integer id) {
-        return userDetailsDao.findOne(id);
-    }
 }

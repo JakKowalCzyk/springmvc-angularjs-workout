@@ -2,17 +2,19 @@ package pl.workout.kowalczyk.com.app.model.BO.exercise;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import pl.workout.kowalczyk.com.app.enums.ExerciseType;
-import pl.workout.kowalczyk.com.app.model.BO.AbstractModel;
+import pl.workout.kowalczyk.com.app.model.BO.ModelObject;
 import pl.workout.kowalczyk.com.app.model.BO.user.UserInfo;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.OneToOne;
 
 /**
  * Created by JK on 2016-09-17.
  */
 @Entity
-public class Exercise extends AbstractModel{
-    private Integer id;
+public class Exercise extends ModelObject {
     private String name;
 
     private String description;
@@ -29,16 +31,6 @@ public class Exercise extends AbstractModel{
     }
 
     public Exercise() {
-    }
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "exercise_id")
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     @OneToOne(mappedBy = "exerciseFavouriteId")
