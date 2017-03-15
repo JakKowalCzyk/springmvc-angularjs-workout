@@ -27,7 +27,9 @@ public class WorkoutMapper extends ModelMapperImpl<Workout, WorkoutDTO> {
         Workout workout = new Workout();
         workout.setDate(objectDTO.getDate());
         workout.setUserId(userDetailsService.getObject(objectDTO.getUser_id()));
-        workout.setUserExercises(objectDTO.getUserExercises().stream().map(aLong -> userExerciseService.getObject(aLong)).collect(Collectors.toList()));
+        if (objectDTO.getUserExercises() != null) {
+            workout.setUserExercises(objectDTO.getUserExercises().stream().map(aLong -> userExerciseService.getObject(aLong)).collect(Collectors.toList()));
+        }
         return workout;
     }
 
