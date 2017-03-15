@@ -3,6 +3,7 @@ package pl.workout.kowalczyk.com.app.mapper.impl;
 import pl.workout.kowalczyk.com.app.mapper.ModelMapper;
 import pl.workout.kowalczyk.com.app.model.BO.ModelObject;
 import pl.workout.kowalczyk.com.app.model.DTO.ObjectDTO;
+import pl.workout.kowalczyk.com.app.model.exception.NotFoundException;
 
 /**
  * Created by JK on 2017-02-18.
@@ -22,8 +23,15 @@ public abstract class ModelMapperImpl<T extends ModelObject, E extends ObjectDTO
 
     @Override
     public E mapToDTO(T modelObject) {
+        checkIdObjectExists(modelObject);
         E objectDTO = buildDTO(modelObject);
         objectDTO.setId(modelObject.getId());
         return objectDTO;
+    }
+
+    private void checkIdObjectExists(T modelObject) {
+        if (modelObject == null) {
+            throw new NotFoundException("Can't find object");
+        }
     }
 }
