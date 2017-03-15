@@ -11,6 +11,12 @@ import java.util.List;
  */
 public interface UserWeightService extends ModelService<UserWeight> {
 
+    @Override
+    UserWeight addObject(UserWeight baseModel);
+
+    @Override
+    UserWeight updateObject(UserWeight baseModel);
+
     List<UserWeight> getWeightByUserId(Long userId);
 
     UserWeight getByUserIdAndDate(Long userId, Date date);
