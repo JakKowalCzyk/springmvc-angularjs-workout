@@ -6,7 +6,7 @@ import pl.workout.kowalczyk.com.app.model.BO.security.UserDetails;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Created by JK on 2016-09-17.

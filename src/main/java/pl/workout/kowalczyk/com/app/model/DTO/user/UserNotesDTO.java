@@ -2,7 +2,7 @@ package pl.workout.kowalczyk.com.app.model.DTO.user;
 
 import pl.workout.kowalczyk.com.app.model.DTO.ObjectDTO;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Created by JK on 2016-11-18.
