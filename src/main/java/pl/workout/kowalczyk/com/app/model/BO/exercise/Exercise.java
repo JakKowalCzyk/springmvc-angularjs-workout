@@ -1,6 +1,5 @@
 package pl.workout.kowalczyk.com.app.model.BO.exercise;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import pl.workout.kowalczyk.com.app.enums.ExerciseType;
 import pl.workout.kowalczyk.com.app.model.BO.ModelObject;
 import pl.workout.kowalczyk.com.app.model.BO.user.UserInfo;
@@ -21,7 +20,6 @@ public class Exercise extends ModelObject {
 
     private ExerciseType exerciseType;
     
-    @JsonIgnore
     private UserInfo userInfoId;
 
     public Exercise(String name, String description, ExerciseType exerciseType) {
