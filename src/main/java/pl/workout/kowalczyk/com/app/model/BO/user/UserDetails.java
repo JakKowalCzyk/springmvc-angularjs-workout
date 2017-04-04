@@ -16,7 +16,7 @@ import java.util.Set;
 @Entity
 public class UserDetails extends ModelObject {
     private String login;
-    private String password;
+    private String hashedPassword;
     private Boolean enabled;
     private Set<UserRole> userRoles = new HashSet<>();
     private String firstName;
@@ -25,9 +25,9 @@ public class UserDetails extends ModelObject {
     private String email;
 
 
-    public UserDetails(String login, String password, Boolean enabled, Set<UserRole> userRoles, String firstName, String lastName, Date birthDay, String email) {
+    public UserDetails(String login, String hashedPassword, Boolean enabled, Set<UserRole> userRoles, String firstName, String lastName, Date birthDay, String email) {
         this.login = login;
-        this.password = password;
+        this.hashedPassword = hashedPassword;
         this.enabled = enabled;
         this.userRoles = userRoles;
         this.firstName = firstName;
@@ -47,12 +47,12 @@ public class UserDetails extends ModelObject {
         this.login = login;
     }
 
-    public String getPassword() {
-        return password;
+    public String getHashedPassword() {
+        return hashedPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setHashedPassword(String password) {
+        this.hashedPassword = password;
     }
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "userDetails")

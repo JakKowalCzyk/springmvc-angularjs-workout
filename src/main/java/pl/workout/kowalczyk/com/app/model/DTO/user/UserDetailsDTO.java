@@ -1,7 +1,6 @@
 package pl.workout.kowalczyk.com.app.model.DTO.user;
 
 import pl.workout.kowalczyk.com.app.model.DTO.ObjectDTO;
-import pl.workout.kowalczyk.com.app.model.DTO.security.UserRoleDTO;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -13,9 +12,9 @@ import java.util.Set;
 public class UserDetailsDTO extends ObjectDTO {
 
     private String login;
-    private String password;
+    private String hashedPassword;
     private Boolean enabled;
-    private Set<UserRoleDTO> userRoles = new HashSet<>();
+    private Set<Long> userRoles = new HashSet<Long>();
     private String firstName;
     private String lastName;
     private Date birthDay;
@@ -32,12 +31,12 @@ public class UserDetailsDTO extends ObjectDTO {
         this.login = login;
     }
 
-    public String getPassword() {
-        return password;
+    public String getHashedPassword() {
+        return hashedPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setHashedPassword(String hashedPassword) {
+        this.hashedPassword = hashedPassword;
     }
 
     public Boolean getEnabled() {
@@ -48,11 +47,11 @@ public class UserDetailsDTO extends ObjectDTO {
         this.enabled = enabled;
     }
 
-    public Set<UserRoleDTO> getUserRoles() {
+    public Set<Long> getUserRoles() {
         return userRoles;
     }
 
-    public void setUserRoles(Set<UserRoleDTO> userRoles) {
+    public void setUserRoles(Set<Long> userRoles) {
         this.userRoles = userRoles;
     }
 

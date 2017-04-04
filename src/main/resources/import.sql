@@ -5,7 +5,7 @@
 -- -- drop table if EXISTS userExerciseId CASCADE ;
 -- -- drop table if EXISTS user_exercise CASCADE ;
 -- --
--- -- create table user(userId SERIAL NOT NULL PRIMARY KEY, login VARCHAR(255), firstName VARCHAR(255), lastName VARCHAR(255), birthDay DATE , email VARCHAR(255), password VARCHAR(255));
+-- -- create table user(userId SERIAL NOT NULL PRIMARY KEY, login VARCHAR(255), firstName VARCHAR(255), lastName VARCHAR(255), birthDay DATE , email VARCHAR(255), hashedPassword VARCHAR(255));
 -- --
 -- -- CREATE TABLE userWeight(uweight_id SERIAL not null PRIMARY KEY,userId int REFERENCES user(userId), weightKg int, date DATE);
 -- --
@@ -37,8 +37,8 @@
 -- --   authentication bytea
 -- -- );
 --
---INSERT INTO user_details (enabled, login, password, birth_day, email, first_name, last_name) VALUES (TRUE, 'nowy', '123', '1990-01-22', 'kowal@email.pl', 'kowalczyk', 'kowal');
--- INSERT INTO user_details (enabled, login, password, birth_day, email, first_name, last_name) VALUES (TRUE, 'nowy2', '1234', '1996-01-22', 'email@email.pl', 'nowy2', 'nowy');
+--INSERT INTO user_details (enabled, login, hashedPassword, birth_day, email, first_name, last_name) VALUES (TRUE, 'nowy', '123', '1990-01-22', 'kowal@email.pl', 'kowalczyk', 'kowal');
+-- INSERT INTO user_details (enabled, login, hashedPassword, birth_day, email, first_name, last_name) VALUES (TRUE, 'nowy2', '1234', '1996-01-22', 'email@email.pl', 'nowy2', 'nowy');
 
 -- INSERT INTO role (name) VALUES ('USER');
 -- INSERT INTO user_role (user_details_id, role_id) VALUES (1, 1);

@@ -12,6 +12,7 @@ import pl.workout.kowalczyk.com.app.model.BO.user.UserDetails;
 import pl.workout.kowalczyk.com.app.services.exercise.ExerciseService;
 import pl.workout.kowalczyk.com.app.services.exercise.UserExerciseService;
 import pl.workout.kowalczyk.com.app.services.exercise.WorkoutService;
+import pl.workout.kowalczyk.com.app.services.security.UserRoleService;
 import pl.workout.kowalczyk.com.app.services.user.UserDetailsService;
 import pl.workout.kowalczyk.com.app.services.user.UserWeightService;
 
@@ -36,6 +37,8 @@ public abstract class AbstractMapperTest {
     private ExerciseService exerciseService;
     @MockBean
     private UserWeightService userWeightService;
+    @MockBean
+    private UserRoleService userRoleService;
 
     @Before
     public void setUp() throws Exception {
