@@ -1,7 +1,6 @@
 package pl.workout.kowalczyk.com.app.model.BO.user;
 
 import pl.workout.kowalczyk.com.app.model.BO.ModelObject;
-import pl.workout.kowalczyk.com.app.model.BO.security.UserDetails;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;

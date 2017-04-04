@@ -1,7 +1,7 @@
 package pl.workout.kowalczyk.com.app.model.BO.exercise;
 
 import pl.workout.kowalczyk.com.app.model.BO.ModelObject;
-import pl.workout.kowalczyk.com.app.model.BO.security.UserDetails;
+import pl.workout.kowalczyk.com.app.model.BO.user.UserDetails;
 
 import javax.persistence.*;
 import java.sql.Date;

@@ -1,13 +1,12 @@
 --INSERT
-INSERT INTO user_details (enabled, login, password) VALUES (TRUE, 'nowy', '123');
-INSERT INTO user_details (enabled, login, password) VALUES (TRUE, 'nowy2', '1234');
+INSERT INTO user_details (enabled, login, password, birth_day, email, first_name, last_name)
+VALUES (TRUE, 'nowy', '123', '1990-01-22', 'kowal@email.pl', 'kowalczyk', 'kowal');
+INSERT INTO user_details (enabled, login, password, birth_day, email, first_name, last_name)
+VALUES (TRUE, 'nowy2', '1234', '1996-01-22', 'email@email.pl', 'nowy2', 'nowy');
+INSERT INTO user_details (enabled, login, password) VALUES (TRUE, 'nowy3', '1234');
 INSERT INTO role (name) VALUES ('USER');
 INSERT INTO user_role (user_details_id, role_id) VALUES (1, 1);
 INSERT INTO user_role (user_details_id, role_id) VALUES (2, 1);
-INSERT INTO saw_user (user_details_id, birth_day, email, first_name, last_name)
-VALUES (1, '1990-01-22', 'kowal@email.pl', 'kowalczyk', 'kowal');
-INSERT INTO saw_user (user_details_id, birth_day, first_name, last_name, email)
-VALUES (2, '1980-03-1', 'nowy2', 'sdsd', 'nowy@cos.com');
 --workout
 INSERT INTO workout (user_details_id, date) VALUES (1, '2015-02-02');
 INSERT INTO workout (user_details_id, date) VALUES (1, '2015-03-03');

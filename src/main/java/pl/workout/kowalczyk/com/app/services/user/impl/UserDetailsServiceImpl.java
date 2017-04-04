@@ -1,4 +1,4 @@
-package pl.workout.kowalczyk.com.app.services.security.impl;
+package pl.workout.kowalczyk.com.app.services.user.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.workout.kowalczyk.com.app.dao.security.UserDetailsDao;
+import pl.workout.kowalczyk.com.app.dao.user.UserDetailsDao;
 import pl.workout.kowalczyk.com.app.model.BO.security.UserRole;
 import pl.workout.kowalczyk.com.app.services.impl.ModelServiceImpl;
 import pl.workout.kowalczyk.com.app.services.security.UserDetailsService;
@@ -20,7 +20,7 @@ import java.util.Set;
  * Created by JK on 2016-12-18.
  */
 @Service
-public class UserDetailsServiceImpl extends ModelServiceImpl<pl.workout.kowalczyk.com.app.model.BO.security.UserDetails> implements UserDetailsService {
+public class UserDetailsServiceImpl extends ModelServiceImpl<pl.workout.kowalczyk.com.app.model.BO.user.UserDetails> implements UserDetailsService {
     @Autowired
     private UserDetailsDao userDetailsDao;
 
@@ -31,10 +31,9 @@ public class UserDetailsServiceImpl extends ModelServiceImpl<pl.workout.kowalczy
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        pl.workout.kowalczyk.com.app.model.BO.security.UserDetails userDetails = userDetailsDao.getByLogin(s);
-        UserDetails userDetailsSecurity = new User(userDetails.getLogin(), userDetails.getPassword(), userDetails.getEnabled(), true, true,
+        pl.workout.kowalczyk.com.app.model.BO.user.UserDetails userDetails = userDetailsDao.getByLogin(s);
+        return new User(userDetails.getLogin(), userDetails.getPassword(), userDetails.getEnabled(), true, true,
                 true, buildUserAuthority(userDetails.getUserRoles()));
-        return userDetailsSecurity;
     }
 
     private List<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles) {

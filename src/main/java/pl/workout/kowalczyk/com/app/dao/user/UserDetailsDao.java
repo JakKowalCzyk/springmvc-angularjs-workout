@@ -1,9 +1,9 @@
-package pl.workout.kowalczyk.com.app.dao.security;
+package pl.workout.kowalczyk.com.app.dao.user;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import pl.workout.kowalczyk.com.app.dao.BaseDao;
-import pl.workout.kowalczyk.com.app.model.BO.security.UserDetails;
+import pl.workout.kowalczyk.com.app.model.BO.user.UserDetails;
 
 /**
  * Created by JK on 2016-12-12.

@@ -1,6 +1,7 @@
 package pl.workout.kowalczyk.com.app.model.BO.security;
 
 import pl.workout.kowalczyk.com.app.model.BO.ModelObject;
+import pl.workout.kowalczyk.com.app.model.BO.user.UserDetails;
 
 import javax.persistence.*;
 
