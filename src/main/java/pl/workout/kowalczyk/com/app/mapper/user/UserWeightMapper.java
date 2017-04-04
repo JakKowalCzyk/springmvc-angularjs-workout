@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import pl.workout.kowalczyk.com.app.mapper.impl.ModelMapperImpl;
 import pl.workout.kowalczyk.com.app.model.BO.user.UserWeight;
 import pl.workout.kowalczyk.com.app.model.DTO.user.UserWeightDTO;
-import pl.workout.kowalczyk.com.app.services.security.UserDetailsService;
+import pl.workout.kowalczyk.com.app.services.user.security.UserDetailsService;
 
 /**
  * Created by JK on 2017-02-18.

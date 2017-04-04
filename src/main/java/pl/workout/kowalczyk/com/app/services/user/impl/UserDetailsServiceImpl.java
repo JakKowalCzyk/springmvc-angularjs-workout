@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import pl.workout.kowalczyk.com.app.dao.user.UserDetailsDao;
 import pl.workout.kowalczyk.com.app.model.BO.security.UserRole;
 import pl.workout.kowalczyk.com.app.services.impl.ModelServiceImpl;
-import pl.workout.kowalczyk.com.app.services.security.UserDetailsService;
+import pl.workout.kowalczyk.com.app.services.user.security.UserDetailsService;
 
 import java.util.ArrayList;
 import java.util.List;
