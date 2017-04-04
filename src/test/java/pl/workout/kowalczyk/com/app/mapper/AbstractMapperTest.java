@@ -12,8 +12,8 @@ import pl.workout.kowalczyk.com.app.model.BO.user.UserDetails;
 import pl.workout.kowalczyk.com.app.services.exercise.ExerciseService;
 import pl.workout.kowalczyk.com.app.services.exercise.UserExerciseService;
 import pl.workout.kowalczyk.com.app.services.exercise.WorkoutService;
+import pl.workout.kowalczyk.com.app.services.user.UserDetailsService;
 import pl.workout.kowalczyk.com.app.services.user.UserWeightService;
-import pl.workout.kowalczyk.com.app.services.user.security.UserDetailsService;
 
 import java.util.GregorianCalendar;
 import java.util.stream.Collectors;

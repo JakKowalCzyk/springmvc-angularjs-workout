@@ -7,7 +7,7 @@ import pl.workout.kowalczyk.com.app.model.BO.ModelObject;
 import pl.workout.kowalczyk.com.app.model.BO.exercise.Workout;
 import pl.workout.kowalczyk.com.app.model.DTO.exercise.WorkoutDTO;
 import pl.workout.kowalczyk.com.app.services.exercise.UserExerciseService;
-import pl.workout.kowalczyk.com.app.services.user.security.UserDetailsService;
+import pl.workout.kowalczyk.com.app.services.user.UserDetailsService;
 
 import java.util.stream.Collectors;
 

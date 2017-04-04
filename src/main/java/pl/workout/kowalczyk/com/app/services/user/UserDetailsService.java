@@ -1,4 +1,4 @@
-package pl.workout.kowalczyk.com.app.services.user.security;
+package pl.workout.kowalczyk.com.app.services.user;
 
 import pl.workout.kowalczyk.com.app.model.BO.user.UserDetails;
 import pl.workout.kowalczyk.com.app.services.ModelService;
