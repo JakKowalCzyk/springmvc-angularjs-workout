@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class WorkoutDTO extends ObjectDTO {
 
-    private Long user_id;
+    private Long userId;
 
     private Date date;
 
@@ -20,12 +20,12 @@ public class WorkoutDTO extends ObjectDTO {
     }
 
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long user_id) {
+        this.userId = user_id;
     }
 
     public Date getDate() {

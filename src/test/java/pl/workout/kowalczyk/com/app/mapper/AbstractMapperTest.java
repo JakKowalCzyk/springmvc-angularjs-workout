@@ -6,6 +6,10 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import pl.workout.kowalczyk.com.app.enums.ExerciseType;
+import pl.workout.kowalczyk.com.app.model.BO.exercise.Exercise;
+import pl.workout.kowalczyk.com.app.model.BO.exercise.UserExercise;
+import pl.workout.kowalczyk.com.app.model.BO.exercise.Workout;
 import pl.workout.kowalczyk.com.app.model.BO.security.Role;
 import pl.workout.kowalczyk.com.app.model.BO.user.UserDetails;
 import pl.workout.kowalczyk.com.app.services.exercise.ExerciseService;
@@ -71,4 +75,35 @@ public abstract class AbstractMapperTest {
         role.setRoleType(USER);
         return role;
     }
+
+    protected Workout getWorkoutTest() {
+        Workout workout = new Workout(getUserDetailsTest(), new GregorianCalendar(2010, 1, 4).getTime());
+        workout.setDate(new GregorianCalendar().getTime());
+        workout.setUserId(getUserDetailsTest());
+        workout.setId(10L);
+        return workout;
+    }
+
+    protected Workout buildWorkoutTest() {
+        Workout workout = getWorkoutTest();
+        workout.setUserExercises(Arrays.asList(getUserExerciseTest()));
+        return workout;
+    }
+
+    protected Exercise getExercise() {
+        Exercise exercise = new Exercise("name", "desc", ExerciseType.BACK);
+        exercise.setId(2L);
+        return exercise;
+    }
+
+    protected UserExercise getUserExerciseTest() {
+        UserExercise userExercise = new UserExercise();
+        userExercise.setId(2L);
+        userExercise.setSeries(14);
+        userExercise.setRepeat(9);
+        userExercise.setWorkoutId(getWorkoutTest());
+        userExercise.setExercise(getExercise());
+        return userExercise;
+    }
+
 }
