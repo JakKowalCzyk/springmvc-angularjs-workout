@@ -43,11 +43,17 @@ public class UserDetailsMapperTest extends AbstractMapperTest {
         userDetailsDTO.setHashedPassword("pass");
         userDetailsDTO.setEmail("email");
         userDetailsDTO.setEnabled(true);
+        userDetailsDTO.setAccountNonLocked(true);
+        userDetailsDTO.setAccountNonExpired(true);
+        userDetailsDTO.setCredentialsNonExpired(true);
         userDetailsDTO.setId(2L);
         userDetailsDTO.setRoles(Arrays.asList(1L).stream().collect(Collectors.toSet()));
         UserDetails userDetails = userDetailsMapper.mapToBO(userDetailsDTO);
         assertTrue(userDetails.getId() == 2L);
-        assertTrue(userDetails.getEnabled());
+        assertTrue(userDetails.isEnabled());
+        assertTrue(userDetails.isAccountNonExpired());
+        assertTrue(userDetails.isAccountNonLocked());
+        assertEquals(userDetailsDTO.isCredentialsNonExpired(), userDetails.isCredentialsNonExpired());
         assertEquals(userDetailsDTO.getFirstName(), userDetails.getFirstName());
         assertEquals(userDetailsDTO.getBirthDay(), userDetails.getBirthDay());
         assertEquals(userDetailsDTO.getLastName(), userDetails.getLastName());
@@ -68,6 +74,10 @@ public class UserDetailsMapperTest extends AbstractMapperTest {
         assertEquals(userDetails.getLogin(), userDetailsDTO.getLogin());
         assertEquals(userDetails.getHashedPassword(), userDetailsDTO.getHashedPassword());
         assertTrue(userDetailsDTO.getRoles().iterator().next() == 1L);
+        assertTrue(userDetailsDTO.isEnabled());
+        assertTrue(userDetailsDTO.isAccountNonExpired());
+        assertTrue(userDetailsDTO.isAccountNonLocked());
+        assertEquals(userDetails.isCredentialsNonExpired(), userDetailsDTO.isCredentialsNonExpired());
     }
 
 }

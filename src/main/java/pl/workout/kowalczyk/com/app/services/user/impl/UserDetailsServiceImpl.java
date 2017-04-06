@@ -32,8 +32,8 @@ public class UserDetailsServiceImpl extends ModelServiceImpl<pl.workout.kowalczy
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         pl.workout.kowalczyk.com.app.model.BO.user.UserDetails userDetails = userDetailsDao.getByLogin(s);
-        return new User(userDetails.getLogin(), userDetails.getHashedPassword(), userDetails.getEnabled(), true, true,
-                true, buildUserAuthority(userDetails.getRoles()));
+        return new User(userDetails.getLogin(), userDetails.getHashedPassword(), userDetails.isEnabled(), userDetails.isAccountNonExpired(), userDetails.isCredentialsNonExpired(),
+                userDetails.isAccountNonLocked(), buildUserAuthority(userDetails.getRoles()));
     }
 
     private List<GrantedAuthority> buildUserAuthority(Set<Role> userRoles) {

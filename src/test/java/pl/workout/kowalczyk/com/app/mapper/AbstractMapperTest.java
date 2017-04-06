@@ -48,8 +48,18 @@ public abstract class AbstractMapperTest {
     }
 
     protected UserDetails getUserDetailsTest() {
-        UserDetails userDetails = new UserDetails("log", "123", true, "name",
-                "lastname", new GregorianCalendar(2012, 2, 14).getTime(), "email");
+        UserDetails userDetails = new UserDetails();
+        userDetails.setLogin("log");
+        userDetails.setHashedPassword("123");
+        userDetails.setEnabled(true);
+        userDetails.setAccountNonExpired(true);
+        userDetails.setAccountNonLocked(true);
+        userDetails.setCredentialsNonExpired(true);
+        userDetails.setEnabled(true);
+        userDetails.setFirstName("name");
+        userDetails.setLastName("lastname");
+        userDetails.setBirthDay(new GregorianCalendar(2012, 2, 14).getTime());
+        userDetails.setEmail("email");
         userDetails.setId(1L);
         userDetails.setRoles(Arrays.asList(getUserRoleTest()).stream().collect(Collectors.toSet()));
         return userDetails;

@@ -16,22 +16,16 @@ import java.util.Set;
 public class UserDetails extends ModelObject {
     private String login;
     private String hashedPassword;
-    private Boolean enabled;
+    private boolean enabled;
+    private boolean accountNonExpired;
+    private boolean credentialsNonExpired;
+    private boolean accountNonLocked;
     private Set<Role> roles = new HashSet<>();
     private String firstName;
     private String lastName;
     private Date birthDay;
     private String email;
 
-    public UserDetails(String login, String hashedPassword, Boolean enabled, String firstName, String lastName, Date birthDay, String email) {
-        this.login = login;
-        this.hashedPassword = hashedPassword;
-        this.enabled = enabled;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDay = birthDay;
-        this.email = email;
-    }
 
     public UserDetails() {
     }
@@ -50,14 +44,6 @@ public class UserDetails extends ModelObject {
 
     public void setHashedPassword(String password) {
         this.hashedPassword = password;
-    }
-
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
     }
 
     public String getFirstName() {
@@ -99,5 +85,37 @@ public class UserDetails extends ModelObject {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public boolean isAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
     }
 }
