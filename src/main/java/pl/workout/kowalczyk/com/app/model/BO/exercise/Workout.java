@@ -4,8 +4,8 @@ import pl.workout.kowalczyk.com.app.model.BO.ModelObject;
 import pl.workout.kowalczyk.com.app.model.BO.user.UserDetails;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
