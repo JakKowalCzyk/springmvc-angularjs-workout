@@ -1,11 +1,10 @@
 package pl.workout.kowalczyk.com.app.model.BO.user;
 
 import pl.workout.kowalczyk.com.app.model.BO.ModelObject;
-import pl.workout.kowalczyk.com.app.model.BO.security.UserRole;
+import pl.workout.kowalczyk.com.app.model.BO.security.Role;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,18 +17,16 @@ public class UserDetails extends ModelObject {
     private String login;
     private String hashedPassword;
     private Boolean enabled;
-    private Set<UserRole> userRoles = new HashSet<>();
+    private Set<Role> roles = new HashSet<>();
     private String firstName;
     private String lastName;
     private Date birthDay;
     private String email;
 
-
-    public UserDetails(String login, String hashedPassword, Boolean enabled, Set<UserRole> userRoles, String firstName, String lastName, Date birthDay, String email) {
+    public UserDetails(String login, String hashedPassword, Boolean enabled, String firstName, String lastName, Date birthDay, String email) {
         this.login = login;
         this.hashedPassword = hashedPassword;
         this.enabled = enabled;
-        this.userRoles = userRoles;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDay = birthDay;
@@ -53,15 +50,6 @@ public class UserDetails extends ModelObject {
 
     public void setHashedPassword(String password) {
         this.hashedPassword = password;
-    }
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "userDetails")
-    public Set<UserRole> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(Set<UserRole> userRoleSet) {
-        this.userRoles = userRoleSet;
     }
 
     public Boolean getEnabled() {
@@ -102,5 +90,14 @@ public class UserDetails extends ModelObject {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @ManyToMany
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

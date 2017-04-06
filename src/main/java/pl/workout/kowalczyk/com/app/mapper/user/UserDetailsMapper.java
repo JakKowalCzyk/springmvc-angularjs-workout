@@ -7,7 +7,7 @@ import pl.workout.kowalczyk.com.app.mapper.impl.ModelMapperImpl;
 import pl.workout.kowalczyk.com.app.model.BO.ModelObject;
 import pl.workout.kowalczyk.com.app.model.BO.user.UserDetails;
 import pl.workout.kowalczyk.com.app.model.DTO.user.UserDetailsDTO;
-import pl.workout.kowalczyk.com.app.services.security.UserRoleService;
+import pl.workout.kowalczyk.com.app.services.security.RoleService;
 
 import java.util.stream.Collectors;
 
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class UserDetailsMapper extends ModelMapperImpl<UserDetails, UserDetailsDTO> {
 
     @Autowired
-    private UserRoleService userRoleService;
+    private RoleService roleService;
 
     @Override
     protected UserDetails buildBO(UserDetailsDTO objectDTO) {
@@ -30,7 +30,7 @@ public class UserDetailsMapper extends ModelMapperImpl<UserDetails, UserDetailsD
         userDetails.setEnabled(objectDTO.getEnabled());
         userDetails.setLogin(objectDTO.getLogin());
         userDetails.setHashedPassword(objectDTO.getHashedPassword());
-        userDetails.setUserRoles(objectDTO.getUserRoles().stream().map(userRoleDTO -> userRoleService.getObject(userRoleDTO)).collect(Collectors.toSet()));
+        userDetails.setRoles(objectDTO.getRoles().stream().map(userRoleDTO -> roleService.getObject(userRoleDTO)).collect(Collectors.toSet()));
         return userDetails;
     }
 
@@ -44,7 +44,7 @@ public class UserDetailsMapper extends ModelMapperImpl<UserDetails, UserDetailsD
         userDetailsDTO.setEnabled(modelObject.getEnabled());
         userDetailsDTO.setLogin(modelObject.getLogin());
         userDetailsDTO.setHashedPassword(modelObject.getHashedPassword());
-        userDetailsDTO.setUserRoles(modelObject.getUserRoles().stream().map(ModelObject::getId).collect(Collectors.toSet()));
-        return null;
+        userDetailsDTO.setRoles(modelObject.getRoles().stream().map(ModelObject::getId).collect(Collectors.toSet()));
+        return userDetailsDTO;
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pl.workout.kowalczyk.com.app.mapper.AbstractMapperTest;
 import pl.workout.kowalczyk.com.app.model.BO.user.UserDetails;
 import pl.workout.kowalczyk.com.app.model.DTO.user.UserDetailsDTO;
-import pl.workout.kowalczyk.com.app.services.security.UserRoleService;
+import pl.workout.kowalczyk.com.app.services.security.RoleService;
 
 import java.util.Arrays;
 import java.util.GregorianCalendar;
@@ -24,13 +24,13 @@ public class UserDetailsMapperTest extends AbstractMapperTest {
     @Autowired
     private UserDetailsMapper userDetailsMapper;
     @Autowired
-    private UserRoleService userRoleService;
+    private RoleService roleService;
 
     @Override
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        Mockito.when(userRoleService.getObject(Mockito.anyLong())).thenReturn(getUserRoleTest());
+        Mockito.when(roleService.getObject(Mockito.anyLong())).thenReturn(getUserRoleTest());
     }
 
     @Test
@@ -44,7 +44,7 @@ public class UserDetailsMapperTest extends AbstractMapperTest {
         userDetailsDTO.setEmail("email");
         userDetailsDTO.setEnabled(true);
         userDetailsDTO.setId(2L);
-        userDetailsDTO.setUserRoles(Arrays.asList(1L).stream().collect(Collectors.toSet()));
+        userDetailsDTO.setRoles(Arrays.asList(1L).stream().collect(Collectors.toSet()));
         UserDetails userDetails = userDetailsMapper.mapToBO(userDetailsDTO);
         assertTrue(userDetails.getId() == 2L);
         assertTrue(userDetails.getEnabled());
@@ -54,8 +54,7 @@ public class UserDetailsMapperTest extends AbstractMapperTest {
         assertEquals(userDetailsDTO.getEmail(), userDetails.getEmail());
         assertEquals(userDetailsDTO.getLogin(), userDetails.getLogin());
         assertEquals(userDetailsDTO.getHashedPassword(), userDetails.getHashedPassword());
-        assertEquals(getUserRoleTest().getRole().getId(), userDetails.getUserRoles().iterator().next().getRole().getId());
-        assertEquals(getUserRoleTest().getId(), userDetails.getUserRoles().iterator().next().getId());
+        assertEquals(getUserRoleTest().getId(), userDetails.getRoles().iterator().next().getId());
     }
 
     @Test
@@ -68,7 +67,7 @@ public class UserDetailsMapperTest extends AbstractMapperTest {
         assertEquals(userDetails.getEmail(), userDetailsDTO.getEmail());
         assertEquals(userDetails.getLogin(), userDetailsDTO.getLogin());
         assertEquals(userDetails.getHashedPassword(), userDetailsDTO.getHashedPassword());
-        assertTrue(userDetailsDTO.getUserRoles().iterator().next() == 1L);
+        assertTrue(userDetailsDTO.getRoles().iterator().next() == 1L);
     }
 
 }

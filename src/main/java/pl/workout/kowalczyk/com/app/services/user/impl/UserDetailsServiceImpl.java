@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.workout.kowalczyk.com.app.dao.user.UserDetailsDao;
-import pl.workout.kowalczyk.com.app.model.BO.security.UserRole;
+import pl.workout.kowalczyk.com.app.model.BO.security.Role;
 import pl.workout.kowalczyk.com.app.services.impl.ModelServiceImpl;
 import pl.workout.kowalczyk.com.app.services.user.UserDetailsService;
 
@@ -33,12 +33,12 @@ public class UserDetailsServiceImpl extends ModelServiceImpl<pl.workout.kowalczy
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         pl.workout.kowalczyk.com.app.model.BO.user.UserDetails userDetails = userDetailsDao.getByLogin(s);
         return new User(userDetails.getLogin(), userDetails.getHashedPassword(), userDetails.getEnabled(), true, true,
-                true, buildUserAuthority(userDetails.getUserRoles()));
+                true, buildUserAuthority(userDetails.getRoles()));
     }
 
-    private List<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles) {
+    private List<GrantedAuthority> buildUserAuthority(Set<Role> userRoles) {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        userRoles.forEach(userRole -> grantedAuthorities.add(new SimpleGrantedAuthority(userRole.getRole().getName())));
+        userRoles.forEach(userRole -> grantedAuthorities.add(new SimpleGrantedAuthority(userRole.getName())));
         return grantedAuthorities;
     }
 

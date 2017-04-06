@@ -14,7 +14,7 @@ public class UserDetailsDTO extends ObjectDTO {
     private String login;
     private String hashedPassword;
     private Boolean enabled;
-    private Set<Long> userRoles = new HashSet<Long>();
+    private Set<Long> roles = new HashSet<Long>();
     private String firstName;
     private String lastName;
     private Date birthDay;
@@ -47,12 +47,12 @@ public class UserDetailsDTO extends ObjectDTO {
         this.enabled = enabled;
     }
 
-    public Set<Long> getUserRoles() {
-        return userRoles;
+    public Set<Long> getRoles() {
+        return roles;
     }
 
-    public void setUserRoles(Set<Long> userRoles) {
-        this.userRoles = userRoles;
+    public void setRoles(Set<Long> roles) {
+        this.roles = roles;
     }
 
     public String getFirstName() {
