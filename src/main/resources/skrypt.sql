@@ -4,7 +4,7 @@ VALUES (TRUE, 'nowy', '123', '1990-01-22', 'kowal@email.pl', 'kowalczyk', 'kowal
 INSERT INTO user_details (enabled, login, hashed_Password, birth_day, email, first_name, last_name)
 VALUES (TRUE, 'nowy2', '1234', '1996-01-22', 'email@email.pl', 'nowy2', 'nowy');
 INSERT INTO user_details (enabled, login, hashed_Password) VALUES (TRUE, 'nowy3', '1234');
-INSERT INTO role (name) VALUES ('USER');
+INSERT INTO role (role_type) VALUES ('USER');
 INSERT INTO user_details_roles (user_details_id, roles_id) VALUES (1, 1);
 INSERT INTO user_details_roles (user_details_id, roles_id) VALUES (2, 1);
 --workout

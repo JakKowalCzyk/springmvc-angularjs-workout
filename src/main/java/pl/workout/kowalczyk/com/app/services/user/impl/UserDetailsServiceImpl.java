@@ -12,9 +12,9 @@ import pl.workout.kowalczyk.com.app.model.BO.security.Role;
 import pl.workout.kowalczyk.com.app.services.impl.ModelServiceImpl;
 import pl.workout.kowalczyk.com.app.services.user.UserDetailsService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by JK on 2016-12-18.
@@ -37,9 +37,7 @@ public class UserDetailsServiceImpl extends ModelServiceImpl<pl.workout.kowalczy
     }
 
     private List<GrantedAuthority> buildUserAuthority(Set<Role> userRoles) {
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        userRoles.forEach(userRole -> grantedAuthorities.add(new SimpleGrantedAuthority(userRole.getName())));
-        return grantedAuthorities;
+        return userRoles.stream().map(userRole -> new SimpleGrantedAuthority(userRole.getRoleType().name())).collect(Collectors.toList());
     }
 
 }

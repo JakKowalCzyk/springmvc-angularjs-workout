@@ -19,6 +19,8 @@ import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.stream.Collectors;
 
+import static pl.workout.kowalczyk.com.app.enums.RoleType.USER;
+
 /**
  * Created by JK on 2017-03-22.
  */
@@ -56,7 +58,7 @@ public abstract class AbstractMapperTest {
     protected Role getUserRoleTest() {
         Role role = new Role();
         role.setId(1L);
-        role.setName("A");
+        role.setRoleType(USER);
         return role;
     }
 }

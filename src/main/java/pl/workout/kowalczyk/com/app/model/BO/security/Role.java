@@ -1,8 +1,11 @@
 package pl.workout.kowalczyk.com.app.model.BO.security;
 
+import pl.workout.kowalczyk.com.app.enums.RoleType;
 import pl.workout.kowalczyk.com.app.model.BO.ModelObject;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 /**
  * Created by JK on 2016-12-14.
@@ -10,15 +13,17 @@ import javax.persistence.Entity;
 @Entity
 public class Role extends ModelObject {
 
-    private String name;
+    private RoleType roleType;
 
     public Role() {
     }
-    public String getName() {
-        return name;
+
+    @Enumerated(EnumType.STRING)
+    public RoleType getRoleType() {
+        return roleType;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRoleType(RoleType name) {
+        this.roleType = name;
     }
 }
