@@ -3,7 +3,7 @@ package pl.workout.kowalczyk.com.app.services.user.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.workout.kowalczyk.com.app.dao.user.UserNotesDao;
-import pl.workout.kowalczyk.com.app.model.BO.user.UserNotes;
+import pl.workout.kowalczyk.com.app.model.BO.user.impl.UserNotes;
 import pl.workout.kowalczyk.com.app.services.impl.ModelServiceImpl;
 import pl.workout.kowalczyk.com.app.services.user.UserNotesService;
 

@@ -42,7 +42,7 @@ public class WorkoutMapperTest extends AbstractMapperTest {
         Workout workout = workoutMapper.mapToBO(workoutDTO);
         assertEquals(workoutDTO.getId(), workout.getId());
         assertEquals(workoutDTO.getDate(), workout.getDate());
-        assertEquals(getUserDetailsTest().getId(), workout.getUserId().getId());
+        assertEquals(getUserDetailsTest().getId(), workout.getUser().getId());
         assertEquals(2, workout.getUserExercises().size());
         assertEquals(ExerciseType.BACK, workout.getUserExercises().get(0).getExercise().getExerciseType());
     }

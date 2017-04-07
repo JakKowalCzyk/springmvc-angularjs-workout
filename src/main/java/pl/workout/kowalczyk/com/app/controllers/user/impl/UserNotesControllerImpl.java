@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.workout.kowalczyk.com.app.controllers.impl.ModelControllerImpl;
 import pl.workout.kowalczyk.com.app.controllers.user.UserNotesController;
-import pl.workout.kowalczyk.com.app.mapper.user.UserNotesMapper;
-import pl.workout.kowalczyk.com.app.model.BO.user.UserNotes;
-import pl.workout.kowalczyk.com.app.model.DTO.user.UserNotesDTO;
+import pl.workout.kowalczyk.com.app.mapper.user.impl.UserNotesMapper;
+import pl.workout.kowalczyk.com.app.model.BO.user.impl.UserNotes;
+import pl.workout.kowalczyk.com.app.model.DTO.user.impl.UserNotesDTO;
 import pl.workout.kowalczyk.com.app.services.user.UserNotesService;
 
 import java.sql.Date;

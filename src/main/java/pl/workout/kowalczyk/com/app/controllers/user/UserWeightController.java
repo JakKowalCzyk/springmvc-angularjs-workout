@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.workout.kowalczyk.com.app.controllers.ModelController;
-import pl.workout.kowalczyk.com.app.model.DTO.user.UserWeightDTO;
+import pl.workout.kowalczyk.com.app.model.DTO.user.impl.UserWeightDTO;
 
 import java.sql.Date;
 import java.util.List;

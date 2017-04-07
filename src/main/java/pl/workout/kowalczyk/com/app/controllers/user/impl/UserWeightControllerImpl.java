@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.workout.kowalczyk.com.app.controllers.impl.ModelControllerImpl;
 import pl.workout.kowalczyk.com.app.controllers.user.UserWeightController;
-import pl.workout.kowalczyk.com.app.mapper.user.UserWeightMapper;
-import pl.workout.kowalczyk.com.app.model.BO.user.UserWeight;
-import pl.workout.kowalczyk.com.app.model.DTO.user.UserWeightDTO;
+import pl.workout.kowalczyk.com.app.mapper.user.impl.UserWeightMapper;
+import pl.workout.kowalczyk.com.app.model.BO.user.impl.UserWeight;
+import pl.workout.kowalczyk.com.app.model.DTO.user.impl.UserWeightDTO;
 import pl.workout.kowalczyk.com.app.services.user.UserWeightService;
 
 import java.sql.Date;

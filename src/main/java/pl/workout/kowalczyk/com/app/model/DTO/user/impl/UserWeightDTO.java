@@ -1,29 +1,19 @@
-package pl.workout.kowalczyk.com.app.model.DTO.user;
+package pl.workout.kowalczyk.com.app.model.DTO.user.impl;
 
-import pl.workout.kowalczyk.com.app.model.DTO.ObjectDTO;
+import pl.workout.kowalczyk.com.app.model.DTO.user.AbstractUserObjectDTO;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Created by JK on 2016-11-18.
  */
-public class UserWeightDTO extends ObjectDTO {
-
-    private Long userId;
+public class UserWeightDTO extends AbstractUserObjectDTO {
 
     private Integer weightKg;
 
     private Date date;
 
     public UserWeightDTO() {
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public Integer getWeightKg() {

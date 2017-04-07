@@ -1,7 +1,7 @@
-package pl.workout.kowalczyk.com.app.model.BO.user;
+package pl.workout.kowalczyk.com.app.model.BO.user.impl;
 
-import pl.workout.kowalczyk.com.app.model.BO.ModelObject;
 import pl.workout.kowalczyk.com.app.model.BO.exercise.Exercise;
+import pl.workout.kowalczyk.com.app.model.BO.user.AbstractUserObject;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -11,27 +11,13 @@ import javax.persistence.OneToOne;
  * Created by JK on 2016-09-17.
  */
 @Entity
-public class UserInfo extends ModelObject {
-    private UserDetails userId;
+public class UserInfo extends AbstractUserObject {
 
     private UserWeight actualWeight;
 
     private Exercise exerciseFavouriteId;
 
-    public UserInfo(Long userInfo_id) {
-        super(userInfo_id);
-    }
-
     public UserInfo() {
-    }
-    @OneToOne
-    @JoinColumn(name = "user_details_id")
-    public UserDetails getUserId() {
-        return userId;
-    }
-
-    public void setUserId(UserDetails userId) {
-        this.userId = userId;
     }
 
     @OneToOne

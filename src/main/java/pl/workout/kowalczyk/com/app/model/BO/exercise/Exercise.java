@@ -2,7 +2,7 @@ package pl.workout.kowalczyk.com.app.model.BO.exercise;
 
 import pl.workout.kowalczyk.com.app.enums.ExerciseType;
 import pl.workout.kowalczyk.com.app.model.BO.ModelObject;
-import pl.workout.kowalczyk.com.app.model.BO.user.UserInfo;
+import pl.workout.kowalczyk.com.app.model.BO.user.impl.UserInfo;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

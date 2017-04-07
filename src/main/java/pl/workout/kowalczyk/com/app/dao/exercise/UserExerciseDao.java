@@ -13,7 +13,7 @@ import java.util.List;
 public interface UserExerciseDao extends BaseDao<UserExercise> {
 
     @Query("SELECT o FROM UserExercise o inner join o.workoutId as workout" +
-            " inner join workout.userId as user where user.id = :userId")
+            " inner join workout.user as user where user.id = :userId")
     List<UserExercise> getUserExercisesByUserId(@Param("userId") Long userId);
 
     @Query("select wor.userExercises from Workout wor where wor.id = :workoutId")

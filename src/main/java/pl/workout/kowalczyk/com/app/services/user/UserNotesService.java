@@ -1,6 +1,6 @@
 package pl.workout.kowalczyk.com.app.services.user;
 
-import pl.workout.kowalczyk.com.app.model.BO.user.UserNotes;
+import pl.workout.kowalczyk.com.app.model.BO.user.impl.UserNotes;
 import pl.workout.kowalczyk.com.app.services.ModelService;
 
 import java.sql.Date;

@@ -1,27 +1,17 @@
-package pl.workout.kowalczyk.com.app.model.DTO.user;
+package pl.workout.kowalczyk.com.app.model.DTO.user.impl;
 
-import pl.workout.kowalczyk.com.app.model.DTO.ObjectDTO;
+import pl.workout.kowalczyk.com.app.model.DTO.user.AbstractUserObjectDTO;
 
 import java.util.Date;
 
 /**
  * Created by JK on 2016-11-18.
  */
-public class UserNotesDTO extends ObjectDTO {
-    private Long user_id;
+public class UserNotesDTO extends AbstractUserObjectDTO {
     private String note;
     private Date date;
 
     public UserNotesDTO() {
-    }
-
-
-    public Long getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
     }
 
     public String getNote() {

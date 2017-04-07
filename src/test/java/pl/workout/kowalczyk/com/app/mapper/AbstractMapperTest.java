@@ -77,9 +77,10 @@ public abstract class AbstractMapperTest {
     }
 
     protected Workout getWorkoutTest() {
-        Workout workout = new Workout(getUserDetailsTest(), new GregorianCalendar(2010, 1, 4).getTime());
+        Workout workout = new Workout(new GregorianCalendar(2010, 1, 4).getTime());
         workout.setDate(new GregorianCalendar().getTime());
-        workout.setUserId(getUserDetailsTest());
+        workout.setUser(getUserDetailsTest());
+        workout.setUser(getUserDetailsTest());
         workout.setId(10L);
         return workout;
     }

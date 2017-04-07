@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pl.workout.kowalczyk.com.app.dao.BaseDao;
-import pl.workout.kowalczyk.com.app.model.BO.user.UserInfo;
+import pl.workout.kowalczyk.com.app.model.BO.user.impl.UserInfo;
 
 /**
  * Created by JK on 2016-09-22.
@@ -13,7 +13,7 @@ import pl.workout.kowalczyk.com.app.model.BO.user.UserInfo;
 public interface UserInfoDao extends BaseDao<UserInfo> {
 
     @Query("SELECT o FROM UserInfo o " +
-            "inner join o.userId as user " +
+            "inner join o.user as user " +
             "where user.id = :userId")
     UserInfo getUserInfoByUserId(@Param("userId") Long userId);
 

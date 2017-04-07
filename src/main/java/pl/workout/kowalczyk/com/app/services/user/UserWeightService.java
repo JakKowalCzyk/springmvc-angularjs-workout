@@ -1,9 +1,9 @@
 package pl.workout.kowalczyk.com.app.services.user;
 
-import pl.workout.kowalczyk.com.app.model.BO.user.UserWeight;
+import pl.workout.kowalczyk.com.app.model.BO.user.impl.UserWeight;
 import pl.workout.kowalczyk.com.app.services.ModelService;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 /**

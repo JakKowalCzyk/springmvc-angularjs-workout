@@ -9,24 +9,24 @@ INSERT INTO role (role_type) VALUES ('USER');
 INSERT INTO user_details_roles (user_details_id, roles_id) VALUES (1, 1);
 INSERT INTO user_details_roles (user_details_id, roles_id) VALUES (2, 1);
 --workout
-INSERT INTO workout (user_details_id, date) VALUES (1, '2015-02-02');
-INSERT INTO workout (user_details_id, date) VALUES (1, '2015-03-03');
-INSERT INTO workout (user_details_id, date) VALUES (1, '2016-06-20');
-INSERT INTO workout (user_details_id, date) VALUES (1, '2016-06-21');
-INSERT INTO workout (user_details_id, date) VALUES (1, '2016-06-23');
-INSERT INTO workout (user_details_id, date) VALUES (1, '2016-06-25');
-INSERT INTO workout (user_details_id, date) VALUES (1, '2016-06-28');
-INSERT INTO workout (user_details_id, date) VALUES (1, '2016-06-30');
-INSERT INTO workout (user_details_id, date) VALUES (1, '2016-07-02');
-INSERT INTO workout (user_details_id, date) VALUES (1, '2016-07-05');
-INSERT INTO workout (user_details_id, date) VALUES (1, '2016-07-10');
-INSERT INTO workout (user_details_id, date) VALUES (2, '2016-03-03');
-INSERT INTO workout (user_details_id, date) VALUES (2, '2016-03-05');
-INSERT INTO workout (user_details_id, date) VALUES (2, '2016-03-07');
-INSERT INTO workout (user_details_id, date) VALUES (2, '2016-03-08');
-INSERT INTO workout (user_details_id, date) VALUES (2, '2016-03-09');
-INSERT INTO workout (user_details_id, date) VALUES (2, '2016-03-12');
-INSERT INTO workout (user_details_id, date) VALUES (2, '2016-03-14');
+INSERT INTO workout (user_id, date) VALUES (1, '2015-02-02');
+INSERT INTO workout (user_id, date) VALUES (1, '2015-03-03');
+INSERT INTO workout (user_id, date) VALUES (1, '2016-06-20');
+INSERT INTO workout (user_id, date) VALUES (1, '2016-06-21');
+INSERT INTO workout (user_id, date) VALUES (1, '2016-06-23');
+INSERT INTO workout (user_id, date) VALUES (1, '2016-06-25');
+INSERT INTO workout (user_id, date) VALUES (1, '2016-06-28');
+INSERT INTO workout (user_id, date) VALUES (1, '2016-06-30');
+INSERT INTO workout (user_id, date) VALUES (1, '2016-07-02');
+INSERT INTO workout (user_id, date) VALUES (1, '2016-07-05');
+INSERT INTO workout (user_id, date) VALUES (1, '2016-07-10');
+INSERT INTO workout (user_id, date) VALUES (2, '2016-03-03');
+INSERT INTO workout (user_id, date) VALUES (2, '2016-03-05');
+INSERT INTO workout (user_id, date) VALUES (2, '2016-03-07');
+INSERT INTO workout (user_id, date) VALUES (2, '2016-03-08');
+INSERT INTO workout (user_id, date) VALUES (2, '2016-03-09');
+INSERT INTO workout (user_id, date) VALUES (2, '2016-03-12');
+INSERT INTO workout (user_id, date) VALUES (2, '2016-03-14');
 --exercise
 INSERT INTO exercise (name, description, exercise_type) VALUES ('Przysiady', 'Przysiady klasyczne głebokie', 'LEGS');
 INSERT INTO exercise (name, description, exercise_type)
@@ -177,29 +177,29 @@ INSERT INTO user_exercise (exercise_id, workout_id, repeat, series) VALUES (9, 1
 INSERT INTO user_exercise (exercise_id, workout_id, repeat, series) VALUES (10, 18, 8, 3);
 
 --weight
-INSERT INTO user_weight (user_details_id, date, weight_kg) VALUES (1, '2015-02-02', 50);
-INSERT INTO user_weight (user_details_id, date, weight_kg) VALUES (1, '2015-03-03', 51);
-INSERT INTO user_weight (user_details_id, date, weight_kg) VALUES (1, '2016-06-20', 52);
-INSERT INTO user_weight (user_details_id, date, weight_kg) VALUES (1, '2016-06-21', 53);
-INSERT INTO user_weight (user_details_id, date, weight_kg) VALUES (1, '2016-06-23', 54);
-INSERT INTO user_weight (user_details_id, date, weight_kg) VALUES (1, '2016-06-25', 52);
-INSERT INTO user_weight (user_details_id, date, weight_kg) VALUES (1, '2016-06-28', 52);
-INSERT INTO user_weight (user_details_id, date, weight_kg) VALUES (1, '2016-06-30', 53);
-INSERT INTO user_weight (user_details_id, date, weight_kg) VALUES (1, '2016-07-02', 52);
-INSERT INTO user_weight (user_details_id, date, weight_kg) VALUES (1, '2016-07-05', 57);
-INSERT INTO user_weight (user_details_id, date, weight_kg) VALUES (1, '2016-07-10', 58);
-INSERT INTO user_weight (user_details_id, date, weight_kg) VALUES (2, '2016-03-03', 70);
-INSERT INTO user_weight (user_details_id, date, weight_kg) VALUES (2, '2016-03-05', 72);
-INSERT INTO user_weight (user_details_id, date, weight_kg) VALUES (2, '2016-03-07', 71);
-INSERT INTO user_weight (user_details_id, date, weight_kg) VALUES (2, '2016-03-08', 69);
-INSERT INTO user_weight (user_details_id, date, weight_kg) VALUES (2, '2016-03-09', 70);
-INSERT INTO user_weight (user_details_id, date, weight_kg) VALUES (2, '2016-03-12', 70);
-INSERT INTO user_weight (user_details_id, date, weight_kg) VALUES (2, '2016-03-14', 71);
+INSERT INTO user_weight (user_id, date, weight_kg) VALUES (1, '2015-02-02', 50);
+INSERT INTO user_weight (user_id, date, weight_kg) VALUES (1, '2015-03-03', 51);
+INSERT INTO user_weight (user_id, date, weight_kg) VALUES (1, '2016-06-20', 52);
+INSERT INTO user_weight (user_id, date, weight_kg) VALUES (1, '2016-06-21', 53);
+INSERT INTO user_weight (user_id, date, weight_kg) VALUES (1, '2016-06-23', 54);
+INSERT INTO user_weight (user_id, date, weight_kg) VALUES (1, '2016-06-25', 52);
+INSERT INTO user_weight (user_id, date, weight_kg) VALUES (1, '2016-06-28', 52);
+INSERT INTO user_weight (user_id, date, weight_kg) VALUES (1, '2016-06-30', 53);
+INSERT INTO user_weight (user_id, date, weight_kg) VALUES (1, '2016-07-02', 52);
+INSERT INTO user_weight (user_id, date, weight_kg) VALUES (1, '2016-07-05', 57);
+INSERT INTO user_weight (user_id, date, weight_kg) VALUES (1, '2016-07-10', 58);
+INSERT INTO user_weight (user_id, date, weight_kg) VALUES (2, '2016-03-03', 70);
+INSERT INTO user_weight (user_id, date, weight_kg) VALUES (2, '2016-03-05', 72);
+INSERT INTO user_weight (user_id, date, weight_kg) VALUES (2, '2016-03-07', 71);
+INSERT INTO user_weight (user_id, date, weight_kg) VALUES (2, '2016-03-08', 69);
+INSERT INTO user_weight (user_id, date, weight_kg) VALUES (2, '2016-03-09', 70);
+INSERT INTO user_weight (user_id, date, weight_kg) VALUES (2, '2016-03-12', 70);
+INSERT INTO user_weight (user_id, date, weight_kg) VALUES (2, '2016-03-14', 71);
 
-INSERT INTO user_info (user_details_id, exercise_id, weight_id) VALUES (1, 11, 11);
-INSERT INTO user_info (user_details_id, exercise_id, weight_id) VALUES (2, 4, 18);
+INSERT INTO user_info (user_id, exercise_id, weight_id) VALUES (1, 11, 11);
+INSERT INTO user_info (user_id, exercise_id, weight_id) VALUES (2, 4, 18);
 
-INSERT INTO user_notes (user_details_id, date, note)
+INSERT INTO user_notes (user_id, date, note)
 VALUES (1, '2016-10-23', 'notatka pierwsza jakas tam blalblablalbablabl');
-INSERT INTO user_notes (user_details_id, date, note)
+INSERT INTO user_notes (user_id, date, note)
 VALUES (1, '2016-09-26', 'njklsadhaslkdjlaksdjlaskdjlaksjdlakdjlskajd');

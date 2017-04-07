@@ -14,15 +14,15 @@ import java.util.List;
  */
 public interface WorkoutDao extends BaseDao<Workout> {
 
-    @Query("SELECT o FROM Workout o inner join o.userId as user" +
+    @Query("SELECT o FROM Workout o inner join o.user as user" +
             " where user.id = :userId")
     List<Workout> getWorkoutsByUserId(@Param("userId") Long userId);
 
-    @Query("SELECT o FROM Workout  o inner join o.userId as user where user.id = :userId and o.date = :date")
+    @Query("SELECT o FROM Workout  o inner join o.user as user where user.id = :userId and o.date = :date")
     Workout getByUserIdAndDate(@Param("userId") Long userId, @Param("date") Date date);
 
     @Query("SELECT o FROM UserExercise o inner join o.workoutId as workout " +
-            "inner join workout.userId as user " +
+            "inner join workout.user as user " +
             "where user.id = :userId and workout.date = :date")
     List<UserExercise> getUserExercisesByIdAndDate(@Param("userId") Long userId, @Param("date") Date date);
 }

@@ -26,7 +26,7 @@ public class WorkoutMapper extends ModelMapperImpl<Workout, WorkoutDTO> {
     protected Workout buildBO(WorkoutDTO objectDTO) {
         Workout workout = new Workout();
         workout.setDate(objectDTO.getDate());
-        workout.setUserId(userDetailsService.getObject(objectDTO.getUserId()));
+        workout.setUser(userDetailsService.getObject(objectDTO.getUserId()));
         if (objectDTO.getUserExercises() != null) {
             workout.setUserExercises(objectDTO.getUserExercises().stream().map(aLong -> userExerciseService.getObject(aLong)).collect(Collectors.toList()));
         }
@@ -37,7 +37,7 @@ public class WorkoutMapper extends ModelMapperImpl<Workout, WorkoutDTO> {
     protected WorkoutDTO buildDTO(Workout modelObject) {
         WorkoutDTO workoutDTO = new WorkoutDTO();
         workoutDTO.setDate(modelObject.getDate());
-        workoutDTO.setUserId(modelObject.getUserId().getId());
+        workoutDTO.setUserId(modelObject.getUser().getId());
         workoutDTO.setUserExercises(modelObject.getUserExercises().stream().map(ModelObject::getId).collect(Collectors.toList()));
         return workoutDTO;
     }

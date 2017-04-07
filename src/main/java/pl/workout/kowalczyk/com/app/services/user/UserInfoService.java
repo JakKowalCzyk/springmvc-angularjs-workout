@@ -1,6 +1,6 @@
 package pl.workout.kowalczyk.com.app.services.user;
 
-import pl.workout.kowalczyk.com.app.model.BO.user.UserInfo;
+import pl.workout.kowalczyk.com.app.model.BO.user.impl.UserInfo;
 import pl.workout.kowalczyk.com.app.services.ModelService;
 
 /**

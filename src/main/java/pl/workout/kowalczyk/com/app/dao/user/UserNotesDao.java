@@ -3,7 +3,7 @@ package pl.workout.kowalczyk.com.app.dao.user;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import pl.workout.kowalczyk.com.app.dao.BaseDao;
-import pl.workout.kowalczyk.com.app.model.BO.user.UserNotes;
+import pl.workout.kowalczyk.com.app.model.BO.user.impl.UserNotes;
 
 import java.sql.Date;
 import java.util.List;
@@ -13,9 +13,9 @@ import java.util.List;
  */
 public interface UserNotesDao extends BaseDao<UserNotes> {
 
-    @Query("SELECT o FROM UserNotes o  join o.user_id as userid where userid.id = :userId")
+    @Query("SELECT o FROM UserNotes o  join o.user as userid where userid.id = :userId")
     List<UserNotes> getUserNotesByUserId(@Param("userId") Long userId);
 
-    @Query("SELECT o FROM UserNotes o join o.user_id as userid where userid.id = :userId and o.date = :date")
+    @Query("SELECT o FROM UserNotes o join o.user as userid where userid.id = :userId and o.date = :date")
     List<UserNotes> getSingleNoteByDate(@Param("userId") Long userId, @Param("date") Date date);
 }
