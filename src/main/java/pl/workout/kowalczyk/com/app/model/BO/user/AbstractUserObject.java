@@ -2,8 +2,8 @@ package pl.workout.kowalczyk.com.app.model.BO.user;
 
 import pl.workout.kowalczyk.com.app.model.BO.ModelObject;
 
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToOne;
 
 /**
  * Created by JK on 2017-04-07.
@@ -16,7 +16,7 @@ public abstract class AbstractUserObject extends ModelObject {
     public AbstractUserObject() {
     }
 
-    @OneToOne
+    @ManyToOne
     public UserDetails getUser() {
         return user;
     }

@@ -1,13 +1,18 @@
 package pl.workout.kowalczyk.com.app.model.BO.user;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import pl.workout.kowalczyk.com.app.model.BO.ModelObject;
+import pl.workout.kowalczyk.com.app.model.BO.exercise.Workout;
 import pl.workout.kowalczyk.com.app.model.BO.security.Role;
+import pl.workout.kowalczyk.com.app.model.BO.user.impl.UserInfo;
+import pl.workout.kowalczyk.com.app.model.BO.user.impl.UserNotes;
+import pl.workout.kowalczyk.com.app.model.BO.user.impl.UserWeight;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.OneToMany;
+import java.util.*;
 
 /**
  * Created by JK on 2016-12-12.
@@ -25,7 +30,10 @@ public class UserDetails extends ModelObject {
     private String lastName;
     private Date birthDay;
     private String email;
-
+    private List<UserWeight> userWeightList = new ArrayList<>();
+    private List<UserNotes> userNotes = new ArrayList<>();
+    private List<UserInfo> userInfoList = new ArrayList<>();
+    private List<Workout> workouts = new ArrayList<>();
 
     public UserDetails() {
     }
@@ -117,5 +125,45 @@ public class UserDetails extends ModelObject {
 
     public void setAccountNonLocked(boolean accountNonLocked) {
         this.accountNonLocked = accountNonLocked;
+    }
+
+    @OneToMany(mappedBy = "user")
+    @Cascade(CascadeType.DELETE)
+    public List<UserWeight> getUserWeightList() {
+        return userWeightList;
+    }
+
+    public void setUserWeightList(List<UserWeight> userWeightList) {
+        this.userWeightList = userWeightList;
+    }
+
+    @OneToMany(mappedBy = "user")
+    @Cascade(CascadeType.DELETE)
+    public List<UserNotes> getUserNotes() {
+        return userNotes;
+    }
+
+    public void setUserNotes(List<UserNotes> userNotes) {
+        this.userNotes = userNotes;
+    }
+
+    @OneToMany(mappedBy = "user")
+    @Cascade(CascadeType.DELETE)
+    public List<UserInfo> getUserInfoList() {
+        return userInfoList;
+    }
+
+    public void setUserInfoList(List<UserInfo> userInfoList) {
+        this.userInfoList = userInfoList;
+    }
+
+    @OneToMany(mappedBy = "user")
+    @Cascade(CascadeType.DELETE)
+    public List<Workout> getWorkouts() {
+        return workouts;
+    }
+
+    public void setWorkouts(List<Workout> workouts) {
+        this.workouts = workouts;
     }
 }
