@@ -48,7 +48,7 @@ public class ExerciseControllerImpl extends ModelControllerImpl<Exercise, Exerci
     }
 
     @Override
-    public void deleteObject(Long id) {
+    public void deleteObject(@PathVariable Long id) {
         super.deleteObject(id);
     }
 

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.workout.kowalczyk.com.app.dao.exercise.ExerciseDao;
 import pl.workout.kowalczyk.com.app.enums.ExerciseType;
 import pl.workout.kowalczyk.com.app.model.BO.exercise.Exercise;
+import pl.workout.kowalczyk.com.app.model.exception.DeleteException;
 import pl.workout.kowalczyk.com.app.services.exercise.ExerciseService;
 import pl.workout.kowalczyk.com.app.services.impl.ModelServiceImpl;
 
@@ -27,5 +28,14 @@ public class ExerciseServiceImpl extends ModelServiceImpl<Exercise> implements E
 
     public List<Exercise> getExercisesForBodyPart(ExerciseType exerciseType) {
         return ((ExerciseDao) getBaseDao()).getExercisesForBodyPart(exerciseType);
+    }
+
+    @Override
+    public void deleteObject(Long id) {
+        try {
+            super.deleteObject(id);
+        } catch (Exception e) {
+            throw new DeleteException(id);
+        }
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.workout.kowalczyk.com.app.dao.security.RoleDao;
 import pl.workout.kowalczyk.com.app.model.BO.security.Role;
+import pl.workout.kowalczyk.com.app.model.exception.DeleteException;
 import pl.workout.kowalczyk.com.app.services.impl.ModelServiceImpl;
 import pl.workout.kowalczyk.com.app.services.security.RoleService;
 
@@ -16,5 +17,15 @@ public class RoleServiceImpl extends ModelServiceImpl<Role> implements RoleServi
     @Autowired
     public RoleServiceImpl(RoleDao baseDao) {
         super(baseDao);
+    }
+
+    @Override
+    public void deleteObject(Long id) {
+        try {
+            super.deleteObject(id);
+        } catch (Exception e) {
+            throw new DeleteException(id);
+        }
+
     }
 }
