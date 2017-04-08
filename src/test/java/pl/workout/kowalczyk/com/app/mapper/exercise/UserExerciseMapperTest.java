@@ -28,7 +28,7 @@ public class UserExerciseMapperTest extends AbstractMapperTest {
     @Override
     @Before
     public void setUp() throws Exception {
-        Mockito.when(exerciseService.getObject(Mockito.anyLong())).thenReturn(getExercise());
+        Mockito.when(exerciseService.getObject(Mockito.anyLong())).thenReturn(getExerciseTest());
         Mockito.when(workoutService.getObject(Mockito.anyLong())).thenReturn(getWorkoutTest());
         super.setUp();
     }
@@ -57,7 +57,7 @@ public class UserExerciseMapperTest extends AbstractMapperTest {
         assertTrue(14 == userExerciseDTO.getSeries());
         assertTrue(userExercise.getRepeat() == userExerciseDTO.getRepeat());
         assertEquals(getWorkoutTest().getId(), userExerciseDTO.getWorkoutId());
-        assertEquals(getExercise().getId(), userExerciseDTO.getExerciseId());
+        assertEquals(getExerciseTest().getId(), userExerciseDTO.getExerciseId());
     }
 
 }

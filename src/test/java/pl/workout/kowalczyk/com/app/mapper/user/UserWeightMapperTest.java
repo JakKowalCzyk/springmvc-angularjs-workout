@@ -36,11 +36,7 @@ public class UserWeightMapperTest extends AbstractMapperTest {
 
     @Test
     public void mapToDTO() throws Exception {
-        UserWeight userWeight = new UserWeight();
-        userWeight.setId(4L);
-        userWeight.setUser(getUserDetailsTest());
-        userWeight.setDate(null);
-        userWeight.setWeightKg(32);
+        UserWeight userWeight = getUserWeightTest();
         UserWeightDTO userWeightDTO = userWeightMapper.mapToDTO(userWeight);
         assertEquals(userWeight.getId(), userWeightDTO.getId());
         assertEquals(userWeight.getDate(), userWeightDTO.getDate());

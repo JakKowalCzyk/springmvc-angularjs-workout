@@ -12,6 +12,7 @@ import pl.workout.kowalczyk.com.app.model.BO.exercise.UserExercise;
 import pl.workout.kowalczyk.com.app.model.BO.exercise.Workout;
 import pl.workout.kowalczyk.com.app.model.BO.security.Role;
 import pl.workout.kowalczyk.com.app.model.BO.user.UserDetails;
+import pl.workout.kowalczyk.com.app.model.BO.user.impl.UserWeight;
 import pl.workout.kowalczyk.com.app.services.exercise.ExerciseService;
 import pl.workout.kowalczyk.com.app.services.exercise.UserExerciseService;
 import pl.workout.kowalczyk.com.app.services.exercise.WorkoutService;
@@ -91,7 +92,7 @@ public abstract class AbstractMapperTest {
         return workout;
     }
 
-    protected Exercise getExercise() {
+    protected Exercise getExerciseTest() {
         Exercise exercise = new Exercise("name", "desc", ExerciseType.BACK);
         exercise.setId(2L);
         return exercise;
@@ -103,8 +104,16 @@ public abstract class AbstractMapperTest {
         userExercise.setSeries(14);
         userExercise.setRepeat(9);
         userExercise.setWorkoutId(getWorkoutTest());
-        userExercise.setExercise(getExercise());
+        userExercise.setExercise(getExerciseTest());
         return userExercise;
     }
 
+    protected UserWeight getUserWeightTest() {
+        UserWeight userWeight = new UserWeight();
+        userWeight.setId(4L);
+        userWeight.setUser(getUserDetailsTest());
+        userWeight.setDate(null);
+        userWeight.setWeightKg(32);
+        return userWeight;
+    }
 }
