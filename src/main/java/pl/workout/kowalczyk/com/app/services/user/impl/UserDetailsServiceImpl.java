@@ -21,8 +21,6 @@ import java.util.stream.Collectors;
  */
 @Service
 public class UserDetailsServiceImpl extends ModelServiceImpl<pl.workout.kowalczyk.com.app.model.BO.user.UserDetails> implements UserDetailsService {
-    @Autowired
-    private UserDetailsDao userDetailsDao;
 
     @Autowired
     public UserDetailsServiceImpl(UserDetailsDao baseDao) {
@@ -31,7 +29,7 @@ public class UserDetailsServiceImpl extends ModelServiceImpl<pl.workout.kowalczy
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        pl.workout.kowalczyk.com.app.model.BO.user.UserDetails userDetails = userDetailsDao.getByLogin(s);
+        pl.workout.kowalczyk.com.app.model.BO.user.UserDetails userDetails = getByLogin(s);
         return new User(userDetails.getLogin(), userDetails.getHashedPassword(), userDetails.isEnabled(), userDetails.isAccountNonExpired(), userDetails.isCredentialsNonExpired(),
                 userDetails.isAccountNonLocked(), buildUserAuthority(userDetails.getRoles()));
     }
@@ -40,4 +38,8 @@ public class UserDetailsServiceImpl extends ModelServiceImpl<pl.workout.kowalczy
         return userRoles.stream().map(userRole -> new SimpleGrantedAuthority(userRole.getRoleType().name())).collect(Collectors.toList());
     }
 
+    @Override
+    public pl.workout.kowalczyk.com.app.model.BO.user.UserDetails getByLogin(String login) {
+        return ((UserDetailsDao) getBaseDao()).getByLogin(login);
+    }
 }

@@ -8,4 +8,5 @@ import pl.workout.kowalczyk.com.app.services.ModelService;
  */
 public interface UserDetailsService extends org.springframework.security.core.userdetails.UserDetailsService, ModelService<UserDetails> {
 
+    UserDetails getByLogin(String login);
 }
