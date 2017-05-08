@@ -36,4 +36,8 @@ public interface RoleController extends ModelController<RoleDTO> {
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     void deleteObject(@PathVariable Long id);
+
+    @Override
+    @RequestMapping(value = "/exist", method = RequestMethod.GET)
+    boolean isExist(@PathVariable Long id);
 }

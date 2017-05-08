@@ -43,6 +43,11 @@ public abstract class ModelServiceImpl<T extends ModelObject> implements ModelSe
         return baseDao.findAll();
     }
 
+    @Override
+    public boolean isExist(Long id) {
+        return baseDao.exists(id);
+    }
+
     protected BaseDao<T> getBaseDao() {
         return baseDao;
     }

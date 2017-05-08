@@ -53,6 +53,11 @@ public class UserNotesControllerImpl extends ModelControllerImpl<UserNotes, User
     }
 
     @Override
+    public boolean isExist(@PathVariable Long id) {
+        return super.isExist(id);
+    }
+
+    @Override
     public List<UserNotesDTO> getUserNotesById(@PathVariable Long id) {
         return ((UserNotesService) getModelService()).getUserNotesByUserId(id).stream().map(userNotes -> getModelMapper().mapToDTO(userNotes)).collect(Collectors.toList());
     }

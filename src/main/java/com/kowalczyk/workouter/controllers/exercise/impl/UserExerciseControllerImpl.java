@@ -51,6 +51,11 @@ public class UserExerciseControllerImpl extends ModelControllerImpl<UserExercise
     }
 
     @Override
+    public boolean isExist(@PathVariable Long id) {
+        return super.isExist(id);
+    }
+
+    @Override
     public List<UserExerciseDTO> getUserExerciseByUserId(@PathVariable Long id) {
         return ((UserExerciseService) getModelService()).getUserExercisesByUserId(id).stream().map(userExercise -> getModelMapper().mapToDTO(userExercise)).collect(Collectors.toList());
     }

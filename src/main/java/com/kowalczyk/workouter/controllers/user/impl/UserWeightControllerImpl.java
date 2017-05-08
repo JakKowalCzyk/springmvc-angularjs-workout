@@ -52,6 +52,11 @@ public class UserWeightControllerImpl extends ModelControllerImpl<UserWeight, Us
     }
 
     @Override
+    public boolean isExist(@PathVariable Long id) {
+        return super.isExist(id);
+    }
+
+    @Override
     public List<UserWeightDTO> getWeightByUserId(@PathVariable Long id) {
         return ((UserWeightService) getModelService()).getWeightByUserId(id).stream().map(userWeight -> getModelMapper().mapToDTO(userWeight)).collect(Collectors.toList());
     }

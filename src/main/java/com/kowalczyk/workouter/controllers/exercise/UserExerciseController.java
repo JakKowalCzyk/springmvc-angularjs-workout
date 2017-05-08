@@ -38,6 +38,10 @@ public interface UserExerciseController extends ModelController<UserExerciseDTO>
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     void deleteObject(@PathVariable Long id);
 
+    @Override
+    @RequestMapping(value = "/exist", method = RequestMethod.GET)
+    boolean isExist(@PathVariable Long id);
+
     @ApiOperation(value = "Get all UserExercises for user")
     @RequestMapping(value = "user/{id}", method = RequestMethod.GET)
     List<UserExerciseDTO> getUserExerciseByUserId(@PathVariable Long id);

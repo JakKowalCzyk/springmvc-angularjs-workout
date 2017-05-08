@@ -18,4 +18,6 @@ public interface ModelService<T extends ModelObject> {
     void deleteObject(Long id);
 
     List<T> getAll();
+
+    boolean isExist(Long id);
 }

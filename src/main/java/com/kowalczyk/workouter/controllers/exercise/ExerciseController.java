@@ -39,6 +39,10 @@ public interface ExerciseController extends ModelController<ExerciseDTO> {
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
     void deleteObject(@PathVariable Long id);
 
+    @Override
+    @RequestMapping(value = "/exist", method = RequestMethod.GET)
+    boolean isExist(@PathVariable Long id);
+
     @ApiOperation(value = "Get exercise by name")
     @RequestMapping(path = "/name/{name}", method = RequestMethod.GET)
     ExerciseDTO getExerciseByName(@PathVariable String name);

@@ -50,6 +50,11 @@ public abstract class ModelControllerImpl<E extends ModelObject, T extends Objec
         modelService.deleteObject(id);
     }
 
+    @Override
+    public boolean isExist(@PathVariable Long id) {
+        return modelService.isExist(id);
+    }
+
     protected ModelService<E> getModelService() {
         return modelService;
     }

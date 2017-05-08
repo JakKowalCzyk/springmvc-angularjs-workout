@@ -50,6 +50,11 @@ public class UserInfoControllerImpl extends ModelControllerImpl<UserInfo, UserIn
     }
 
     @Override
+    public boolean isExist(@PathVariable Long id) {
+        return super.isExist(id);
+    }
+
+    @Override
     public UserInfoDTO getById(@PathVariable Long id) {
         return getModelMapper().mapToDTO(((UserInfoService) getModelService()).getUserInfoByUserId(id));
     }

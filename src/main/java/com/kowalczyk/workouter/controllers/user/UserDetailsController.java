@@ -38,6 +38,10 @@ public interface UserDetailsController extends ModelController<UserDetailsDTO> {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     void deleteObject(@PathVariable Long id);
 
+    @Override
+    @RequestMapping(value = "/exist", method = RequestMethod.GET)
+    boolean isExist(@PathVariable Long id);
+
     @RequestMapping(value = "/principal", method = RequestMethod.GET)
     UserDetailsDTO getPrincipal(Principal principal);
 }

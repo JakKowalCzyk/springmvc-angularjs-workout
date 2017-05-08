@@ -39,6 +39,9 @@ public interface WorkoutController extends ModelController<WorkoutDTO> {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     void deleteObject(@PathVariable Long id);
 
+    @Override
+    @RequestMapping(value = "/exist", method = RequestMethod.GET)
+    boolean isExist(@PathVariable Long id);
 
     @ApiOperation(value = "Get workout for user")
     @RequestMapping(value = "user/{id}", method = RequestMethod.GET)

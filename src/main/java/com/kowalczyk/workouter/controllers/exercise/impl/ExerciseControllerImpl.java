@@ -53,6 +53,11 @@ public class ExerciseControllerImpl extends ModelControllerImpl<Exercise, Exerci
     }
 
     @Override
+    public boolean isExist(@PathVariable Long id) {
+        return super.isExist(id);
+    }
+
+    @Override
     public ExerciseDTO getExerciseByName(@PathVariable String name) {
         return getModelMapper().mapToDTO(((ExerciseService) getModelService()).getExerciseByName(name));
     }

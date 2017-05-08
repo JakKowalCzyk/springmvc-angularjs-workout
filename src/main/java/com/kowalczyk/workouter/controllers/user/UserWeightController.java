@@ -39,6 +39,10 @@ public interface UserWeightController extends ModelController<UserWeightDTO> {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     void deleteObject(@PathVariable Long id);
 
+    @Override
+    @RequestMapping(value = "/exist", method = RequestMethod.GET)
+    boolean isExist(@PathVariable Long id);
+
     @ApiOperation(value = "Get weight for user")
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     List<UserWeightDTO> getWeightByUserId(@PathVariable Long id);

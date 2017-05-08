@@ -40,6 +40,10 @@ public interface UserNotesController extends ModelController<UserNotesDTO> {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     void deleteObject(@PathVariable Long id);
 
+    @Override
+    @RequestMapping(value = "/exist", method = RequestMethod.GET)
+    boolean isExist(@PathVariable Long id);
+
     @ApiOperation(value = "Get all notes for user")
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     List<UserNotesDTO> getUserNotesById(@PathVariable Long id);
