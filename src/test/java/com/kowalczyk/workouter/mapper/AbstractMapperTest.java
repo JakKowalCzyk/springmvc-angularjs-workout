@@ -1,5 +1,6 @@
 package com.kowalczyk.workouter.mapper;
 
+import com.kowalczyk.workouter.AbstractTestHelper;
 import com.kowalczyk.workouter.enums.ExerciseType;
 import com.kowalczyk.workouter.enums.RoleType;
 import com.kowalczyk.workouter.model.BO.exercise.Exercise;
@@ -30,7 +31,7 @@ import java.util.stream.Collectors;
  */
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = MapperConfigurationTest.class)
-public abstract class AbstractMapperTest {
+public abstract class AbstractMapperTest extends AbstractTestHelper {
 
     @MockBean
     protected UserDetailsService userDetailsService;
@@ -50,7 +51,6 @@ public abstract class AbstractMapperTest {
     public void setUp() throws Exception {
         Mockito.when(userDetailsService.getObject(Mockito.anyLong())).thenReturn(getUserDetailsTest());
     }
-
     protected UserDetails getUserDetailsTest() {
         UserDetails userDetails = new UserDetails();
         userDetails.setLogin("log");

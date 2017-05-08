@@ -8,8 +8,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.GregorianCalendar;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -23,11 +21,7 @@ public class UserWeightMapperTest extends AbstractMapperTest {
 
     @Test
     public void mapToBO() throws Exception {
-        UserWeightDTO userWeightDTO = new UserWeightDTO();
-        userWeightDTO.setDate(new GregorianCalendar(2012, 12, 2).getTime());
-        userWeightDTO.setId(2L);
-        userWeightDTO.setWeightKg(56);
-        userWeightDTO.setUserId(getUserDetailsTest().getId());
+        UserWeightDTO userWeightDTO = getUserWeightDTOTest();
         UserWeight userWeight = userWeightMapper.mapToBO(userWeightDTO);
         Assert.assertEquals(userWeightDTO.getId(), userWeight.getId());
         assertEquals(userWeightDTO.getDate(), userWeight.getDate());

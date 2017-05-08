@@ -30,8 +30,12 @@ public class UserInfoMapper extends AbstractUserMapper<UserInfo, UserInfoDTO> {
     @Override
     protected UserInfoDTO buildUserDTOObject(UserInfo modelObject) {
         UserInfoDTO userInfoDTO = new UserInfoDTO();
-        userInfoDTO.setActualWeightId(modelObject.getActualWeight().getId());
-        userInfoDTO.setFavouriteExerciseId(modelObject.getExerciseFavouriteId().getId());
+        if (modelObject.getActualWeight() != null) {
+            userInfoDTO.setActualWeightId(modelObject.getActualWeight().getId());
+        }
+        if (modelObject.getExerciseFavouriteId() != null) {
+            userInfoDTO.setFavouriteExerciseId(modelObject.getExerciseFavouriteId().getId());
+        }
         return userInfoDTO;
     }
 }

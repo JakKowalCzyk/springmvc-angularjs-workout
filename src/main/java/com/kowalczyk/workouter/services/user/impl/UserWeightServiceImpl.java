@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by JK on 2016-10-26.
@@ -23,6 +24,11 @@ public class UserWeightServiceImpl extends ModelServiceImpl<UserWeight> implemen
     @Autowired
     public UserWeightServiceImpl(UserWeightDao baseDao) {
         super(baseDao);
+    }
+
+    @Override
+    public UserWeight getActualWeight(Long userId) {
+        return userInfoService.getObject(userId).getActualWeight();
     }
 
     @Override
@@ -39,6 +45,29 @@ public class UserWeightServiceImpl extends ModelServiceImpl<UserWeight> implemen
             updateActualUserWeight(baseModel);
         }
         return super.updateObject(baseModel);
+    }
+
+    @Override
+    public void deleteObject(Long id) {
+        UserWeight userWeightToDelete = super.getObject(id);
+        updateUserInfoWithNullWeight(userWeightToDelete);
+        if (checkIfLastWeight(userWeightToDelete)) {
+            deleteAndUpdateActualWeight(id, userWeightToDelete);
+        } else {
+            super.deleteObject(id);
+        }
+    }
+
+    private void updateUserInfoWithNullWeight(UserWeight userWeightToDelete) {
+        UserInfo userInfo = userInfoService.getUserInfoByUserId(userWeightToDelete.getUser().getId());
+        userInfo.setActualWeight(null);
+        userInfoService.updateObject(userInfo);
+    }
+
+    private void deleteAndUpdateActualWeight(Long id, UserWeight userWeightToDelete) {
+        super.deleteObject(id);
+        Optional<UserWeight> userWeightOptional = getUserWeightWitLastDate(userWeightToDelete.getUser().getId());
+        userWeightOptional.ifPresent(this::setActualWeight);
     }
 
     private UserWeight updateActualUserWeight(UserWeight baseModel) {
@@ -67,17 +96,13 @@ public class UserWeightServiceImpl extends ModelServiceImpl<UserWeight> implemen
         return ((UserWeightDao) getBaseDao()).getByUserIdAndDate(userId, date);
     }
 
-    @Override
-    public UserWeight getActualWeight(Long userId) {
-        return userInfoService.getObject(userId).getActualWeight();
-    }
-
     public boolean checkIfLastWeight(UserWeight userWeight) {
-        return !getLastDate(userWeight.getUser().getId()).after(userWeight.getDate());
+        Long userId = userWeight.getUser().getId();
+        Optional<UserWeight> dateOptional = getUserWeightWitLastDate(userId);
+        return !dateOptional.isPresent() || !dateOptional.get().getDate().after(userWeight.getDate());
     }
 
-    public Date getLastDate(Long userId) {
-        List<UserWeight> userWeights = ((UserWeightDao) getBaseDao()).getUserWeightListOrderedByDate(userId);
-        return userWeights.stream().findFirst().get().getDate();
+    public Optional<UserWeight> getUserWeightWitLastDate(Long userId) {
+        return ((UserWeightDao) getBaseDao()).getUserWeightListOrderedByDate(userId).stream().findFirst();
     }
 }

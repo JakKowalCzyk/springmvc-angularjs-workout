@@ -5,6 +5,7 @@ import com.kowalczyk.workouter.services.ModelService;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by JK on 2016-10-26.
@@ -23,7 +24,7 @@ public interface UserWeightService extends ModelService<UserWeight> {
 
     UserWeight getActualWeight(Long userId);
 
-    Date getLastDate(Long userId);
+    Optional<UserWeight> getUserWeightWitLastDate(Long userId);
 
     boolean checkIfLastWeight(UserWeight userWeight);
 }

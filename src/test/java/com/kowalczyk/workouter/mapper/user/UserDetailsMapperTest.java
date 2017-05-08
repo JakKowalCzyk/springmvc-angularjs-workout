@@ -10,10 +10,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Arrays;
-import java.util.GregorianCalendar;
-import java.util.stream.Collectors;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -36,19 +32,7 @@ public class UserDetailsMapperTest extends AbstractMapperTest {
 
     @Test
     public void mapToBO() throws Exception {
-        UserDetailsDTO userDetailsDTO = new UserDetailsDTO();
-        userDetailsDTO.setFirstName("name");
-        userDetailsDTO.setLastName("last");
-        userDetailsDTO.setBirthDay(new GregorianCalendar(2012, 3, 12).getTime());
-        userDetailsDTO.setLogin("log");
-        userDetailsDTO.setHashedPassword("pass");
-        userDetailsDTO.setEmail("email");
-        userDetailsDTO.setEnabled(true);
-        userDetailsDTO.setAccountNonLocked(true);
-        userDetailsDTO.setAccountNonExpired(true);
-        userDetailsDTO.setCredentialsNonExpired(true);
-        userDetailsDTO.setId(2L);
-        userDetailsDTO.setRoles(Arrays.asList(1L).stream().collect(Collectors.toSet()));
+        UserDetailsDTO userDetailsDTO = getUserDetailsDTOTest();
         UserDetails userDetails = userDetailsMapper.mapToBO(userDetailsDTO);
         assertTrue(userDetails.getId() == 2L);
         assertTrue(userDetails.isEnabled());

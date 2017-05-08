@@ -20,9 +20,7 @@ public class RoleMapperTest extends AbstractMapperTest {
 
     @Test
     public void mapToBO() throws Exception {
-        RoleDTO roleDTO = new RoleDTO();
-        roleDTO.setRoleType(RoleType.ADMIN);
-        roleDTO.setId(5L);
+        RoleDTO roleDTO = getRoleDTOTest();
         Role role = roleMapper.mapToBO(roleDTO);
         Assert.assertEquals(roleDTO.getId(), role.getId());
         assertEquals(RoleType.ADMIN, role.getRoleType());
