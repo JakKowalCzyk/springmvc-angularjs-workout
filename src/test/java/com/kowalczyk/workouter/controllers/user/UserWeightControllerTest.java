@@ -10,8 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by JK on 2017-04-08.
@@ -55,10 +54,13 @@ public class UserWeightControllerTest extends AbstractControllerTest {
 
     private void testDelete() {
         userWeightController.deleteObject(1L);
+        assertFalse(userWeightController.isExist(1L));
+        assertTrue(userWeightController.isExist(2L));
         List<UserWeightDTO> userWeightDTOList = userWeightController.findAll();
         assertEquals(1, userWeightDTOList.size());
         assertTrue(2 == userWeightController.getActualWeight(getUserDetailsDTOTest().getId()).getId());
         userWeightController.deleteObject(2L);
+        assertFalse(userWeightController.isExist(2L));
         userWeightDTOList = userWeightController.findAll();
         assertEquals(0, userWeightDTOList.size());
         try {
@@ -119,6 +121,8 @@ public class UserWeightControllerTest extends AbstractControllerTest {
         } catch (Exception e) {
             assertTrue(e instanceof NotFoundException);
         }
+        userWeightController.deleteObject(2L);
+        assertFalse(userWeightController.isExist(2L));
     }
 
 
