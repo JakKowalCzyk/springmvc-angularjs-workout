@@ -2,9 +2,7 @@ package com.kowalczyk.workouter.model.BO.exercise;
 
 import com.kowalczyk.workouter.model.BO.user.AbstractUserObject;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +24,15 @@ public class Workout extends AbstractUserObject {
     public Workout() {
     }
 
+    @PrePersist
+    public void prePersist() {
+        getUser().getWorkouts().add(this);
+    }
+
+    @PreRemove
+    public void preRemove() {
+        getUser().getWorkouts().remove(this);
+    }
     public Date getDate() {
         return date;
     }

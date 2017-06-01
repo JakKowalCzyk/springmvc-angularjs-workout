@@ -2,9 +2,7 @@ package com.kowalczyk.workouter.model.DTO.user;
 
 import com.kowalczyk.workouter.model.DTO.ObjectDTO;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by JK on 2017-04-04.
@@ -22,6 +20,10 @@ public class UserDetailsDTO extends ObjectDTO {
     private boolean accountNonExpired;
     private boolean credentialsNonExpired;
     private boolean accountNonLocked;
+    private List<Long> userWeightList = new ArrayList<>();
+    private List<Long> userNotes = new ArrayList<>();
+    private List<Long> userInfoList = new ArrayList<>();
+    private List<Long> workouts = new ArrayList<>();
 
     public UserDetailsDTO() {
     }
@@ -112,5 +114,37 @@ public class UserDetailsDTO extends ObjectDTO {
 
     public void setAccountNonLocked(boolean accountNonLocked) {
         this.accountNonLocked = accountNonLocked;
+    }
+
+    public List<Long> getUserWeightList() {
+        return userWeightList;
+    }
+
+    public void setUserWeightList(List<Long> userWeightList) {
+        this.userWeightList = userWeightList;
+    }
+
+    public List<Long> getUserNotes() {
+        return userNotes;
+    }
+
+    public void setUserNotes(List<Long> userNotes) {
+        this.userNotes = userNotes;
+    }
+
+    public List<Long> getUserInfoList() {
+        return userInfoList;
+    }
+
+    public void setUserInfoList(List<Long> userInfoList) {
+        this.userInfoList = userInfoList;
+    }
+
+    public List<Long> getWorkouts() {
+        return workouts;
+    }
+
+    public void setWorkouts(List<Long> workouts) {
+        this.workouts = workouts;
     }
 }

@@ -6,8 +6,6 @@ import com.kowalczyk.workouter.model.BO.security.Role;
 import com.kowalczyk.workouter.model.BO.user.impl.UserInfo;
 import com.kowalczyk.workouter.model.BO.user.impl.UserNotes;
 import com.kowalczyk.workouter.model.BO.user.impl.UserWeight;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -127,8 +125,7 @@ public class UserDetails extends ModelObject {
         this.accountNonLocked = accountNonLocked;
     }
 
-    @OneToMany(mappedBy = "user")
-    @Cascade(CascadeType.DELETE)
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = javax.persistence.CascadeType.REMOVE)
     public List<UserWeight> getUserWeightList() {
         return userWeightList;
     }
@@ -137,8 +134,7 @@ public class UserDetails extends ModelObject {
         this.userWeightList = userWeightList;
     }
 
-    @OneToMany(mappedBy = "user")
-    @Cascade(CascadeType.DELETE)
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     public List<UserNotes> getUserNotes() {
         return userNotes;
     }
@@ -147,8 +143,7 @@ public class UserDetails extends ModelObject {
         this.userNotes = userNotes;
     }
 
-    @OneToMany(mappedBy = "user")
-    @Cascade(CascadeType.DELETE)
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     public List<UserInfo> getUserInfoList() {
         return userInfoList;
     }
@@ -157,8 +152,7 @@ public class UserDetails extends ModelObject {
         this.userInfoList = userInfoList;
     }
 
-    @OneToMany(mappedBy = "user")
-    @Cascade(CascadeType.DELETE)
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     public List<Workout> getWorkouts() {
         return workouts;
     }

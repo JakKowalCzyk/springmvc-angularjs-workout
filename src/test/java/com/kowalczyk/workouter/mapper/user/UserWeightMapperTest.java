@@ -21,7 +21,8 @@ public class UserWeightMapperTest extends AbstractMapperTest {
 
     @Test
     public void mapToBO() throws Exception {
-        UserWeightDTO userWeightDTO = getUserWeightDTOTest();
+        UserWeightDTO userWeightDTO = buildUserWeightDTOTest();
+        userWeightDTO.setId(2L);
         UserWeight userWeight = userWeightMapper.mapToBO(userWeightDTO);
         Assert.assertEquals(userWeightDTO.getId(), userWeight.getId());
         assertEquals(userWeightDTO.getDate(), userWeight.getDate());

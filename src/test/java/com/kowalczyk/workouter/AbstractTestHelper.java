@@ -14,12 +14,6 @@ import java.util.stream.Collectors;
  */
 public abstract class AbstractTestHelper {
 
-    protected UserWeightDTO getUserWeightDTOTest() {
-        UserWeightDTO userWeightDTO = buildUserWeightDTOTest();
-        userWeightDTO.setId(2L);
-        return userWeightDTO;
-    }
-
     protected UserWeightDTO buildUserWeightDTOTest() {
         UserWeightDTO userWeightDTO = new UserWeightDTO();
         userWeightDTO.setDate(new GregorianCalendar(2012, 12, 2).getTime());

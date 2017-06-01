@@ -14,6 +14,8 @@ import com.kowalczyk.workouter.services.exercise.UserExerciseService;
 import com.kowalczyk.workouter.services.exercise.WorkoutService;
 import com.kowalczyk.workouter.services.security.RoleService;
 import com.kowalczyk.workouter.services.user.UserDetailsService;
+import com.kowalczyk.workouter.services.user.UserInfoService;
+import com.kowalczyk.workouter.services.user.UserNotesService;
 import com.kowalczyk.workouter.services.user.UserWeightService;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -45,7 +47,10 @@ public abstract class AbstractMapperTest extends AbstractTestHelper {
     private UserWeightService userWeightService;
     @MockBean
     private RoleService roleService;
-
+    @MockBean
+    private UserInfoService userInfoService;
+    @MockBean
+    private UserNotesService userNotesService;
 
     @Before
     public void setUp() throws Exception {
