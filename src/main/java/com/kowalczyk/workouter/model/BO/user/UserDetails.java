@@ -7,9 +7,7 @@ import com.kowalczyk.workouter.model.BO.user.impl.UserInfo;
 import com.kowalczyk.workouter.model.BO.user.impl.UserNotes;
 import com.kowalczyk.workouter.model.BO.user.impl.UserWeight;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.*;
 
 /**
@@ -34,6 +32,12 @@ public class UserDetails extends ModelObject {
     private List<Workout> workouts = new ArrayList<>();
 
     public UserDetails() {
+    }
+
+    @PreRemove
+    public void preRemove() {
+        getUserWeightList().forEach(userWeight -> userWeight.setUser(null));
+        getUserInfoList().forEach(userInfo -> userInfo.setUser(null));
     }
 
     public String getLogin() {
@@ -125,7 +129,7 @@ public class UserDetails extends ModelObject {
         this.accountNonLocked = accountNonLocked;
     }
 
-    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = javax.persistence.CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
     public List<UserWeight> getUserWeightList() {
         return userWeightList;
     }
@@ -134,7 +138,7 @@ public class UserDetails extends ModelObject {
         this.userWeightList = userWeightList;
     }
 
-    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    @OneToMany(mappedBy = "user")
     public List<UserNotes> getUserNotes() {
         return userNotes;
     }
@@ -143,7 +147,7 @@ public class UserDetails extends ModelObject {
         this.userNotes = userNotes;
     }
 
-    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
     public List<UserInfo> getUserInfoList() {
         return userInfoList;
     }
@@ -152,7 +156,7 @@ public class UserDetails extends ModelObject {
         this.userInfoList = userInfoList;
     }
 
-    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    @OneToMany(mappedBy = "user")
     public List<Workout> getWorkouts() {
         return workouts;
     }

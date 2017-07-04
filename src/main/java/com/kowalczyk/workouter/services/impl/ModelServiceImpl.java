@@ -3,12 +3,14 @@ package com.kowalczyk.workouter.services.impl;
 import com.kowalczyk.workouter.dao.BaseDao;
 import com.kowalczyk.workouter.model.BO.ModelObject;
 import com.kowalczyk.workouter.services.ModelService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by JK on 2017-02-18.
  */
+@Service
 public abstract class ModelServiceImpl<T extends ModelObject> implements ModelService<T> {
 
     private BaseDao<T> baseDao;
@@ -36,6 +38,11 @@ public abstract class ModelServiceImpl<T extends ModelObject> implements ModelSe
     @Override
     public void deleteObject(Long id) {
         baseDao.delete(id);
+    }
+
+    @Override
+    public void deleteObject(T baseModel) {
+        baseDao.delete(baseModel);
     }
 
     @Override

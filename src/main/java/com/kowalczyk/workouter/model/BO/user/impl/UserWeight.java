@@ -27,7 +27,9 @@ public class UserWeight extends AbstractUserObject {
 
     @PreRemove
     public void preRemove() {
-        getUser().getUserWeightList().remove(this);
+        if (getUser() != null) {
+            getUser().getUserWeightList().remove(this);
+        }
     }
     public int getWeightKg() {
         return weightKg;

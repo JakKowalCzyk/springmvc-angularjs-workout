@@ -25,7 +25,9 @@ public class UserInfo extends AbstractUserObject {
 
     @PreRemove
     public void preRemove() {
-        getUser().getUserInfoList().remove(this);
+        if (getUser() != null) {
+            getUser().getUserInfoList().remove(this);
+        }
     }
     @OneToOne
     @JoinColumn(name = "weight_id")

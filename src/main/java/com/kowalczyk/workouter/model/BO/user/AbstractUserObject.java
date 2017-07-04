@@ -17,7 +17,7 @@ public abstract class AbstractUserObject extends ModelObject {
     public AbstractUserObject() {
     }
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = UserDetails.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = UserDetails.class)
     public UserDetails getUser() {
         return user;
     }

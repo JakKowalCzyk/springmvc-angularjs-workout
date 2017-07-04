@@ -17,6 +17,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -49,12 +50,12 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
     @After
     public void tearDown() throws Exception {
         List<UserDetailsDTO> userDetailsDTOS = userDetailsController.findAll();
-        userDetailsDTOS.forEach(userDetailsDTO -> {
+        new ArrayList<>(userDetailsDTOS).forEach(userDetailsDTO -> {
             userDetailsController.deleteObject(userDetailsDTO.getId());
             assertFalse(userDetailsController.isExist(userDetailsDTO.getId()));
         });
         List<RoleDTO> roleDTOS = roleController.findAll();
-        roleDTOS.forEach(roleDTO -> {
+        new ArrayList<>(roleDTOS).forEach(roleDTO -> {
             roleController.deleteObject(roleDTO.getId());
             assertFalse(roleController.isExist(roleDTO.getId()));
         });

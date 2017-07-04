@@ -52,7 +52,7 @@ public class UserWeightServiceImpl extends ModelServiceImpl<UserWeight> implemen
         UserWeight userWeightToDelete = super.getObject(id);
         updateUserInfoWithNullWeight(userWeightToDelete);
         if (checkIfLastWeight(userWeightToDelete)) {
-            deleteAndUpdateActualWeight(id, userWeightToDelete);
+            deleteAndUpdateActualWeight(userWeightToDelete);
         } else {
             super.deleteObject(id);
         }
@@ -64,8 +64,8 @@ public class UserWeightServiceImpl extends ModelServiceImpl<UserWeight> implemen
         userInfoService.updateObject(userInfo);
     }
 
-    private void deleteAndUpdateActualWeight(Long id, UserWeight userWeightToDelete) {
-        super.deleteObject(id);
+    private void deleteAndUpdateActualWeight(UserWeight userWeightToDelete) {
+        super.deleteObject(userWeightToDelete);
         Optional<UserWeight> userWeightOptional = getUserWeightWitLastDate(userWeightToDelete.getUser().getId());
         userWeightOptional.ifPresent(this::setActualWeight);
     }

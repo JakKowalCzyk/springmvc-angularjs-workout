@@ -4,6 +4,7 @@ import com.kowalczyk.workouter.dao.BaseDao;
 import com.kowalczyk.workouter.model.BO.user.impl.UserWeight;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * Created by JK on 2016-09-22.
  */
+@Repository
 public interface UserWeightDao extends BaseDao<UserWeight> {
 
     @Query("SELECT o FROM UserWeight o inner join o.user as user WHERE user.id = :userId")
