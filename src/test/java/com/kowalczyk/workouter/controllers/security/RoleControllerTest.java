@@ -6,8 +6,10 @@ import com.kowalczyk.workouter.model.DTO.security.RoleDTO;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import java.util.List;
+import java.util.Objects;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by JK on 2017-04-08.
@@ -19,39 +21,51 @@ public class RoleControllerTest extends AbstractControllerTest {
 
     @Test
     public void getObject() throws Exception {
-        RoleDTO roleDTO = buildRoleDTOTest();
-        roleDTO = roleController.addObject(roleDTO);
-        assertTrue(1L == roleDTO.getId());
-        assertEquals(RoleType.ADMIN, roleDTO.getRoleType());
-        roleDTO.setRoleType(RoleType.USER);
-        roleDTO = roleController.addObject(roleDTO);
-        assertTrue(2L == roleDTO.getId());
-        assertTrue(1L == roleController.getObject(1L).getId());
-        assertEquals(RoleType.ADMIN, roleController.getObject(1L).getRoleType());
-        assertEquals(RoleType.USER, roleController.getObject(2L).getRoleType());
-        roleDTO.setRoleType(RoleType.TRAINER);
-        roleController.updateObject(roleDTO);
-        assertEquals(RoleType.TRAINER, roleController.getObject(2L).getRoleType());
+        RoleDTO roleDTO = roleController.addObject(buildRoleDTOTest());
+        RoleDTO expectedRoleDTO = roleController.getObject(roleDTO.getId());
+        assertEquals(roleDTO.getId(), expectedRoleDTO.getId());
+        assertEquals(roleDTO.getRoleType(), expectedRoleDTO.getRoleType());
+        deleteRoles(expectedRoleDTO);
+    }
+
+    public void deleteRoles(RoleDTO roleDTO) {
+        roleController.deleteObject(roleDTO.getId());
+        assertFalse(roleController.isExist(roleDTO.getId()));
     }
 
     @Test
     public void updateObject() throws Exception {
-
-    }
-
-    @Test
-    public void addObject() throws Exception {
-
+        RoleDTO roleDTO = roleController.addObject(buildRoleDTOTest());
+        roleDTO.setRoleType(RoleType.TRAINER);
+        roleDTO = roleController.updateObject(roleDTO);
+        assertEquals(RoleType.TRAINER, roleDTO.getRoleType());
+        deleteRoles(roleDTO);
     }
 
     @Test
     public void findAll() throws Exception {
+        List<RoleDTO> roleDTOS = roleController.findAll();
+        assertEquals(1, roleDTOS.size());
+        RoleDTO roleDTO = buildRoleDTOTest();
+        roleDTO.setRoleType(RoleType.USER);
+        roleDTO = roleController.addObject(roleDTO);
+        Long roleDTOId = roleDTO.getId();
+        roleDTOS = roleController.findAll();
+        assertEquals(2, roleDTOS.size());
+        assertTrue(roleDTOS.stream().anyMatch(r -> Objects.equals(r.getId(), roleDTOId)));
 
-    }
+        RoleDTO roleDTO1 = buildRoleDTOTest();
+        roleDTO1.setRoleType(RoleType.TRAINER);
+        roleDTO1 = roleController.addObject(roleDTO1);
+        roleDTOS = roleController.findAll();
+        assertEquals(3, roleDTOS.size());
 
-    @Test
-    public void deleteObject() throws Exception {
-
+        deleteRoles(roleDTO);
+        roleDTOS = roleController.findAll();
+        assertEquals(2, roleDTOS.size());
+        deleteRoles(roleDTO1);
+        roleDTOS = roleController.findAll();
+        assertEquals(1, roleDTOS.size());
     }
 
 }
