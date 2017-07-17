@@ -7,6 +7,7 @@ import com.kowalczyk.workouter.controllers.user.UserInfoController;
 import com.kowalczyk.workouter.model.DTO.security.RoleDTO;
 import com.kowalczyk.workouter.model.DTO.user.UserDetailsDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserInfoDTO;
+import com.kowalczyk.workouter.model.DTO.user.impl.UserNotesDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserWeightDTO;
 import org.junit.After;
 import org.junit.Before;
@@ -18,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -33,6 +35,8 @@ import static org.junit.Assert.assertFalse;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public abstract class AbstractControllerTest extends AbstractTestHelper {
 
+    protected Long userDetailsId1;
+    protected Long userDetailsId2;
     @Autowired
     private UserDetailsController userDetailsController;
     @Autowired
@@ -61,17 +65,19 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
         });
     }
 
-    private void addUserDetailsUserInfo2() {
-        UserDetailsDTO userDetailsDTO = getUserDetailsDTOTest2();
-        userDetailsDTO.setRoles(Stream.of(roleController.findAll().stream().findAny().get().getId()).collect(Collectors.toSet()));
-        userDetailsDTO = userDetailsController.addObject(userDetailsDTO);
-        userInfoController.addObject(getUserInfoDTO(userDetailsDTO.getId()));
-    }
-
     private void addUserDetailsUserInfo1() {
         UserDetailsDTO userDetailsDTO = getUserDetailsDTOTest();
         userDetailsDTO.setRoles(Stream.of(roleController.findAll().stream().findAny().get().getId()).collect(Collectors.toSet()));
         userDetailsDTO = userDetailsController.addObject(userDetailsDTO);
+        userDetailsId1 = userDetailsDTO.getId();
+        userInfoController.addObject(getUserInfoDTO(userDetailsDTO.getId()));
+    }
+
+    private void addUserDetailsUserInfo2() {
+        UserDetailsDTO userDetailsDTO = getUserDetailsDTOTest2();
+        userDetailsDTO.setRoles(Stream.of(roleController.findAll().stream().findAny().get().getId()).collect(Collectors.toSet()));
+        userDetailsDTO = userDetailsController.addObject(userDetailsDTO);
+        userDetailsId2 = userDetailsDTO.getId();
         userInfoController.addObject(getUserInfoDTO(userDetailsDTO.getId()));
     }
 
@@ -87,5 +93,24 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
         UserWeightDTO userWeightDTO = buildUserWeightDTOTest();
         userWeightDTO.setUserId(userDetailsController.findAll().stream().findFirst().get().getId());
         return userWeightDTO;
+    }
+
+    protected UserNotesDTO createUserNotesTest(Date date, String note) {
+        UserNotesDTO userNotesDTO = getUserNotesDTOTest(date, note);
+        userNotesDTO.setUserId(userDetailsId1);
+        return userNotesDTO;
+    }
+
+    protected UserNotesDTO createUserNotesTest2(Date date, String note) {
+        UserNotesDTO userNotesDTO = getUserNotesDTOTest(date, note);
+        userNotesDTO.setUserId(userDetailsId2);
+        return userNotesDTO;
+    }
+
+    private UserNotesDTO getUserNotesDTOTest(Date date, String note) {
+        UserNotesDTO userNotesDTO = new UserNotesDTO();
+        userNotesDTO.setDate(date);
+        userNotesDTO.setNote(note);
+        return userNotesDTO;
     }
 }
