@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by JK on 2017-01-22.
  */
 @Api(tags = {"User Notes API"}, description = "Services for user's notes")
-@RequestMapping("/user/notes")
+@RequestMapping("/notes")
 public interface UserNotesController extends ModelController<UserNotesDTO> {
 
 
@@ -46,7 +46,7 @@ public interface UserNotesController extends ModelController<UserNotesDTO> {
 
     @ApiOperation(value = "Get all notes for user")
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    List<UserNotesDTO> getUserNotesById(@PathVariable Long id);
+    List<UserNotesDTO> getUserNotesByUserId(@PathVariable Long id);
 
     @ApiOperation(value = "Get all notes for user by date")
     @RequestMapping(value = "/user/{id}/date/{date}", method = RequestMethod.GET)

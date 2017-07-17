@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,7 +58,7 @@ public class UserNotesControllerImpl extends ModelControllerImpl<UserNotes, User
     }
 
     @Override
-    public List<UserNotesDTO> getUserNotesById(@PathVariable Long id) {
+    public List<UserNotesDTO> getUserNotesByUserId(@PathVariable Long id) {
         return ((UserNotesService) getModelService()).getUserNotesByUserId(id).stream().map(userNotes -> getModelMapper().mapToDTO(userNotes)).collect(Collectors.toList());
     }
 
