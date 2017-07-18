@@ -97,8 +97,7 @@ public class UserWeightServiceImpl extends ModelServiceImpl<UserWeight> implemen
     }
 
     public boolean checkIfLastWeight(UserWeight userWeight) {
-        Long userId = userWeight.getUser().getId();
-        Optional<UserWeight> dateOptional = getUserWeightWitLastDate(userId);
+        Optional<UserWeight> dateOptional = getUserWeightWitLastDate(userWeight.getUser().getId());
         return !dateOptional.isPresent() || !dateOptional.get().getDate().after(userWeight.getDate());
     }
 

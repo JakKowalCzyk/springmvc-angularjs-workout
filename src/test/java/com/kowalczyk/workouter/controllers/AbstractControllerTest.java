@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -90,7 +91,14 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
     }
 
     protected UserWeightDTO getUserWeightDTOTest() {
-        UserWeightDTO userWeightDTO = buildUserWeightDTOTest();
+        return getUserWeightDTOTest(56, new GregorianCalendar(2012, 12, 12));
+    }
+
+    protected UserWeightDTO getUserWeightDTOTest(int weight, GregorianCalendar date) {
+        UserWeightDTO userWeightDTO = new UserWeightDTO();
+        userWeightDTO.setDate(date.getTime());
+        userWeightDTO.setWeightKg(weight);
+        userWeightDTO.setUserId(getUserDetailsDTOTest().getId());
         userWeightDTO.setUserId(userDetailsController.findAll().stream().findFirst().get().getId());
         return userWeightDTO;
     }

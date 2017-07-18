@@ -44,7 +44,7 @@ public interface UserInfoController extends ModelController<UserInfoDTO> {
     boolean isExist(@PathVariable Long id);
 
     @ApiOperation(value = "Get User info for user")
-    @RequestMapping(value = "user/{id}", method = RequestMethod.GET)
-    UserInfoDTO getById(@PathVariable Long id);
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    UserInfoDTO getByUserId(@PathVariable Long id);
 
 }
