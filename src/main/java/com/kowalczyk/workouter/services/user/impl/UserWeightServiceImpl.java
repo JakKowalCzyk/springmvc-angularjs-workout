@@ -28,7 +28,7 @@ public class UserWeightServiceImpl extends ModelServiceImpl<UserWeight> implemen
 
     @Override
     public UserWeight getActualWeight(Long userId) {
-        return userInfoService.getObject(userId).getActualWeight();
+        return userInfoService.getUserInfoByUserId(userId).getActualWeight();
     }
 
     @Override

@@ -55,7 +55,7 @@ public class UserInfoControllerImpl extends ModelControllerImpl<UserInfo, UserIn
     }
 
     @Override
-    public UserInfoDTO getById(@PathVariable Long id) {
+    public UserInfoDTO getByUserId(@PathVariable Long id) {
         return getModelMapper().mapToDTO(((UserInfoService) getModelService()).getUserInfoByUserId(id));
     }
 }

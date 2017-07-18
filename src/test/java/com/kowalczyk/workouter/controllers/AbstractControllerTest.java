@@ -4,6 +4,8 @@ import com.kowalczyk.workouter.AbstractTestHelper;
 import com.kowalczyk.workouter.controllers.security.RoleController;
 import com.kowalczyk.workouter.controllers.user.UserDetailsController;
 import com.kowalczyk.workouter.controllers.user.UserInfoController;
+import com.kowalczyk.workouter.enums.ExerciseType;
+import com.kowalczyk.workouter.model.DTO.exercise.ExerciseDTO;
 import com.kowalczyk.workouter.model.DTO.security.RoleDTO;
 import com.kowalczyk.workouter.model.DTO.user.UserDetailsDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserInfoDTO;
@@ -64,6 +66,8 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
             roleController.deleteObject(roleDTO.getId());
             assertFalse(roleController.isExist(roleDTO.getId()));
         });
+        userDetailsId1 = null;
+        userDetailsId2 = null;
     }
 
     private void addUserDetailsUserInfo1() {
@@ -120,5 +124,13 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
         userNotesDTO.setDate(date);
         userNotesDTO.setNote(note);
         return userNotesDTO;
+    }
+
+    protected ExerciseDTO createExerciseDTOTest(String name, String description, ExerciseType exerciseType) {
+        ExerciseDTO exerciseDTO = new ExerciseDTO();
+        exerciseDTO.setName(name);
+        exerciseDTO.setDescription(description);
+        exerciseDTO.setExerciseType(exerciseType);
+        return exerciseDTO;
     }
 }
