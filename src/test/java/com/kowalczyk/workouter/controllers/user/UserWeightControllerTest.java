@@ -19,21 +19,17 @@ import static org.junit.Assert.*;
 public class UserWeightControllerTest extends AbstractControllerTest {
     @Autowired
     private UserWeightController userWeightController;
-    @Autowired
-    private UserDetailsController userDetailsController;
-    @Autowired
-    private UserInfoController userInfoController;
 
     @Test
     public void getObject() throws Exception {
-        UserWeightDTO expectedUserWeightDTO = userWeightController.addObject(getUserWeightDTOTest());
+        UserWeightDTO expectedUserWeightDTO = userWeightController.addObject(getUserWeightDTOTest(54, new GregorianCalendar(2012, 10, 12)));
         UserWeightDTO actualUserWeightDTO = userWeightController.getObject(expectedUserWeightDTO.getId());
 
         assertTrue(Objects.equals(expectedUserWeightDTO.getId(), actualUserWeightDTO.getId()));
         assertEquals(expectedUserWeightDTO.getDate(), actualUserWeightDTO.getDate());
         assertEquals(1, userWeightController.findAll().size());
 
-        UserWeightDTO expectedUserWeightDTO1 = userWeightController.addObject(getUserWeightDTOTest());
+        UserWeightDTO expectedUserWeightDTO1 = userWeightController.addObject(getUserWeightDTOTest(60, new GregorianCalendar(2013, 10, 12)));
         UserWeightDTO userWeightDTO = userWeightController.getObject(expectedUserWeightDTO1.getId());
         assertEquals(2, userWeightController.findAll().size());
         assertTrue(userWeightDTO.getId().equals(expectedUserWeightDTO1.getId()));
@@ -48,8 +44,10 @@ public class UserWeightControllerTest extends AbstractControllerTest {
         assertEquals(1, userWeightController.findAll().size());
         deleteWeights(expectedUserWeightDTO1);
 
-        expectedUserWeightDTO1 = userWeightController.addObject(getUserWeightDTOTest());
-        userDetailsController.deleteObject(expectedUserWeightDTO1.getUserId());
+        expectedUserWeightDTO1 = userWeightController.addObject(getUserWeightDTOTest(14, new GregorianCalendar(2012, 3, 2)));
+        Long userId = expectedUserWeightDTO1.getUserId();
+        userDetailsController.deleteObject(userId);
+        assertFalse(userDetailsController.isExist(expectedUserWeightDTO1.getUserId()));
         assertEquals(0, userWeightController.findAll().size());
     }
 
@@ -60,17 +58,17 @@ public class UserWeightControllerTest extends AbstractControllerTest {
 
     @Test
     public void testDelete() throws Exception {
-        UserWeightDTO expectedUserWeightDTO = userWeightController.addObject(getUserWeightDTOTest());
+        UserWeightDTO expectedUserWeightDTO = userWeightController.addObject(getUserWeightDTOTest(14, new GregorianCalendar(2012, 3, 2)));
         assertTrue(userWeightController.isExist(expectedUserWeightDTO.getId()));
         deleteWeights(expectedUserWeightDTO);
         assertFalse(userWeightController.isExist(20L));
 
-        UserWeightDTO expectedUserWeightDTO1 = userWeightController.addObject(getUserWeightDTOTest());
+        UserWeightDTO expectedUserWeightDTO1 = userWeightController.addObject(getUserWeightDTOTest(54, new GregorianCalendar(2012, 10, 12)));
         List<UserWeightDTO> userWeightDTOList = userWeightController.findAll();
         assertEquals(1, userWeightDTOList.size());
         assertTrue(Objects.equals(expectedUserWeightDTO1.getId(), userWeightController.getActualWeight(expectedUserWeightDTO.getUserId()).getId()));
 
-        UserWeightDTO expectedUserWeightDTO2 = userWeightController.addObject(getUserWeightDTOTest());
+        UserWeightDTO expectedUserWeightDTO2 = userWeightController.addObject(getUserWeightDTOTest(57, new GregorianCalendar(2015, 10, 12)));
         assertTrue(Objects.equals(expectedUserWeightDTO2.getId(), userWeightController.getActualWeight(expectedUserWeightDTO.getUserId()).getId()));
 
         deleteWeights(expectedUserWeightDTO1);
@@ -88,8 +86,8 @@ public class UserWeightControllerTest extends AbstractControllerTest {
 
     @Test
     public void testUpdateActualWeight() throws Exception {
-        UserWeightDTO expectedUserWeightDTO = userWeightController.addObject(getUserWeightDTOTest());
-        UserWeightDTO expectedUserWeightDTO1 = userWeightController.addObject(getUserWeightDTOTest());
+        UserWeightDTO expectedUserWeightDTO = userWeightController.addObject(getUserWeightDTOTest(14, new GregorianCalendar(2012, 3, 2)));
+        UserWeightDTO expectedUserWeightDTO1 = userWeightController.addObject(getUserWeightDTOTest(54, new GregorianCalendar(2012, 10, 12)));
 
         expectedUserWeightDTO.setDate(new GregorianCalendar().getTime());
         UserWeightDTO userWeightDTO = userWeightController.updateObject(expectedUserWeightDTO);
@@ -122,13 +120,13 @@ public class UserWeightControllerTest extends AbstractControllerTest {
 
     @Test
     public void testFindAll() throws Exception {
-        UserWeightDTO expectedUserWeightDTO = userWeightController.addObject(getUserWeightDTOTest());
-        UserWeightDTO expectedUserWeightDTO1 = userWeightController.addObject(getUserWeightDTOTest());
+        UserWeightDTO expectedUserWeightDTO = userWeightController.addObject(getUserWeightDTOTest(54, new GregorianCalendar(2012, 10, 12)));
+        UserWeightDTO expectedUserWeightDTO1 = userWeightController.addObject(getUserWeightDTOTest(14, new GregorianCalendar(2013, 3, 2)));
         List<UserWeightDTO> userWeightDTOList = userWeightController.findAll();
         assertEquals(2, userWeightDTOList.size());
         assertTrue(Objects.equals(expectedUserWeightDTO1.getId(), userWeightController.getActualWeight(expectedUserWeightDTO.getUserId()).getId()));
 
-        UserWeightDTO expectedUserWeightDTO2 = userWeightController.addObject(getUserWeightDTOTest());
+        UserWeightDTO expectedUserWeightDTO2 = userWeightController.addObject(getUserWeightDTOTest(30, new GregorianCalendar(2015, 3, 2)));
         userWeightDTOList = userWeightController.findAll();
         assertEquals(3, userWeightDTOList.size());
         assertTrue(Objects.equals(expectedUserWeightDTO2.getId(), userWeightController.getActualWeight(expectedUserWeightDTO.getUserId()).getId()));
@@ -143,21 +141,27 @@ public class UserWeightControllerTest extends AbstractControllerTest {
 
     @Test
     public void getWeightByUserId() throws Exception {
-        UserWeightDTO expectedUserWeightDTO = getUserWeightDTOTest();
+        UserWeightDTO expectedUserWeightDTO = getUserWeightDTOTest(14, new GregorianCalendar(2012, 3, 2));
         expectedUserWeightDTO.setDate(new GregorianCalendar().getTime());
         expectedUserWeightDTO = userWeightController.addObject(expectedUserWeightDTO);
-        UserWeightDTO expectedUserWeightDTO2 = getUserWeightDTOTest();
+        UserWeightDTO expectedUserWeightDTO2 = getUserWeightDTOTest(54, new GregorianCalendar(2012, 10, 12));
         expectedUserWeightDTO2 = userWeightController.addObject(expectedUserWeightDTO2);
-        UserWeightDTO userWeightDTO3 = getUserWeightDTOTest();
+        UserWeightDTO userWeightDTO3 = getUserWeightDTOTest(60, new GregorianCalendar(2014, 10, 12));
         userWeightDTO3.setDate(new GregorianCalendar(2012, 12, 3).getTime());
         userWeightDTO3 = userWeightController.addObject(userWeightDTO3);
 
         List<UserWeightDTO> userWeightDTOS = userWeightController.getWeightByUserId(expectedUserWeightDTO.getUserId());
         assertEquals(3, userWeightDTOS.size());
         assertTrue(expectedUserWeightDTO.getUserId().intValue() == userWeightDTOS.get(2).getUserId());
-        assertEquals(expectedUserWeightDTO.getWeightKg(), userWeightDTOS.get(1).getWeightKg());
+        UserWeightDTO finalExpectedUserWeightDTO = expectedUserWeightDTO;
+        assertTrue(userWeightDTOS.stream().anyMatch(userWeightDTO -> userWeightDTO.getWeightKg().equals(finalExpectedUserWeightDTO.getWeightKg())));
+
         userWeightDTOS = userWeightController.getWeightByUserId(expectedUserWeightDTO.getUserId());
         assertEquals(3, userWeightDTOS.size());
+
+        userWeightDTOS = userWeightController.getWeightByUserId(userDetailsId2);
+        assertTrue(userWeightDTOS.isEmpty());
+
         deleteWeights(expectedUserWeightDTO);
         deleteWeights(expectedUserWeightDTO2);
         deleteWeights(userWeightDTO3);
@@ -165,10 +169,10 @@ public class UserWeightControllerTest extends AbstractControllerTest {
 
     @Test
     public void getWeightByDate() throws Exception {
-        UserWeightDTO userWeightDTO = userWeightController.addObject(getUserWeightDTOTest());
+        UserWeightDTO userWeightDTO = userWeightController.addObject(getUserWeightDTOTest(54, new GregorianCalendar(2012, 10, 12)));
         userWeightDTO = userWeightController.getObject(userWeightDTO.getId());
 
-        UserWeightDTO expectedUserWeightDTO = getUserWeightDTOTest();
+        UserWeightDTO expectedUserWeightDTO = getUserWeightDTOTest(14, new GregorianCalendar(2012, 3, 2));
         expectedUserWeightDTO.setDate(new GregorianCalendar().getTime());
         UserWeightDTO userWeightDTO1 = userWeightController.addObject(expectedUserWeightDTO);
 

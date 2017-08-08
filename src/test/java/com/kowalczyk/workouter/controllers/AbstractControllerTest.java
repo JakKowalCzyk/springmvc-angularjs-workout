@@ -11,6 +11,8 @@ import com.kowalczyk.workouter.model.DTO.user.UserDetailsDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserInfoDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserNotesDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserWeightDTO;
+import com.kowalczyk.workouter.services.user.UserDetailsService;
+import com.kowalczyk.workouter.services.user.UserInfoService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -41,11 +43,15 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
     protected Long userDetailsId1;
     protected Long userDetailsId2;
     @Autowired
-    private UserDetailsController userDetailsController;
+    protected UserDetailsController userDetailsController;
+    @Autowired
+    protected UserInfoController userInfoController;
     @Autowired
     private RoleController roleController;
     @Autowired
-    private UserInfoController userInfoController;
+    private UserInfoService userInfoService;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Before
     public void setUp() throws Exception {
@@ -75,7 +81,6 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
         userDetailsDTO.setRoles(Stream.of(roleController.findAll().stream().findAny().get().getId()).collect(Collectors.toSet()));
         userDetailsDTO = userDetailsController.addObject(userDetailsDTO);
         userDetailsId1 = userDetailsDTO.getId();
-        userInfoController.addObject(getUserInfoDTO(userDetailsDTO.getId()));
     }
 
     private void addUserDetailsUserInfo2() {
@@ -83,7 +88,6 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
         userDetailsDTO.setRoles(Stream.of(roleController.findAll().stream().findAny().get().getId()).collect(Collectors.toSet()));
         userDetailsDTO = userDetailsController.addObject(userDetailsDTO);
         userDetailsId2 = userDetailsDTO.getId();
-        userInfoController.addObject(getUserInfoDTO(userDetailsDTO.getId()));
     }
 
     protected UserInfoDTO getUserInfoDTO(Long userId) {
@@ -94,16 +98,11 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
         return userInfoDTO;
     }
 
-    protected UserWeightDTO getUserWeightDTOTest() {
-        return getUserWeightDTOTest(56, new GregorianCalendar(2012, 12, 12));
-    }
-
     protected UserWeightDTO getUserWeightDTOTest(int weight, GregorianCalendar date) {
         UserWeightDTO userWeightDTO = new UserWeightDTO();
         userWeightDTO.setDate(date.getTime());
         userWeightDTO.setWeightKg(weight);
-        userWeightDTO.setUserId(getUserDetailsDTOTest().getId());
-        userWeightDTO.setUserId(userDetailsController.findAll().stream().findFirst().get().getId());
+        userWeightDTO.setUserId(userDetailsId1);
         return userWeightDTO;
     }
 

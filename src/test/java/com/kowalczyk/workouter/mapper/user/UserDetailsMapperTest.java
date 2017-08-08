@@ -6,6 +6,7 @@ import com.kowalczyk.workouter.model.BO.user.impl.UserNotes;
 import com.kowalczyk.workouter.model.DTO.user.UserDetailsDTO;
 import com.kowalczyk.workouter.services.exercise.WorkoutService;
 import com.kowalczyk.workouter.services.security.RoleService;
+import com.kowalczyk.workouter.services.user.UserInfoService;
 import com.kowalczyk.workouter.services.user.UserNotesService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,7 +14,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
@@ -32,15 +32,17 @@ public class UserDetailsMapperTest extends AbstractMapperTest {
     private WorkoutService workoutService;
     @Autowired
     private UserNotesService userNotesService;
-
+    @Autowired
+    private UserInfoService userInfoService;
     @Override
     @Before
     public void setUp() throws Exception {
         super.setUp();
         Mockito.when(roleService.getObject(Mockito.anyLong())).thenReturn(getUserRoleTest());
-        Mockito.when(workoutService.getObject(Mockito.anyLong())).thenReturn(getWorkoutTest());
+        Mockito.when(workoutService.getWorkoutsByUserId(Mockito.anyLong())).thenReturn(Arrays.asList(getWorkoutTest(), getWorkoutTest()));
         UserNotes userNotes = getUserNotesTest();
-        Mockito.when(userNotesService.getObject(Mockito.anyLong())).thenReturn(userNotes);
+        Mockito.when(userNotesService.getUserNotesByUserId(Mockito.anyLong())).thenReturn(Arrays.asList(userNotes));
+        Mockito.when(userInfoService.getUserInfoByUserId(Mockito.anyLong())).thenReturn(null);
     }
 
     private UserNotes getUserNotesTest() {
@@ -52,9 +54,6 @@ public class UserDetailsMapperTest extends AbstractMapperTest {
     @Test
     public void mapToBO() throws Exception {
         UserDetailsDTO userDetailsDTO = getUserDetailsDTOTest();
-        userDetailsDTO.setWorkouts(Arrays.asList(1L, 2L));
-        userDetailsDTO.setUserNotes(Arrays.asList(1L));
-        userDetailsDTO.setUserInfoList(new ArrayList<>());
         UserDetails userDetails = userDetailsMapper.mapToBO(userDetailsDTO);
         assertEquals(userDetails.getId(), userDetailsDTO.getId());
         assertTrue(userDetails.isEnabled());
@@ -72,7 +71,7 @@ public class UserDetailsMapperTest extends AbstractMapperTest {
         assertEquals(getWorkoutTest().getId(), userDetails.getWorkouts().get(0).getId());
         assertEquals(1, userDetails.getUserNotes().size());
         assertTrue(userDetails.getUserWeightList().isEmpty());
-        assertTrue(userDetails.getUserInfoList().isEmpty());
+        assertTrue(userDetails.getUserInfo() == null);
     }
 
     @Test
@@ -80,7 +79,7 @@ public class UserDetailsMapperTest extends AbstractMapperTest {
         UserDetails userDetails = getUserDetailsTest();
         userDetails.setUserNotes(Arrays.asList(getUserNotesTest()));
         userDetails.setWorkouts(Arrays.asList(getWorkoutTest(), getWorkoutTest()));
-        userDetails.setUserInfoList(new ArrayList<>());
+        userDetails.setUserInfo(null);
         UserDetailsDTO userDetailsDTO = userDetailsMapper.mapToDTO(userDetails);
         assertEquals(userDetails.getFirstName(), userDetailsDTO.getFirstName());
         assertEquals(userDetails.getBirthDay(), userDetailsDTO.getBirthDay());
@@ -93,11 +92,6 @@ public class UserDetailsMapperTest extends AbstractMapperTest {
         assertTrue(userDetailsDTO.isAccountNonExpired());
         assertTrue(userDetailsDTO.isAccountNonLocked());
         assertEquals(userDetails.isCredentialsNonExpired(), userDetailsDTO.isCredentialsNonExpired());
-        assertEquals(1, userDetailsDTO.getUserNotes().size());
-        assertEquals(getUserNotesTest().getId(), userDetailsDTO.getUserNotes().get(0));
-        assertEquals(2, userDetailsDTO.getWorkouts().size());
-        assertTrue(userDetailsDTO.getUserInfoList().isEmpty());
-        assertTrue(userDetailsDTO.getUserWeightList().isEmpty());
     }
 
 }

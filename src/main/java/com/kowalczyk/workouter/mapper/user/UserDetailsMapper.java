@@ -4,6 +4,7 @@ package com.kowalczyk.workouter.mapper.user;
 import com.kowalczyk.workouter.mapper.impl.ModelMapperImpl;
 import com.kowalczyk.workouter.model.BO.ModelObject;
 import com.kowalczyk.workouter.model.BO.user.UserDetails;
+import com.kowalczyk.workouter.model.BO.user.impl.UserInfo;
 import com.kowalczyk.workouter.model.DTO.user.UserDetailsDTO;
 import com.kowalczyk.workouter.services.exercise.WorkoutService;
 import com.kowalczyk.workouter.services.security.RoleService;
@@ -13,6 +14,7 @@ import com.kowalczyk.workouter.services.user.UserWeightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -46,10 +48,11 @@ public class UserDetailsMapper extends ModelMapperImpl<UserDetails, UserDetailsD
         userDetails.setLogin(objectDTO.getLogin());
         userDetails.setHashedPassword(objectDTO.getHashedPassword());
         userDetails.setRoles(objectDTO.getRoles().stream().map(userRoleDTO -> roleService.getObject(userRoleDTO)).collect(Collectors.toSet()));
-        userDetails.setUserInfoList(objectDTO.getUserInfoList().stream().map(id -> userInfoService.getObject(id)).collect(Collectors.toList()));
-        userDetails.setUserWeightList(objectDTO.getUserWeightList().stream().map(id -> userWeightService.getObject(id)).collect(Collectors.toList()));
-        userDetails.setUserNotes(objectDTO.getUserNotes().stream().map(id -> userNotesService.getObject(id)).collect(Collectors.toList()));
-        userDetails.setWorkouts(objectDTO.getWorkouts().stream().map(id -> workoutService.getObject(id)).collect(Collectors.toList()));
+        Optional<UserInfo> userInfoOptional = Optional.ofNullable(userInfoService.getUserInfoByUserId(objectDTO.getId()));
+        userInfoOptional.ifPresent(userInfo -> userDetails.setUserInfo(userInfoOptional.get()));
+        userDetails.getUserWeightList().addAll(userWeightService.getWeightByUserId(objectDTO.getId()));
+        userDetails.getUserNotes().addAll(userNotesService.getUserNotesByUserId(objectDTO.getId()));
+        userDetails.getWorkouts().addAll(workoutService.getWorkoutsByUserId(objectDTO.getId()));
         return userDetails;
     }
 
@@ -67,10 +70,6 @@ public class UserDetailsMapper extends ModelMapperImpl<UserDetails, UserDetailsD
         userDetailsDTO.setLogin(modelObject.getLogin());
         userDetailsDTO.setHashedPassword(modelObject.getHashedPassword());
         userDetailsDTO.setRoles(modelObject.getRoles().stream().map(ModelObject::getId).collect(Collectors.toSet()));
-        userDetailsDTO.setUserInfoList(modelObject.getUserInfoList().stream().map(ModelObject::getId).collect(Collectors.toList()));
-        userDetailsDTO.setUserWeightList(modelObject.getUserWeightList().stream().map(ModelObject::getId).collect(Collectors.toList()));
-        userDetailsDTO.setUserNotes(modelObject.getUserNotes().stream().map(ModelObject::getId).collect(Collectors.toList()));
-        userDetailsDTO.setWorkouts(modelObject.getWorkouts().stream().map(ModelObject::getId).collect(Collectors.toList()));
         return userDetailsDTO;
     }
 }

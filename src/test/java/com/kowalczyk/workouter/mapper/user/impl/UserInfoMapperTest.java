@@ -4,6 +4,7 @@ import com.kowalczyk.workouter.mapper.AbstractMapperTest;
 import com.kowalczyk.workouter.model.BO.user.impl.UserInfo;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserInfoDTO;
 import com.kowalczyk.workouter.services.exercise.ExerciseService;
+import com.kowalczyk.workouter.services.user.UserDetailsService;
 import com.kowalczyk.workouter.services.user.UserWeightService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,12 +25,14 @@ public class UserInfoMapperTest extends AbstractMapperTest {
     private UserWeightService userWeightService;
     @Autowired
     private ExerciseService exerciseService;
-
+    @Autowired
+    private UserDetailsService userDetailsService;
     @Override
     @Before
     public void setUp() throws Exception {
         Mockito.when(userWeightService.getObject(Mockito.anyLong())).thenReturn(getUserWeightTest());
         Mockito.when(exerciseService.getObject(Mockito.anyLong())).thenReturn(getExerciseTest());
+        Mockito.when(userDetailsService.getObject(Mockito.anyLong())).thenReturn(getUserDetailsTest());
         super.setUp();
     }
 

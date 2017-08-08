@@ -50,12 +50,17 @@ public class UserWeightServiceImpl extends ModelServiceImpl<UserWeight> implemen
     @Override
     public void deleteObject(Long id) {
         UserWeight userWeightToDelete = super.getObject(id);
+        removeUserWeightFromUser(userWeightToDelete);
         updateUserInfoWithNullWeight(userWeightToDelete);
         if (checkIfLastWeight(userWeightToDelete)) {
             deleteAndUpdateActualWeight(userWeightToDelete);
         } else {
             super.deleteObject(id);
         }
+    }
+
+    private void removeUserWeightFromUser(UserWeight userWeightToDelete) {
+        userWeightToDelete.getUser().getUserWeightList().remove(userWeightToDelete);
     }
 
     private void updateUserInfoWithNullWeight(UserWeight userWeightToDelete) {

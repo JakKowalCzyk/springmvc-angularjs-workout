@@ -6,6 +6,8 @@ import com.kowalczyk.workouter.model.BO.security.Role;
 import com.kowalczyk.workouter.model.BO.user.impl.UserInfo;
 import com.kowalczyk.workouter.model.BO.user.impl.UserNotes;
 import com.kowalczyk.workouter.model.BO.user.impl.UserWeight;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.*;
@@ -26,9 +28,9 @@ public class UserDetails extends ModelObject {
     private String lastName;
     private Date birthDay;
     private String email;
+    private UserInfo userInfo;
     private List<UserWeight> userWeightList = new ArrayList<>();
     private List<UserNotes> userNotes = new ArrayList<>();
-    private List<UserInfo> userInfoList = new ArrayList<>();
     private List<Workout> workouts = new ArrayList<>();
 
     public UserDetails() {
@@ -36,8 +38,6 @@ public class UserDetails extends ModelObject {
 
     @PreRemove
     public void preRemove() {
-        getUserWeightList().forEach(userWeight -> userWeight.setUser(null));
-        getUserInfoList().forEach(userInfo -> userInfo.setUser(null));
     }
 
     public String getLogin() {
@@ -129,7 +129,8 @@ public class UserDetails extends ModelObject {
         this.accountNonLocked = accountNonLocked;
     }
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     public List<UserWeight> getUserWeightList() {
         return userWeightList;
     }
@@ -138,7 +139,8 @@ public class UserDetails extends ModelObject {
         this.userWeightList = userWeightList;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     public List<UserNotes> getUserNotes() {
         return userNotes;
     }
@@ -147,16 +149,18 @@ public class UserDetails extends ModelObject {
         this.userNotes = userNotes;
     }
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
-    public List<UserInfo> getUserInfoList() {
-        return userInfoList;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    public UserInfo getUserInfo() {
+        return userInfo;
     }
 
-    public void setUserInfoList(List<UserInfo> userInfoList) {
-        this.userInfoList = userInfoList;
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     public List<Workout> getWorkouts() {
         return workouts;
     }
