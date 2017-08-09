@@ -16,6 +16,7 @@ public class UserInfo extends ModelObject {
     private UserWeight actualWeight;
 
     private Exercise exerciseFavouriteId;
+
     private UserDetails user;
 
     public UserInfo() {
@@ -59,7 +60,7 @@ public class UserInfo extends ModelObject {
         this.exerciseFavouriteId = exerciseFavouriteId;
     }
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = {CascadeType.MERGE})
     public UserDetails getUser() {
         return user;
     }

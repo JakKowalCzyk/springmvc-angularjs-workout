@@ -64,7 +64,13 @@ public class UserDetailsServiceImpl extends ModelServiceImpl<com.kowalczyk.worko
     @Override
     public void deleteObject(Long id) {
         com.kowalczyk.workouter.model.BO.user.UserDetails userDetails = super.getObject(id);
-        userInfoService.deleteObject(userDetails.getUserInfo());
+        deleteUserInfoBeforeUserIfNotNull(userDetails);
         super.deleteObject(id);
+    }
+
+    private void deleteUserInfoBeforeUserIfNotNull(com.kowalczyk.workouter.model.BO.user.UserDetails userDetails) {
+        if (userDetails.getUserInfo() != null) {
+            userInfoService.deleteObject(userDetails.getUserInfo());
+        }
     }
 }

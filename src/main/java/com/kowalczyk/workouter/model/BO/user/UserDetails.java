@@ -149,7 +149,7 @@ public class UserDetails extends ModelObject {
         this.userNotes = userNotes;
     }
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
     @OnDelete(action = OnDeleteAction.CASCADE)
     public UserInfo getUserInfo() {
         return userInfo;
