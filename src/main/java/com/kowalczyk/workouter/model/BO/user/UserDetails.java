@@ -4,7 +4,7 @@ import com.kowalczyk.workouter.model.BO.ModelObject;
 import com.kowalczyk.workouter.model.BO.exercise.Workout;
 import com.kowalczyk.workouter.model.BO.security.Role;
 import com.kowalczyk.workouter.model.BO.user.impl.UserInfo;
-import com.kowalczyk.workouter.model.BO.user.impl.UserNotes;
+import com.kowalczyk.workouter.model.BO.user.impl.UserNote;
 import com.kowalczyk.workouter.model.BO.user.impl.UserWeight;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -30,7 +30,7 @@ public class UserDetails extends ModelObject {
     private String email;
     private UserInfo userInfo;
     private List<UserWeight> userWeightList = new ArrayList<>();
-    private List<UserNotes> userNotes = new ArrayList<>();
+    private List<UserNote> userNotes = new ArrayList<>();
     private List<Workout> workouts = new ArrayList<>();
 
     public UserDetails() {
@@ -141,11 +141,11 @@ public class UserDetails extends ModelObject {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    public List<UserNotes> getUserNotes() {
+    public List<UserNote> getUserNotes() {
         return userNotes;
     }
 
-    public void setUserNotes(List<UserNotes> userNotes) {
+    public void setUserNotes(List<UserNote> userNotes) {
         this.userNotes = userNotes;
     }
 

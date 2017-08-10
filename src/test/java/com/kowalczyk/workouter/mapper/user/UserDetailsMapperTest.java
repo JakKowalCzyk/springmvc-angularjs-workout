@@ -2,7 +2,7 @@ package com.kowalczyk.workouter.mapper.user;
 
 import com.kowalczyk.workouter.mapper.AbstractMapperTest;
 import com.kowalczyk.workouter.model.BO.user.UserDetails;
-import com.kowalczyk.workouter.model.BO.user.impl.UserNotes;
+import com.kowalczyk.workouter.model.BO.user.impl.UserNote;
 import com.kowalczyk.workouter.model.DTO.user.UserDetailsDTO;
 import com.kowalczyk.workouter.services.exercise.WorkoutService;
 import com.kowalczyk.workouter.services.security.RoleService;
@@ -40,20 +40,20 @@ public class UserDetailsMapperTest extends AbstractMapperTest {
         super.setUp();
         Mockito.when(roleService.getObject(Mockito.anyLong())).thenReturn(getUserRoleTest());
         Mockito.when(workoutService.getWorkoutsByUserId(Mockito.anyLong())).thenReturn(Arrays.asList(getWorkoutTest(), getWorkoutTest()));
-        UserNotes userNotes = getUserNotesTest();
-        Mockito.when(userNotesService.getUserNotesByUserId(Mockito.anyLong())).thenReturn(Arrays.asList(userNotes));
+        UserNote userNote = getUserNotesTest();
+        Mockito.when(userNotesService.getUserNotesByUserId(Mockito.anyLong())).thenReturn(Arrays.asList(userNote));
         Mockito.when(userInfoService.getUserInfoByUserId(Mockito.anyLong())).thenReturn(null);
     }
 
-    private UserNotes getUserNotesTest() {
-        UserNotes userNotes = new UserNotes();
-        userNotes.setId(1L);
-        return userNotes;
+    private UserNote getUserNotesTest() {
+        UserNote userNote = new UserNote();
+        userNote.setId(1L);
+        return userNote;
     }
 
     @Test
     public void mapToBO() throws Exception {
-        UserDetailsDTO userDetailsDTO = getUserDetailsDTOTest();
+        UserDetailsDTO userDetailsDTO = getUserDetailsDTOTest("login", "name", "lastName");
         UserDetails userDetails = userDetailsMapper.mapToBO(userDetailsDTO);
         assertEquals(userDetails.getId(), userDetailsDTO.getId());
         assertTrue(userDetails.isEnabled());

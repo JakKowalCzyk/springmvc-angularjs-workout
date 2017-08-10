@@ -7,8 +7,8 @@ package com.kowalczyk.workouter.controllers.user.impl;
 import com.kowalczyk.workouter.controllers.impl.ModelControllerImpl;
 import com.kowalczyk.workouter.controllers.user.UserNotesController;
 import com.kowalczyk.workouter.mapper.user.impl.UserNotesMapper;
-import com.kowalczyk.workouter.model.BO.user.impl.UserNotes;
-import com.kowalczyk.workouter.model.DTO.user.impl.UserNotesDTO;
+import com.kowalczyk.workouter.model.BO.user.impl.UserNote;
+import com.kowalczyk.workouter.model.DTO.user.impl.UserNoteDTO;
 import com.kowalczyk.workouter.services.user.UserNotesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-public class UserNotesControllerImpl extends ModelControllerImpl<UserNotes, UserNotesDTO> implements UserNotesController {
+public class UserNotesControllerImpl extends ModelControllerImpl<UserNote, UserNoteDTO> implements UserNotesController {
 
     @Autowired
     public UserNotesControllerImpl(UserNotesService modelService, UserNotesMapper modelMapper) {
@@ -28,22 +28,22 @@ public class UserNotesControllerImpl extends ModelControllerImpl<UserNotes, User
     }
 
     @Override
-    public UserNotesDTO getObject(@PathVariable Long id) {
+    public UserNoteDTO getObject(@PathVariable Long id) {
         return super.getObject(id);
     }
 
     @Override
-    public UserNotesDTO updateObject(@RequestBody UserNotesDTO model) {
+    public UserNoteDTO updateObject(@RequestBody UserNoteDTO model) {
         return super.updateObject(model);
     }
 
     @Override
-    public UserNotesDTO addObject(@RequestBody UserNotesDTO model) {
+    public UserNoteDTO addObject(@RequestBody UserNoteDTO model) {
         return super.addObject(model);
     }
 
     @Override
-    public List<UserNotesDTO> findAll() {
+    public List<UserNoteDTO> findAll() {
         return super.findAll();
     }
 
@@ -58,12 +58,12 @@ public class UserNotesControllerImpl extends ModelControllerImpl<UserNotes, User
     }
 
     @Override
-    public List<UserNotesDTO> getUserNotesByUserId(@PathVariable Long id) {
+    public List<UserNoteDTO> getUserNotesByUserId(@PathVariable Long id) {
         return ((UserNotesService) getModelService()).getUserNotesByUserId(id).stream().map(userNotes -> getModelMapper().mapToDTO(userNotes)).collect(Collectors.toList());
     }
 
     @Override
-    public List<UserNotesDTO> getUserNotesByDate(@PathVariable Long id, @PathVariable Date date) {
+    public List<UserNoteDTO> getUserNotesByDate(@PathVariable Long id, @PathVariable Date date) {
         return ((UserNotesService) getModelService()).getNotesByDate(id, date).stream().map(userNotes -> getModelMapper().mapToDTO(userNotes)).collect(Collectors.toList());
     }
 }

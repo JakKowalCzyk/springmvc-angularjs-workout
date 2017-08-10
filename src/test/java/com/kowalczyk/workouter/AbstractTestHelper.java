@@ -18,31 +18,25 @@ public abstract class AbstractTestHelper {
         UserWeightDTO userWeightDTO = new UserWeightDTO();
         userWeightDTO.setDate(new GregorianCalendar(2012, 12, 2).getTime());
         userWeightDTO.setWeightKg(56);
-        userWeightDTO.setUserId(getUserDetailsDTOTest().getId());
+        userWeightDTO.setUserId(getUserDetailsDTOTest("login1", "name1", "lastN1").getId());
         return userWeightDTO;
     }
 
-    protected UserDetailsDTO getUserDetailsDTOTest() {
+
+    protected UserDetailsDTO getUserDetailsDTOTest(String login, String name, String lastName) {
         UserDetailsDTO userDetailsDTO = buildUserDetailsDTOTest();
-        userDetailsDTO.setId(1L);
+        userDetailsDTO.setLogin(login);
+        userDetailsDTO.setEmail(login);
+        userDetailsDTO.setFirstName(name);
+        userDetailsDTO.setLogin(lastName);
         return userDetailsDTO;
     }
 
-    protected UserDetailsDTO getUserDetailsDTOTest2() {
-        UserDetailsDTO userDetailsDTO = buildUserDetailsDTOTest();
-        userDetailsDTO.setEmail("mail");
-        userDetailsDTO.setId(2L);
-        return userDetailsDTO;
-    }
 
     protected UserDetailsDTO buildUserDetailsDTOTest() {
         UserDetailsDTO userDetailsDTO = new UserDetailsDTO();
-        userDetailsDTO.setFirstName("name");
-        userDetailsDTO.setLastName("last");
         userDetailsDTO.setBirthDay(new GregorianCalendar(2012, 3, 12).getTime());
-        userDetailsDTO.setLogin("log");
         userDetailsDTO.setHashedPassword("pass");
-        userDetailsDTO.setEmail("email");
         userDetailsDTO.setEnabled(true);
         userDetailsDTO.setAccountNonLocked(true);
         userDetailsDTO.setAccountNonExpired(true);

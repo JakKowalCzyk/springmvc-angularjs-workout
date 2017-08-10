@@ -11,13 +11,13 @@ import java.util.Date;
  * Created by JK on 2016-09-17.
  */
 @Entity
-public class UserNotes extends AbstractUserObject {
+public class UserNote extends AbstractUserObject {
 
     private String note;
 
     private Date date;
 
-    public UserNotes() {
+    public UserNote() {
     }
 
     @PrePersist
@@ -27,8 +27,8 @@ public class UserNotes extends AbstractUserObject {
 
     @PreRemove
     public void preRemove() {
-        getUser().getUserNotes().remove(this);
     }
+
     public String getNote() {
         return note;
     }
