@@ -47,7 +47,7 @@ public class UserInfoMapperTest extends AbstractMapperTest {
         assertEquals(userInfoDTO.getId(), userInfo.getId());
         Assert.assertEquals(userInfoDTO.getUserId(), userInfo.getUser().getId());
         Assert.assertEquals(userInfoDTO.getActualWeightId(), userInfo.getActualWeight().getId());
-        Assert.assertEquals(userInfoDTO.getFavouriteExerciseId(), userInfo.getExerciseFavouriteId().getId());
+        Assert.assertEquals(userInfoDTO.getFavouriteExerciseId(), userInfo.getFavouriteExercise().getId());
     }
 
     @Test
@@ -56,12 +56,12 @@ public class UserInfoMapperTest extends AbstractMapperTest {
         userInfo.setId(3L);
         userInfo.setUser(getUserDetailsTest());
         userInfo.setActualWeight(getUserWeightTest());
-        userInfo.setExerciseFavouriteId(getExerciseTest());
+        userInfo.setFavouriteExercise(getExerciseTest());
         UserInfoDTO userInfoDTO = userInfoMapper.mapToDTO(userInfo);
         assertEquals(userInfo.getId(), userInfoDTO.getId());
         Assert.assertEquals(userInfo.getUser().getId(), userInfoDTO.getUserId());
         Assert.assertEquals(userInfo.getActualWeight().getId(), userInfoDTO.getActualWeightId());
-        Assert.assertEquals(userInfo.getExerciseFavouriteId().getId(), userInfoDTO.getFavouriteExerciseId());
+        Assert.assertEquals(userInfo.getFavouriteExercise().getId(), userInfoDTO.getFavouriteExerciseId());
     }
 
 }

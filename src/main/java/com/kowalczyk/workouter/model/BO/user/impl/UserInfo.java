@@ -15,7 +15,7 @@ public class UserInfo extends ModelObject {
 
     private UserWeight actualWeight;
 
-    private Exercise exerciseFavouriteId;
+    private Exercise favouriteExercise;
 
     private UserDetails user;
 
@@ -52,12 +52,12 @@ public class UserInfo extends ModelObject {
 
     @OneToOne
     @JoinColumn(name = "exercise_id")
-    public Exercise getExerciseFavouriteId() {
-        return exerciseFavouriteId;
+    public Exercise getFavouriteExercise() {
+        return favouriteExercise;
     }
 
-    public void setExerciseFavouriteId(Exercise exerciseFavouriteId) {
-        this.exerciseFavouriteId = exerciseFavouriteId;
+    public void setFavouriteExercise(Exercise exerciseFavouriteId) {
+        this.favouriteExercise = exerciseFavouriteId;
     }
 
     @OneToOne(cascade = {CascadeType.MERGE})

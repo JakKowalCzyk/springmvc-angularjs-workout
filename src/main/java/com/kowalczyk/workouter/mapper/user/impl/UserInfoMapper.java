@@ -28,7 +28,9 @@ public class UserInfoMapper extends ModelMapperImpl<UserInfo, UserInfoDTO> {
         if (objectDTO.getActualWeightId() != null) {
             userInfo.setActualWeight(userWeightService.getObject(objectDTO.getActualWeightId()));
         }
-        userInfo.setExerciseFavouriteId(exerciseService.getObject(objectDTO.getFavouriteExerciseId()));
+        if (objectDTO.getFavouriteExerciseId() != null) {
+            userInfo.setFavouriteExercise(exerciseService.getObject(objectDTO.getFavouriteExerciseId()));
+        }
         userInfo.setUser(userDetailsService.getObject(objectDTO.getUserId()));
         return userInfo;
     }
@@ -39,8 +41,8 @@ public class UserInfoMapper extends ModelMapperImpl<UserInfo, UserInfoDTO> {
         if (modelObject.getActualWeight() != null) {
             userInfoDTO.setActualWeightId(modelObject.getActualWeight().getId());
         }
-        if (modelObject.getExerciseFavouriteId() != null) {
-            userInfoDTO.setFavouriteExerciseId(modelObject.getExerciseFavouriteId().getId());
+        if (modelObject.getFavouriteExercise() != null) {
+            userInfoDTO.setFavouriteExerciseId(modelObject.getFavouriteExercise().getId());
         }
         userInfoDTO.setUserId(modelObject.getUser().getId());
         return userInfoDTO;

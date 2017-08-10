@@ -31,7 +31,7 @@ public class Exercise extends ModelObject {
     public Exercise() {
     }
 
-    @OneToOne(mappedBy = "exerciseFavouriteId")
+    @OneToOne(mappedBy = "favouriteExercise")
     public UserInfo getUserInfoId() {
         return userInfoId;
     }
