@@ -9,7 +9,7 @@ import com.kowalczyk.workouter.model.DTO.exercise.ExerciseDTO;
 import com.kowalczyk.workouter.model.DTO.security.RoleDTO;
 import com.kowalczyk.workouter.model.DTO.user.UserDetailsDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserInfoDTO;
-import com.kowalczyk.workouter.model.DTO.user.impl.UserNotesDTO;
+import com.kowalczyk.workouter.model.DTO.user.impl.UserNoteDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserWeightDTO;
 import com.kowalczyk.workouter.services.user.UserDetailsService;
 import com.kowalczyk.workouter.services.user.UserInfoService;
@@ -77,14 +77,14 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
     }
 
     private void addUserDetailsUserInfo1() {
-        UserDetailsDTO userDetailsDTO = getUserDetailsDTOTest();
+        UserDetailsDTO userDetailsDTO = getUserDetailsDTOTest("log1", "n1", "la1");
         userDetailsDTO.setRoles(Stream.of(roleController.findAll().stream().findAny().get().getId()).collect(Collectors.toSet()));
         userDetailsDTO = userDetailsController.addObject(userDetailsDTO);
         userDetailsId1 = userDetailsDTO.getId();
     }
 
     private void addUserDetailsUserInfo2() {
-        UserDetailsDTO userDetailsDTO = getUserDetailsDTOTest2();
+        UserDetailsDTO userDetailsDTO = getUserDetailsDTOTest("log2", "n2", "la2");
         userDetailsDTO.setRoles(Stream.of(roleController.findAll().stream().findAny().get().getId()).collect(Collectors.toSet()));
         userDetailsDTO = userDetailsController.addObject(userDetailsDTO);
         userDetailsId2 = userDetailsDTO.getId();
@@ -93,8 +93,6 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
     protected UserInfoDTO getUserInfoDTO(Long userId) {
         UserInfoDTO userInfoDTO = new UserInfoDTO();
         userInfoDTO.setUserId(userId);
-        userInfoDTO.setActualWeightId(0L);
-        userInfoDTO.setFavouriteExerciseId(0L);
         return userInfoDTO;
     }
 
@@ -106,23 +104,12 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
         return userWeightDTO;
     }
 
-    protected UserNotesDTO createUserNotesTest(Date date, String note) {
-        UserNotesDTO userNotesDTO = getUserNotesDTOTest(date, note);
-        userNotesDTO.setUserId(userDetailsId1);
-        return userNotesDTO;
-    }
-
-    protected UserNotesDTO createUserNotesTest2(Date date, String note) {
-        UserNotesDTO userNotesDTO = getUserNotesDTOTest(date, note);
-        userNotesDTO.setUserId(userDetailsId2);
-        return userNotesDTO;
-    }
-
-    private UserNotesDTO getUserNotesDTOTest(Date date, String note) {
-        UserNotesDTO userNotesDTO = new UserNotesDTO();
-        userNotesDTO.setDate(date);
-        userNotesDTO.setNote(note);
-        return userNotesDTO;
+    protected UserNoteDTO createUserNotesTest(Date date, String note, Long userDetailsId) {
+        UserNoteDTO userNoteDTO = new UserNoteDTO();
+        userNoteDTO.setDate(date);
+        userNoteDTO.setNote(note);
+        userNoteDTO.setUserId(userDetailsId);
+        return userNoteDTO;
     }
 
     protected ExerciseDTO createExerciseDTOTest(String name, String description, ExerciseType exerciseType) {

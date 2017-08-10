@@ -8,6 +8,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.GregorianCalendar;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -38,6 +40,14 @@ public class UserWeightMapperTest extends AbstractMapperTest {
         assertEquals(userWeight.getDate(), userWeightDTO.getDate());
         assertTrue(userWeight.getWeightKg() == userWeightDTO.getWeightKg());
         Assert.assertEquals(userWeight.getUser().getId(), userWeightDTO.getUserId());
+    }
+
+    protected UserWeightDTO buildUserWeightDTOTest() {
+        UserWeightDTO userWeightDTO = new UserWeightDTO();
+        userWeightDTO.setDate(new GregorianCalendar(2012, 12, 2).getTime());
+        userWeightDTO.setWeightKg(56);
+        userWeightDTO.setUserId(getUserDetailsDTOTest("login1", "name1", "lastN1").getId());
+        return userWeightDTO;
     }
 
 }

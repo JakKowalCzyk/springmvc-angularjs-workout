@@ -52,7 +52,7 @@ public class UserInfoControllerTest extends AbstractControllerTest {
         assertEquals(userInfoDTO.getId(), userInfoDTO1.getId());
         assertEquals(userInfoDTO.getFavouriteExerciseId(), userInfoDTO1.getFavouriteExerciseId());
         assertEquals(userWeightDTO.getId(), userInfoDTO1.getActualWeightId());
-        assertTrue(userDetailsService.getObject(userInfoDTO1.getUserId()).getUserInfo().getExerciseFavouriteId().getId().equals(userInfoDTO1.getFavouriteExerciseId()));
+        assertTrue(userDetailsService.getObject(userInfoDTO1.getUserId()).getUserInfo().getFavouriteExercise().getId().equals(userInfoDTO1.getFavouriteExerciseId()));
 
         deleteUserInfo(userInfoDTO);
 
@@ -80,7 +80,7 @@ public class UserInfoControllerTest extends AbstractControllerTest {
         userInfoDTO.setFavouriteExerciseId(exerciseDTO1.getId());
         UserInfoDTO updatedUserInfoDTO = userInfoController.updateObject(userInfoDTO);
         assertEquals(updatedUserInfoDTO.getFavouriteExerciseId(), exerciseDTO1.getId());
-        assertTrue(userDetailsService.getObject(updatedUserInfoDTO.getUserId()).getUserInfo().getExerciseFavouriteId().getId().equals(updatedUserInfoDTO.getFavouriteExerciseId()));
+        assertTrue(userDetailsService.getObject(updatedUserInfoDTO.getUserId()).getUserInfo().getFavouriteExercise().getId().equals(updatedUserInfoDTO.getFavouriteExerciseId()));
 
 
         UserWeightDTO userWeightDTO1 = userWeightController.addObject(getUserWeightDTOTest(100, new GregorianCalendar()));
