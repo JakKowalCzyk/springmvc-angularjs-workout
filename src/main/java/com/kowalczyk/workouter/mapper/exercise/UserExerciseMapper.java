@@ -1,8 +1,8 @@
 package com.kowalczyk.workouter.mapper.exercise;
 
 import com.kowalczyk.workouter.mapper.impl.ModelMapperImpl;
-import com.kowalczyk.workouter.model.BO.exercise.UserExercise;
-import com.kowalczyk.workouter.model.DTO.exercise.UserExerciseDTO;
+import com.kowalczyk.workouter.model.BO.exercise.WorkoutExercise;
+import com.kowalczyk.workouter.model.DTO.exercise.WorkoutExerciseDTO;
 import com.kowalczyk.workouter.services.exercise.ExerciseService;
 import com.kowalczyk.workouter.services.exercise.WorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * Created by JK on 2017-02-18.
  */
 @Component
-public class UserExerciseMapper extends ModelMapperImpl<UserExercise, UserExerciseDTO> {
+public class UserExerciseMapper extends ModelMapperImpl<WorkoutExercise, WorkoutExerciseDTO> {
 
     @Autowired
     private ExerciseService exerciseService;
@@ -20,22 +20,22 @@ public class UserExerciseMapper extends ModelMapperImpl<UserExercise, UserExerci
     private WorkoutService workoutService;
 
     @Override
-    protected UserExercise buildBO(UserExerciseDTO objectDTO) {
-        UserExercise userExercise = new UserExercise();
-        userExercise.setExercise(exerciseService.getObject(objectDTO.getExerciseId()));
-        userExercise.setWorkoutId(workoutService.getObject(objectDTO.getWorkoutId()));
-        userExercise.setRepeat(objectDTO.getRepeat());
-        userExercise.setSeries(objectDTO.getSeries());
-        return userExercise;
+    protected WorkoutExercise buildBO(WorkoutExerciseDTO objectDTO) {
+        WorkoutExercise workoutExercise = new WorkoutExercise();
+        workoutExercise.setExercise(exerciseService.getObject(objectDTO.getExerciseId()));
+        workoutExercise.setWorkout(workoutService.getObject(objectDTO.getWorkoutId()));
+        workoutExercise.setRepeat(objectDTO.getRepeat());
+        workoutExercise.setSeries(objectDTO.getSeries());
+        return workoutExercise;
     }
 
     @Override
-    protected UserExerciseDTO buildDTO(UserExercise modelObject) {
-        UserExerciseDTO userExerciseDTO = new UserExerciseDTO();
-        userExerciseDTO.setExerciseId(modelObject.getExercise().getId());
-        userExerciseDTO.setRepeat(modelObject.getRepeat());
-        userExerciseDTO.setSeries(modelObject.getSeries());
-        userExerciseDTO.setWorkoutId(modelObject.getWorkoutId().getId());
-        return userExerciseDTO;
+    protected WorkoutExerciseDTO buildDTO(WorkoutExercise modelObject) {
+        WorkoutExerciseDTO workoutExerciseDTO = new WorkoutExerciseDTO();
+        workoutExerciseDTO.setExerciseId(modelObject.getExercise().getId());
+        workoutExerciseDTO.setRepeat(modelObject.getRepeat());
+        workoutExerciseDTO.setSeries(modelObject.getSeries());
+        workoutExerciseDTO.setWorkoutId(modelObject.getWorkout().getId());
+        return workoutExerciseDTO;
     }
 }

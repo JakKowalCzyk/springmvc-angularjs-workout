@@ -13,7 +13,7 @@
 -- --
 -- -- CREATE TABLE workout(workoutId SERIAL NOT NULL PRIMARY KEY ,userId int REFERENCES user(userId), date DATE);
 -- --
--- -- CREATE TABLE userExercise(usexercise_id SERIAL NOT NULL PRIMARY key, exercise_id int REFERENCES userExerciseId(exercise_id), workoutId int REFERENCES workout(workoutId), repeat int, series int);
+-- -- CREATE TABLE workoutExercise(usexercise_id SERIAL NOT NULL PRIMARY key, exercise_id int REFERENCES userExerciseId(exercise_id), workoutId int REFERENCES workout(workoutId), repeat int, series int);
 -- --
 -- -- create table userInfo(uinfo_id SERIAL NOT NULL PRIMARY KEY, userId int REFERENCES user(userId), actualWeight int REFERENCES userWeight(uweight_id), efavourite_id int REFERENCES userExerciseId(exercise_id));
 -- --

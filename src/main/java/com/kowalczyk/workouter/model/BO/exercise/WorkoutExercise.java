@@ -8,20 +8,20 @@ import javax.persistence.*;
  * Created by JK on 2016-09-17.
  */
 @Entity
-public class UserExercise extends ModelObject {
+public class WorkoutExercise extends ModelObject {
 
     private Exercise exercise;
 
-    private Workout workoutId;
+    private Workout workout;
 
     private int repeat;
 
     private int series;
 
-    public UserExercise() {
+    public WorkoutExercise() {
     }
 
-    public UserExercise(int repeat, int series) {
+    public WorkoutExercise(int repeat, int series) {
         this.repeat = repeat;
         this.series = series;
     }
@@ -38,12 +38,12 @@ public class UserExercise extends ModelObject {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "workoutId")
-    public Workout getWorkoutId() {
-        return workoutId;
+    public Workout getWorkout() {
+        return workout;
     }
 
-    public void setWorkoutId(Workout workout) {
-        this.workoutId = workout;
+    public void setWorkout(Workout workout) {
+        this.workout = workout;
     }
 
     public int getRepeat() {

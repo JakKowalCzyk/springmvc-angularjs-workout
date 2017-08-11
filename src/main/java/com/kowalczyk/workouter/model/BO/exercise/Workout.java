@@ -15,7 +15,7 @@ public class Workout extends AbstractUserObject {
 
     private Date date;
 
-    private List<UserExercise> userExercises = new ArrayList<>();
+    private List<WorkoutExercise> workoutExercises = new ArrayList<>();
 
     public Workout(Date date) {
         this.date = date;
@@ -41,12 +41,12 @@ public class Workout extends AbstractUserObject {
         this.date = date;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workoutId")
-    public List<UserExercise> getUserExercises() {
-        return userExercises;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workout")
+    public List<WorkoutExercise> getWorkoutExercises() {
+        return workoutExercises;
     }
 
-    public void setUserExercises(List<UserExercise> userExercises) {
-        this.userExercises = userExercises;
+    public void setWorkoutExercises(List<WorkoutExercise> workoutExercises) {
+        this.workoutExercises = workoutExercises;
     }
 }

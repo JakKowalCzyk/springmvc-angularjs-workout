@@ -4,7 +4,7 @@ import com.kowalczyk.workouter.enums.ExerciseType;
 import com.kowalczyk.workouter.mapper.AbstractMapperTest;
 import com.kowalczyk.workouter.model.BO.exercise.Workout;
 import com.kowalczyk.workouter.model.DTO.exercise.WorkoutDTO;
-import com.kowalczyk.workouter.services.exercise.UserExerciseService;
+import com.kowalczyk.workouter.services.exercise.WorkoutExerciseService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,12 +24,12 @@ public class WorkoutMapperTest extends AbstractMapperTest {
     @Autowired
     private WorkoutMapper workoutMapper;
     @Autowired
-    private UserExerciseService userExerciseService;
+    private WorkoutExerciseService workoutExerciseService;
 
     @Override
     @Before
     public void setUp() throws Exception {
-        Mockito.when(userExerciseService.getObject(Mockito.anyLong())).thenReturn(getUserExerciseTest());
+        Mockito.when(workoutExerciseService.getObject(Mockito.anyLong())).thenReturn(getUserExerciseTest());
         super.setUp();
     }
 
@@ -44,8 +44,8 @@ public class WorkoutMapperTest extends AbstractMapperTest {
         assertEquals(workoutDTO.getId(), workout.getId());
         assertEquals(workoutDTO.getDate(), workout.getDate());
         assertEquals(getUserDetailsTest().getId(), workout.getUser().getId());
-        assertEquals(2, workout.getUserExercises().size());
-        Assert.assertEquals(ExerciseType.BACK, workout.getUserExercises().get(0).getExercise().getExerciseType());
+        assertEquals(2, workout.getWorkoutExercises().size());
+        Assert.assertEquals(ExerciseType.BACK, workout.getWorkoutExercises().get(0).getExercise().getExerciseType());
     }
 
     @Test
