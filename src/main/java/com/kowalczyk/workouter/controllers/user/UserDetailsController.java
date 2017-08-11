@@ -44,4 +44,7 @@ public interface UserDetailsController extends ModelController<UserDetailsDTO> {
 
     @RequestMapping(value = "/principal", method = RequestMethod.GET)
     UserDetailsDTO getPrincipal(Principal principal);
+
+    @RequestMapping(value = "/login}", method = RequestMethod.GET)
+    UserDetailsDTO getByLogin(@PathVariable String login);
 }
