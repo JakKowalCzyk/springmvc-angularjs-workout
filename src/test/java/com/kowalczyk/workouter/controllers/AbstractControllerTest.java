@@ -5,6 +5,7 @@ import com.kowalczyk.workouter.controllers.security.RoleController;
 import com.kowalczyk.workouter.controllers.user.UserDetailsController;
 import com.kowalczyk.workouter.controllers.user.UserInfoController;
 import com.kowalczyk.workouter.enums.ExerciseType;
+import com.kowalczyk.workouter.enums.RoleType;
 import com.kowalczyk.workouter.model.DTO.exercise.ExerciseDTO;
 import com.kowalczyk.workouter.model.DTO.security.RoleDTO;
 import com.kowalczyk.workouter.model.DTO.user.UserDetailsDTO;
@@ -47,7 +48,7 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
     @Autowired
     protected UserInfoController userInfoController;
     @Autowired
-    private RoleController roleController;
+    protected RoleController roleController;
     @Autowired
     private UserInfoService userInfoService;
     @Autowired
@@ -55,7 +56,7 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
 
     @Before
     public void setUp() throws Exception {
-        roleController.addObject(buildRoleDTOTest());
+        roleController.addObject(buildRoleDTOTest(RoleType.USER));
         addUserDetailsUserInfo1();
         addUserDetailsUserInfo2();
     }

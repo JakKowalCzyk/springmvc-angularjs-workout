@@ -21,7 +21,7 @@ public class RoleControllerTest extends AbstractControllerTest {
 
     @Test
     public void getObject() throws Exception {
-        RoleDTO roleDTO = roleController.addObject(buildRoleDTOTest());
+        RoleDTO roleDTO = roleController.addObject(buildRoleDTOTest(RoleType.ADMIN));
         RoleDTO expectedRoleDTO = roleController.getObject(roleDTO.getId());
         assertEquals(roleDTO.getId(), expectedRoleDTO.getId());
         assertEquals(roleDTO.getRoleType(), expectedRoleDTO.getRoleType());
@@ -35,7 +35,7 @@ public class RoleControllerTest extends AbstractControllerTest {
 
     @Test
     public void updateObject() throws Exception {
-        RoleDTO roleDTO = roleController.addObject(buildRoleDTOTest());
+        RoleDTO roleDTO = roleController.addObject(buildRoleDTOTest(RoleType.ADMIN));
         roleDTO.setRoleType(RoleType.TRAINER);
         roleDTO = roleController.updateObject(roleDTO);
         assertEquals(RoleType.TRAINER, roleDTO.getRoleType());
@@ -46,7 +46,7 @@ public class RoleControllerTest extends AbstractControllerTest {
     public void findAll() throws Exception {
         List<RoleDTO> roleDTOS = roleController.findAll();
         assertEquals(1, roleDTOS.size());
-        RoleDTO roleDTO = buildRoleDTOTest();
+        RoleDTO roleDTO = buildRoleDTOTest(RoleType.ADMIN);
         roleDTO.setRoleType(RoleType.USER);
         roleDTO = roleController.addObject(roleDTO);
         Long roleDTOId = roleDTO.getId();
@@ -54,7 +54,7 @@ public class RoleControllerTest extends AbstractControllerTest {
         assertEquals(2, roleDTOS.size());
         assertTrue(roleDTOS.stream().anyMatch(r -> Objects.equals(r.getId(), roleDTOId)));
 
-        RoleDTO roleDTO1 = buildRoleDTOTest();
+        RoleDTO roleDTO1 = buildRoleDTOTest(RoleType.ADMIN);
         roleDTO1.setRoleType(RoleType.TRAINER);
         roleDTO1 = roleController.addObject(roleDTO1);
         roleDTOS = roleController.findAll();

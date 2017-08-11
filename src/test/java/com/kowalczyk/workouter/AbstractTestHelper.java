@@ -4,9 +4,7 @@ import com.kowalczyk.workouter.enums.RoleType;
 import com.kowalczyk.workouter.model.DTO.security.RoleDTO;
 import com.kowalczyk.workouter.model.DTO.user.UserDetailsDTO;
 
-import java.util.Arrays;
 import java.util.GregorianCalendar;
-import java.util.stream.Collectors;
 
 /**
  * Created by JK on 2017-04-08.
@@ -22,6 +20,12 @@ public abstract class AbstractTestHelper {
         return userDetailsDTO;
     }
 
+    protected UserDetailsDTO getUserDetailsDTOTest(String login, String name, String lastName, Long roleId) {
+        UserDetailsDTO userDetailsDTO = getUserDetailsDTOTest(login, name, lastName);
+        userDetailsDTO.getRoles().add(roleId);
+        return userDetailsDTO;
+    }
+
 
     protected UserDetailsDTO buildUserDetailsDTOTest() {
         UserDetailsDTO userDetailsDTO = new UserDetailsDTO();
@@ -31,17 +35,16 @@ public abstract class AbstractTestHelper {
         userDetailsDTO.setAccountNonLocked(true);
         userDetailsDTO.setAccountNonExpired(true);
         userDetailsDTO.setCredentialsNonExpired(true);
-        userDetailsDTO.setRoles(Arrays.asList(1L).stream().collect(Collectors.toSet()));
         return userDetailsDTO;
     }
 
-    protected RoleDTO getRoleDTOTest() {
-        RoleDTO roleDTO = buildRoleDTOTest();
+    protected RoleDTO getRoleDTOTest(RoleType roleType) {
+        RoleDTO roleDTO = buildRoleDTOTest(roleType);
         roleDTO.setId(1L);
         return roleDTO;
     }
 
-    protected RoleDTO buildRoleDTOTest() {
+    protected RoleDTO buildRoleDTOTest(RoleType roleType) {
         RoleDTO roleDTO = new RoleDTO();
         roleDTO.setRoleType(RoleType.ADMIN);
         return roleDTO;
