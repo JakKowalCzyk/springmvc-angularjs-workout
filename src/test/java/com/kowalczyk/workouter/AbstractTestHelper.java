@@ -26,6 +26,13 @@ public abstract class AbstractTestHelper {
         return userDetailsDTO;
     }
 
+    protected UserDetailsDTO getUserDetailsDTOTest(String login, String name, String lastName, Long roleId, Long userId) {
+        UserDetailsDTO userDetailsDTO = getUserDetailsDTOTest(login, name, lastName);
+        userDetailsDTO.setId(userId);
+        userDetailsDTO.getRoles().add(roleId);
+        return userDetailsDTO;
+    }
+
 
     protected UserDetailsDTO buildUserDetailsDTOTest() {
         UserDetailsDTO userDetailsDTO = new UserDetailsDTO();
@@ -46,7 +53,7 @@ public abstract class AbstractTestHelper {
 
     protected RoleDTO buildRoleDTOTest(RoleType roleType) {
         RoleDTO roleDTO = new RoleDTO();
-        roleDTO.setRoleType(RoleType.ADMIN);
+        roleDTO.setRoleType(roleType);
         return roleDTO;
     }
 }

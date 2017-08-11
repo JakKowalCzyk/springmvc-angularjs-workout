@@ -53,7 +53,7 @@ public class UserDetailsMapperTest extends AbstractMapperTest {
 
     @Test
     public void mapToBO() throws Exception {
-        UserDetailsDTO userDetailsDTO = getUserDetailsDTOTest("login", "name", "lastName");
+        UserDetailsDTO userDetailsDTO = getUserDetailsDTOTest("login", "name", "lastName", 1L, 10L);
         UserDetails userDetails = userDetailsMapper.mapToBO(userDetailsDTO);
         assertEquals(userDetails.getId(), userDetailsDTO.getId());
         assertTrue(userDetails.isEnabled());

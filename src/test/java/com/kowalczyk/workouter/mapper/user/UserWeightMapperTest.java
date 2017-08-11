@@ -46,7 +46,7 @@ public class UserWeightMapperTest extends AbstractMapperTest {
         UserWeightDTO userWeightDTO = new UserWeightDTO();
         userWeightDTO.setDate(new GregorianCalendar(2012, 12, 2).getTime());
         userWeightDTO.setWeightKg(56);
-        userWeightDTO.setUserId(getUserDetailsDTOTest("login1", "name1", "lastN1").getId());
+        userWeightDTO.setUserId(getUserDetailsDTOTest("login1", "name1", "lastN1", 2L, 1L).getId());
         return userWeightDTO;
     }
 
