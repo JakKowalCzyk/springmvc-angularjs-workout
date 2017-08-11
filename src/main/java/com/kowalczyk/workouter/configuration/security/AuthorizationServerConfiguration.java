@@ -17,8 +17,8 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter{
-    private static String REALM = "WORKOUT_REALM";
     private static final String RESOURCE_ID = "workout_api";
+    private static String REALM = "WORKOUT_REALM";
     @Autowired
     private TokenStore tokenStore;
 
@@ -30,7 +30,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.realm(REALM + "/client");
+        security.realm(REALM + "/client").allowFormAuthenticationForClients();
     }
 
     @Override

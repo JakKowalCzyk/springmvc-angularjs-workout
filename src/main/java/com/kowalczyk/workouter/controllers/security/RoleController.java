@@ -14,7 +14,7 @@ import java.util.List;
  * Created by JK on 2017-04-08.
  */
 @Api(tags = "Role API", description = "Services for Roles")
-@RequestMapping("/role")
+@RequestMapping("/api/role")
 public interface RoleController extends ModelController<RoleDTO> {
 
     @Override

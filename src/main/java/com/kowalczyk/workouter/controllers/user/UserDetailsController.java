@@ -15,7 +15,7 @@ import java.util.List;
  * Created by JK on 2017-04-08.
  */
 @Api(tags = "User Details API", description = "Services for UserDetails")
-@RequestMapping("/user/details")
+@RequestMapping("/api/user/details")
 public interface UserDetailsController extends ModelController<UserDetailsDTO> {
 
     @Override

@@ -1,13 +1,11 @@
 package com.kowalczyk.workouter.configuration;
 
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 import org.springframework.web.servlet.config.annotation.*;
-
-import java.util.logging.Filter;
 
 /**
  * Created by JKowalczyk on 2017-08-09.
@@ -16,10 +14,27 @@ import java.util.logging.Filter;
 @EnableWebMvc
 public class WebConfig extends WebMvcConfigurerAdapter{
 
-
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    @Bean
+    public FilterRegistrationBean filterRegistration() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(requestFilter());
+        registration.addUrlPatterns("/*");
+        registration.setName("requestFilter");
+        return registration;
+    }
+
+    @Bean(name = "requestFilter")
+    public javax.servlet.Filter requestFilter() {
+        CommonsRequestLoggingFilter filter = new CommonsRequestLoggingFilter();
+        filter.setIncludeQueryString(true);
+        filter.setIncludeClientInfo(true);
+        filter.setIncludePayload(false);
+        return filter;
     }
 
     @Override

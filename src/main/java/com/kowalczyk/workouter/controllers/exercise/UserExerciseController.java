@@ -15,7 +15,7 @@ import java.util.List;
  * Created by JK on 2017-01-22.
  */
 @Api(tags = {"User exercise API"}, description = "Services for users trained exercises")
-@RequestMapping("/user/exercise")
+@RequestMapping("/api/user/exercise")
 public interface UserExerciseController extends ModelController<UserExerciseDTO> {
 
     @Override

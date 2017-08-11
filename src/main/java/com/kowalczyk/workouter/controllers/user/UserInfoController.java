@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Api(tags = {"User Info API"}, description = "Services for user info")
-@RequestMapping("/user/info")
+@RequestMapping("/api/user/info")
 public interface UserInfoController extends ModelController<UserInfoDTO> {
 
     @Override
