@@ -16,5 +16,7 @@ public interface ExerciseDao extends BaseDao<Exercise> {
     @Query("SELECT o FROM Exercise o where o.exerciseType = :exerciseType")
     List<Exercise> getExercisesForBodyPart(@Param("exerciseType") ExerciseType exerciseType);
 
-    List<Exercise> findByNameContainingOrDescriptionContainingOrExerciseTypeContaining(String tag);
+    @Query("select o from Exercise o where lower(o.name) LIKE CONCAT('%',:tag,'%') or lower(o.description) like CONCAT('%',:tag,'%') " +
+            "or lower(o.exerciseType) like CONCAT('%',:tag,'%')")
+    List<Exercise> findByNameContainingIgnoreCase(@Param("tag") String tag);
 }

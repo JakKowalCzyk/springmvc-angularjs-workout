@@ -28,7 +28,7 @@ public class ExerciseServiceImpl extends ModelServiceImpl<Exercise> implements E
 
     @Override
     public List<Exercise> searchExercise(String tag) {
-        return ((ExerciseDao) getBaseDao()).findByNameContainingOrDescriptionContainingOrExerciseTypeContaining(tag.toLowerCase());
+        return ((ExerciseDao) getBaseDao()).findByNameContainingIgnoreCase(tag.toLowerCase());
     }
 
     @Override
