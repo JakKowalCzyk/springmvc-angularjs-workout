@@ -5,10 +5,7 @@ import com.kowalczyk.workouter.enums.ExerciseType;
 import com.kowalczyk.workouter.model.DTO.exercise.ExerciseDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,9 +40,9 @@ public interface ExerciseController extends ModelController<ExerciseDTO> {
     @RequestMapping(value = "/exist", method = RequestMethod.GET)
     boolean isExist(@PathVariable Long id);
 
-    @ApiOperation(value = "Get exercise by name")
-    @RequestMapping(path = "/name/{name}", method = RequestMethod.GET)
-    ExerciseDTO getExerciseByName(@PathVariable String name);
+    @ApiOperation(value = "Search for exercise")
+    @RequestMapping(path = "/search", method = RequestMethod.GET)
+    List<ExerciseDTO> searchExercise(@RequestParam String tag);
 
     @ApiOperation(value = "Get exercise by type")
     @RequestMapping(path = "/type/{exerciseType}", method = RequestMethod.GET)

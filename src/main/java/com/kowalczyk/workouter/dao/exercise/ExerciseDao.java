@@ -13,9 +13,8 @@ import java.util.List;
  */
 public interface ExerciseDao extends BaseDao<Exercise> {
 
-    @Query("SELECT o FROM Exercise o where o.name = :name")
-    Exercise getExerciseByName(@Param("name") String name);
-
     @Query("SELECT o FROM Exercise o where o.exerciseType = :exerciseType")
     List<Exercise> getExercisesForBodyPart(@Param("exerciseType") ExerciseType exerciseType);
+
+    List<Exercise> findByNameContainingOrDescriptionContainingOrExerciseTypeContaining(String tag);
 }

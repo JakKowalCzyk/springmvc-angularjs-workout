@@ -22,12 +22,13 @@ public class ExerciseServiceImpl extends ModelServiceImpl<Exercise> implements E
         super(baseDao);
     }
 
-    public Exercise getExerciseByName(String name) {
-        return ((ExerciseDao) getBaseDao()).getExerciseByName(name);
-    }
-
     public List<Exercise> getExercisesForBodyPart(ExerciseType exerciseType) {
         return ((ExerciseDao) getBaseDao()).getExercisesForBodyPart(exerciseType);
+    }
+
+    @Override
+    public List<Exercise> searchExercise(String tag) {
+        return ((ExerciseDao) getBaseDao()).findByNameContainingOrDescriptionContainingOrExerciseTypeContaining(tag.toLowerCase());
     }
 
     @Override

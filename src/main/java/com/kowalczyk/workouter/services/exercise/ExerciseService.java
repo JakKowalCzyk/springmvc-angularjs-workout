@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface ExerciseService extends ModelService<Exercise> {
 
-    Exercise getExerciseByName(String name);
-
     List<Exercise> getExercisesForBodyPart(ExerciseType exerciseType);
+
+    List<Exercise> searchExercise(String tag);
 }

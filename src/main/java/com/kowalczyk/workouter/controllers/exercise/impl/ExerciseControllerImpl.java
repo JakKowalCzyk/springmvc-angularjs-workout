@@ -58,8 +58,8 @@ public class ExerciseControllerImpl extends ModelControllerImpl<Exercise, Exerci
     }
 
     @Override
-    public ExerciseDTO getExerciseByName(@PathVariable String name) {
-        return getModelMapper().mapToDTO(((ExerciseService) getModelService()).getExerciseByName(name));
+    public List<ExerciseDTO> searchExercise(@RequestParam String tag) {
+        return (((ExerciseService) getModelService()).searchExercise(tag)).stream().map(exercise -> getModelMapper().mapToDTO(exercise)).collect(Collectors.toList());
     }
 
     @Override
