@@ -26,7 +26,16 @@ public class WorkoutExercise extends ModelObject {
         this.series = series;
     }
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @PrePersist
+    public void prePersist() {
+        getWorkout().getWorkoutExercises().add(this);
+    }
+
+    @PreRemove
+    public void preRemove() {
+    }
+
+    @OneToOne
     @JoinColumn(name = "exercise_id")
     public Exercise getExercise() {
         return exercise;
@@ -36,7 +45,7 @@ public class WorkoutExercise extends ModelObject {
         this.exercise = exercise;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "workoutId")
     public Workout getWorkout() {
         return workout;

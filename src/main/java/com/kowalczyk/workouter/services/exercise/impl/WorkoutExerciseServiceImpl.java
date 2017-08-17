@@ -30,4 +30,14 @@ public class WorkoutExerciseServiceImpl extends ModelServiceImpl<WorkoutExercise
         return ((WorkoutExerciseDao) getBaseDao()).findByWorkoutId(workoutId);
     }
 
+    @Override
+    public void deleteObject(Long id) {
+        removeWorkoutExerciseFromWorkout(id);
+        super.deleteObject(id);
+    }
+
+    private void removeWorkoutExerciseFromWorkout(Long id) {
+        WorkoutExercise workoutExerciseToDelete = super.getObject(id);
+        workoutExerciseToDelete.getWorkout().getWorkoutExercises().remove(workoutExerciseToDelete);
+    }
 }

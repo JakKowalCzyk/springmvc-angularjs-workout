@@ -31,4 +31,15 @@ public class WorkoutServiceImpl extends ModelServiceImpl<Workout> implements Wor
     public Workout getByUserIdAndDate(Long userId, Date date) {
         return ((WorkoutDao) getBaseDao()).getByUserIdAndDate(userId, date);
     }
+
+    @Override
+    public void deleteObject(Long id) {
+        removeWorkoutFromUser(id);
+        super.deleteObject(id);
+    }
+
+    private void removeWorkoutFromUser(Long id) {
+        Workout workoutToDelete = super.getObject(id);
+        workoutToDelete.getUser().getWorkouts().remove(workoutToDelete);
+    }
 }

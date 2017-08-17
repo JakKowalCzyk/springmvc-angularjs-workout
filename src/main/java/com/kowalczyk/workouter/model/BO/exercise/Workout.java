@@ -31,8 +31,8 @@ public class Workout extends AbstractUserObject {
 
     @PreRemove
     public void preRemove() {
-        getUser().getWorkouts().remove(this);
     }
+
     public Date getDate() {
         return date;
     }

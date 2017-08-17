@@ -7,6 +7,8 @@ import com.kowalczyk.workouter.controllers.user.UserInfoController;
 import com.kowalczyk.workouter.enums.ExerciseType;
 import com.kowalczyk.workouter.enums.RoleType;
 import com.kowalczyk.workouter.model.DTO.exercise.ExerciseDTO;
+import com.kowalczyk.workouter.model.DTO.exercise.WorkoutDTO;
+import com.kowalczyk.workouter.model.DTO.exercise.WorkoutExerciseDTO;
 import com.kowalczyk.workouter.model.DTO.security.RoleDTO;
 import com.kowalczyk.workouter.model.DTO.user.UserDetailsDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserInfoDTO;
@@ -119,5 +121,21 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
         exerciseDTO.setDescription(description);
         exerciseDTO.setExerciseType(exerciseType);
         return exerciseDTO;
+    }
+
+    protected WorkoutDTO createWorkoutDTOTest(Date date, Long userId) {
+        WorkoutDTO workoutDTO = new WorkoutDTO();
+        workoutDTO.setDate(date);
+        workoutDTO.setUserId(userId);
+        return workoutDTO;
+    }
+
+    protected WorkoutExerciseDTO createWorkoutExerciseDTOTest(WorkoutDTO workoutDTO, ExerciseDTO exerciseDTO, int repeat, int series) {
+        WorkoutExerciseDTO workoutExerciseDTO = new WorkoutExerciseDTO();
+        workoutExerciseDTO.setWorkoutId(workoutDTO.getId());
+        workoutExerciseDTO.setExerciseId(exerciseDTO.getId());
+        workoutExerciseDTO.setRepeat(repeat);
+        workoutExerciseDTO.setSeries(series);
+        return workoutExerciseDTO;
     }
 }
