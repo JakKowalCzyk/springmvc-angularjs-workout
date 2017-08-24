@@ -40,4 +40,10 @@ public class WorkoutExerciseServiceImpl extends ModelServiceImpl<WorkoutExercise
         WorkoutExercise workoutExerciseToDelete = super.getObject(id);
         workoutExerciseToDelete.getWorkout().getWorkoutExercises().remove(workoutExerciseToDelete);
     }
+
+    @Override
+    public WorkoutExercise updateObject(WorkoutExercise baseModel) {
+        baseModel.setWorkout(super.getObject(baseModel.getId()).getWorkout());
+        return super.updateObject(baseModel);
+    }
 }

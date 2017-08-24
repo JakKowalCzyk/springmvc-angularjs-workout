@@ -46,7 +46,7 @@ public class WorkoutExercise extends ModelObject {
     }
 
     @ManyToOne
-    @JoinColumn(name = "workoutId")
+    @JoinColumn(name = "workoutId", nullable = false)
     public Workout getWorkout() {
         return workout;
     }
