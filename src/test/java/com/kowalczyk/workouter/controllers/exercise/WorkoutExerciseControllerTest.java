@@ -5,8 +5,7 @@ import com.kowalczyk.workouter.enums.ExerciseType;
 import com.kowalczyk.workouter.model.DTO.exercise.ExerciseDTO;
 import com.kowalczyk.workouter.model.DTO.exercise.WorkoutDTO;
 import com.kowalczyk.workouter.model.DTO.exercise.WorkoutExerciseDTO;
-import com.kowalczyk.workouter.services.exercise.WorkoutExerciseService;
-import com.kowalczyk.workouter.services.exercise.WorkoutService;
+import com.kowalczyk.workouter.model.exception.CannotCreateObjectException;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,10 +25,6 @@ public class WorkoutExerciseControllerTest extends AbstractControllerTest {
     private WorkoutController workoutController;
     @Autowired
     private ExerciseController exerciseController;
-    @Autowired
-    private WorkoutService workoutService;
-    @Autowired
-    private WorkoutExerciseService workoutExerciseService;
 
     @Test
     public void getObject() throws Exception {
@@ -74,6 +69,16 @@ public class WorkoutExerciseControllerTest extends AbstractControllerTest {
     private void deleteWorkoutExercise(WorkoutExerciseDTO workoutExerciseDTO1) {
         workoutExerciseController.deleteObject(workoutExerciseDTO1.getId());
         assertFalse(workoutExerciseController.isExist(workoutExerciseDTO1.getId()));
+    }
+
+    @Test(expected = CannotCreateObjectException.class)
+    public void addObject() throws Exception {
+        WorkoutDTO workoutDTO1 = workoutController.addObject(createWorkoutDTOTest(new GregorianCalendar(2012, 9, 12).getTime(), userDetailsId1));
+        ExerciseDTO exerciseDTO1 = exerciseController.addObject(createExerciseDTOTest("ex1", "dex1", ExerciseType.ARMS));
+        WorkoutExerciseDTO workoutExerciseDTO1 = workoutExerciseController.addObject(createWorkoutExerciseDTOTest(workoutDTO1, exerciseDTO1, 10, 3));
+
+        workoutExerciseDTO1.setWorkoutId(workoutDTO1.getId() + 1);
+        workoutExerciseController.addObject(workoutExerciseDTO1);
     }
 
     @Test

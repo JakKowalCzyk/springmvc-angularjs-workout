@@ -2,7 +2,7 @@ package com.kowalczyk.workouter.controllers.exercise.impl;
 
 import com.kowalczyk.workouter.controllers.exercise.WorkoutExerciseController;
 import com.kowalczyk.workouter.controllers.impl.ModelControllerImpl;
-import com.kowalczyk.workouter.mapper.exercise.UserExerciseMapper;
+import com.kowalczyk.workouter.mapper.exercise.WorkoutExerciseMapper;
 import com.kowalczyk.workouter.model.BO.exercise.WorkoutExercise;
 import com.kowalczyk.workouter.model.DTO.exercise.WorkoutExerciseDTO;
 import com.kowalczyk.workouter.services.exercise.WorkoutExerciseService;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class WorkoutExerciseControllerImpl extends ModelControllerImpl<WorkoutExercise, WorkoutExerciseDTO> implements WorkoutExerciseController {
 
     @Autowired
-    public WorkoutExerciseControllerImpl(WorkoutExerciseService modelService, UserExerciseMapper modelMapper) {
+    public WorkoutExerciseControllerImpl(WorkoutExerciseService modelService, WorkoutExerciseMapper modelMapper) {
         super(modelService, modelMapper);
     }
 

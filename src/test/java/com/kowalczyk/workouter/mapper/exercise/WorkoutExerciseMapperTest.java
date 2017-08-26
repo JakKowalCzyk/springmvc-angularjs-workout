@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class WorkoutExerciseMapperTest extends AbstractMapperTest {
     @Autowired
-    private UserExerciseMapper userExerciseMapper;
+    private WorkoutExerciseMapper workoutExerciseMapper;
     @Autowired
     private ExerciseService exerciseService;
     @Autowired
@@ -41,7 +41,7 @@ public class WorkoutExerciseMapperTest extends AbstractMapperTest {
         workoutExerciseDTO.setWorkoutId(10L);
         workoutExerciseDTO.setId(5L);
         workoutExerciseDTO.setExerciseId(2L);
-        WorkoutExercise workoutExercise = userExerciseMapper.mapToBO(workoutExerciseDTO);
+        WorkoutExercise workoutExercise = workoutExerciseMapper.mapToBO(workoutExerciseDTO);
         assertEquals(workoutExerciseDTO.getId(), workoutExercise.getId());
         assertEquals(12, workoutExercise.getRepeat());
         assertTrue(workoutExerciseDTO.getSeries() == workoutExercise.getSeries());
@@ -52,7 +52,7 @@ public class WorkoutExerciseMapperTest extends AbstractMapperTest {
     @Test
     public void mapToDTO() throws Exception {
         WorkoutExercise workoutExercise = getUserExerciseTest();
-        WorkoutExerciseDTO workoutExerciseDTO = userExerciseMapper.mapToDTO(workoutExercise);
+        WorkoutExerciseDTO workoutExerciseDTO = workoutExerciseMapper.mapToDTO(workoutExercise);
         assertEquals(workoutExercise.getId(), workoutExerciseDTO.getId());
         assertTrue(14 == workoutExerciseDTO.getSeries());
         assertTrue(workoutExercise.getRepeat() == workoutExerciseDTO.getRepeat());
