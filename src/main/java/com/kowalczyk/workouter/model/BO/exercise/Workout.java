@@ -41,7 +41,7 @@ public class Workout extends AbstractUserObject {
         this.date = date;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workout")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workout", orphanRemoval = true)
     public List<WorkoutExercise> getWorkoutExercises() {
         return workoutExercises;
     }

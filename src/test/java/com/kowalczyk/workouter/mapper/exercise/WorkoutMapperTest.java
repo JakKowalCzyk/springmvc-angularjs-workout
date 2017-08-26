@@ -29,14 +29,14 @@ public class WorkoutMapperTest extends AbstractMapperTest {
     @Override
     @Before
     public void setUp() throws Exception {
-        Mockito.when(workoutExerciseService.getObject(Mockito.anyLong())).thenReturn(getUserExerciseTest());
+        Mockito.when(workoutExerciseService.findByWorkoutId(Mockito.anyLong())).thenReturn(Arrays.asList(getUserExerciseTest()));
         super.setUp();
     }
 
     @Test
     public void mapToBO() throws Exception {
         WorkoutDTO workoutDTO = new WorkoutDTO();
-        workoutDTO.setUserExercises(Arrays.asList(1L, 2L));
+        workoutDTO.setUserExercises(Arrays.asList(getUserExerciseTest().getId(), 3L, 4L));
         workoutDTO.setId(2L);
         workoutDTO.setUserId(4L);
         workoutDTO.setDate(new GregorianCalendar(2014, 12, 13).getTime());
@@ -44,7 +44,7 @@ public class WorkoutMapperTest extends AbstractMapperTest {
         assertEquals(workoutDTO.getId(), workout.getId());
         assertEquals(workoutDTO.getDate(), workout.getDate());
         assertEquals(getUserDetailsTest().getId(), workout.getUser().getId());
-        assertEquals(2, workout.getWorkoutExercises().size());
+        assertEquals(1, workout.getWorkoutExercises().size());
         Assert.assertEquals(ExerciseType.BACK, workout.getWorkoutExercises().get(0).getExercise().getExerciseType());
     }
 
