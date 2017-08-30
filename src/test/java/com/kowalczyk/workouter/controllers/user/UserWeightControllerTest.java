@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
@@ -87,7 +88,9 @@ public class UserWeightControllerTest extends AbstractControllerTest {
     @Test
     public void testUpdateActualWeight() throws Exception {
         UserWeightDTO expectedUserWeightDTO = userWeightController.addObject(getUserWeightDTOTest(14, new GregorianCalendar(2012, 3, 2)));
-        UserWeightDTO expectedUserWeightDTO1 = userWeightController.addObject(getUserWeightDTOTest(54, new GregorianCalendar(2012, 10, 12)));
+        UserWeightDTO expectedUserWeightDTO1 = userWeightController.addObject(getUserWeightDTOTest(54, new GregorianCalendar(2013, 10, 12)));
+
+        assertTrue(Objects.equals(expectedUserWeightDTO1.getId(), userWeightController.getActualWeight(expectedUserWeightDTO1.getUserId()).getId()));
 
         expectedUserWeightDTO.setDate(new GregorianCalendar().getTime());
         UserWeightDTO userWeightDTO = userWeightController.updateObject(expectedUserWeightDTO);
@@ -98,10 +101,14 @@ public class UserWeightControllerTest extends AbstractControllerTest {
         assertEquals(2, userWeightDTOList.size());
         assertTrue(Objects.equals(expectedUserWeightDTO.getId(), userWeightController.getActualWeight(expectedUserWeightDTO.getUserId()).getId()));
 
+        TimeUnit.SECONDS.sleep(1);
+
         expectedUserWeightDTO1.setDate(new GregorianCalendar().getTime());
         userWeightDTO = userWeightController.updateObject(expectedUserWeightDTO1);
         assertEquals(expectedUserWeightDTO1.getId(), userWeightDTO.getId());
         assertTrue(Objects.equals(expectedUserWeightDTO1.getId(), userWeightController.getActualWeight(expectedUserWeightDTO.getUserId()).getId()));
+
+        TimeUnit.SECONDS.sleep(1);
 
         UserWeightDTO expectedUserWeightDTO2 = userWeightController.addObject(getUserWeightDTOTest(44, new GregorianCalendar()));
         assertTrue(Objects.equals(expectedUserWeightDTO2.getId(), userWeightController.getActualWeight(expectedUserWeightDTO.getUserId()).getId()));
