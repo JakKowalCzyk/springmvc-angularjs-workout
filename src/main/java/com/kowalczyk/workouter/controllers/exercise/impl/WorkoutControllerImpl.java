@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,10 +58,5 @@ public class WorkoutControllerImpl extends ModelControllerImpl<Workout, WorkoutD
     @Override
     public List<WorkoutDTO> getWorkoutsByUser(@PathVariable Long id) {
         return ((WorkoutService) getModelService()).getWorkoutsByUserId(id).stream().map(workout -> getModelMapper().mapToDTO(workout)).collect(Collectors.toList());
-    }
-
-    @Override
-    public WorkoutDTO getWorkoutByDate(@PathVariable Long id, @PathVariable Date date) {
-        return getModelMapper().mapToDTO(((WorkoutService) getModelService()).getByUserIdAndDate(id, date));
     }
 }

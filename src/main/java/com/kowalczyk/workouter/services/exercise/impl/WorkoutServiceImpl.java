@@ -7,7 +7,6 @@ import com.kowalczyk.workouter.services.impl.ModelServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.util.List;
 
 /**
@@ -25,11 +24,6 @@ public class WorkoutServiceImpl extends ModelServiceImpl<Workout> implements Wor
     @Override
     public List<Workout> getWorkoutsByUserId(Long userId) {
         return ((WorkoutDao) getBaseDao()).getWorkoutsByUserId(userId);
-    }
-
-    @Override
-    public Workout getByUserIdAndDate(Long userId, Date date) {
-        return ((WorkoutDao) getBaseDao()).getByUserIdAndDate(userId, date);
     }
 
     @Override
