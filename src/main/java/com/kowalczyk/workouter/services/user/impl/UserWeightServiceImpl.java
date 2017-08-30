@@ -1,6 +1,6 @@
 package com.kowalczyk.workouter.services.user.impl;
 
-import com.kowalczyk.workouter.dao.user.UserWeightDao;
+import com.kowalczyk.workouter.dao.user.UserWeightDAO;
 import com.kowalczyk.workouter.model.BO.user.impl.UserInfo;
 import com.kowalczyk.workouter.model.BO.user.impl.UserWeight;
 import com.kowalczyk.workouter.services.impl.ModelServiceImpl;
@@ -22,7 +22,7 @@ public class UserWeightServiceImpl extends ModelServiceImpl<UserWeight> implemen
     private UserInfoService userInfoService;
 
     @Autowired
-    public UserWeightServiceImpl(UserWeightDao baseDao) {
+    public UserWeightServiceImpl(UserWeightDAO baseDao) {
         super(baseDao);
     }
 
@@ -94,11 +94,11 @@ public class UserWeightServiceImpl extends ModelServiceImpl<UserWeight> implemen
     }
 
     public List<UserWeight> getWeightByUserId(Long userId) {
-        return ((UserWeightDao) getBaseDao()).getWeightByUserId(userId);
+        return ((UserWeightDAO) getBaseDao()).getWeightByUserId(userId);
     }
 
     public UserWeight getByUserIdAndDate(Long userId, Date date) {
-        return ((UserWeightDao) getBaseDao()).getByUserIdAndDate(userId, date);
+        return ((UserWeightDAO) getBaseDao()).getByUserIdAndDate(userId, date);
     }
 
     public boolean checkIfLastWeight(UserWeight userWeight) {
@@ -107,6 +107,6 @@ public class UserWeightServiceImpl extends ModelServiceImpl<UserWeight> implemen
     }
 
     public Optional<UserWeight> getUserWeightWitLastDate(Long userId) {
-        return ((UserWeightDao) getBaseDao()).getUserWeightListOrderedByDate(userId).stream().findFirst();
+        return ((UserWeightDAO) getBaseDao()).getUserWeightListOrderedByDate(userId).stream().findFirst();
     }
 }

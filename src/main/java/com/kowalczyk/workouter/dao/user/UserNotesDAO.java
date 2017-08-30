@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by JK on 2016-09-22.
  */
-public interface UserNotesDao extends BaseDao<UserNote> {
+public interface UserNotesDAO extends BaseDao<UserNote> {
 
     @Query("SELECT o FROM UserNote o  join o.user as userid where userid.id = :userId")
     List<UserNote> getUserNotesByUserId(@Param("userId") Long userId);

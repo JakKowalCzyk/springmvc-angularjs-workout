@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by JK on 2016-09-22.
  */
-public interface ExerciseDao extends BaseDao<Exercise> {
+public interface ExerciseDAO extends BaseDao<Exercise> {
 
     @Query("SELECT o FROM Exercise o where o.exerciseType = :exerciseType")
     List<Exercise> getExercisesForBodyPart(@Param("exerciseType") ExerciseType exerciseType);

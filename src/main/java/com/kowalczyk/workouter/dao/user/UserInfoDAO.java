@@ -10,11 +10,9 @@ import org.springframework.stereotype.Repository;
  * Created by JK on 2016-09-22.
  */
 @Repository
-public interface UserInfoDao extends BaseDao<UserInfo> {
+public interface UserInfoDAO extends BaseDao<UserInfo> {
 
-    @Query("SELECT o FROM UserInfo o " +
-            "inner join o.user as user " +
-            "where user.id = :userId")
+    @Query("SELECT o FROM UserInfo o inner join o.user as user where user.id = :userId")
     UserInfo getUserInfoByUserId(@Param("userId") Long userId);
 
 }

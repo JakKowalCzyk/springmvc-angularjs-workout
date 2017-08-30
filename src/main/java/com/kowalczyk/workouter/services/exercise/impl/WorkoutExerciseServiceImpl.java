@@ -1,6 +1,6 @@
 package com.kowalczyk.workouter.services.exercise.impl;
 
-import com.kowalczyk.workouter.dao.exercise.WorkoutExerciseDao;
+import com.kowalczyk.workouter.dao.exercise.WorkoutExerciseDAO;
 import com.kowalczyk.workouter.model.BO.exercise.WorkoutExercise;
 import com.kowalczyk.workouter.services.exercise.WorkoutExerciseService;
 import com.kowalczyk.workouter.services.impl.ModelServiceImpl;
@@ -16,18 +16,18 @@ import java.util.List;
 public class WorkoutExerciseServiceImpl extends ModelServiceImpl<WorkoutExercise> implements WorkoutExerciseService {
 
     @Autowired
-    public WorkoutExerciseServiceImpl(WorkoutExerciseDao baseDao) {
+    public WorkoutExerciseServiceImpl(WorkoutExerciseDAO baseDao) {
         super(baseDao);
     }
 
     @Override
     public List<WorkoutExercise> getWorkoutExercisesByUserId(Long userId) {
-        return ((WorkoutExerciseDao) getBaseDao()).getUserExercisesByUserId(userId);
+        return ((WorkoutExerciseDAO) getBaseDao()).getUserExercisesByUserId(userId);
     }
 
     @Override
     public List<WorkoutExercise> findByWorkoutId(Long workoutId) {
-        return ((WorkoutExerciseDao) getBaseDao()).findByWorkoutId(workoutId);
+        return ((WorkoutExerciseDAO) getBaseDao()).findByWorkoutId(workoutId);
     }
 
     @Override

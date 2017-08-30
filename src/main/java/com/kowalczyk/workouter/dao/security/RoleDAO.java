@@ -6,5 +6,5 @@ import com.kowalczyk.workouter.model.BO.security.Role;
 /**
  * Created by JK on 2016-12-18.
  */
-public interface RoleDao extends BaseDao<Role> {
+public interface RoleDAO extends BaseDao<Role> {
 }

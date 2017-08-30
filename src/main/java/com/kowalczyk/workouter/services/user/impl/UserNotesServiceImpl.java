@@ -1,6 +1,6 @@
 package com.kowalczyk.workouter.services.user.impl;
 
-import com.kowalczyk.workouter.dao.user.UserNotesDao;
+import com.kowalczyk.workouter.dao.user.UserNotesDAO;
 import com.kowalczyk.workouter.model.BO.user.impl.UserNote;
 import com.kowalczyk.workouter.services.impl.ModelServiceImpl;
 import com.kowalczyk.workouter.services.user.UserNotesService;
@@ -17,7 +17,7 @@ import java.util.List;
 public class UserNotesServiceImpl extends ModelServiceImpl<UserNote> implements UserNotesService {
 
     @Autowired
-    public UserNotesServiceImpl(UserNotesDao baseDao) {
+    public UserNotesServiceImpl(UserNotesDAO baseDao) {
         super(baseDao);
     }
 
@@ -33,10 +33,10 @@ public class UserNotesServiceImpl extends ModelServiceImpl<UserNote> implements 
     }
 
     public List<UserNote> getUserNotesByUserId(Long userId) {
-        return ((UserNotesDao) getBaseDao()).getUserNotesByUserId(userId);
+        return ((UserNotesDAO) getBaseDao()).getUserNotesByUserId(userId);
     }
 
     public List<UserNote> getNotesByDate(Long userId, Date date) {
-        return ((UserNotesDao) getBaseDao()).getSingleNoteByDate(userId, date);
+        return ((UserNotesDAO) getBaseDao()).getSingleNoteByDate(userId, date);
     }
 }

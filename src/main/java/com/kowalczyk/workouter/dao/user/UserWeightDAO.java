@@ -13,7 +13,7 @@ import java.util.List;
  * Created by JK on 2016-09-22.
  */
 @Repository
-public interface UserWeightDao extends BaseDao<UserWeight> {
+public interface UserWeightDAO extends BaseDao<UserWeight> {
 
     @Query("SELECT o FROM UserWeight o inner join o.user as user WHERE user.id = :userId")
     List<UserWeight> getWeightByUserId(@Param("userId") Long userId);

@@ -10,10 +10,9 @@ import java.util.List;
 /**
  * Created by JK on 2016-09-22.
  */
-public interface WorkoutExerciseDao extends BaseDao<WorkoutExercise> {
+public interface WorkoutExerciseDAO extends BaseDao<WorkoutExercise> {
 
-    @Query("SELECT o FROM WorkoutExercise o inner join o.workout as workout" +
-            " inner join workout.user as user where user.id = :userId")
+    @Query("SELECT o FROM WorkoutExercise o inner join o.workout as workout inner join workout.user as user where user.id = :userId")
     List<WorkoutExercise> getUserExercisesByUserId(@Param("userId") Long userId);
 
     @Query("select wor.workoutExercises from Workout wor where wor.id = :workoutId")

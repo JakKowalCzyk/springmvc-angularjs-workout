@@ -1,6 +1,6 @@
 package com.kowalczyk.workouter.services.user.impl;
 
-import com.kowalczyk.workouter.dao.user.UserDetailsDao;
+import com.kowalczyk.workouter.dao.user.UserDetailsDAO;
 import com.kowalczyk.workouter.model.BO.security.Role;
 import com.kowalczyk.workouter.model.BO.user.impl.UserInfo;
 import com.kowalczyk.workouter.services.impl.ModelServiceImpl;
@@ -27,7 +27,7 @@ public class UserDetailsServiceImpl extends ModelServiceImpl<com.kowalczyk.worko
     private UserInfoService userInfoService;
 
     @Autowired
-    public UserDetailsServiceImpl(UserDetailsDao baseDao, UserInfoService userInfoService) {
+    public UserDetailsServiceImpl(UserDetailsDAO baseDao, UserInfoService userInfoService) {
         super(baseDao);
         this.userInfoService = userInfoService;
     }
@@ -58,7 +58,7 @@ public class UserDetailsServiceImpl extends ModelServiceImpl<com.kowalczyk.worko
 
     @Override
     public com.kowalczyk.workouter.model.BO.user.UserDetails getByLogin(String login) {
-        return ((UserDetailsDao) getBaseDao()).getByLogin(login);
+        return ((UserDetailsDAO) getBaseDao()).findByLogin(login);
     }
 
     @Override
