@@ -62,7 +62,7 @@ public class WorkoutExerciseControllerTest extends AbstractControllerTest {
         WorkoutExerciseDTO workoutExerciseDTO6 = workoutExerciseController.addObject(createWorkoutExerciseDTOTest(workoutDTO1, exerciseDTO4, 12, 2));
         assertEquals(2, workoutExerciseController.findAll().size());
 
-        userDetailsController.deleteObject(workoutDTO.getUserId());
+        userController.deleteObject(workoutDTO.getUserId());
         assertTrue(workoutExerciseController.findAll().isEmpty());
     }
 

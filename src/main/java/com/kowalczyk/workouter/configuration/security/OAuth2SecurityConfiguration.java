@@ -2,7 +2,7 @@ package com.kowalczyk.workouter.configuration.security;
 
 import com.kowalczyk.workouter.configuration.security.social.FacebookConnectionSignUp;
 import com.kowalczyk.workouter.configuration.security.social.FacebookSignInAdapter;
-import com.kowalczyk.workouter.services.user.UserDetailsService;
+import com.kowalczyk.workouter.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.TokenApprovalStore;
@@ -39,7 +40,7 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private ClientDetailsService clientDetailsService;
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserService userService;
     @Autowired
     private DataSource dataSource;
     @Autowired
@@ -51,7 +52,12 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(userDetailsService);
+        authenticationManagerBuilder.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
+    }
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder(12);
     }
 
     @Override

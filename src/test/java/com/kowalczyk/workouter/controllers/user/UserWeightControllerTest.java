@@ -47,8 +47,8 @@ public class UserWeightControllerTest extends AbstractControllerTest {
 
         expectedUserWeightDTO1 = userWeightController.addObject(getUserWeightDTOTest(14, new GregorianCalendar(2012, 3, 2)));
         Long userId = expectedUserWeightDTO1.getUserId();
-        userDetailsController.deleteObject(userId);
-        assertFalse(userDetailsController.isExist(expectedUserWeightDTO1.getUserId()));
+        userController.deleteObject(userId);
+        assertFalse(userController.isExist(expectedUserWeightDTO1.getUserId()));
         assertEquals(0, userWeightController.findAll().size());
     }
 

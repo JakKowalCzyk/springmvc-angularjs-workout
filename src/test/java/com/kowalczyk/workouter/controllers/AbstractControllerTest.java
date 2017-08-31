@@ -1,21 +1,23 @@
 package com.kowalczyk.workouter.controllers;
 
+import com.google.gson.Gson;
 import com.kowalczyk.workouter.AbstractTestHelper;
 import com.kowalczyk.workouter.controllers.security.RoleController;
-import com.kowalczyk.workouter.controllers.user.UserDetailsController;
+import com.kowalczyk.workouter.controllers.user.UserController;
 import com.kowalczyk.workouter.controllers.user.UserInfoController;
 import com.kowalczyk.workouter.enums.ExerciseType;
 import com.kowalczyk.workouter.enums.RoleType;
+import com.kowalczyk.workouter.model.DTO.ObjectDTO;
 import com.kowalczyk.workouter.model.DTO.exercise.ExerciseDTO;
 import com.kowalczyk.workouter.model.DTO.exercise.WorkoutDTO;
 import com.kowalczyk.workouter.model.DTO.exercise.WorkoutExerciseDTO;
 import com.kowalczyk.workouter.model.DTO.security.RoleDTO;
-import com.kowalczyk.workouter.model.DTO.user.UserDetailsDTO;
+import com.kowalczyk.workouter.model.DTO.user.UserDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserInfoDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserNoteDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserWeightDTO;
-import com.kowalczyk.workouter.services.user.UserDetailsService;
 import com.kowalczyk.workouter.services.user.UserInfoService;
+import com.kowalczyk.workouter.services.user.UserService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -23,7 +25,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,18 +51,22 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
     protected Long userDetailsId1;
     protected Long userDetailsId2;
     @Autowired
-    protected UserDetailsController userDetailsController;
+    protected UserController userController;
     @Autowired
     protected UserInfoController userInfoController;
     @Autowired
     protected RoleController roleController;
+    protected MockMvc mvc;
     @Autowired
     private UserInfoService userInfoService;
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserService userService;
+    @Autowired
+    private WebApplicationContext context;
 
     @Before
     public void setUp() throws Exception {
+        mvc = MockMvcBuilders.webAppContextSetup(context).build();
         roleController.addObject(buildRoleDTOTest(RoleType.USER));
         addUserDetailsUserInfo1();
         addUserDetailsUserInfo2();
@@ -65,10 +74,10 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
 
     @After
     public void tearDown() throws Exception {
-        List<UserDetailsDTO> userDetailsDTOS = userDetailsController.findAll();
-        new ArrayList<>(userDetailsDTOS).forEach(userDetailsDTO -> {
-            userDetailsController.deleteObject(userDetailsDTO.getId());
-            assertFalse(userDetailsController.isExist(userDetailsDTO.getId()));
+        List<UserDTO> userDTOS = userController.findAll();
+        new ArrayList<>(userDTOS).forEach(userDetailsDTO -> {
+            userController.deleteObject(userDetailsDTO.getId());
+            assertFalse(userController.isExist(userDetailsDTO.getId()));
         });
         List<RoleDTO> roleDTOS = roleController.findAll();
         new ArrayList<>(roleDTOS).forEach(roleDTO -> {
@@ -80,17 +89,17 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
     }
 
     private void addUserDetailsUserInfo1() {
-        UserDetailsDTO userDetailsDTO = getUserDetailsDTOTest("log1", "n1", "la1");
-        userDetailsDTO.setRoles(Stream.of(roleController.findAll().stream().findAny().get().getId()).collect(Collectors.toSet()));
-        userDetailsDTO = userDetailsController.addObject(userDetailsDTO);
-        userDetailsId1 = userDetailsDTO.getId();
+        UserDTO userDTO = getUserDetailsDTOTest("log1", "n1", "la1");
+        userDTO.setRoles(Stream.of(roleController.findAll().stream().findAny().get().getId()).collect(Collectors.toSet()));
+        userDTO = userController.addObject(userDTO);
+        userDetailsId1 = userDTO.getId();
     }
 
     private void addUserDetailsUserInfo2() {
-        UserDetailsDTO userDetailsDTO = getUserDetailsDTOTest("log2", "n2", "la2");
-        userDetailsDTO.setRoles(Stream.of(roleController.findAll().stream().findAny().get().getId()).collect(Collectors.toSet()));
-        userDetailsDTO = userDetailsController.addObject(userDetailsDTO);
-        userDetailsId2 = userDetailsDTO.getId();
+        UserDTO userDTO = getUserDetailsDTOTest("log2", "n2", "la2");
+        userDTO.setRoles(Stream.of(roleController.findAll().stream().findAny().get().getId()).collect(Collectors.toSet()));
+        userDTO = userController.addObject(userDTO);
+        userDetailsId2 = userDTO.getId();
     }
 
     protected UserInfoDTO getUserInfoDTO(Long userId) {
@@ -137,5 +146,10 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
         workoutExerciseDTO.setRepeat(repeat);
         workoutExerciseDTO.setSeries(series);
         return workoutExerciseDTO;
+    }
+
+    protected String getContentJson(ObjectDTO objectDTO) {
+        Gson gson = new Gson();
+        return gson.toJson(objectDTO);
     }
 }

@@ -9,18 +9,14 @@ import com.kowalczyk.workouter.model.BO.user.impl.UserWeight;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.*;
 import java.util.*;
 
 /**
  * Created by JK on 2016-12-12.
  */
-@Entity
-public class UserDetails extends ModelObject {
+@Entity(name = "user_details")
+public class User extends ModelObject {
     private String login;
     private String hashedPassword;
     private boolean enabled;
@@ -37,7 +33,7 @@ public class UserDetails extends ModelObject {
     private List<UserNote> userNotes = new ArrayList<>();
     private List<Workout> workouts = new ArrayList<>();
 
-    public UserDetails() {
+    public User() {
     }
 
     @PreRemove
@@ -92,7 +88,7 @@ public class UserDetails extends ModelObject {
         this.email = email;
     }
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     public Set<Role> getRoles() {
         return roles;
     }

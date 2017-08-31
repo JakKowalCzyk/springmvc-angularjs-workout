@@ -1,6 +1,8 @@
 package com.kowalczyk.workouter.model.DTO.user;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kowalczyk.workouter.model.DTO.ObjectDTO;
+import org.hibernate.validator.constraints.Email;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -9,21 +11,23 @@ import java.util.Set;
 /**
  * Created by JK on 2017-04-04.
  */
-public class UserDetailsDTO extends ObjectDTO {
+public class UserDTO extends ObjectDTO {
 
     private String login;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String hashedPassword;
     private Set<Long> roles = new HashSet<Long>();
     private String firstName;
     private String lastName;
     private Date birthDay;
+    @Email
     private String email;
     private boolean enabled;
     private boolean accountNonExpired;
     private boolean credentialsNonExpired;
     private boolean accountNonLocked;
 
-    public UserDetailsDTO() {
+    public UserDTO() {
     }
 
     public String getLogin() {

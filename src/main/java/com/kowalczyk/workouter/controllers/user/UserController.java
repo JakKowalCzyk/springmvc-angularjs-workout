@@ -1,7 +1,7 @@
 package com.kowalczyk.workouter.controllers.user;
 
 import com.kowalczyk.workouter.controllers.ModelController;
-import com.kowalczyk.workouter.model.DTO.user.UserDetailsDTO;
+import com.kowalczyk.workouter.model.DTO.user.UserDTO;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,25 +14,25 @@ import java.util.List;
 /**
  * Created by JK on 2017-04-08.
  */
-@Api(tags = "User Details API", description = "Services for UserDetails")
-@RequestMapping("/api/user/details")
-public interface UserDetailsController extends ModelController<UserDetailsDTO> {
+@Api(tags = "User Details API", description = "Services for User")
+@RequestMapping("/api/user")
+public interface UserController extends ModelController<UserDTO> {
 
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    UserDetailsDTO getObject(@PathVariable Long id);
+    UserDTO getObject(@PathVariable Long id);
 
     @Override
     @RequestMapping(method = RequestMethod.PUT)
-    UserDetailsDTO updateObject(@RequestBody UserDetailsDTO model);
+    UserDTO updateObject(@RequestBody UserDTO model);
 
     @Override
     @RequestMapping(method = RequestMethod.POST)
-    UserDetailsDTO addObject(@RequestBody UserDetailsDTO model);
+    UserDTO addObject(@RequestBody UserDTO model);
 
     @Override
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    List<UserDetailsDTO> findAll();
+    List<UserDTO> findAll();
 
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -43,8 +43,8 @@ public interface UserDetailsController extends ModelController<UserDetailsDTO> {
     boolean isExist(@PathVariable Long id);
 
     @RequestMapping(value = "/principal", method = RequestMethod.GET)
-    UserDetailsDTO getPrincipal(Principal principal);
+    UserDTO getPrincipal(Principal principal);
 
     @RequestMapping(value = "/login}", method = RequestMethod.GET)
-    UserDetailsDTO getByLogin(@PathVariable String login);
+    UserDTO getByLogin(@PathVariable String login);
 }

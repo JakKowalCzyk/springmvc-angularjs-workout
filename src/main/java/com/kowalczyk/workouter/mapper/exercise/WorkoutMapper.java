@@ -5,7 +5,7 @@ import com.kowalczyk.workouter.model.BO.ModelObject;
 import com.kowalczyk.workouter.model.BO.exercise.Workout;
 import com.kowalczyk.workouter.model.DTO.exercise.WorkoutDTO;
 import com.kowalczyk.workouter.services.exercise.WorkoutExerciseService;
-import com.kowalczyk.workouter.services.user.UserDetailsService;
+import com.kowalczyk.workouter.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class WorkoutMapper extends ModelMapperImpl<Workout, WorkoutDTO> {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserService userService;
     @Autowired
     private WorkoutExerciseService workoutExerciseService;
 
@@ -26,7 +26,7 @@ public class WorkoutMapper extends ModelMapperImpl<Workout, WorkoutDTO> {
     protected Workout buildBO(WorkoutDTO objectDTO) {
         Workout workout = new Workout();
         workout.setDate(objectDTO.getDate());
-        workout.setUser(userDetailsService.getObject(objectDTO.getUserId()));
+        workout.setUser(userService.getObject(objectDTO.getUserId()));
         workout.getWorkoutExercises().addAll(workoutExerciseService.findByWorkoutId(objectDTO.getId()).stream()
                 .filter(workoutExercise -> objectDTO.getUserExercises().contains(workoutExercise.getId())).collect(Collectors.toList()));
         return workout;
