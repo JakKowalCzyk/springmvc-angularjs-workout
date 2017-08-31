@@ -15,7 +15,6 @@ import static org.junit.Assert.*;
  * Created by JK on 2017-04-08.
  */
 public class RoleControllerTest extends AbstractControllerTest {
-
     @Autowired
     private RoleController roleController;
 
@@ -66,6 +65,20 @@ public class RoleControllerTest extends AbstractControllerTest {
         deleteRoles(roleDTO1);
         roleDTOS = roleController.findAll();
         assertEquals(1, roleDTOS.size());
+    }
+
+    @Test
+    public void findByRoleType() throws Exception {
+        RoleDTO roleDTO1 = roleController.addObject(buildRoleDTOTest(RoleType.ADMIN));
+        RoleDTO roleDTO2 = roleController.addObject(buildRoleDTOTest(RoleType.TRAINER));
+
+        RoleDTO roleDTO11 = roleController.findByRoleType(RoleType.ADMIN);
+        assertEquals(roleDTO1.getId(), roleDTO11.getId());
+        assertEquals(roleDTO1.getRoleType(), roleDTO11.getRoleType());
+
+        RoleDTO roleDTO22 = roleController.findByRoleType(RoleType.TRAINER);
+        assertEquals(roleDTO2.getId(), roleDTO22.getId());
+        assertEquals(roleDTO2.getRoleType(), roleDTO22.getRoleType());
     }
 
 }
