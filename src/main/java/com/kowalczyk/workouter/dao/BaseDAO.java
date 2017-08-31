@@ -8,6 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by JK on 2016-09-03.
  */
 @Transactional
-public interface BaseDao<T extends ModelObject> extends JpaRepository<T, Long> {
+public interface BaseDAO<T extends ModelObject> extends JpaRepository<T, Long> {
 
 }

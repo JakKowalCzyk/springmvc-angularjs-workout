@@ -19,7 +19,7 @@ public class UserInfoServiceImpl extends ModelServiceImpl<UserInfo> implements U
     }
 
     public UserInfo getUserInfoByUserId(Long userId) {
-        return ((UserInfoDAO) getBaseDao()).getUserInfoByUserId(userId);
+        return ((UserInfoDAO) getBaseDAO()).getUserInfoByUserId(userId);
     }
 
 }

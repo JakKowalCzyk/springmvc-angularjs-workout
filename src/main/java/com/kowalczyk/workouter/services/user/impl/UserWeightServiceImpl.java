@@ -94,11 +94,11 @@ public class UserWeightServiceImpl extends ModelServiceImpl<UserWeight> implemen
     }
 
     public List<UserWeight> getWeightByUserId(Long userId) {
-        return ((UserWeightDAO) getBaseDao()).getWeightByUserId(userId);
+        return ((UserWeightDAO) getBaseDAO()).getWeightByUserId(userId);
     }
 
     public UserWeight getByUserIdAndDate(Long userId, Date date) {
-        return ((UserWeightDAO) getBaseDao()).getByUserIdAndDate(userId, date);
+        return ((UserWeightDAO) getBaseDAO()).getByUserIdAndDate(userId, date);
     }
 
     public boolean checkIfLastWeight(UserWeight userWeight) {
@@ -107,6 +107,6 @@ public class UserWeightServiceImpl extends ModelServiceImpl<UserWeight> implemen
     }
 
     public Optional<UserWeight> getUserWeightWitLastDate(Long userId) {
-        return ((UserWeightDAO) getBaseDao()).getUserWeightListOrderedByDate(userId).stream().findFirst();
+        return ((UserWeightDAO) getBaseDAO()).getUserWeightListOrderedByDate(userId).stream().findFirst();
     }
 }

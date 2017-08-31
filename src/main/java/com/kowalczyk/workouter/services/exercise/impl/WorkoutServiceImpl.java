@@ -23,7 +23,7 @@ public class WorkoutServiceImpl extends ModelServiceImpl<Workout> implements Wor
 
     @Override
     public List<Workout> getWorkoutsByUserId(Long userId) {
-        return ((WorkoutDAO) getBaseDao()).getWorkoutsByUserId(userId);
+        return ((WorkoutDAO) getBaseDAO()).getWorkoutsByUserId(userId);
     }
 
     @Override

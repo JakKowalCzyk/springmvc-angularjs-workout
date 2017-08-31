@@ -23,12 +23,12 @@ public class ExerciseServiceImpl extends ModelServiceImpl<Exercise> implements E
     }
 
     public List<Exercise> getExercisesForBodyPart(ExerciseType exerciseType) {
-        return ((ExerciseDAO) getBaseDao()).getExercisesForBodyPart(exerciseType);
+        return ((ExerciseDAO) getBaseDAO()).getExercisesForBodyPart(exerciseType);
     }
 
     @Override
     public List<Exercise> searchExercise(String tag) {
-        return ((ExerciseDAO) getBaseDao()).findByNameContainingIgnoreCase(tag.toLowerCase());
+        return ((ExerciseDAO) getBaseDAO()).findByNameContainingIgnoreCase(tag.toLowerCase());
     }
 
     @Override

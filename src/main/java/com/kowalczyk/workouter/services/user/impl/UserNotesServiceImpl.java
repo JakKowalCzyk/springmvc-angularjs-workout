@@ -33,10 +33,10 @@ public class UserNotesServiceImpl extends ModelServiceImpl<UserNote> implements 
     }
 
     public List<UserNote> getUserNotesByUserId(Long userId) {
-        return ((UserNotesDAO) getBaseDao()).getUserNotesByUserId(userId);
+        return ((UserNotesDAO) getBaseDAO()).getUserNotesByUserId(userId);
     }
 
     public List<UserNote> getNotesByDate(Long userId, Date date) {
-        return ((UserNotesDAO) getBaseDao()).getSingleNoteByDate(userId, date);
+        return ((UserNotesDAO) getBaseDAO()).getSingleNoteByDate(userId, date);
     }
 }

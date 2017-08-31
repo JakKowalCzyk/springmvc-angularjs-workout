@@ -22,12 +22,12 @@ public class WorkoutExerciseServiceImpl extends ModelServiceImpl<WorkoutExercise
 
     @Override
     public List<WorkoutExercise> getWorkoutExercisesByUserId(Long userId) {
-        return ((WorkoutExerciseDAO) getBaseDao()).getUserExercisesByUserId(userId);
+        return ((WorkoutExerciseDAO) getBaseDAO()).getUserExercisesByUserId(userId);
     }
 
     @Override
     public List<WorkoutExercise> findByWorkoutId(Long workoutId) {
-        return ((WorkoutExerciseDAO) getBaseDao()).findByWorkoutId(workoutId);
+        return ((WorkoutExerciseDAO) getBaseDAO()).findByWorkoutId(workoutId);
     }
 
     @Override

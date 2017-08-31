@@ -58,7 +58,7 @@ public class UserDetailsServiceImpl extends ModelServiceImpl<com.kowalczyk.worko
 
     @Override
     public com.kowalczyk.workouter.model.BO.user.UserDetails getByLogin(String login) {
-        return ((UserDetailsDAO) getBaseDao()).findByLogin(login);
+        return ((UserDetailsDAO) getBaseDAO()).findByLogin(login);
     }
 
     @Override
