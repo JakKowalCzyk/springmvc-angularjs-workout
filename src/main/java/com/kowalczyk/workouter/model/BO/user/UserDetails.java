@@ -9,10 +9,6 @@ import com.kowalczyk.workouter.model.BO.user.impl.UserWeight;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.*;
 import java.util.*;
 
@@ -92,7 +88,7 @@ public class UserDetails extends ModelObject {
         this.email = email;
     }
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     public Set<Role> getRoles() {
         return roles;
     }

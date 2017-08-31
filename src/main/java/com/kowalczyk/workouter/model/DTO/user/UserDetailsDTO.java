@@ -1,5 +1,6 @@
 package com.kowalczyk.workouter.model.DTO.user;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kowalczyk.workouter.model.DTO.ObjectDTO;
 
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.Set;
 public class UserDetailsDTO extends ObjectDTO {
 
     private String login;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String hashedPassword;
     private Set<Long> roles = new HashSet<Long>();
     private String firstName;

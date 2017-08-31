@@ -12,6 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,18 +26,31 @@ import java.util.stream.Collectors;
 public class UserDetailsServiceImpl extends ModelServiceImpl<com.kowalczyk.workouter.model.BO.user.UserDetails> implements UserDetailsService {
 
     private UserInfoService userInfoService;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserDetailsServiceImpl(UserDetailsDAO baseDao, UserInfoService userInfoService) {
+    public UserDetailsServiceImpl(UserDetailsDAO baseDao, UserInfoService userInfoService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         super(baseDao);
         this.userInfoService = userInfoService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
     public com.kowalczyk.workouter.model.BO.user.UserDetails addObject(com.kowalczyk.workouter.model.BO.user.UserDetails baseModel) {
+        hashUserPassword(baseModel);
         com.kowalczyk.workouter.model.BO.user.UserDetails userDetails = super.addObject(baseModel);
         createNewUserInfo(userDetails);
         return userDetails;
+    }
+
+    @Override
+    public com.kowalczyk.workouter.model.BO.user.UserDetails updateObject(com.kowalczyk.workouter.model.BO.user.UserDetails baseModel) {
+        baseModel.setHashedPassword(super.getObject(baseModel.getId()).getHashedPassword());
+        return super.updateObject(baseModel);
+    }
+
+    private void hashUserPassword(com.kowalczyk.workouter.model.BO.user.UserDetails baseModel) {
+        baseModel.setHashedPassword(bCryptPasswordEncoder.encode(baseModel.getHashedPassword()));
     }
 
     private void createNewUserInfo(com.kowalczyk.workouter.model.BO.user.UserDetails userDetails) {
