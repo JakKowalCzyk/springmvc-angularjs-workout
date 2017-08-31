@@ -1,6 +1,5 @@
 package com.kowalczyk.workouter.configuration.security;
 
-import com.kowalczyk.workouter.configuration.security.social.FacebookAuthenticationProvider;
 import com.kowalczyk.workouter.configuration.security.social.FacebookConnectionSignUp;
 import com.kowalczyk.workouter.configuration.security.social.FacebookSignInAdapter;
 import com.kowalczyk.workouter.services.user.UserDetailsService;
@@ -38,8 +37,6 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private ClientDetailsService clientDetailsService;
     @Autowired
-    private FacebookAuthenticationProvider facebookAuthenticationProvider;
-    @Autowired
     private UserDetailsService userDetailsService;
     @Autowired
     private DataSource dataSource;
@@ -52,7 +49,6 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-//        authenticationManagerBuilder.authenticationProvider(facebookAuthenticationProvider);
         authenticationManagerBuilder.userDetailsService(userDetailsService);
     }
 
@@ -61,7 +57,7 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .anonymous().disable()
                 .authorizeRequests()
-                .antMatchers("/oauth/**", "/login/**", "/signin/**", "/signup/**").permitAll();
+                .antMatchers("/oauth/token", "/oauth/authorize", "/login/**", "/signin/**", "/signup/**").permitAll().and().httpBasic();
     }
 
     @Override

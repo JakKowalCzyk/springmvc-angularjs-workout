@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Spring Social Login</title>
@@ -18,6 +18,17 @@
         </p>
     </div><!-- /.container-fluid -->
 </nav>
+
+<div class="col-sm-12">
+    <form action="/oauth/authorize?response_type=token&amp;client_id=workout_client&amp;redirect_uri=/" method="POST">
+        <input type="submit" value="Login using authorize" class="btn btn-primary"/>
+    </form>
+</div>
+<div class="col-sm-12">
+    <form action="/api/user/details" method="POST">
+        <input type="submit" value="/api/user/details" class="btn btn-primary"/>
+    </form>
+</div>
 
 <div class="container">
     <h1 class="col-sm-12">Welcome, <span sec:authentication="name">Username</span></h1>
