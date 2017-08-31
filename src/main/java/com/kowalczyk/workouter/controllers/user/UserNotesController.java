@@ -16,9 +16,8 @@ import java.util.List;
  * Created by JK on 2017-01-22.
  */
 @Api(tags = {"User Notes API"}, description = "Services for user's notes")
-@RequestMapping("/notes")
+@RequestMapping("/api/user/notes")
 public interface UserNotesController extends ModelController<UserNoteDTO> {
-
 
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

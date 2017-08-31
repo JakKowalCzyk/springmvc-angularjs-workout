@@ -16,7 +16,7 @@ import java.util.List;
  * Created by JK on 2017-01-22.
  */
 @Api(tags = {"User's weight API"}, description = "Services for user's weight")
-@RequestMapping("/user/weight")
+@RequestMapping("/api/user/weight")
 public interface UserWeightController extends ModelController<UserWeightDTO> {
 
     @Override

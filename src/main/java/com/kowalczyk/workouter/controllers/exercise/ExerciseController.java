@@ -13,7 +13,7 @@ import java.util.List;
  * Created by JK on 2017-01-22.
  */
 @Api(tags = {"Exercise API "}, description = "Services for exercises")
-@RequestMapping("/exercise")
+@RequestMapping("/api/exercise")
 public interface ExerciseController extends ModelController<ExerciseDTO> {
 
     @Override

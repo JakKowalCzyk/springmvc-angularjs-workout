@@ -1,35 +1,28 @@
-package com.kowalczyk.workouter.configuration.security;
+package com.kowalczyk.workouter.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
-import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
-import org.springframework.security.oauth2.provider.token.TokenStore;
 
 /**
- * Created by JK on 2016-11-28.
+ * Created by JKowalczyk on 2017-02-22.
  */
 @Configuration
+@Profile("test")
+@Primary
 @EnableAuthorizationServer
-@Profile("!test")
-public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter{
+public class AuthorizationServerConfigurationTest extends AuthorizationServerConfigurerAdapter {
+
     private static final String RESOURCE_ID = "workout_api";
     private static final String CLIENT_SECRET = "secret";
     private static final String REALM = "WORKOUT_REALM";
     private static final String WORKOUT_CLIENT = "workout_client";
-    @Autowired
-    private TokenStore tokenStore;
-    @Autowired
-    private UserApprovalHandler userApprovalHandler;
-    @Autowired
-    private AuthenticationManager authenticationManager;
+
     @Value("#{environment.ACCESS_TOKEN}")
     private String accessTokenValidity = "600";
     @Value("#{environment.REFRESH_TOKEN}")
@@ -54,8 +47,4 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .refreshTokenValiditySeconds(Integer.valueOf(refreshTokenValidity));
     }
 
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(tokenStore).userApprovalHandler(userApprovalHandler).authenticationManager(authenticationManager);
-    }
 }

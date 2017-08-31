@@ -22,20 +22,20 @@
 -- -- drop TABLE if EXISTS oauth_access_token;
 -- -- drop TABLE if EXISTS oauth_refresh_token;
 --
--- -- CREATE TABLE oauth_access_token (
--- --   token_id VARCHAR(256),
--- --   token bytea,
--- --   authentication_id VARCHAR(256),
--- --   user_name VARCHAR(256),
--- --   client_id VARCHAR(256),
--- --   authentication bytea,
--- --   refresh_token VARCHAR(256)
--- -- );
--- -- CREATE TABLE oauth_refresh_token (
--- --   token_id VARCHAR(256),
--- --   token bytea,
--- --   authentication bytea
--- -- );
+-- CREATE TABLE oauth_access_token (
+--   token_id VARCHAR(256),
+--   token bytea,
+--   authentication_id VARCHAR(256),
+--   user_name VARCHAR(256),
+--   client_id VARCHAR(256),
+--   authentication bytea,
+--   refresh_token VARCHAR(256)
+-- );
+-- CREATE TABLE oauth_refresh_token (
+--   token_id VARCHAR(256),
+--   token bytea,
+--   authentication bytea
+-- );
 --
 --INSERT INTO user_details (enabled, login, hashedPassword, birth_day, email, first_name, last_name) VALUES (TRUE, 'nowy', '123', '1990-01-22', 'kowal@email.pl', 'kowalczyk', 'kowal');
 -- INSERT INTO user_details (enabled, login, hashedPassword, birth_day, email, first_name, last_name) VALUES (TRUE, 'nowy2', '1234', '1996-01-22', 'email@email.pl', 'nowy2', 'nowy');

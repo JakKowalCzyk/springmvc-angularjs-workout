@@ -2,6 +2,7 @@ package com.kowalczyk.workouter.controllers.security.impl;
 
 import com.kowalczyk.workouter.controllers.impl.ModelControllerImpl;
 import com.kowalczyk.workouter.controllers.security.RoleController;
+import com.kowalczyk.workouter.enums.RoleType;
 import com.kowalczyk.workouter.mapper.security.RoleMapper;
 import com.kowalczyk.workouter.model.BO.security.Role;
 import com.kowalczyk.workouter.model.DTO.security.RoleDTO;
@@ -9,6 +10,7 @@ import com.kowalczyk.workouter.services.security.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -52,5 +54,10 @@ public class RoleControllerImpl extends ModelControllerImpl<Role, RoleDTO> imple
     @Override
     public void deleteObject(@PathVariable Long id) {
         super.deleteObject(id);
+    }
+
+    @Override
+    public RoleDTO findByRoleType(@RequestParam RoleType roleType) {
+        return getModelMapper().mapToDTO(((RoleService) getModelService()).findByRoleType(roleType));
     }
 }
