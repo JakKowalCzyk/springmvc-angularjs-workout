@@ -39,4 +39,8 @@ public interface RoleController extends ModelController<RoleDTO> {
     @ApiOperation(value = "Find role by role type")
     @RequestMapping(value = "/type", method = RequestMethod.GET)
     RoleDTO findByRoleType(@RequestParam RoleType roleType);
+
+    @Override
+    @RequestMapping(value = "/exist", method = RequestMethod.GET)
+    boolean isExist(@PathVariable Long id);
 }

@@ -7,11 +7,11 @@ import java.util.Date;
 /**
  * Created by JK on 2016-11-18.
  */
-public class UserNotesDTO extends AbstractUserObjectDTO {
+public class UserNoteDTO extends AbstractUserObjectDTO {
     private String note;
     private Date date;
 
-    public UserNotesDTO() {
+    public UserNoteDTO() {
     }
 
     public String getNote() {

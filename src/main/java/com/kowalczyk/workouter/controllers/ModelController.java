@@ -26,4 +26,7 @@ public interface ModelController<T extends ObjectDTO> {
 
     @ApiOperation(value = "Delete object by id")
     void deleteObject(@PathVariable Long id);
+
+    @ApiOperation(value = "Check if exist")
+    boolean isExist(@PathVariable Long id);
 }

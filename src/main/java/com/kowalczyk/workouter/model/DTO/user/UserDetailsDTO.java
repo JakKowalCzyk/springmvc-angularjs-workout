@@ -113,4 +113,5 @@ public class UserDetailsDTO extends ObjectDTO {
     public void setAccountNonLocked(boolean accountNonLocked) {
         this.accountNonLocked = accountNonLocked;
     }
+
 }

@@ -1,13 +1,12 @@
 package com.kowalczyk.workouter.services.exercise.impl;
 
-import com.kowalczyk.workouter.dao.exercise.WorkoutDao;
+import com.kowalczyk.workouter.dao.exercise.WorkoutDAO;
 import com.kowalczyk.workouter.model.BO.exercise.Workout;
 import com.kowalczyk.workouter.services.exercise.WorkoutService;
 import com.kowalczyk.workouter.services.impl.ModelServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.util.List;
 
 /**
@@ -18,17 +17,23 @@ public class WorkoutServiceImpl extends ModelServiceImpl<Workout> implements Wor
 
 
     @Autowired
-    public WorkoutServiceImpl(WorkoutDao baseDao) {
+    public WorkoutServiceImpl(WorkoutDAO baseDao) {
         super(baseDao);
     }
 
     @Override
     public List<Workout> getWorkoutsByUserId(Long userId) {
-        return ((WorkoutDao) getBaseDao()).getWorkoutsByUserId(userId);
+        return ((WorkoutDAO) getBaseDAO()).getWorkoutsByUserId(userId);
     }
 
     @Override
-    public Workout getByUserIdAndDate(Long userId, Date date) {
-        return ((WorkoutDao) getBaseDao()).getByUserIdAndDate(userId, date);
+    public void deleteObject(Long id) {
+        removeWorkoutFromUser(id);
+        super.deleteObject(id);
+    }
+
+    private void removeWorkoutFromUser(Long id) {
+        Workout workoutToDelete = super.getObject(id);
+        workoutToDelete.getUser().getWorkouts().remove(workoutToDelete);
     }
 }

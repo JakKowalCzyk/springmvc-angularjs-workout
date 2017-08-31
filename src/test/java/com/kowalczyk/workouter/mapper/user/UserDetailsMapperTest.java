@@ -2,8 +2,12 @@ package com.kowalczyk.workouter.mapper.user;
 
 import com.kowalczyk.workouter.mapper.AbstractMapperTest;
 import com.kowalczyk.workouter.model.BO.user.UserDetails;
+import com.kowalczyk.workouter.model.BO.user.impl.UserNote;
 import com.kowalczyk.workouter.model.DTO.user.UserDetailsDTO;
+import com.kowalczyk.workouter.services.exercise.WorkoutService;
 import com.kowalczyk.workouter.services.security.RoleService;
+import com.kowalczyk.workouter.services.user.UserInfoService;
+import com.kowalczyk.workouter.services.user.UserNotesService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,8 +15,6 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
-import java.util.GregorianCalendar;
-import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -26,31 +28,34 @@ public class UserDetailsMapperTest extends AbstractMapperTest {
     private UserDetailsMapper userDetailsMapper;
     @Autowired
     private RoleService roleService;
-
+    @Autowired
+    private WorkoutService workoutService;
+    @Autowired
+    private UserNotesService userNotesService;
+    @Autowired
+    private UserInfoService userInfoService;
     @Override
     @Before
     public void setUp() throws Exception {
         super.setUp();
         Mockito.when(roleService.getObject(Mockito.anyLong())).thenReturn(getUserRoleTest());
+        Mockito.when(workoutService.getWorkoutsByUserId(Mockito.anyLong())).thenReturn(Arrays.asList(getWorkoutTest(), getWorkoutTest()));
+        UserNote userNote = getUserNotesTest();
+        Mockito.when(userNotesService.getUserNotesByUserId(Mockito.anyLong())).thenReturn(Arrays.asList(userNote));
+        Mockito.when(userInfoService.getUserInfoByUserId(Mockito.anyLong())).thenReturn(null);
+    }
+
+    private UserNote getUserNotesTest() {
+        UserNote userNote = new UserNote();
+        userNote.setId(1L);
+        return userNote;
     }
 
     @Test
     public void mapToBO() throws Exception {
-        UserDetailsDTO userDetailsDTO = new UserDetailsDTO();
-        userDetailsDTO.setFirstName("name");
-        userDetailsDTO.setLastName("last");
-        userDetailsDTO.setBirthDay(new GregorianCalendar(2012, 3, 12).getTime());
-        userDetailsDTO.setLogin("log");
-        userDetailsDTO.setHashedPassword("pass");
-        userDetailsDTO.setEmail("email");
-        userDetailsDTO.setEnabled(true);
-        userDetailsDTO.setAccountNonLocked(true);
-        userDetailsDTO.setAccountNonExpired(true);
-        userDetailsDTO.setCredentialsNonExpired(true);
-        userDetailsDTO.setId(2L);
-        userDetailsDTO.setRoles(Arrays.asList(1L).stream().collect(Collectors.toSet()));
+        UserDetailsDTO userDetailsDTO = getUserDetailsDTOTest("login", "name", "lastName", 1L, 10L);
         UserDetails userDetails = userDetailsMapper.mapToBO(userDetailsDTO);
-        assertTrue(userDetails.getId() == 2L);
+        assertEquals(userDetails.getId(), userDetailsDTO.getId());
         assertTrue(userDetails.isEnabled());
         assertTrue(userDetails.isAccountNonExpired());
         assertTrue(userDetails.isAccountNonLocked());
@@ -62,11 +67,19 @@ public class UserDetailsMapperTest extends AbstractMapperTest {
         assertEquals(userDetailsDTO.getLogin(), userDetails.getLogin());
         assertEquals(userDetailsDTO.getHashedPassword(), userDetails.getHashedPassword());
         Assert.assertEquals(getUserRoleTest().getId(), userDetails.getRoles().iterator().next().getId());
+        assertEquals(2, userDetails.getWorkouts().size());
+        assertEquals(getWorkoutTest().getId(), userDetails.getWorkouts().get(0).getId());
+        assertEquals(1, userDetails.getUserNotes().size());
+        assertTrue(userDetails.getUserWeightList().isEmpty());
+        assertTrue(userDetails.getUserInfo() == null);
     }
 
     @Test
     public void mapToDTO() throws Exception {
         UserDetails userDetails = getUserDetailsTest();
+        userDetails.setUserNotes(Arrays.asList(getUserNotesTest()));
+        userDetails.setWorkouts(Arrays.asList(getWorkoutTest(), getWorkoutTest()));
+        userDetails.setUserInfo(null);
         UserDetailsDTO userDetailsDTO = userDetailsMapper.mapToDTO(userDetails);
         assertEquals(userDetails.getFirstName(), userDetailsDTO.getFirstName());
         assertEquals(userDetails.getBirthDay(), userDetailsDTO.getBirthDay());

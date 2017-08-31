@@ -47,6 +47,11 @@ public class RoleControllerImpl extends ModelControllerImpl<Role, RoleDTO> imple
     }
 
     @Override
+    public boolean isExist(@PathVariable Long id) {
+        return super.isExist(id);
+    }
+
+    @Override
     public void deleteObject(@PathVariable Long id) {
         super.deleteObject(id);
     }

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.sql.Date;
 import java.util.List;
 
 /**
@@ -39,12 +38,12 @@ public interface WorkoutController extends ModelController<WorkoutDTO> {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     void deleteObject(@PathVariable Long id);
 
+    @Override
+    @RequestMapping(value = "/exist", method = RequestMethod.GET)
+    boolean isExist(@PathVariable Long id);
 
     @ApiOperation(value = "Get workout for user")
     @RequestMapping(value = "user/{id}", method = RequestMethod.GET)
     List<WorkoutDTO> getWorkoutsByUser(@PathVariable Long id);
 
-    @ApiOperation(value = "Get workout by date for user")
-    @RequestMapping(value = "user/{id}/date/{date}", method = RequestMethod.GET)
-    WorkoutDTO getWorkoutByDate(@PathVariable Long id, @PathVariable Date date);
 }

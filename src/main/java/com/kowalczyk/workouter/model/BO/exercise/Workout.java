@@ -2,9 +2,7 @@ package com.kowalczyk.workouter.model.BO.exercise;
 
 import com.kowalczyk.workouter.model.BO.user.AbstractUserObject;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,13 +15,22 @@ public class Workout extends AbstractUserObject {
 
     private Date date;
 
-    private List<UserExercise> userExercises = new ArrayList<>();
+    private List<WorkoutExercise> workoutExercises = new ArrayList<>();
 
     public Workout(Date date) {
         this.date = date;
     }
 
     public Workout() {
+    }
+
+    @PrePersist
+    public void prePersist() {
+        getUser().getWorkouts().add(this);
+    }
+
+    @PreRemove
+    public void preRemove() {
     }
 
     public Date getDate() {
@@ -34,12 +41,12 @@ public class Workout extends AbstractUserObject {
         this.date = date;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workoutId")
-    public List<UserExercise> getUserExercises() {
-        return userExercises;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workout", orphanRemoval = true)
+    public List<WorkoutExercise> getWorkoutExercises() {
+        return workoutExercises;
     }
 
-    public void setUserExercises(List<UserExercise> userExercises) {
-        this.userExercises = userExercises;
+    public void setWorkoutExercises(List<WorkoutExercise> workoutExercises) {
+        this.workoutExercises = workoutExercises;
     }
 }

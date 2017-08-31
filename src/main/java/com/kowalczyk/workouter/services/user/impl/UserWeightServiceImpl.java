@@ -1,6 +1,6 @@
 package com.kowalczyk.workouter.services.user.impl;
 
-import com.kowalczyk.workouter.dao.user.UserWeightDao;
+import com.kowalczyk.workouter.dao.user.UserWeightDAO;
 import com.kowalczyk.workouter.model.BO.user.impl.UserInfo;
 import com.kowalczyk.workouter.model.BO.user.impl.UserWeight;
 import com.kowalczyk.workouter.services.impl.ModelServiceImpl;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by JK on 2016-10-26.
@@ -21,8 +22,13 @@ public class UserWeightServiceImpl extends ModelServiceImpl<UserWeight> implemen
     private UserInfoService userInfoService;
 
     @Autowired
-    public UserWeightServiceImpl(UserWeightDao baseDao) {
+    public UserWeightServiceImpl(UserWeightDAO baseDao) {
         super(baseDao);
+    }
+
+    @Override
+    public UserWeight getActualWeight(Long userId) {
+        return userInfoService.getUserInfoByUserId(userId).getActualWeight();
     }
 
     @Override
@@ -39,6 +45,34 @@ public class UserWeightServiceImpl extends ModelServiceImpl<UserWeight> implemen
             updateActualUserWeight(baseModel);
         }
         return super.updateObject(baseModel);
+    }
+
+    @Override
+    public void deleteObject(Long id) {
+        UserWeight userWeightToDelete = super.getObject(id);
+        removeUserWeightFromUser(userWeightToDelete);
+        updateUserInfoWithNullWeight(userWeightToDelete);
+        if (checkIfLastWeight(userWeightToDelete)) {
+            deleteAndUpdateActualWeight(userWeightToDelete);
+        } else {
+            super.deleteObject(id);
+        }
+    }
+
+    private void removeUserWeightFromUser(UserWeight userWeightToDelete) {
+        userWeightToDelete.getUser().getUserWeightList().remove(userWeightToDelete);
+    }
+
+    private void updateUserInfoWithNullWeight(UserWeight userWeightToDelete) {
+        UserInfo userInfo = userInfoService.getUserInfoByUserId(userWeightToDelete.getUser().getId());
+        userInfo.setActualWeight(null);
+        userInfoService.updateObject(userInfo);
+    }
+
+    private void deleteAndUpdateActualWeight(UserWeight userWeightToDelete) {
+        super.deleteObject(userWeightToDelete);
+        Optional<UserWeight> userWeightOptional = getUserWeightWitLastDate(userWeightToDelete.getUser().getId());
+        userWeightOptional.ifPresent(this::setActualWeight);
     }
 
     private UserWeight updateActualUserWeight(UserWeight baseModel) {
@@ -60,24 +94,19 @@ public class UserWeightServiceImpl extends ModelServiceImpl<UserWeight> implemen
     }
 
     public List<UserWeight> getWeightByUserId(Long userId) {
-        return ((UserWeightDao) getBaseDao()).getWeightByUserId(userId);
+        return ((UserWeightDAO) getBaseDAO()).getWeightByUserId(userId);
     }
 
     public UserWeight getByUserIdAndDate(Long userId, Date date) {
-        return ((UserWeightDao) getBaseDao()).getByUserIdAndDate(userId, date);
-    }
-
-    @Override
-    public UserWeight getActualWeight(Long userId) {
-        return userInfoService.getObject(userId).getActualWeight();
+        return ((UserWeightDAO) getBaseDAO()).getByUserIdAndDate(userId, date);
     }
 
     public boolean checkIfLastWeight(UserWeight userWeight) {
-        return !getLastDate(userWeight.getUser().getId()).after(userWeight.getDate());
+        Optional<UserWeight> dateOptional = getUserWeightWitLastDate(userWeight.getUser().getId());
+        return !dateOptional.isPresent() || !dateOptional.get().getDate().after(userWeight.getDate());
     }
 
-    public Date getLastDate(Long userId) {
-        List<UserWeight> userWeights = ((UserWeightDao) getBaseDao()).getUserWeightListOrderedByDate(userId);
-        return userWeights.stream().findFirst().get().getDate();
+    public Optional<UserWeight> getUserWeightWitLastDate(Long userId) {
+        return ((UserWeightDAO) getBaseDAO()).getUserWeightListOrderedByDate(userId).stream().findFirst();
     }
 }

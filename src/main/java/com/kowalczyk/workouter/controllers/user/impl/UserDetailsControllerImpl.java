@@ -46,7 +46,17 @@ public class UserDetailsControllerImpl extends ModelControllerImpl<UserDetails, 
     }
 
     @Override
+    public boolean isExist(@PathVariable Long id) {
+        return super.isExist(id);
+    }
+
+    @Override
     public UserDetailsDTO getPrincipal(Principal principal) {
         return getModelMapper().mapToDTO(((UserDetailsService) getModelService()).getByLogin(principal.getName()));
+    }
+
+    @Override
+    public UserDetailsDTO getByLogin(@PathVariable String login) {
+        return getModelMapper().mapToDTO(((UserDetailsService) getModelService()).getByLogin(login));
     }
 }

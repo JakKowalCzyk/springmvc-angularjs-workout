@@ -1,18 +1,21 @@
 package com.kowalczyk.workouter.mapper;
 
+import com.kowalczyk.workouter.AbstractTestHelper;
 import com.kowalczyk.workouter.enums.ExerciseType;
 import com.kowalczyk.workouter.enums.RoleType;
 import com.kowalczyk.workouter.model.BO.exercise.Exercise;
-import com.kowalczyk.workouter.model.BO.exercise.UserExercise;
 import com.kowalczyk.workouter.model.BO.exercise.Workout;
+import com.kowalczyk.workouter.model.BO.exercise.WorkoutExercise;
 import com.kowalczyk.workouter.model.BO.security.Role;
 import com.kowalczyk.workouter.model.BO.user.UserDetails;
 import com.kowalczyk.workouter.model.BO.user.impl.UserWeight;
 import com.kowalczyk.workouter.services.exercise.ExerciseService;
-import com.kowalczyk.workouter.services.exercise.UserExerciseService;
+import com.kowalczyk.workouter.services.exercise.WorkoutExerciseService;
 import com.kowalczyk.workouter.services.exercise.WorkoutService;
 import com.kowalczyk.workouter.services.security.RoleService;
 import com.kowalczyk.workouter.services.user.UserDetailsService;
+import com.kowalczyk.workouter.services.user.UserInfoService;
+import com.kowalczyk.workouter.services.user.UserNotesService;
 import com.kowalczyk.workouter.services.user.UserWeightService;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -30,12 +33,12 @@ import java.util.stream.Collectors;
  */
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = MapperConfigurationTest.class)
-public abstract class AbstractMapperTest {
+public abstract class AbstractMapperTest extends AbstractTestHelper {
 
     @MockBean
     protected UserDetailsService userDetailsService;
     @MockBean
-    private UserExerciseService userExerciseService;
+    private WorkoutExerciseService workoutExerciseService;
     @MockBean
     private WorkoutService workoutService;
     @MockBean
@@ -44,13 +47,15 @@ public abstract class AbstractMapperTest {
     private UserWeightService userWeightService;
     @MockBean
     private RoleService roleService;
-
+    @MockBean
+    private UserInfoService userInfoService;
+    @MockBean
+    private UserNotesService userNotesService;
 
     @Before
     public void setUp() throws Exception {
         Mockito.when(userDetailsService.getObject(Mockito.anyLong())).thenReturn(getUserDetailsTest());
     }
-
     protected UserDetails getUserDetailsTest() {
         UserDetails userDetails = new UserDetails();
         userDetails.setLogin("log");
@@ -87,7 +92,7 @@ public abstract class AbstractMapperTest {
 
     protected Workout buildWorkoutTest() {
         Workout workout = getWorkoutTest();
-        workout.setUserExercises(Arrays.asList(getUserExerciseTest()));
+        workout.setWorkoutExercises(Arrays.asList(getUserExerciseTest()));
         return workout;
     }
 
@@ -97,14 +102,14 @@ public abstract class AbstractMapperTest {
         return exercise;
     }
 
-    protected UserExercise getUserExerciseTest() {
-        UserExercise userExercise = new UserExercise();
-        userExercise.setId(2L);
-        userExercise.setSeries(14);
-        userExercise.setRepeat(9);
-        userExercise.setWorkoutId(getWorkoutTest());
-        userExercise.setExercise(getExerciseTest());
-        return userExercise;
+    protected WorkoutExercise getUserExerciseTest() {
+        WorkoutExercise workoutExercise = new WorkoutExercise();
+        workoutExercise.setId(2L);
+        workoutExercise.setSeries(14);
+        workoutExercise.setRepeat(9);
+        workoutExercise.setWorkout(getWorkoutTest());
+        workoutExercise.setExercise(getExerciseTest());
+        return workoutExercise;
     }
 
     protected UserWeight getUserWeightTest() {

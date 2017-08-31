@@ -4,7 +4,7 @@ import com.kowalczyk.workouter.mapper.impl.ModelMapperImpl;
 import com.kowalczyk.workouter.model.BO.ModelObject;
 import com.kowalczyk.workouter.model.BO.exercise.Workout;
 import com.kowalczyk.workouter.model.DTO.exercise.WorkoutDTO;
-import com.kowalczyk.workouter.services.exercise.UserExerciseService;
+import com.kowalczyk.workouter.services.exercise.WorkoutExerciseService;
 import com.kowalczyk.workouter.services.user.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,16 +20,15 @@ public class WorkoutMapper extends ModelMapperImpl<Workout, WorkoutDTO> {
     @Autowired
     private UserDetailsService userDetailsService;
     @Autowired
-    private UserExerciseService userExerciseService;
+    private WorkoutExerciseService workoutExerciseService;
 
     @Override
     protected Workout buildBO(WorkoutDTO objectDTO) {
         Workout workout = new Workout();
         workout.setDate(objectDTO.getDate());
         workout.setUser(userDetailsService.getObject(objectDTO.getUserId()));
-        if (objectDTO.getUserExercises() != null) {
-            workout.setUserExercises(objectDTO.getUserExercises().stream().map(aLong -> userExerciseService.getObject(aLong)).collect(Collectors.toList()));
-        }
+        workout.getWorkoutExercises().addAll(workoutExerciseService.findByWorkoutId(objectDTO.getId()).stream()
+                .filter(workoutExercise -> objectDTO.getUserExercises().contains(workoutExercise.getId())).collect(Collectors.toList()));
         return workout;
     }
 
@@ -38,7 +37,7 @@ public class WorkoutMapper extends ModelMapperImpl<Workout, WorkoutDTO> {
         WorkoutDTO workoutDTO = new WorkoutDTO();
         workoutDTO.setDate(modelObject.getDate());
         workoutDTO.setUserId(modelObject.getUser().getId());
-        workoutDTO.setUserExercises(modelObject.getUserExercises().stream().map(ModelObject::getId).collect(Collectors.toList()));
+        workoutDTO.setUserExercises(modelObject.getWorkoutExercises().stream().map(ModelObject::getId).collect(Collectors.toList()));
         return workoutDTO;
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,6 +49,11 @@ public class UserWeightControllerImpl extends ModelControllerImpl<UserWeight, Us
     @Override
     public void deleteObject(@PathVariable Long id) {
         super.deleteObject(id);
+    }
+
+    @Override
+    public boolean isExist(@PathVariable Long id) {
+        return super.isExist(id);
     }
 
     @Override

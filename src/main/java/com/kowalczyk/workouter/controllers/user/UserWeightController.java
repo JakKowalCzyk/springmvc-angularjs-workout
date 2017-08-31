@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,6 +38,10 @@ public interface UserWeightController extends ModelController<UserWeightDTO> {
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     void deleteObject(@PathVariable Long id);
+
+    @Override
+    @RequestMapping(value = "/exist", method = RequestMethod.GET)
+    boolean isExist(@PathVariable Long id);
 
     @ApiOperation(value = "Get weight for user")
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)

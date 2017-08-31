@@ -1,7 +1,7 @@
 -- -- drop table if EXISTS user CASCADE ;
 -- -- drop table if EXISTS userInfo CASCADE ;
 -- -- drop table if EXISTS userWeight CASCADE ;
--- -- drop table if EXISTS userNotes CASCADE ;
+-- -- drop table if EXISTS userNote CASCADE ;
 -- -- drop table if EXISTS userExerciseId CASCADE ;
 -- -- drop table if EXISTS user_exercise CASCADE ;
 -- --
@@ -13,11 +13,11 @@
 -- --
 -- -- CREATE TABLE workout(workoutId SERIAL NOT NULL PRIMARY KEY ,userId int REFERENCES user(userId), date DATE);
 -- --
--- -- CREATE TABLE userExercise(usexercise_id SERIAL NOT NULL PRIMARY key, exercise_id int REFERENCES userExerciseId(exercise_id), workoutId int REFERENCES workout(workoutId), repeat int, series int);
+-- -- CREATE TABLE workoutExercise(usexercise_id SERIAL NOT NULL PRIMARY key, exercise_id int REFERENCES userExerciseId(exercise_id), workoutId int REFERENCES workout(workoutId), repeat int, series int);
 -- --
 -- -- create table userInfo(uinfo_id SERIAL NOT NULL PRIMARY KEY, userId int REFERENCES user(userId), actualWeight int REFERENCES userWeight(uweight_id), efavourite_id int REFERENCES userExerciseId(exercise_id));
 -- --
--- -- CREATE TABLE userNotes(unotes_id SERIAL NOT NULL PRIMARY key, userId int REFERENCES user(userId), note text, date DATE );
+-- -- CREATE TABLE userNote(unotes_id SERIAL NOT NULL PRIMARY key, userId int REFERENCES user(userId), note text, date DATE );
 --
 -- -- drop TABLE if EXISTS oauth_access_token;
 -- -- drop TABLE if EXISTS oauth_refresh_token;

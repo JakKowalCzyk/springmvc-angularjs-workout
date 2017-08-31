@@ -5,13 +5,13 @@ import com.kowalczyk.workouter.model.DTO.ObjectDTO;
 /**
  * Created by JK on 2016-11-18.
  */
-public class UserExerciseDTO extends ObjectDTO {
+public class WorkoutExerciseDTO extends ObjectDTO {
     private Long workoutId;
     private Integer repeat;
     private Integer series;
     private Long exerciseId;
 
-    public UserExerciseDTO() {
+    public WorkoutExerciseDTO() {
     }
 
     public Long getWorkoutId() {

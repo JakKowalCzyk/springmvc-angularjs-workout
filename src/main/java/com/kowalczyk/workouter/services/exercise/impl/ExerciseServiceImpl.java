@@ -1,6 +1,6 @@
 package com.kowalczyk.workouter.services.exercise.impl;
 
-import com.kowalczyk.workouter.dao.exercise.ExerciseDao;
+import com.kowalczyk.workouter.dao.exercise.ExerciseDAO;
 import com.kowalczyk.workouter.enums.ExerciseType;
 import com.kowalczyk.workouter.model.BO.exercise.Exercise;
 import com.kowalczyk.workouter.model.exception.DeleteException;
@@ -18,16 +18,17 @@ import java.util.List;
 public class ExerciseServiceImpl extends ModelServiceImpl<Exercise> implements ExerciseService {
 
     @Autowired
-    public ExerciseServiceImpl(ExerciseDao baseDao) {
+    public ExerciseServiceImpl(ExerciseDAO baseDao) {
         super(baseDao);
     }
 
-    public Exercise getExerciseByName(String name) {
-        return ((ExerciseDao) getBaseDao()).getExerciseByName(name);
+    public List<Exercise> getExercisesForBodyPart(ExerciseType exerciseType) {
+        return ((ExerciseDAO) getBaseDAO()).getExercisesForBodyPart(exerciseType);
     }
 
-    public List<Exercise> getExercisesForBodyPart(ExerciseType exerciseType) {
-        return ((ExerciseDao) getBaseDao()).getExercisesForBodyPart(exerciseType);
+    @Override
+    public List<Exercise> searchExercise(String tag) {
+        return ((ExerciseDAO) getBaseDAO()).findByNameContainingIgnoreCase(tag.toLowerCase());
     }
 
     @Override

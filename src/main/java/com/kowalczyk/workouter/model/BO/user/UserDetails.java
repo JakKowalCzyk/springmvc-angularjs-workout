@@ -4,15 +4,16 @@ import com.kowalczyk.workouter.model.BO.ModelObject;
 import com.kowalczyk.workouter.model.BO.exercise.Workout;
 import com.kowalczyk.workouter.model.BO.security.Role;
 import com.kowalczyk.workouter.model.BO.user.impl.UserInfo;
-import com.kowalczyk.workouter.model.BO.user.impl.UserNotes;
+import com.kowalczyk.workouter.model.BO.user.impl.UserNote;
 import com.kowalczyk.workouter.model.BO.user.impl.UserWeight;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.*;
 
 /**
@@ -31,12 +32,16 @@ public class UserDetails extends ModelObject {
     private String lastName;
     private Date birthDay;
     private String email;
+    private UserInfo userInfo;
     private List<UserWeight> userWeightList = new ArrayList<>();
-    private List<UserNotes> userNotes = new ArrayList<>();
-    private List<UserInfo> userInfoList = new ArrayList<>();
+    private List<UserNote> userNotes = new ArrayList<>();
     private List<Workout> workouts = new ArrayList<>();
 
     public UserDetails() {
+    }
+
+    @PreRemove
+    public void preRemove() {
     }
 
     public String getLogin() {
@@ -87,7 +92,7 @@ public class UserDetails extends ModelObject {
         this.email = email;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     public Set<Role> getRoles() {
         return roles;
     }
@@ -128,8 +133,8 @@ public class UserDetails extends ModelObject {
         this.accountNonLocked = accountNonLocked;
     }
 
-    @OneToMany(mappedBy = "user")
-    @Cascade(CascadeType.DELETE)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     public List<UserWeight> getUserWeightList() {
         return userWeightList;
     }
@@ -138,28 +143,28 @@ public class UserDetails extends ModelObject {
         this.userWeightList = userWeightList;
     }
 
-    @OneToMany(mappedBy = "user")
-    @Cascade(CascadeType.DELETE)
-    public List<UserNotes> getUserNotes() {
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    public List<UserNote> getUserNotes() {
         return userNotes;
     }
 
-    public void setUserNotes(List<UserNotes> userNotes) {
+    public void setUserNotes(List<UserNote> userNotes) {
         this.userNotes = userNotes;
     }
 
-    @OneToMany(mappedBy = "user")
-    @Cascade(CascadeType.DELETE)
-    public List<UserInfo> getUserInfoList() {
-        return userInfoList;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    public UserInfo getUserInfo() {
+        return userInfo;
     }
 
-    public void setUserInfoList(List<UserInfo> userInfoList) {
-        this.userInfoList = userInfoList;
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
 
-    @OneToMany(mappedBy = "user")
-    @Cascade(CascadeType.DELETE)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     public List<Workout> getWorkouts() {
         return workouts;
     }

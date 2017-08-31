@@ -8,25 +8,34 @@ import javax.persistence.*;
  * Created by JK on 2016-09-17.
  */
 @Entity
-public class UserExercise extends ModelObject {
+public class WorkoutExercise extends ModelObject {
 
     private Exercise exercise;
 
-    private Workout workoutId;
+    private Workout workout;
 
     private int repeat;
 
     private int series;
 
-    public UserExercise() {
+    public WorkoutExercise() {
     }
 
-    public UserExercise(int repeat, int series) {
+    public WorkoutExercise(int repeat, int series) {
         this.repeat = repeat;
         this.series = series;
     }
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @PrePersist
+    public void prePersist() {
+        getWorkout().getWorkoutExercises().add(this);
+    }
+
+    @PreRemove
+    public void preRemove() {
+    }
+
+    @OneToOne
     @JoinColumn(name = "exercise_id")
     public Exercise getExercise() {
         return exercise;
@@ -36,14 +45,14 @@ public class UserExercise extends ModelObject {
         this.exercise = exercise;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "workoutId")
-    public Workout getWorkoutId() {
-        return workoutId;
+    @ManyToOne
+    @JoinColumn(name = "workoutId", nullable = false)
+    public Workout getWorkout() {
+        return workout;
     }
 
-    public void setWorkoutId(Workout workout) {
-        this.workoutId = workout;
+    public void setWorkout(Workout workout) {
+        this.workout = workout;
     }
 
     public int getRepeat() {

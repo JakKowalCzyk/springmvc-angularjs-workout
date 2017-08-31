@@ -2,6 +2,7 @@ package com.kowalczyk.workouter.model.BO.user;
 
 import com.kowalczyk.workouter.model.BO.ModelObject;
 
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
@@ -16,7 +17,7 @@ public abstract class AbstractUserObject extends ModelObject {
     public AbstractUserObject() {
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = UserDetails.class)
     public UserDetails getUser() {
         return user;
     }

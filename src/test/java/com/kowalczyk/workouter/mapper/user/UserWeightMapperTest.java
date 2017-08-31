@@ -23,11 +23,8 @@ public class UserWeightMapperTest extends AbstractMapperTest {
 
     @Test
     public void mapToBO() throws Exception {
-        UserWeightDTO userWeightDTO = new UserWeightDTO();
-        userWeightDTO.setDate(new GregorianCalendar(2012, 12, 2).getTime());
+        UserWeightDTO userWeightDTO = buildUserWeightDTOTest();
         userWeightDTO.setId(2L);
-        userWeightDTO.setWeightKg(56);
-        userWeightDTO.setUserId(getUserDetailsTest().getId());
         UserWeight userWeight = userWeightMapper.mapToBO(userWeightDTO);
         Assert.assertEquals(userWeightDTO.getId(), userWeight.getId());
         assertEquals(userWeightDTO.getDate(), userWeight.getDate());
@@ -43,6 +40,14 @@ public class UserWeightMapperTest extends AbstractMapperTest {
         assertEquals(userWeight.getDate(), userWeightDTO.getDate());
         assertTrue(userWeight.getWeightKg() == userWeightDTO.getWeightKg());
         Assert.assertEquals(userWeight.getUser().getId(), userWeightDTO.getUserId());
+    }
+
+    protected UserWeightDTO buildUserWeightDTOTest() {
+        UserWeightDTO userWeightDTO = new UserWeightDTO();
+        userWeightDTO.setDate(new GregorianCalendar(2012, 12, 2).getTime());
+        userWeightDTO.setWeightKg(56);
+        userWeightDTO.setUserId(getUserDetailsDTOTest("login1", "name1", "lastN1", 2L, 1L).getId());
+        return userWeightDTO;
     }
 
 }
