@@ -8,17 +8,21 @@ import com.kowalczyk.workouter.model.DTO.user.impl.UserInfoDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * Created by JK on 2017-08-10.
  */
 public class UserDetailsControllerTest extends AbstractControllerTest {
 
+    private static final String PATH = "/api/user/details";
     @Autowired
     private UserDetailsController userDetailsController;
     private Long roleId;
@@ -119,6 +123,19 @@ public class UserDetailsControllerTest extends AbstractControllerTest {
 
         deleteUserDetails(userDetailsDTO1);
         deleteUserDetails(userDetailsDTO2);
+
+        UserDetailsDTO userDetailsDTO3 = (getUserDetailsDTOTest("log3", "n1", "la1", roleId));
+        userDetailsDTO3.setEmail("notValid");
+        userDetailsDTO3.setBirthDay(null);
+
+        String message = mvc.perform(post(PATH)
+                .contentType(MediaType.APPLICATION_JSON).content(getContentJson(userDetailsDTO3)))
+                .andExpect(status().isUnprocessableEntity()).andReturn().getResponse().getContentAsString();
+
+        userDetailsDTO3.setEmail("email@email.com");
+        mvc.perform(post(PATH)
+                .contentType(MediaType.APPLICATION_JSON).content(getContentJson(userDetailsDTO3)))
+                .andExpect(status().isOk());
     }
 
     @Test

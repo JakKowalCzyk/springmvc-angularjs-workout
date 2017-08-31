@@ -1,11 +1,13 @@
 package com.kowalczyk.workouter.controllers;
 
+import com.google.gson.Gson;
 import com.kowalczyk.workouter.AbstractTestHelper;
 import com.kowalczyk.workouter.controllers.security.RoleController;
 import com.kowalczyk.workouter.controllers.user.UserDetailsController;
 import com.kowalczyk.workouter.controllers.user.UserInfoController;
 import com.kowalczyk.workouter.enums.ExerciseType;
 import com.kowalczyk.workouter.enums.RoleType;
+import com.kowalczyk.workouter.model.DTO.ObjectDTO;
 import com.kowalczyk.workouter.model.DTO.exercise.ExerciseDTO;
 import com.kowalczyk.workouter.model.DTO.exercise.WorkoutDTO;
 import com.kowalczyk.workouter.model.DTO.exercise.WorkoutExerciseDTO;
@@ -23,7 +25,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,13 +56,17 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
     protected UserInfoController userInfoController;
     @Autowired
     protected RoleController roleController;
+    protected MockMvc mvc;
     @Autowired
     private UserInfoService userInfoService;
     @Autowired
     private UserDetailsService userDetailsService;
+    @Autowired
+    private WebApplicationContext context;
 
     @Before
     public void setUp() throws Exception {
+        mvc = MockMvcBuilders.webAppContextSetup(context).build();
         roleController.addObject(buildRoleDTOTest(RoleType.USER));
         addUserDetailsUserInfo1();
         addUserDetailsUserInfo2();
@@ -137,5 +146,10 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
         workoutExerciseDTO.setRepeat(repeat);
         workoutExerciseDTO.setSeries(series);
         return workoutExerciseDTO;
+    }
+
+    protected String getContentJson(ObjectDTO objectDTO) {
+        Gson gson = new Gson();
+        return gson.toJson(objectDTO);
     }
 }

@@ -2,6 +2,7 @@ package com.kowalczyk.workouter.model.DTO.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kowalczyk.workouter.model.DTO.ObjectDTO;
+import org.hibernate.validator.constraints.Email;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -19,6 +20,7 @@ public class UserDetailsDTO extends ObjectDTO {
     private String firstName;
     private String lastName;
     private Date birthDay;
+    @Email
     private String email;
     private boolean enabled;
     private boolean accountNonExpired;

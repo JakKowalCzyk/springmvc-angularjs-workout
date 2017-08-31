@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
@@ -26,12 +27,12 @@ public class UserDetailsControllerImpl extends ModelControllerImpl<UserDetails, 
     }
 
     @Override
-    public UserDetailsDTO updateObject(@RequestBody UserDetailsDTO model) {
+    public UserDetailsDTO updateObject(@Valid @RequestBody UserDetailsDTO model) {
         return super.updateObject(model);
     }
 
     @Override
-    public UserDetailsDTO addObject(@RequestBody UserDetailsDTO model) {
+    public UserDetailsDTO addObject(@Valid @RequestBody UserDetailsDTO model) {
         return super.addObject(model);
     }
 
