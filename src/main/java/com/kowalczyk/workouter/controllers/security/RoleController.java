@@ -1,12 +1,11 @@
 package com.kowalczyk.workouter.controllers.security;
 
 import com.kowalczyk.workouter.controllers.ModelController;
+import com.kowalczyk.workouter.enums.RoleType;
 import com.kowalczyk.workouter.model.DTO.security.RoleDTO;
 import io.swagger.annotations.Api;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,4 +35,8 @@ public interface RoleController extends ModelController<RoleDTO> {
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     void deleteObject(@PathVariable Long id);
+
+    @ApiOperation(value = "Find role by role type")
+    @RequestMapping(value = "/type", method = RequestMethod.GET)
+    RoleDTO findByRoleType(@RequestParam RoleType roleType);
 }
