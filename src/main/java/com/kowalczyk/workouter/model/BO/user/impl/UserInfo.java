@@ -2,7 +2,7 @@ package com.kowalczyk.workouter.model.BO.user.impl;
 
 import com.kowalczyk.workouter.model.BO.ModelObject;
 import com.kowalczyk.workouter.model.BO.exercise.Exercise;
-import com.kowalczyk.workouter.model.BO.user.UserDetails;
+import com.kowalczyk.workouter.model.BO.user.User;
 import com.kowalczyk.workouter.model.exception.CannotCreateObjectException;
 
 import javax.persistence.*;
@@ -17,7 +17,7 @@ public class UserInfo extends ModelObject {
 
     private Exercise favouriteExercise;
 
-    private UserDetails user;
+    private User user;
 
     public UserInfo() {
     }
@@ -61,11 +61,11 @@ public class UserInfo extends ModelObject {
     }
 
     @OneToOne(cascade = {CascadeType.MERGE})
-    public UserDetails getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserDetails userId) {
+    public void setUser(User userId) {
         this.user = userId;
     }
 

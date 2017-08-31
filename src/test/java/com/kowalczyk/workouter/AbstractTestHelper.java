@@ -2,7 +2,7 @@ package com.kowalczyk.workouter;
 
 import com.kowalczyk.workouter.enums.RoleType;
 import com.kowalczyk.workouter.model.DTO.security.RoleDTO;
-import com.kowalczyk.workouter.model.DTO.user.UserDetailsDTO;
+import com.kowalczyk.workouter.model.DTO.user.UserDTO;
 
 import java.util.GregorianCalendar;
 
@@ -11,38 +11,38 @@ import java.util.GregorianCalendar;
  */
 public abstract class AbstractTestHelper {
 
-    protected UserDetailsDTO getUserDetailsDTOTest(String login, String name, String lastName) {
-        UserDetailsDTO userDetailsDTO = buildUserDetailsDTOTest();
-        userDetailsDTO.setLogin(login);
-        userDetailsDTO.setEmail(login);
-        userDetailsDTO.setFirstName(name);
-        userDetailsDTO.setLogin(lastName);
-        return userDetailsDTO;
+    protected UserDTO getUserDetailsDTOTest(String login, String name, String lastName) {
+        UserDTO userDTO = buildUserDetailsDTOTest();
+        userDTO.setLogin(login);
+        userDTO.setEmail(login);
+        userDTO.setFirstName(name);
+        userDTO.setLogin(lastName);
+        return userDTO;
     }
 
-    protected UserDetailsDTO getUserDetailsDTOTest(String login, String name, String lastName, Long roleId) {
-        UserDetailsDTO userDetailsDTO = getUserDetailsDTOTest(login, name, lastName);
-        userDetailsDTO.getRoles().add(roleId);
-        return userDetailsDTO;
+    protected UserDTO getUserDetailsDTOTest(String login, String name, String lastName, Long roleId) {
+        UserDTO userDTO = getUserDetailsDTOTest(login, name, lastName);
+        userDTO.getRoles().add(roleId);
+        return userDTO;
     }
 
-    protected UserDetailsDTO getUserDetailsDTOTest(String login, String name, String lastName, Long roleId, Long userId) {
-        UserDetailsDTO userDetailsDTO = getUserDetailsDTOTest(login, name, lastName);
-        userDetailsDTO.setId(userId);
-        userDetailsDTO.getRoles().add(roleId);
-        return userDetailsDTO;
+    protected UserDTO getUserDetailsDTOTest(String login, String name, String lastName, Long roleId, Long userId) {
+        UserDTO userDTO = getUserDetailsDTOTest(login, name, lastName);
+        userDTO.setId(userId);
+        userDTO.getRoles().add(roleId);
+        return userDTO;
     }
 
 
-    protected UserDetailsDTO buildUserDetailsDTOTest() {
-        UserDetailsDTO userDetailsDTO = new UserDetailsDTO();
-        userDetailsDTO.setBirthDay(new GregorianCalendar(2012, 3, 12).getTime());
-        userDetailsDTO.setHashedPassword("pass");
-        userDetailsDTO.setEnabled(true);
-        userDetailsDTO.setAccountNonLocked(true);
-        userDetailsDTO.setAccountNonExpired(true);
-        userDetailsDTO.setCredentialsNonExpired(true);
-        return userDetailsDTO;
+    protected UserDTO buildUserDetailsDTOTest() {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setBirthDay(new GregorianCalendar(2012, 3, 12).getTime());
+        userDTO.setHashedPassword("pass");
+        userDTO.setEnabled(true);
+        userDTO.setAccountNonLocked(true);
+        userDTO.setAccountNonExpired(true);
+        userDTO.setCredentialsNonExpired(true);
+        return userDTO;
     }
 
     protected RoleDTO getRoleDTOTest(RoleType roleType) {

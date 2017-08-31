@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * Created by JK on 2017-04-04.
  */
-public class UserDetailsDTO extends ObjectDTO {
+public class UserDTO extends ObjectDTO {
 
     private String login;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -27,7 +27,7 @@ public class UserDetailsDTO extends ObjectDTO {
     private boolean credentialsNonExpired;
     private boolean accountNonLocked;
 
-    public UserDetailsDTO() {
+    public UserDTO() {
     }
 
     public String getLogin() {

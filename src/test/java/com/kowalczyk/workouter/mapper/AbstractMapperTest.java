@@ -7,15 +7,15 @@ import com.kowalczyk.workouter.model.BO.exercise.Exercise;
 import com.kowalczyk.workouter.model.BO.exercise.Workout;
 import com.kowalczyk.workouter.model.BO.exercise.WorkoutExercise;
 import com.kowalczyk.workouter.model.BO.security.Role;
-import com.kowalczyk.workouter.model.BO.user.UserDetails;
+import com.kowalczyk.workouter.model.BO.user.User;
 import com.kowalczyk.workouter.model.BO.user.impl.UserWeight;
 import com.kowalczyk.workouter.services.exercise.ExerciseService;
 import com.kowalczyk.workouter.services.exercise.WorkoutExerciseService;
 import com.kowalczyk.workouter.services.exercise.WorkoutService;
 import com.kowalczyk.workouter.services.security.RoleService;
-import com.kowalczyk.workouter.services.user.UserDetailsService;
 import com.kowalczyk.workouter.services.user.UserInfoService;
 import com.kowalczyk.workouter.services.user.UserNotesService;
+import com.kowalczyk.workouter.services.user.UserService;
 import com.kowalczyk.workouter.services.user.UserWeightService;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 public abstract class AbstractMapperTest extends AbstractTestHelper {
 
     @MockBean
-    protected UserDetailsService userDetailsService;
+    protected UserService userService;
     @MockBean
     private WorkoutExerciseService workoutExerciseService;
     @MockBean
@@ -54,24 +54,25 @@ public abstract class AbstractMapperTest extends AbstractTestHelper {
 
     @Before
     public void setUp() throws Exception {
-        Mockito.when(userDetailsService.getObject(Mockito.anyLong())).thenReturn(getUserDetailsTest());
+        Mockito.when(userService.getObject(Mockito.anyLong())).thenReturn(getUserDetailsTest());
     }
-    protected UserDetails getUserDetailsTest() {
-        UserDetails userDetails = new UserDetails();
-        userDetails.setLogin("log");
-        userDetails.setHashedPassword("123");
-        userDetails.setEnabled(true);
-        userDetails.setAccountNonExpired(true);
-        userDetails.setAccountNonLocked(true);
-        userDetails.setCredentialsNonExpired(true);
-        userDetails.setEnabled(true);
-        userDetails.setFirstName("name");
-        userDetails.setLastName("lastname");
-        userDetails.setBirthDay(new GregorianCalendar(2012, 2, 14).getTime());
-        userDetails.setEmail("email");
-        userDetails.setId(1L);
-        userDetails.setRoles(Arrays.asList(getUserRoleTest()).stream().collect(Collectors.toSet()));
-        return userDetails;
+
+    protected User getUserDetailsTest() {
+        User user = new User();
+        user.setLogin("log");
+        user.setHashedPassword("123");
+        user.setEnabled(true);
+        user.setAccountNonExpired(true);
+        user.setAccountNonLocked(true);
+        user.setCredentialsNonExpired(true);
+        user.setEnabled(true);
+        user.setFirstName("name");
+        user.setLastName("lastname");
+        user.setBirthDay(new GregorianCalendar(2012, 2, 14).getTime());
+        user.setEmail("email");
+        user.setId(1L);
+        user.setRoles(Arrays.asList(getUserRoleTest()).stream().collect(Collectors.toSet()));
+        return user;
     }
 
     protected Role getUserRoleTest() {

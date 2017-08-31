@@ -7,7 +7,7 @@ import com.kowalczyk.workouter.model.DTO.exercise.ExerciseDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserInfoDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserWeightDTO;
 import com.kowalczyk.workouter.model.exception.NotFoundException;
-import com.kowalczyk.workouter.services.user.UserDetailsService;
+import com.kowalczyk.workouter.services.user.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +29,9 @@ public class UserInfoControllerTest extends AbstractControllerTest {
     @Autowired
     private ExerciseController exerciseController;
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserService userService;
     @Autowired
-    private UserDetailsController userDetailsController;
+    private UserController userController;
 
     @Override
     @Before
@@ -52,14 +52,14 @@ public class UserInfoControllerTest extends AbstractControllerTest {
         assertEquals(userInfoDTO.getId(), userInfoDTO1.getId());
         assertEquals(userInfoDTO.getFavouriteExerciseId(), userInfoDTO1.getFavouriteExerciseId());
         assertEquals(userWeightDTO.getId(), userInfoDTO1.getActualWeightId());
-        assertTrue(userDetailsService.getObject(userInfoDTO1.getUserId()).getUserInfo().getFavouriteExercise().getId().equals(userInfoDTO1.getFavouriteExerciseId()));
+        assertTrue(userService.getObject(userInfoDTO1.getUserId()).getUserInfo().getFavouriteExercise().getId().equals(userInfoDTO1.getFavouriteExerciseId()));
 
         deleteUserInfo(userInfoDTO);
 
         UserInfoDTO userInfoDTO2 = userInfoController.addObject(getUserInfoDTO(userDetailsId1));
-        assertTrue(userDetailsService.getObject(userInfoDTO2.getUserId()).getUserInfo().getId().equals(userInfoDTO2.getId()));
+        assertTrue(userService.getObject(userInfoDTO2.getUserId()).getUserInfo().getId().equals(userInfoDTO2.getId()));
 
-        userDetailsController.deleteObject(userInfoDTO2.getUserId());
+        userController.deleteObject(userInfoDTO2.getUserId());
         assertTrue(userInfoController.findAll().isEmpty());
     }
 
@@ -80,7 +80,7 @@ public class UserInfoControllerTest extends AbstractControllerTest {
         userInfoDTO.setFavouriteExerciseId(exerciseDTO1.getId());
         UserInfoDTO updatedUserInfoDTO = userInfoController.updateObject(userInfoDTO);
         assertEquals(updatedUserInfoDTO.getFavouriteExerciseId(), exerciseDTO1.getId());
-        assertTrue(userDetailsService.getObject(updatedUserInfoDTO.getUserId()).getUserInfo().getFavouriteExercise().getId().equals(updatedUserInfoDTO.getFavouriteExerciseId()));
+        assertTrue(userService.getObject(updatedUserInfoDTO.getUserId()).getUserInfo().getFavouriteExercise().getId().equals(updatedUserInfoDTO.getFavouriteExerciseId()));
 
 
         UserWeightDTO userWeightDTO1 = userWeightController.addObject(getUserWeightDTOTest(100, new GregorianCalendar()));

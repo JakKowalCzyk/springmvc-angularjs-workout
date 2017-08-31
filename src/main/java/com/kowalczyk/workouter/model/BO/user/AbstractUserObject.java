@@ -12,17 +12,17 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class AbstractUserObject extends ModelObject {
 
-    private UserDetails user;
+    private User user;
 
     public AbstractUserObject() {
     }
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = UserDetails.class)
-    public UserDetails getUser() {
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserDetails userId) {
+    public void setUser(User userId) {
         this.user = userId;
     }
 }

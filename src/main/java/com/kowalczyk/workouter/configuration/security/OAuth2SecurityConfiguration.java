@@ -2,7 +2,7 @@ package com.kowalczyk.workouter.configuration.security;
 
 import com.kowalczyk.workouter.configuration.security.social.FacebookConnectionSignUp;
 import com.kowalczyk.workouter.configuration.security.social.FacebookSignInAdapter;
-import com.kowalczyk.workouter.services.user.UserDetailsService;
+import com.kowalczyk.workouter.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,7 +40,7 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private ClientDetailsService clientDetailsService;
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserService userService;
     @Autowired
     private DataSource dataSource;
     @Autowired
@@ -52,7 +52,7 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+        authenticationManagerBuilder.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
     }
 
     @Bean

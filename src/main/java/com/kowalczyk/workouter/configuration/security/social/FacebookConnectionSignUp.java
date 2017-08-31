@@ -1,14 +1,13 @@
 package com.kowalczyk.workouter.configuration.security.social;
 
 import com.kowalczyk.workouter.enums.RoleType;
-import com.kowalczyk.workouter.model.BO.user.UserDetails;
+import com.kowalczyk.workouter.model.BO.user.User;
 import com.kowalczyk.workouter.services.security.RoleService;
-import com.kowalczyk.workouter.services.user.UserDetailsService;
+import com.kowalczyk.workouter.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
@@ -20,7 +19,7 @@ import java.util.Random;
 public class FacebookConnectionSignUp implements ConnectionSignUp{
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserService userService;
     @Autowired
     private RoleService roleService;
 
@@ -28,22 +27,22 @@ public class FacebookConnectionSignUp implements ConnectionSignUp{
     public String execute(Connection<?> connection) {
 
         Facebook facebook = (Facebook) connection.getApi();
-        User userProfile = facebook.fetchObject("me", User.class, "id", "email", "first_name", "last_name");
-        UserDetails userDetails = new UserDetails();
-        userDetails.setFirstName(userProfile.getFirstName());
-        userDetails.setLastName(userProfile.getLastName());
+        org.springframework.social.facebook.api.User userProfile = facebook.fetchObject("me", org.springframework.social.facebook.api.User.class, "id", "email", "first_name", "last_name");
+        User user = new User();
+        user.setFirstName(userProfile.getFirstName());
+        user.setLastName(userProfile.getLastName());
 
         Random random = new Random();
-        userDetails.setHashedPassword(Long.toHexString(Double.doubleToLongBits(random.nextInt(8))));
+        user.setHashedPassword(Long.toHexString(Double.doubleToLongBits(random.nextInt(8))));
 
-        userDetails.setAccountNonExpired(true);
-        userDetails.setAccountNonLocked(true);
-        userDetails.setCredentialsNonExpired(true);
-        userDetails.setEnabled(true);
-        userDetails.setEmail(userProfile.getEmail());
-        userDetails.setLogin(userProfile.getId());
-        userDetails.getRoles().add(roleService.findByRoleType(RoleType.USER));
-        userDetailsService.addObject(userDetails);
-        return userDetails.getLogin();
+        user.setAccountNonExpired(true);
+        user.setAccountNonLocked(true);
+        user.setCredentialsNonExpired(true);
+        user.setEnabled(true);
+        user.setEmail(userProfile.getEmail());
+        user.setLogin(userProfile.getId());
+        user.getRoles().add(roleService.findByRoleType(RoleType.USER));
+        userService.addObject(user);
+        return user.getLogin();
     }
 }

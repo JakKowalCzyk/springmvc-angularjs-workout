@@ -48,10 +48,10 @@ public class WorkoutControllerTest extends AbstractControllerTest {
         WorkoutDTO workoutDTO3 = workoutController.addObject(createWorkoutDTOTest(new GregorianCalendar(2012, 9, 12).getTime(), userDetailsId1));
         WorkoutDTO workoutDTO4 = workoutController.addObject(createWorkoutDTOTest(new GregorianCalendar(2010, 9, 12).getTime(), userDetailsId1));
         WorkoutDTO workoutDTO5 = workoutController.addObject(createWorkoutDTOTest(new GregorianCalendar(2010, 9, 12).getTime(), userDetailsId2));
-        userDetailsController.deleteObject(workoutDTO3.getUserId());
+        userController.deleteObject(workoutDTO3.getUserId());
         assertEquals(1, workoutController.findAll().size());
 
-        userDetailsController.deleteObject(workoutDTO5.getUserId());
+        userController.deleteObject(workoutDTO5.getUserId());
         assertTrue(workoutController.findAll().isEmpty());
     }
 

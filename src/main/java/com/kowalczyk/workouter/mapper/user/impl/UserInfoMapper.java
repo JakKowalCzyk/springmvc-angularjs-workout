@@ -4,7 +4,7 @@ import com.kowalczyk.workouter.mapper.impl.ModelMapperImpl;
 import com.kowalczyk.workouter.model.BO.user.impl.UserInfo;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserInfoDTO;
 import com.kowalczyk.workouter.services.exercise.ExerciseService;
-import com.kowalczyk.workouter.services.user.UserDetailsService;
+import com.kowalczyk.workouter.services.user.UserService;
 import com.kowalczyk.workouter.services.user.UserWeightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ public class UserInfoMapper extends ModelMapperImpl<UserInfo, UserInfoDTO> {
     @Autowired
     private ExerciseService exerciseService;
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserService userService;
 
     @Override
     protected UserInfo buildBO(UserInfoDTO objectDTO) {
@@ -31,7 +31,7 @@ public class UserInfoMapper extends ModelMapperImpl<UserInfo, UserInfoDTO> {
         if (objectDTO.getFavouriteExerciseId() != null) {
             userInfo.setFavouriteExercise(exerciseService.getObject(objectDTO.getFavouriteExerciseId()));
         }
-        userInfo.setUser(userDetailsService.getObject(objectDTO.getUserId()));
+        userInfo.setUser(userService.getObject(objectDTO.getUserId()));
         return userInfo;
     }
 

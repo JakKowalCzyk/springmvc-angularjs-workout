@@ -29,9 +29,9 @@ public class UserNoteControllerTest extends AbstractControllerTest {
         userNoteDTO = userNotesController.addObject(createUserNotesTest(new GregorianCalendar().getTime(), "note11", userDetailsId1));
         UserNoteDTO userNotesDT12 = userNotesController.addObject(createUserNotesTest(new GregorianCalendar().getTime(), "note12", userDetailsId1));
         UserNoteDTO userNoteDTO2 = userNotesController.addObject(createUserNotesTest(new GregorianCalendar().getTime(), "note2", userDetailsId2));
-        userDetailsController.deleteObject(userNoteDTO.getUserId());
-        userDetailsController.deleteObject(userNoteDTO2.getUserId());
-        assertFalse(userDetailsController.isExist(userNoteDTO2.getUserId()));
+        userController.deleteObject(userNoteDTO.getUserId());
+        userController.deleteObject(userNoteDTO2.getUserId());
+        assertFalse(userController.isExist(userNoteDTO2.getUserId()));
         assertEquals(0, userNotesController.findAll().size());
     }
 
