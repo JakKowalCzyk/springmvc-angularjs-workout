@@ -16,13 +16,13 @@ import com.kowalczyk.workouter.model.DTO.user.UserDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserInfoDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserNoteDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserWeightDTO;
-import com.kowalczyk.workouter.services.user.UserInfoService;
-import com.kowalczyk.workouter.services.user.UserService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -50,19 +50,19 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
 
     protected Long userDetailsId1;
     protected Long userDetailsId2;
+    protected MockMvc mvc;
+
     @Autowired
     protected UserController userController;
     @Autowired
     protected UserInfoController userInfoController;
     @Autowired
     protected RoleController roleController;
-    protected MockMvc mvc;
-    @Autowired
-    private UserInfoService userInfoService;
-    @Autowired
-    private UserService userService;
     @Autowired
     private WebApplicationContext context;
+
+    @MockBean
+    private JavaMailSender javaMailSender;
 
     @Before
     public void setUp() throws Exception {
