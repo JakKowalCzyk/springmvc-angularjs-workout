@@ -9,6 +9,7 @@ import com.kowalczyk.workouter.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -59,5 +60,10 @@ public class UserControllerImpl extends ModelControllerImpl<User, UserDTO> imple
     @Override
     public UserDTO getByLogin(@PathVariable String login) {
         return getModelMapper().mapToDTO(((UserService) getModelService()).getByLogin(login));
+    }
+
+    @Override
+    public void logoutUser(@RequestParam String token) {
+        ((UserService) getModelService()).revokeToken(token);
     }
 }

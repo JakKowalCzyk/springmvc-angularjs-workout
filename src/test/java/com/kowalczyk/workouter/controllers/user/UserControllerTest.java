@@ -128,12 +128,12 @@ public class UserControllerTest extends AbstractControllerTest {
         userDTO3.setEmail("notValid");
         userDTO3.setBirthDay(null);
 
-        String message = mvc.perform(post(PATH)
+        String message = mockMvc.perform(post(PATH)
                 .contentType(MediaType.APPLICATION_JSON).content(getContentJson(userDTO3)))
                 .andExpect(status().isUnprocessableEntity()).andReturn().getResponse().getContentAsString();
 
         userDTO3.setEmail("email@email.com");
-        mvc.perform(post(PATH)
+        mockMvc.perform(post(PATH)
                 .contentType(MediaType.APPLICATION_JSON).content(getContentJson(userDTO3)))
                 .andExpect(status().isOk());
     }

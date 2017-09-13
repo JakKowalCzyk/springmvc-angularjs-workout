@@ -1,5 +1,8 @@
 package com.kowalczyk.workouter.controllers;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.kowalczyk.workouter.AbstractTestHelper;
 import com.kowalczyk.workouter.controllers.security.RoleController;
@@ -23,11 +26,14 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
@@ -38,6 +44,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.Assert.assertFalse;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 /**
  * Created by JK on 2017-02-01.
@@ -47,26 +54,30 @@ import static org.junit.Assert.assertFalse;
 @Transactional
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public abstract class AbstractControllerTest extends AbstractTestHelper {
-
+    private static final String CLIENT_SECRET = "secret";
+    private static final String WORKOUT_CLIENT = "workout_client";
     protected Long userDetailsId1;
     protected Long userDetailsId2;
+    protected MockMvc mockMvc;
+    protected MockMvc mockMvcSecured;
     @Autowired
     protected UserController userController;
     @Autowired
     protected UserInfoController userInfoController;
     @Autowired
     protected RoleController roleController;
-    protected MockMvc mvc;
     @Autowired
     private UserInfoService userInfoService;
     @Autowired
     private UserService userService;
     @Autowired
     private WebApplicationContext context;
-
+    @Autowired
+    private FilterChainProxy springSecurityFilterChain;
     @Before
     public void setUp() throws Exception {
-        mvc = MockMvcBuilders.webAppContextSetup(context).build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+        mockMvcSecured = MockMvcBuilders.webAppContextSetup(context).addFilter(springSecurityFilterChain).build();
         roleController.addObject(buildRoleDTOTest(RoleType.USER));
         addUserDetailsUserInfo1();
         addUserDetailsUserInfo2();
@@ -151,5 +162,27 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
     protected String getContentJson(ObjectDTO objectDTO) {
         Gson gson = new Gson();
         return gson.toJson(objectDTO);
+    }
+
+    protected String getAccessToken(String username, String password) throws Exception {
+        MockHttpServletResponse response = mockMvcSecured
+                .perform(post("/oauth/token")
+                        .header("Authorization", "Basic "
+                                + new String(Base64Utils.encode((WORKOUT_CLIENT + CLIENT_SECRET)
+                                .getBytes())))
+                        .param("username", username)
+                        .param("password", password)
+                        .param("grant_type", "password"))
+                .andReturn().getResponse();
+
+        return new ObjectMapper()
+                .readValue(response.getContentAsByteArray(), OAuthToken.class)
+                .accessToken;
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    private static class OAuthToken {
+        @JsonProperty("access_token")
+        public String accessToken;
     }
 }

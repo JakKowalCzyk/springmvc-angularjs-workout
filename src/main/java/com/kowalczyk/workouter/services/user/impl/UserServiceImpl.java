@@ -13,6 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,12 +28,14 @@ public class UserServiceImpl extends ModelServiceImpl<User> implements UserServi
 
     private UserInfoService userInfoService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private TokenStore tokenStore;
 
     @Autowired
-    public UserServiceImpl(UserDAO baseDao, UserInfoService userInfoService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserServiceImpl(UserDAO baseDao, UserInfoService userInfoService, BCryptPasswordEncoder bCryptPasswordEncoder, TokenStore tokenStore) {
         super(baseDao);
         this.userInfoService = userInfoService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.tokenStore = tokenStore;
     }
 
     @Override
@@ -73,6 +76,11 @@ public class UserServiceImpl extends ModelServiceImpl<User> implements UserServi
     @Override
     public User getByLogin(String login) {
         return ((UserDAO) getBaseDAO()).findByLogin(login);
+    }
+
+    @Override
+    public void revokeToken(String token) {
+        tokenStore.removeAccessToken(tokenStore.readAccessToken(token));
     }
 
     @Override

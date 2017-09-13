@@ -22,8 +22,8 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter{
     private static final String RESOURCE_ID = "workout_api";
     private static final String CLIENT_SECRET = "secret";
-    private static final String REALM = "WORKOUT_REALM";
     private static final String WORKOUT_CLIENT = "workout_client";
+    private static final String REALM = "WORKOUT_REALM";
     @Autowired
     private TokenStore tokenStore;
     @Autowired
@@ -45,11 +45,11 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient(WORKOUT_CLIENT)
+                .secret(CLIENT_SECRET)
                 .resourceIds(RESOURCE_ID)
                 .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
                 .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
                 .scopes("read", "write", "trust")
-                .secret(CLIENT_SECRET)
                 .accessTokenValiditySeconds(Integer.valueOf(accessTokenValidity))
                 .refreshTokenValiditySeconds(Integer.valueOf(refreshTokenValidity));
     }
