@@ -38,6 +38,10 @@ public class UserServiceImpl extends ModelServiceImpl<User> implements UserServi
     @Override
     public User addObject(User baseModel) {
         hashUserPassword(baseModel);
+        baseModel.setAccountNonExpired(false);
+        baseModel.setCredentialsNonExpired(false);
+        baseModel.setEnabled(false);
+        baseModel.setAccountNonLocked(false);
         User user = super.addObject(baseModel);
         createNewUserInfo(user);
         return user;
