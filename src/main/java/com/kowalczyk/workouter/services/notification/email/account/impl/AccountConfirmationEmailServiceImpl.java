@@ -20,17 +20,7 @@ public class AccountConfirmationEmailServiceImpl extends GenericEmailServiceImpl
 
     @Override
     public void sendEmailToUserWithConfirmationLink(UserConfirmationToken userConfirmationToken, String uri) {
-        String url = prepareUri(userConfirmationToken, uri);
+
     }
 
-    private String prepareUri(UserConfirmationToken userConfirmationToken, String uri) {
-        String enryptedToken = encryptToken(userConfirmationToken);
-
-        return "";
-    }
-
-    private String encryptToken(UserConfirmationToken userConfirmationToken) {
-
-        return "";
-    }
 }
