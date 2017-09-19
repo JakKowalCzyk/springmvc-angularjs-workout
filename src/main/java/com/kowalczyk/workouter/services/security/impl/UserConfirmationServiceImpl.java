@@ -6,13 +6,12 @@ import com.kowalczyk.workouter.model.BO.user.User;
 import com.kowalczyk.workouter.model.exception.ConfirmationAccountException;
 import com.kowalczyk.workouter.services.impl.ModelServiceImpl;
 import com.kowalczyk.workouter.services.notification.email.account.AccountConfirmationEmailService;
+import com.kowalczyk.workouter.services.security.DecryptionService;
 import com.kowalczyk.workouter.services.security.UserConfirmationService;
-import com.kowalczyk.workouter.services.security.helper.DecryptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -22,20 +21,39 @@ import java.util.UUID;
 public class UserConfirmationServiceImpl extends ModelServiceImpl<UserConfirmationToken> implements UserConfirmationService {
 
     private AccountConfirmationEmailService accountConfirmationEmailService;
+    private DecryptionService decryptionService;
 
     @Autowired
-    public UserConfirmationServiceImpl(UserConfirmationTokenDAO baseDAO, AccountConfirmationEmailService accountConfirmationEmailService) {
+    public UserConfirmationServiceImpl(UserConfirmationTokenDAO baseDAO, AccountConfirmationEmailService accountConfirmationEmailService, DecryptionService decryptionService) {
         super(baseDAO);
         this.accountConfirmationEmailService = accountConfirmationEmailService;
+        this.decryptionService = decryptionService;
     }
 
     @Override
     public void startConfirmationProcess(User user, String uri) {
+        UserConfirmationToken userConfirmationToken = getUserConfirmationToken(user);
+        String preparedUrl = prepareUri(userConfirmationToken, uri);
+        sendEmailToUserWithConfirmationLink(userConfirmationToken, preparedUrl);
+    }
+
+    @Override
+    public void deleteByUser(User user) {
+        Optional<UserConfirmationToken> tokenOptional = Optional.ofNullable(findByUser(user));
+        tokenOptional.ifPresent(userConfirmationToken -> super.deleteObject(findByUser(user)));
+    }
+
+    @Override
+    public UserConfirmationToken findByUser(User user) {
+        return ((UserConfirmationTokenDAO) getBaseDAO()).findByUser(user);
+    }
+
+    public UserConfirmationToken getUserConfirmationToken(User user) {
         UserConfirmationToken userConfirmationToken = new UserConfirmationToken();
         userConfirmationToken.setUser(user);
         userConfirmationToken.setToken(UUID.randomUUID().toString());
-        String preparedUrl = prepareUri(userConfirmationToken, uri);
-        sendEmailToUserWithConfirmationLink(userConfirmationToken, preparedUrl);
+        addObject(userConfirmationToken);
+        return userConfirmationToken;
     }
 
     private void sendEmailToUserWithConfirmationLink(UserConfirmationToken userConfirmationToken, String uri) {
@@ -48,18 +66,15 @@ public class UserConfirmationServiceImpl extends ModelServiceImpl<UserConfirmati
     }
 
 
-    private String prepareUri(UserConfirmationToken userConfirmationToken, String uri) {
-        String encryptedToken = null;
-        try {
-            encryptedToken = encryptToken(userConfirmationToken);
-        } catch (GeneralSecurityException | IOException e) {
-            throw new ConfirmationAccountException(userConfirmationToken.getUser().getId());
-        }
-        return String.format("%s/%s/%s", uri, userConfirmationToken.getUser().getId(), encryptedToken);
+    public String prepareUri(UserConfirmationToken userConfirmationToken, String uri) {
+        return String.format("%s/%s/%s", uri, userConfirmationToken.getUser().getId(), encryptToken(userConfirmationToken));
     }
 
-    private String encryptToken(UserConfirmationToken userConfirmationToken) throws GeneralSecurityException, IOException {
-        return new DecryptionHelper()
-                .encryptWithPublicKey(userConfirmationToken.getToken(), "C:/ssh/workouter_priv.jks", "workouter-api", "workouter");
+    public String encryptToken(UserConfirmationToken userConfirmationToken) {
+        try {
+            return new String(decryptionService.encrypt(decryptionService.getPublicKey(), userConfirmationToken.getToken().getBytes()));
+        } catch (Exception e) {
+            throw new ConfirmationAccountException(userConfirmationToken.getUser().getId());
+        }
     }
 }

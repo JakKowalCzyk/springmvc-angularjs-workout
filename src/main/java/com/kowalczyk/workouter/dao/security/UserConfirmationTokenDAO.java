@@ -2,6 +2,7 @@ package com.kowalczyk.workouter.dao.security;
 
 import com.kowalczyk.workouter.dao.BaseDAO;
 import com.kowalczyk.workouter.model.BO.security.UserConfirmationToken;
+import com.kowalczyk.workouter.model.BO.user.User;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,4 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserConfirmationTokenDAO extends BaseDAO<UserConfirmationToken> {
+
+    UserConfirmationToken findByUser(User user);
 }

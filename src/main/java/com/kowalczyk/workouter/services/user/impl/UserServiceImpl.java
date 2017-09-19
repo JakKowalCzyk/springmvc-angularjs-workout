@@ -91,6 +91,7 @@ public class UserServiceImpl extends ModelServiceImpl<User> implements UserServi
     public void deleteObject(Long id) {
         User user = super.getObject(id);
         deleteUserInfoBeforeUserIfNotNull(user);
+        deleteConfirmationToken(user);
         super.deleteObject(id);
     }
 
@@ -98,5 +99,9 @@ public class UserServiceImpl extends ModelServiceImpl<User> implements UserServi
         if (user.getUserInfo() != null) {
             userInfoService.deleteObject(user.getUserInfo());
         }
+    }
+
+    private void deleteConfirmationToken(User user) {
+        userConfirmationService.deleteByUser(user);
     }
 }

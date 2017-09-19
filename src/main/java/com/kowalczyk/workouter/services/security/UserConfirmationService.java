@@ -11,4 +11,7 @@ public interface UserConfirmationService extends ModelService<UserConfirmationTo
 
     void startConfirmationProcess(User user, String uri);
 
+    void deleteByUser(User user);
+
+    UserConfirmationToken findByUser(User user);
 }
