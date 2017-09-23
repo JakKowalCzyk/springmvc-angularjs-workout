@@ -5,6 +5,7 @@ import com.kowalczyk.workouter.model.BO.security.Role;
 import com.kowalczyk.workouter.model.BO.user.User;
 import com.kowalczyk.workouter.model.BO.user.impl.UserInfo;
 import com.kowalczyk.workouter.services.impl.ModelServiceImpl;
+import com.kowalczyk.workouter.services.security.UserConfirmationService;
 import com.kowalczyk.workouter.services.user.UserInfoService;
 import com.kowalczyk.workouter.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +28,23 @@ public class UserServiceImpl extends ModelServiceImpl<User> implements UserServi
 
     private UserInfoService userInfoService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private UserConfirmationService userConfirmationService;
 
     @Autowired
-    public UserServiceImpl(UserDAO baseDao, UserInfoService userInfoService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserServiceImpl(UserDAO baseDao, UserInfoService userInfoService, BCryptPasswordEncoder bCryptPasswordEncoder, UserConfirmationService userConfirmationService) {
         super(baseDao);
         this.userInfoService = userInfoService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.userConfirmationService = userConfirmationService;
     }
 
     @Override
     public User addObject(User baseModel) {
         hashUserPassword(baseModel);
+        baseModel.setAccountNonExpired(false);
+        baseModel.setCredentialsNonExpired(false);
+        baseModel.setEnabled(false);
+        baseModel.setAccountNonLocked(false);
         User user = super.addObject(baseModel);
         createNewUserInfo(user);
         return user;
@@ -76,9 +83,15 @@ public class UserServiceImpl extends ModelServiceImpl<User> implements UserServi
     }
 
     @Override
+    public void confirmAccount(String uri, Long userId) {
+        userConfirmationService.startConfirmationProcess(super.getObject(userId), uri);
+    }
+
+    @Override
     public void deleteObject(Long id) {
         User user = super.getObject(id);
         deleteUserInfoBeforeUserIfNotNull(user);
+        deleteConfirmationToken(user);
         super.deleteObject(id);
     }
 
@@ -86,5 +99,9 @@ public class UserServiceImpl extends ModelServiceImpl<User> implements UserServi
         if (user.getUserInfo() != null) {
             userInfoService.deleteObject(user.getUserInfo());
         }
+    }
+
+    private void deleteConfirmationToken(User user) {
+        userConfirmationService.deleteByUser(user);
     }
 }

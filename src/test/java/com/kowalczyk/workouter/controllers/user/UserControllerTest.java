@@ -2,12 +2,18 @@ package com.kowalczyk.workouter.controllers.user;
 
 import com.kowalczyk.workouter.controllers.AbstractControllerTest;
 import com.kowalczyk.workouter.enums.RoleType;
+import com.kowalczyk.workouter.model.BO.security.UserConfirmationToken;
 import com.kowalczyk.workouter.model.DTO.security.RoleDTO;
 import com.kowalczyk.workouter.model.DTO.user.UserDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserInfoDTO;
+import com.kowalczyk.workouter.services.notification.email.account.AccountConfirmationEmailService;
+import com.kowalczyk.workouter.services.security.UserConfirmationService;
+import com.kowalczyk.workouter.services.user.UserService;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 
 import java.util.Arrays;
@@ -23,8 +29,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class UserControllerTest extends AbstractControllerTest {
 
     private static final String PATH = "/api/user";
+
     @Autowired
     private UserController userController;
+    @Autowired
+    private UserConfirmationService userConfirmationService;
+    @Autowired
+    private UserService userService;
+    @MockBean
+    private AccountConfirmationEmailService accountConfirmationEmailService;
+
     private Long roleId;
 
     @Override
@@ -33,6 +47,7 @@ public class UserControllerTest extends AbstractControllerTest {
         super.setUp();
         userController.findAll().forEach(userDetailsDTO -> userController.deleteObject(userDetailsDTO.getId()));
         roleId = roleController.findAll().stream().findAny().get().getId();
+        Mockito.doNothing().when(accountConfirmationEmailService).sendEmailToUserWithConfirmationLink(Mockito.any(), Mockito.anyString());
     }
 
     @Test
@@ -191,6 +206,16 @@ public class UserControllerTest extends AbstractControllerTest {
         deleteUserDetails(userDTO1);
         deleteUserDetails(userDTO2);
         deleteUserDetails(userDTO3);
+    }
+
+    @Test
+    public void testDelete() throws Exception {
+        UserDTO userDTO1 = userController.addObject(getUserDetailsDTOTest("log1", "n1", "la1", roleId));
+        userController.startConfirmationProcedure("new", userDTO1.getId());
+        UserConfirmationToken userConfirmationToken = userConfirmationService.findByUser(userService.getObject(userDTO1.getId()));
+        assertTrue(userConfirmationService.isExist(userConfirmationToken.getId()));
+        deleteUserDetails(userDTO1);
+        assertFalse(userConfirmationService.isExist(userConfirmationToken.getId()));
     }
 
 }

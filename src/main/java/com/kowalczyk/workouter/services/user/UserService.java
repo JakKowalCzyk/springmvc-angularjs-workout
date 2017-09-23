@@ -9,4 +9,6 @@ import com.kowalczyk.workouter.services.ModelService;
 public interface UserService extends org.springframework.security.core.userdetails.UserDetailsService, ModelService<User> {
 
     User getByLogin(String login);
+
+    void confirmAccount(String uri, Long userId);
 }
