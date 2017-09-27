@@ -83,8 +83,23 @@ public class UserServiceImpl extends ModelServiceImpl<User> implements UserServi
     }
 
     @Override
-    public void confirmAccount(String uri, Long userId) {
+    public void startConfirmationProcedure(String uri, Long userId) {
         userConfirmationService.startConfirmationProcess(super.getObject(userId), uri);
+    }
+
+    @Override
+    public boolean confirmAccount(Long id, String token) {
+        User userToBeConfirmed = super.getObject(id);
+        if (!userConfirmationService.isConfirmationAllowed(userToBeConfirmed, token)) {
+            deleteObject(userToBeConfirmed);
+            return false;
+        }
+        userToBeConfirmed.setAccountNonExpired(true);
+        userToBeConfirmed.setAccountNonLocked(true);
+        userToBeConfirmed.setCredentialsNonExpired(true);
+        userToBeConfirmed.setEnabled(true);
+        updateObject(userToBeConfirmed);
+        return true;
     }
 
     @Override

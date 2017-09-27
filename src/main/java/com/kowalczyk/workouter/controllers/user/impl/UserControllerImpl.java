@@ -64,6 +64,11 @@ public class UserControllerImpl extends ModelControllerImpl<User, UserDTO> imple
 
     @Override
     public void startConfirmationProcedure(@RequestParam String uri, @PathVariable Long id) {
-        ((UserService) getModelService()).confirmAccount(uri, id);
+        ((UserService) getModelService()).startConfirmationProcedure(uri, id);
+    }
+
+    @Override
+    public boolean confirmAccount(@PathVariable Long id, @PathVariable String token) {
+        return ((UserService) getModelService()).confirmAccount(id, token);
     }
 }

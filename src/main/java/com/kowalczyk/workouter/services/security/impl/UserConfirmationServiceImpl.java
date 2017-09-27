@@ -11,6 +11,8 @@ import com.kowalczyk.workouter.services.security.UserConfirmationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -46,6 +48,25 @@ public class UserConfirmationServiceImpl extends ModelServiceImpl<UserConfirmati
     @Override
     public UserConfirmationToken findByUser(User user) {
         return ((UserConfirmationTokenDAO) getBaseDAO()).findByUser(user);
+    }
+
+    @Override
+    public boolean isConfirmationAllowed(User user, String token) {
+        Optional<UserConfirmationToken> tokenOptional = Optional.ofNullable(((UserConfirmationTokenDAO) getBaseDAO()).findByToken(token));
+        if (!tokenOptional.isPresent()) {
+            throw new ConfirmationAccountException(user.getId());
+        }
+        UserConfirmationToken userConfirmationToken = tokenOptional.get();
+        if (user.getId() != userConfirmationToken.getUser().getId()) {
+            throw new ConfirmationAccountException(user.getId());
+        }
+        return validTokenDateAndDeleteToken(userConfirmationToken);
+    }
+
+    private boolean validTokenDateAndDeleteToken(UserConfirmationToken userConfirmationToken) {
+        Date expiryDate = userConfirmationToken.getExpiryDate();
+        getBaseDAO().delete(userConfirmationToken);
+        return expiryDate.after(new GregorianCalendar().getTime());
     }
 
     public UserConfirmationToken getUserConfirmationToken(User user) {

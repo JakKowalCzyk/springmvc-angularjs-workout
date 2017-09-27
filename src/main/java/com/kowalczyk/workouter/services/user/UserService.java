@@ -10,5 +10,7 @@ public interface UserService extends org.springframework.security.core.userdetai
 
     User getByLogin(String login);
 
-    void confirmAccount(String uri, Long userId);
+    void startConfirmationProcedure(String uri, Long userId);
+
+    boolean confirmAccount(Long id, String token);
 }

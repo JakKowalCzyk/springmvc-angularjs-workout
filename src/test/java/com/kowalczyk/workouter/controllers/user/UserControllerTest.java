@@ -6,6 +6,7 @@ import com.kowalczyk.workouter.model.BO.security.UserConfirmationToken;
 import com.kowalczyk.workouter.model.DTO.security.RoleDTO;
 import com.kowalczyk.workouter.model.DTO.user.UserDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserInfoDTO;
+import com.kowalczyk.workouter.model.exception.ConfirmationAccountException;
 import com.kowalczyk.workouter.services.notification.email.account.AccountConfirmationEmailService;
 import com.kowalczyk.workouter.services.security.UserConfirmationService;
 import com.kowalczyk.workouter.services.user.UserService;
@@ -17,6 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 
 import java.util.Arrays;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -218,4 +220,63 @@ public class UserControllerTest extends AbstractControllerTest {
         assertFalse(userConfirmationService.isExist(userConfirmationToken.getId()));
     }
 
+    @Test
+    public void testConfirmAccount() throws Exception {
+        UserDTO userDTO1 = userController.addObject(getUserDetailsDTOTest("log1", "n1", "la1", roleId));
+        userController.startConfirmationProcedure("new", userDTO1.getId());
+        UserConfirmationToken userConfirmationToken = userConfirmationService.findByUser(userService.getObject(userDTO1.getId()));
+
+        assertTrue(userController.confirmAccount(userDTO1.getId(), userConfirmationToken.getToken()));
+        assertTrue(userController.getObject(userDTO1.getId()).isAccountNonExpired());
+        assertTrue(userController.getObject(userDTO1.getId()).isAccountNonLocked());
+        assertTrue(userController.getObject(userDTO1.getId()).isCredentialsNonExpired());
+        assertTrue(userController.getObject(userDTO1.getId()).isEnabled());
+        assertFalse(userConfirmationService.isExist(userConfirmationToken.getId()));
+
+        UserDTO userDTO2 = userController.addObject(getUserDetailsDTOTest("log2", "n1", "la1", roleId));
+        userController.startConfirmationProcedure("new2", userDTO2.getId());
+        UserConfirmationToken userConfirmationToken2 = userConfirmationService.findByUser(userService.getObject(userDTO2.getId()));
+        userConfirmationToken2.setExpiryDate(new GregorianCalendar(1900, 2, 1).getTime());
+        userConfirmationToken2 = userConfirmationService.updateObject(userConfirmationToken2);
+
+        assertFalse(userController.confirmAccount(userDTO2.getId(), userConfirmationToken2.getToken()));
+        assertFalse(userController.isExist(userDTO2.getId()));
+        assertFalse(userConfirmationService.isExist(userConfirmationToken2.getId()));
+
+        deleteUserDetails(userDTO1);
+    }
+
+    @Test(expected = ConfirmationAccountException.class)
+    public void testConfirmAccount2() throws Exception {
+        UserDTO userDTO1 = userController.addObject(getUserDetailsDTOTest("log2", "n1", "la1", roleId));
+        userController.startConfirmationProcedure("new1", userDTO1.getId());
+        UserConfirmationToken userConfirmationToken = userConfirmationService.findByUser(userService.getObject(userDTO1.getId()));
+
+        assertTrue(userController.confirmAccount(userDTO1.getId(), "randomToken"));
+        assertTrue(userController.isExist(userDTO1.getId()));
+        assertTrue(userConfirmationService.isExist(userConfirmationToken.getId()));
+        assertFalse(userController.getObject(userDTO1.getId()).isAccountNonExpired());
+        assertFalse(userController.getObject(userDTO1.getId()).isAccountNonLocked());
+        assertFalse(userController.getObject(userDTO1.getId()).isCredentialsNonExpired());
+        assertFalse(userController.getObject(userDTO1.getId()).isEnabled());
+
+        deleteUserDetails(userDTO1);
+    }
+
+    @Test(expected = ConfirmationAccountException.class)
+    public void testConfirmAccount3() throws Exception {
+        UserDTO userDTO1 = userController.addObject(getUserDetailsDTOTest("log1", "n1", "la1", roleId));
+        UserDTO userDTO2 = userController.addObject(getUserDetailsDTOTest("log2", "n1", "la1", roleId));
+        userController.startConfirmationProcedure("new1", userDTO1.getId());
+        UserConfirmationToken userConfirmationToken = userConfirmationService.findByUser(userService.getObject(userDTO1.getId()));
+
+        assertTrue(userController.confirmAccount(userDTO2.getId(), "randomToken"));
+        assertTrue(userController.isExist(userDTO1.getId()));
+        assertTrue(userController.isExist(userDTO2.getId()));
+        assertTrue(userConfirmationService.isExist(userConfirmationToken.getId()));
+        assertFalse(userController.getObject(userDTO1.getId()).isAccountNonExpired());
+        assertFalse(userController.getObject(userDTO1.getId()).isAccountNonLocked());
+        assertFalse(userController.getObject(userDTO1.getId()).isCredentialsNonExpired());
+        assertFalse(userController.getObject(userDTO1.getId()).isEnabled());
+    }
 }

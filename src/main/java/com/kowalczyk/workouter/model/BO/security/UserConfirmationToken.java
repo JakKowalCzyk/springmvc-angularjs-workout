@@ -16,8 +16,6 @@ import java.util.GregorianCalendar;
 @Entity
 public class UserConfirmationToken extends ModelObject {
 
-    private static final int EXPIRATION = 60 * 24;
-
     private String token;
 
     private User user;
