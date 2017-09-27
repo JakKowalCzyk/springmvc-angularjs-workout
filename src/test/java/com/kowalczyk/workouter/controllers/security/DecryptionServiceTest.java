@@ -1,6 +1,7 @@
-package com.kowalczyk.workouter.services.security;
+package com.kowalczyk.workouter.controllers.security;
 
 import com.kowalczyk.workouter.controllers.AbstractControllerTest;
+import com.kowalczyk.workouter.services.security.DecryptionService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

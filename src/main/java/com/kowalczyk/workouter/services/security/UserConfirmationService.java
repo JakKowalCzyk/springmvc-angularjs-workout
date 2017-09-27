@@ -14,4 +14,6 @@ public interface UserConfirmationService extends ModelService<UserConfirmationTo
     void deleteByUser(User user);
 
     UserConfirmationToken findByUser(User user);
+
+    boolean isConfirmationAllowed(User user, String token);
 }

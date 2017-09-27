@@ -12,4 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface UserConfirmationTokenDAO extends BaseDAO<UserConfirmationToken> {
 
     UserConfirmationToken findByUser(User user);
+
+    UserConfirmationToken findByToken(String token);
 }

@@ -51,4 +51,8 @@ public interface UserController extends ModelController<UserDTO> {
     @ApiOperation(value = "Start confirmation account procedure")
     @RequestMapping(value = "/{id}/confirm/", method = RequestMethod.POST)
     void startConfirmationProcedure(@RequestParam String uri, @PathVariable Long id);
+
+    @ApiOperation(value = "Confirm user's account")
+    @RequestMapping(value = "/{id}/token/{token}", method = RequestMethod.PUT)
+    boolean confirmAccount(@PathVariable Long id, @PathVariable String token);
 }
