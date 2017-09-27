@@ -1,7 +1,6 @@
-package com.kowalczyk.workouter.services.security.impl;
+package com.kowalczyk.workouter.controllers.user;
 
 import com.kowalczyk.workouter.controllers.AbstractControllerTest;
-import com.kowalczyk.workouter.controllers.user.UserController;
 import com.kowalczyk.workouter.dao.security.UserConfirmationTokenDAO;
 import com.kowalczyk.workouter.model.BO.security.UserConfirmationToken;
 import com.kowalczyk.workouter.model.BO.user.User;
@@ -11,6 +10,7 @@ import com.kowalczyk.workouter.model.exception.ConfirmationAccountException;
 import com.kowalczyk.workouter.services.notification.email.account.AccountConfirmationEmailService;
 import com.kowalczyk.workouter.services.security.DecryptionService;
 import com.kowalczyk.workouter.services.security.UserConfirmationService;
+import com.kowalczyk.workouter.services.security.impl.UserConfirmationServiceImpl;
 import com.kowalczyk.workouter.services.user.UserService;
 import org.apache.commons.lang.time.DateUtils;
 import org.junit.Before;
