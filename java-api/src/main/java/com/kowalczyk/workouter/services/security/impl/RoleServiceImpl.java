@@ -1,7 +1,7 @@
 package com.kowalczyk.workouter.services.security.impl;
 
-import com.kowalczyk.workouter.enums.RoleType;
 import com.kowalczyk.workouter.dao.security.RoleDAO;
+import com.kowalczyk.workouter.enums.RoleType;
 import com.kowalczyk.workouter.model.BO.security.Role;
 import com.kowalczyk.workouter.model.exception.DeleteException;
 import com.kowalczyk.workouter.services.impl.ModelServiceImpl;

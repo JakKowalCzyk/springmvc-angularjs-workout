@@ -1,0 +1,25 @@
+branches:
+  only:
+    - develop
+addons:
+  apt:
+    packages:
+      - docker-ce
+      - sshpass
+matrix:
+  include:
+    - language: java
+      sudo: required
+      jdk: oraclejdk8
+
+      services:
+        - docker
+
+      before_install: cd $TRAVIS_BUILD_DIR/java-api
+
+      install: true
+      script:
+        - |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            mvn install dockerfile:build
+            mvn  dockerfile:push
