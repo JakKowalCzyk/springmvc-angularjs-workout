@@ -1,12 +1,6 @@
 package com.kowalczyk.workouter.config;
 
-<<<<<<<Updated upstream
 import org.springframework.beans.factory.annotation.Value;
-        =======
-        import com.kowalczyk.workouter.configuration.security.AuthorizationServerConfiguration;
-        import org.springframework.beans.factory.annotation.Value;
-        import org.springframework.boot.test.mock.mockito.MockBean;
-        >>>>>>>Stashed changes
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
@@ -14,10 +8,6 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-        <<<<<<<Updated upstream
-        =======
-        import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
-        >>>>>>>Stashed changes
 
 /**
  * Created by JKowalczyk on 2017-02-22.
@@ -26,7 +16,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 @Profile("test")
 @Primary
 @EnableAuthorizationServer
-<<<<<<<Updated upstream
 public class AuthorizationServerConfigurationTest extends AuthorizationServerConfigurerAdapter {
 
     private static final String RESOURCE_ID = "workout_api";
@@ -57,14 +46,5 @@ public class AuthorizationServerConfigurationTest extends AuthorizationServerCon
                 .accessTokenValiditySeconds(Integer.valueOf(accessTokenValidity))
                 .refreshTokenValiditySeconds(Integer.valueOf(refreshTokenValidity));
     }
-=======
 
-    public class AuthorizationServerConfigurationTest extends AuthorizationServerConfiguration {
-
-        Stashed changes
-
->>>>>>>
-        @MockBean
-        private UserApprovalHandler userApprovalHandler;
-
-    }
+}

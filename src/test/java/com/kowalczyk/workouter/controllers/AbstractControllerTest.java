@@ -16,7 +16,6 @@ import com.kowalczyk.workouter.model.DTO.user.UserDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserInfoDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserNoteDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserWeightDTO;
-import org.apache.commons.codec.binary.Base64;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -31,7 +30,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -40,10 +38,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.Assert.assertFalse;
-
-<<<<<<<Updated upstream
-        =======
-        >>>>>>>Stashed changes
 
 /**
  * Created by JK on 2017-02-01.
@@ -64,9 +58,9 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
     protected UserInfoController userInfoController;
     @Autowired
     protected RoleController roleController;
-    Stashed changes
     @Autowired
     private WebApplicationContext context;
+
     @MockBean
     private JavaMailSender javaMailSender;
 
@@ -153,34 +147,9 @@ public abstract class AbstractControllerTest extends AbstractTestHelper {
         workoutExerciseDTO.setSeries(series);
         return workoutExerciseDTO;
     }
-<<<<<<<Updated upstream
-=======
 
     protected String getContentJson(ObjectDTO objectDTO) {
         Gson gson = new Gson();
         return gson.toJson(objectDTO);
-    }
-
-    protected String getAccessToken(String username, String password) throws Exception {
-        String authHeader = String.format("%s:%s", WORKOUT_CLIENT, CLIENT_SECRET);
-        MockHttpServletResponse response = mockMvcSecured
-                .perform(post("/oauth/token")
-                        .header("Authorization", "Basic "
-                                + new String(Base64.encodeBase64(authHeader.getBytes(Charset.forName("US-ASCII")))))
-                        .param("username", username)
-                        .param("password", password)
-                        .param("grant_type", "password"))
-                .andReturn().getResponse();
-
-        return new ObjectMapper()
-                .readValue(response.getContentAsByteArray(), OAuthToken.class)
-                .accessToken;
-    }
->>>>>>>
-
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    private static class OAuthToken {
-        @JsonProperty("access_token")
-        public String accessToken;
     }
 }

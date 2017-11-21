@@ -16,7 +16,7 @@ public abstract class AbstractTestHelper {
         userDTO.setLogin(login);
         userDTO.setEmail(login);
         userDTO.setFirstName(name);
-        userDTO.setLastName(lastName);
+        userDTO.setLogin(lastName);
         return userDTO;
     }
 
