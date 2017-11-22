@@ -1,4 +1,4 @@
-komis-db:
+postgres-db:
   container_name: workouter-db
   image: postgres:9.4
   volumes:
@@ -17,4 +17,4 @@ komis-api:
     - EMAIL_USER=$EMAIL_US
     - FB_SECRET=$FB_SECR
   links:
-    - workouter-db:postgres
+    - postgres-db:postgres
