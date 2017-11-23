@@ -47,8 +47,6 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private ConnectionFactoryLocator connectionFactoryLocator;
     @Autowired
     private UsersConnectionRepository usersConnectionRepository;
-    @Autowired
-    private FacebookConnectionSignUp facebookConnectionSignup;
 
     @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
@@ -105,8 +103,13 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    FacebookConnectionSignUp facebookConnectionSignUp() {
+        return new FacebookConnectionSignUp(userService);
+    }
+
+    @Bean
     public ProviderSignInController providerSignInController() {
-        ((InMemoryUsersConnectionRepository)usersConnectionRepository).setConnectionSignUp(facebookConnectionSignup);
+        ((InMemoryUsersConnectionRepository) usersConnectionRepository).setConnectionSignUp(facebookConnectionSignUp());
         return new ProviderSignInController(connectionFactoryLocator, usersConnectionRepository, new FacebookSignInAdapter());
     }
 

@@ -13,4 +13,6 @@ public interface UserService extends org.springframework.security.core.userdetai
     void startConfirmationProcedure(String uri, Long userId);
 
     boolean confirmAccount(Long id, String token);
+
+    User createSocialAccount(org.springframework.social.facebook.api.User socialUser);
 }
