@@ -1,6 +1,6 @@
 branches:
   only:
-    - develop
+    - WOR-9
 addons:
   apt:
     packages:

@@ -1,10 +1,12 @@
 package com.kowalczyk.workouter.services.user.impl;
 
 import com.kowalczyk.workouter.dao.user.UserDAO;
+import com.kowalczyk.workouter.enums.RoleType;
 import com.kowalczyk.workouter.model.BO.security.Role;
 import com.kowalczyk.workouter.model.BO.user.User;
 import com.kowalczyk.workouter.model.BO.user.impl.UserInfo;
 import com.kowalczyk.workouter.services.impl.ModelServiceImpl;
+import com.kowalczyk.workouter.services.security.RoleService;
 import com.kowalczyk.workouter.services.security.UserConfirmationService;
 import com.kowalczyk.workouter.services.user.UserInfoService;
 import com.kowalczyk.workouter.services.user.UserService;
@@ -17,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -29,13 +32,15 @@ public class UserServiceImpl extends ModelServiceImpl<User> implements UserServi
     private UserInfoService userInfoService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private UserConfirmationService userConfirmationService;
+    private RoleService roleService;
 
     @Autowired
-    public UserServiceImpl(UserDAO baseDao, UserInfoService userInfoService, BCryptPasswordEncoder bCryptPasswordEncoder, UserConfirmationService userConfirmationService) {
+    public UserServiceImpl(UserDAO baseDao, UserInfoService userInfoService, BCryptPasswordEncoder bCryptPasswordEncoder, UserConfirmationService userConfirmationService, RoleService roleService) {
         super(baseDao);
         this.userInfoService = userInfoService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.userConfirmationService = userConfirmationService;
+        this.roleService = roleService;
     }
 
     @Override
@@ -100,6 +105,26 @@ public class UserServiceImpl extends ModelServiceImpl<User> implements UserServi
         userToBeConfirmed.setEnabled(true);
         updateObject(userToBeConfirmed);
         return true;
+    }
+
+    @Override
+    public User createSocialAccount(org.springframework.social.facebook.api.User socialUser) {
+        User user = new User();
+        user.setFirstName(socialUser.getFirstName());
+        user.setLastName(socialUser.getLastName());
+        Random random = new Random();
+        user.setHashedPassword(Long.toHexString(Double.doubleToLongBits(random.nextInt(8))));
+        user.setAccountNonExpired(true);
+        user.setAccountNonLocked(true);
+        user.setCredentialsNonExpired(true);
+        user.setEnabled(true);
+        user.setEmail(socialUser.getEmail());
+        user.setLogin(socialUser.getId());
+        user.getRoles().add(roleService.findByRoleType(RoleType.USER));
+        hashUserPassword(user);
+        user = super.addObject(user);
+        createNewUserInfo(user);
+        return user;
     }
 
     @Override
