@@ -3,7 +3,6 @@ package com.kowalczyk.workouter.services.security.impl;
 import com.kowalczyk.workouter.dao.security.UserConfirmationTokenDAO;
 import com.kowalczyk.workouter.model.BO.security.UserConfirmationToken;
 import com.kowalczyk.workouter.model.BO.user.User;
-import com.kowalczyk.workouter.model.exception.ConfirmationAccountException;
 import com.kowalczyk.workouter.services.impl.ModelServiceImpl;
 import com.kowalczyk.workouter.services.notification.email.account.AccountConfirmationEmailService;
 import com.kowalczyk.workouter.services.security.DecryptionService;
@@ -11,8 +10,6 @@ import com.kowalczyk.workouter.services.security.UserConfirmationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -22,6 +19,7 @@ import java.util.UUID;
 @Service
 public class UserConfirmationServiceImpl extends ModelServiceImpl<UserConfirmationToken> implements UserConfirmationService {
 
+    public static final String TOKEN = "token=";
     private AccountConfirmationEmailService accountConfirmationEmailService;
     private DecryptionService decryptionService;
 
@@ -51,23 +49,10 @@ public class UserConfirmationServiceImpl extends ModelServiceImpl<UserConfirmati
     }
 
     @Override
-    public boolean isConfirmationAllowed(User user, String token) {
-        Optional<UserConfirmationToken> tokenOptional = Optional.ofNullable(((UserConfirmationTokenDAO) getBaseDAO()).findByToken(token));
-        if (!tokenOptional.isPresent()) {
-            throw new ConfirmationAccountException(user.getId());
-        }
-        UserConfirmationToken userConfirmationToken = tokenOptional.get();
-        if (user.getId() != userConfirmationToken.getUser().getId()) {
-            throw new ConfirmationAccountException(user.getId());
-        }
-        return validTokenDateAndDeleteToken(userConfirmationToken);
+    public Optional<UserConfirmationToken> findByToken(String token) {
+        return Optional.ofNullable(((UserConfirmationTokenDAO) getBaseDAO()).findByToken(token));
     }
 
-    private boolean validTokenDateAndDeleteToken(UserConfirmationToken userConfirmationToken) {
-        Date expiryDate = userConfirmationToken.getExpiryDate();
-        getBaseDAO().delete(userConfirmationToken);
-        return expiryDate.after(new GregorianCalendar().getTime());
-    }
 
     public UserConfirmationToken getUserConfirmationToken(User user) {
         UserConfirmationToken userConfirmationToken = new UserConfirmationToken();
@@ -88,14 +73,8 @@ public class UserConfirmationServiceImpl extends ModelServiceImpl<UserConfirmati
 
 
     public String prepareUri(UserConfirmationToken userConfirmationToken, String uri) {
-        return String.format("%s/%s/%s", uri, userConfirmationToken.getUser().getId(), encryptToken(userConfirmationToken));
+        uri = uri.replace(TOKEN, String.format("token=%s", userConfirmationToken.getToken()));
+        return uri;
     }
 
-    public String encryptToken(UserConfirmationToken userConfirmationToken) {
-        try {
-            return new String(decryptionService.encrypt(decryptionService.getPublicKey(), userConfirmationToken.getToken().getBytes()));
-        } catch (Exception e) {
-            throw new ConfirmationAccountException(userConfirmationToken.getUser().getId());
-        }
-    }
 }

@@ -3,6 +3,7 @@ package com.kowalczyk.workouter.services.user.impl;
 import com.kowalczyk.workouter.dao.user.UserDAO;
 import com.kowalczyk.workouter.enums.RoleType;
 import com.kowalczyk.workouter.model.BO.security.Role;
+import com.kowalczyk.workouter.model.BO.security.UserConfirmationToken;
 import com.kowalczyk.workouter.model.BO.user.User;
 import com.kowalczyk.workouter.model.BO.user.impl.UserInfo;
 import com.kowalczyk.workouter.services.impl.ModelServiceImpl;
@@ -19,6 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -93,17 +95,18 @@ public class UserServiceImpl extends ModelServiceImpl<User> implements UserServi
     }
 
     @Override
-    public boolean confirmAccount(Long id, String token) {
-        User userToBeConfirmed = super.getObject(id);
-        if (!userConfirmationService.isConfirmationAllowed(userToBeConfirmed, token)) {
-            deleteObject(userToBeConfirmed);
+    public boolean confirmAccount(String token) {
+        Optional<UserConfirmationToken> userOptional = userConfirmationService.findByToken(token);
+        if (!userOptional.isPresent()) {
             return false;
         }
+        User userToBeConfirmed = userOptional.get().getUser();
         userToBeConfirmed.setAccountNonExpired(true);
         userToBeConfirmed.setAccountNonLocked(true);
         userToBeConfirmed.setCredentialsNonExpired(true);
         userToBeConfirmed.setEnabled(true);
         updateObject(userToBeConfirmed);
+        userConfirmationService.deleteByUser(userToBeConfirmed);
         return true;
     }
 

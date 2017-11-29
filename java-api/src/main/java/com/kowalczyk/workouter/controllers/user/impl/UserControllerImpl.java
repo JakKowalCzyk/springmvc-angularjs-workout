@@ -7,6 +7,8 @@ import com.kowalczyk.workouter.model.BO.user.User;
 import com.kowalczyk.workouter.model.DTO.user.UserDTO;
 import com.kowalczyk.workouter.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,7 +70,8 @@ public class UserControllerImpl extends ModelControllerImpl<User, UserDTO> imple
     }
 
     @Override
-    public boolean confirmAccount(@PathVariable Long id, @PathVariable String token) {
-        return ((UserService) getModelService()).confirmAccount(id, token);
+    public ResponseEntity<Boolean> confirmAccount(@PathVariable String token) {
+        boolean isAccountConfirmed = ((UserService) getModelService()).confirmAccount(token);
+        return new ResponseEntity<Boolean>(isAccountConfirmed, isAccountConfirmed ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 }
