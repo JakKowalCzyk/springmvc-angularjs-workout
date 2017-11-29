@@ -4,6 +4,7 @@ import com.kowalczyk.workouter.controllers.ModelController;
 import com.kowalczyk.workouter.model.DTO.user.UserDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -53,6 +54,6 @@ public interface UserController extends ModelController<UserDTO> {
     void startConfirmationProcedure(@RequestParam String uri, @PathVariable Long id);
 
     @ApiOperation(value = "Confirm user's account")
-    @RequestMapping(value = "/{id}/token/{token}", method = RequestMethod.PUT)
-    boolean confirmAccount(@PathVariable Long id, @PathVariable String token);
+    @RequestMapping(value = "/confirm", method = RequestMethod.PUT)
+    ResponseEntity<Boolean> confirmAccount(@RequestHeader String token);
 }

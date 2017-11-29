@@ -47,7 +47,7 @@ public class AccountConfirmationEmailServiceImpl extends GenericEmailServiceImpl
 
     @Override
     public String getBody(String textToInclude) {
-        return String.format("%s\n%s", BODY, textToInclude);
+        return textToInclude;
     }
 
 }
