@@ -2,13 +2,18 @@ package com.kowalczyk.workouter.controllers.user;
 
 import com.kowalczyk.workouter.controllers.AbstractControllerTest;
 import com.kowalczyk.workouter.enums.RoleType;
+import com.kowalczyk.workouter.model.BO.security.token.ResetPasswordToken;
 import com.kowalczyk.workouter.model.BO.security.token.UserConfirmationToken;
+import com.kowalczyk.workouter.model.DTO.security.ResetPasswordObject;
 import com.kowalczyk.workouter.model.DTO.security.RoleDTO;
 import com.kowalczyk.workouter.model.DTO.user.UserDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserInfoDTO;
 import com.kowalczyk.workouter.services.notification.email.account.AccountConfirmationEmailService;
+import com.kowalczyk.workouter.services.notification.email.password.ResetPasswordEmailService;
+import com.kowalczyk.workouter.services.security.token.ResetPasswordService;
 import com.kowalczyk.workouter.services.security.token.UserConfirmationService;
 import com.kowalczyk.workouter.services.user.UserService;
+import org.apache.commons.lang.time.DateUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -17,6 +22,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 
 import java.util.Arrays;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -36,8 +42,12 @@ public class UserControllerTest extends AbstractControllerTest {
     private UserConfirmationService userConfirmationService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ResetPasswordService resetPasswordService;
     @MockBean
     private AccountConfirmationEmailService accountConfirmationEmailService;
+    @MockBean
+    private ResetPasswordEmailService resetPasswordEmailService;
 
     private Long roleId;
 
@@ -257,6 +267,57 @@ public class UserControllerTest extends AbstractControllerTest {
         assertFalse(userController.getObject(userDTO1.getId()).isEnabled());
 
         deleteUserDetails(userDTO1);
+    }
+
+    @Test
+    public void testResetPassword() throws Exception {
+        UserDTO userDTO1 = userController.addObject(getUserDetailsDTOTest("log1", "n1", "la1", roleId));
+        userController.startResetPasswordProcedure("new", userDTO1.getId());
+
+        ResetPasswordToken resetPasswordToken = resetPasswordService.findByUser(userService.getObject(userDTO1.getId()));
+
+        ResetPasswordObject resetPasswordObject = new ResetPasswordObject();
+        resetPasswordObject.setNewPassword("newPass");
+        resetPasswordObject.setToken(resetPasswordToken.getToken());
+
+        assertTrue(userController.resetPassword(resetPasswordObject).getBody());
+        assertNotEquals(userDTO1.getHashedPassword(), userController.getObject(userDTO1.getId()).getHashedPassword());
+        assertFalse(resetPasswordService.isExist(resetPasswordToken.getId()));
+
+        UserDTO userDTO2 = userController.addObject(getUserDetailsDTOTest("log2", "n1", "la1", roleId));
+        userController.startResetPasswordProcedure("new2", userDTO2.getId());
+        ResetPasswordToken resetPasswordToken2 = resetPasswordService.findByUser(userService.getObject(userDTO2.getId()));
+        ResetPasswordObject resetPasswordObject2 = new ResetPasswordObject();
+        resetPasswordObject2.setNewPassword("newPass");
+        resetPasswordObject2.setToken(resetPasswordToken2.getToken());
+
+        assertTrue(userController.resetPassword(resetPasswordObject2).getBody());
+        assertNotEquals(userDTO2.getHashedPassword(), userController.getObject(userDTO2.getId()).getHashedPassword());
+        assertFalse(resetPasswordService.isExist(resetPasswordToken2.getId()));
+        deleteUserDetails(userDTO2);
+
+        ResetPasswordObject noTokenObject = new ResetPasswordObject();
+        resetPasswordObject.setToken("asdasd");
+        resetPasswordObject.setNewPassword("123");
+        assertFalse(userController.resetPassword(noTokenObject).getBody());
+
+        userController.startResetPasswordProcedure("new3", userDTO1.getId());
+        ResetPasswordToken resetPasswordToken3 = resetPasswordService.findByUser(userService.getObject(userDTO1.getId()));
+
+        ResetPasswordObject wrongToken = new ResetPasswordObject();
+        wrongToken.setToken("wrong");
+        wrongToken.setNewPassword("123");
+        assertFalse(userController.resetPassword(noTokenObject).getBody());
+        assertTrue(resetPasswordService.isExist(resetPasswordToken3.getId()));
+
+        resetPasswordToken3.setExpiryDate(DateUtils.addHours(new GregorianCalendar().getTime(), -1));
+        resetPasswordService.updateObject(resetPasswordToken3);
+
+        ResetPasswordObject expiredToken = new ResetPasswordObject();
+        expiredToken.setToken(resetPasswordToken3.getToken());
+        expiredToken.setNewPassword("123");
+        assertFalse(userController.resetPassword(expiredToken).getBody());
+        assertFalse(resetPasswordService.isExist(resetPasswordToken3.getId()));
     }
 
 

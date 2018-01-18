@@ -145,15 +145,20 @@ public class UserServiceImpl extends ModelServiceImpl<User> implements UserServi
             return false;
         }
         ResetPasswordToken resetPasswordToken = resetPasswordTokenOptional.get();
-        if (resetPasswordToken.getExpiryDate().before(new GregorianCalendar().getTime())) {
-            resetPasswordService.deleteObject(resetPasswordToken);
+        if (isDateExpired(resetPasswordToken)) {
+            deleteResetPasswordTokens(resetPasswordToken.getUser());
             return false;
         }
         User user = resetPasswordToken.getUser();
         user.setHashedPassword(bCryptPasswordEncoder.encode(resetPasswordObject.getNewPassword()));
         updateObject(user);
+        deleteResetPasswordTokens(user);
 
         return true;
+    }
+
+    private boolean isDateExpired(ResetPasswordToken resetPasswordToken) {
+        return resetPasswordToken.getExpiryDate().before(new GregorianCalendar().getTime());
     }
 
     @Override
@@ -161,6 +166,7 @@ public class UserServiceImpl extends ModelServiceImpl<User> implements UserServi
         User user = super.getObject(id);
         deleteUserInfoBeforeUserIfNotNull(user);
         deleteConfirmationToken(user);
+        deleteResetPasswordTokens(user);
         super.deleteObject(id);
     }
 
@@ -168,6 +174,10 @@ public class UserServiceImpl extends ModelServiceImpl<User> implements UserServi
         if (user.getUserInfo() != null) {
             userInfoService.deleteObject(user.getUserInfo());
         }
+    }
+
+    private void deleteResetPasswordTokens(User user) {
+        resetPasswordService.deleteByUser(user);
     }
 
     private void deleteConfirmationToken(User user) {
