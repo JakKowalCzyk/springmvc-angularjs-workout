@@ -1,6 +1,6 @@
 package com.kowalczyk.workouter.services.notification.email.account.impl;
 
-import com.kowalczyk.workouter.model.BO.security.UserConfirmationToken;
+import com.kowalczyk.workouter.model.BO.security.token.UserConfirmationToken;
 import com.kowalczyk.workouter.model.BO.user.User;
 import com.kowalczyk.workouter.model.exception.ConfirmationAccountException;
 import com.kowalczyk.workouter.services.notification.email.EmailSenderService;
