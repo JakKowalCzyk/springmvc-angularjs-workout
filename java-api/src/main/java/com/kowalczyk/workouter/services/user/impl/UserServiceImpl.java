@@ -3,12 +3,15 @@ package com.kowalczyk.workouter.services.user.impl;
 import com.kowalczyk.workouter.dao.user.UserDAO;
 import com.kowalczyk.workouter.enums.RoleType;
 import com.kowalczyk.workouter.model.BO.security.Role;
-import com.kowalczyk.workouter.model.BO.security.UserConfirmationToken;
+import com.kowalczyk.workouter.model.BO.security.token.ResetPasswordToken;
+import com.kowalczyk.workouter.model.BO.security.token.UserConfirmationToken;
 import com.kowalczyk.workouter.model.BO.user.User;
 import com.kowalczyk.workouter.model.BO.user.impl.UserInfo;
+import com.kowalczyk.workouter.model.DTO.security.ResetPasswordObject;
 import com.kowalczyk.workouter.services.impl.ModelServiceImpl;
 import com.kowalczyk.workouter.services.security.RoleService;
-import com.kowalczyk.workouter.services.security.UserConfirmationService;
+import com.kowalczyk.workouter.services.security.token.ResetPasswordService;
+import com.kowalczyk.workouter.services.security.token.UserConfirmationService;
 import com.kowalczyk.workouter.services.user.UserInfoService;
 import com.kowalczyk.workouter.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +22,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -35,14 +35,17 @@ public class UserServiceImpl extends ModelServiceImpl<User> implements UserServi
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private UserConfirmationService userConfirmationService;
     private RoleService roleService;
+    private ResetPasswordService resetPasswordService;
 
     @Autowired
-    public UserServiceImpl(UserDAO baseDao, UserInfoService userInfoService, BCryptPasswordEncoder bCryptPasswordEncoder, UserConfirmationService userConfirmationService, RoleService roleService) {
+    public UserServiceImpl(UserDAO baseDao, UserInfoService userInfoService, BCryptPasswordEncoder bCryptPasswordEncoder, UserConfirmationService userConfirmationService, RoleService roleService,
+                           ResetPasswordService resetPasswordService) {
         super(baseDao);
         this.userInfoService = userInfoService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.userConfirmationService = userConfirmationService;
         this.roleService = roleService;
+        this.resetPasswordService = resetPasswordService;
     }
 
     @Override
@@ -91,7 +94,7 @@ public class UserServiceImpl extends ModelServiceImpl<User> implements UserServi
 
     @Override
     public void startConfirmationProcedure(String uri, Long userId) {
-        userConfirmationService.startConfirmationProcess(super.getObject(userId), uri);
+        userConfirmationService.startTokenProcedure(super.getObject(userId), uri);
     }
 
     @Override
@@ -128,6 +131,29 @@ public class UserServiceImpl extends ModelServiceImpl<User> implements UserServi
         user = super.addObject(user);
         createNewUserInfo(user);
         return user;
+    }
+
+    @Override
+    public void startResetPasswordProcedure(Long userId, String body) {
+        resetPasswordService.startTokenProcedure(super.getObject(userId), body);
+    }
+
+    @Override
+    public boolean resetPassword(ResetPasswordObject resetPasswordObject) {
+        Optional<ResetPasswordToken> resetPasswordTokenOptional = resetPasswordService.findByToken(resetPasswordObject.getToken());
+        if (!resetPasswordTokenOptional.isPresent()) {
+            return false;
+        }
+        ResetPasswordToken resetPasswordToken = resetPasswordTokenOptional.get();
+        if (resetPasswordToken.getExpiryDate().before(new GregorianCalendar().getTime())) {
+            resetPasswordService.deleteObject(resetPasswordToken);
+            return false;
+        }
+        User user = resetPasswordToken.getUser();
+        user.setHashedPassword(bCryptPasswordEncoder.encode(resetPasswordObject.getNewPassword()));
+        updateObject(user);
+
+        return true;
     }
 
     @Override

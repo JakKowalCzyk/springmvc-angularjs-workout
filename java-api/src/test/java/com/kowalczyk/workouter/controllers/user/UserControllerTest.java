@@ -2,12 +2,12 @@ package com.kowalczyk.workouter.controllers.user;
 
 import com.kowalczyk.workouter.controllers.AbstractControllerTest;
 import com.kowalczyk.workouter.enums.RoleType;
-import com.kowalczyk.workouter.model.BO.security.UserConfirmationToken;
+import com.kowalczyk.workouter.model.BO.security.token.UserConfirmationToken;
 import com.kowalczyk.workouter.model.DTO.security.RoleDTO;
 import com.kowalczyk.workouter.model.DTO.user.UserDTO;
 import com.kowalczyk.workouter.model.DTO.user.impl.UserInfoDTO;
 import com.kowalczyk.workouter.services.notification.email.account.AccountConfirmationEmailService;
-import com.kowalczyk.workouter.services.security.UserConfirmationService;
+import com.kowalczyk.workouter.services.security.token.UserConfirmationService;
 import com.kowalczyk.workouter.services.user.UserService;
 import org.junit.Before;
 import org.junit.Test;

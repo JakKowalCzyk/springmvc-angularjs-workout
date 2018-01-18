@@ -1,6 +1,7 @@
 package com.kowalczyk.workouter.controllers.user;
 
 import com.kowalczyk.workouter.controllers.ModelController;
+import com.kowalczyk.workouter.model.DTO.security.ResetPasswordObject;
 import com.kowalczyk.workouter.model.DTO.user.UserDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -56,4 +57,14 @@ public interface UserController extends ModelController<UserDTO> {
     @ApiOperation(value = "Confirm user's account")
     @RequestMapping(value = "/confirm", method = RequestMethod.PUT)
     ResponseEntity<Boolean> confirmAccount(@RequestHeader String token);
+
+    @ApiOperation(value = "Start reset password procedure")
+    @RequestMapping(value = "/{id}/reset/password", method = RequestMethod.POST)
+    void startResetPasswordProcedure(@RequestParam String body, @PathVariable Long id);
+
+    @ApiOperation(value = "Reset user's password")
+    @RequestMapping(value = "/reset/password", method = RequestMethod.PUT)
+    ResponseEntity<Boolean> resetPassword(@RequestBody ResetPasswordObject resetPasswordObject);
+
+
 }
